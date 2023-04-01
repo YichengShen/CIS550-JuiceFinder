@@ -1,0 +1,279 @@
+id,brand,vehicle_type,model,release_year,variant,type,ac_port,dc_port,usable_battery_size,energy_consumption
+1,Aiways,car,U5,2021.0,,bev,type2,ccs,63.0,18.8
+2,Aiways,car,U5,2020.0,,bev,type2,ccs,63.0,18.8
+3,Artega,car,Karo,2020.0,Range Plus,bev,type2,,14.4,7.2
+4,Artega,car,Karo,2020.0,Range,bev,type2,,8.0,6.4
+5,Audi,car,Q4 Sportback e-tron,2021.0,35,bev,type2,ccs,52.0,176.0
+6,Audi,car,Q4 Sportback e-tron,2021.0,50 quattro ,bev,type2,ccs,77.0,190.0
+7,Audi,car,Q4 e-tron,2021.0,50 quattro,bev,type2,ccs,77.0,197.0
+8,Audi,car,Q4 e-tron,2021.0,35,bev,type2,ccs,52.0,182.0
+9,Audi,car,Q4 e-tron,2021.0,,bev,type2,ccs,77.0,188.0
+10,Audi,car,e-tron 50,2019.0,,bev,type2,ccs,65.0,22.7
+11,Audi,car,e-tron S,2020.0,,bev,type2,ccs,95.0,27.0
+12,Audi,car,e-tron 55,2019.0,,bev,type2,ccs,86.5,23.4
+13,Audi,car,e-tron 55,2019.0,22kW-AC,bev,type2,ccs,86.5,23.4
+14,Audi,car,e-tron 50,2019.0,22kW-AC,bev,type2,ccs,65.0,22.7
+15,Audi,car,A3 Sportback 40 e-tron,2020.0,,phev,type2,,8.8,12.4
+16,Audi,car,e-tron S,2020.0,Sportback,bev,type2,ccs,86.5,27.0
+17,Audi,car,A6,2020.0,50 TFSI e,phev,type2,,14.1,17.0
+18,Audi,car,A6,2020.0,55 TFSI e,phev,type2,,14.1,17.0
+19,Audi,car,A7 55TFSI E,2019.0,Sportback e quattro,phev,type2,,14.1,14.1
+20,Audi,car,Q5 55 TFSI,2019.0,e Quattro,phev,type2,,14.1,17.0
+21,Audi,car,Q7 e-tron,2020.0,,phev,type2,,17.3,17.0
+22,BMW,car,i3S,2020.0,120 Ah,bev,type2,ccs,37.9,16.2
+23,BMW,car,i3,2020.0,120 Ah,bev,type2,ccs,37.9,15.4
+24,BMW,car,X5,2020.0,xDrive25e,phev,type2,,22.2,29.1
+25,BMW,car,X3,2020.0,xDrive25e,phev,type2,,11.15,28.4
+26,BMW,car,X2,2020.0,xDrive25e,phev,type2,,8.8,19.1
+27,BMW,car,X1,2020.0,xDrive25e,phev,type2,,8.8,19.7
+28,BMW,car,745Le,2020.0,xDrive,phev,type2,,11.15,25.6
+29,BMW,car,745Le,2020.0,,phev,type2,,11.15,23.3
+30,BMW,car,740 E,2016.0,,phev,type2,,7.4,17.0
+31,BMW,car,545,2020.0,xDrive Berline,phev,type2,,11.15,17.2
+32,BMW,car,530e,2020.0,xDrive Touring,phev,type2,,11.15,18.5
+33,BMW,car,530e,2020.0,Touring,phev,type2,,11.15,17.0
+34,BMW,car,530e,2020.0,xDrive Berline,phev,type2,,11.15,17.4
+35,BMW,car,530e,2020.0,Berline,phev,type2,,11.15,16.3
+36,BMW,car,330e,2020.0,xDrive Touring,phev,type2,,11.5,17.2
+37,BMW,car,330e,2020.0,Touring,phev,type2,,11.15,16.2
+38,BMW,car,330e,2020.0,xDrive Berline,phev,type2,,11.15,16.5
+39,BMW,car,330e,2020.0,berline,phev,type2,,11.5,16.5
+40,BMW,car,330e,2016.0,,phev,type2,,12.0,17.0
+41,BMW,car,225XE,2020.0,Active Tourer 220 ch,phev,type2,,8.8,14.5
+42,BMW,car,225XE,2016.0,Serie 2 ActiveTourer,phev,type2,,10.0,17.0
+43,BMW,car,225XE,2019.0,10.0 kWh,phev,type2,,8.8,17.0
+44,BMW,car,I8,2018.0,Roadster,phev,type2,,9.4,18.0
+45,BMW,car,iX3,2020.0,286 ch,bev,type2,ccs,73.8,18.6
+46,BMW,car,i3,,60 Ah,bev,type2,ccs,18.8,14.5
+47,BMW,car,i3,,120 Ah,bev,type2,ccs,37.9,16.1
+48,BMW,car,X5,2020.0,PHEV,phev,type2,,21.0,21.3
+49,BMW,car,i3,,94 Ah,bev,type2,ccs,27.2,16.0
+50,BMW,car,iX3,2020.0,,bev,type2,ccs,74.0,18.5
+51,BMW,car,i3S,2019.0,94 Ah REX,bev,type2,ccs,27.2,16.1
+52,BMW,car,i3S,2019.0,94 Ah,bev,type2,ccs,27.2,16.1
+53,BMW,car,i3S,2019.0,120 Ah,bev,type2,ccs,37.9,16.1
+54,BMW,car,X1,2019.0,xDrive 25e,phev,type2,,9.7,19.0
+55,BMW,car,X3,2019.0,xDrive30e,phev,type2,,12.0,16.4
+56,CUPRA,car,Born,2021.0,150 kW - 62 kWh,bev,type2,ccs,58.0,166.0
+57,CUPRA,car,Born,2022.0,170 kW - 62 kWh,bev,type2,ccs,58.0,168.0
+58,CUPRA,car,Born,2021.0,170 kW - 82 kWh,bev,type2,ccs,77.0,171.0
+59,CUPRA,car,Born,2021.0,110 kW - 55 kWh,bev,type2,ccs,45.0,164.0
+60,Chevrolet,car,Spark EV,2013.0,21 kWh,bev,type1,ccs,21.3,16.0
+61,Chevrolet,car,Spark EV,2015.0,19 kWh,bev,type1,ccs,19.0,14.0
+62,Chevrolet,car,Bolt,2017.0,60 kWh,bev,type1,ccs,58.0,12.9
+63,Chevrolet,car,Bolt,2017.0,60 kWh,bev,type2,ccs,58.0,12.9
+64,Citroen,car,C-Zero,,,bev,type1,chademo,14.5,17.1
+65,Citroen,car,Berlingo Electric,,,bev,type1,chademo,22.5,17.7
+66,Citroen,car,ë-C4,2020.0,,bev,type2,ccs,46.0,18.0
+67,Citroen,car,C5,2020.0,Hybrid,phev,type2,,13.2,16.0
+68,Citroen,car,ë-Spacetourer,2020.0,50 kWh,bev,type2,ccs,46.0,18.0
+69,Citroen,car,ë-Spacetourer,2020.0,75 kWh,bev,type2,ccs,75.0,18.0
+70,DS,car,3 Crossback E-Tense,2020.0,11 kW-AC,bev,type2,ccs,46.0,18.4
+71,DS,car,3 Crossback E-Tense,2020.0,"7,2 kW-AC",bev,type2,ccs,46.0,18.4
+72,DS,car,7 Crossback,2020.0,E-Tense 4X4 PHEV,phev,type2,,13.2,17.4
+73,Dacia,car,Spring Electric,2021.0,,bev,type2,ccs,26.8,15.8
+74,Energica,motorbike,Eva,2020.0,Ribelle,bev,type1,ccs,18.9,11.59
+75,Energica,motorbike,Ego,2019.0,,bev,type1,ccs,18.9,11.59
+76,Energica,motorbike,Eva,2019.0,,bev,type1,,18.9,11.59
+77,Fiat,car,500e,2014.0,,bev,type1,,19.2,18.0
+78,Fiat,car,500e,2020.0,,bev,type2,ccs,42.0,16.8
+79,Ford,car,Focus electric,2013.0,,bev,type2,,23.0,16.4
+80,Ford,car,Focus electric,2017.0,,bev,type2,ccs,33.5,16.4
+81,Ford,car,Kuga,2020.0,PHEV,phev,type2,,14.4,19.0
+82,Ford,car,Mustang Mach e,2020.0,"AWD 98,8 kWh",bev,type2,ccs,88.0,18.1
+83,Ford,car,Mustang Mach e,2020.0,"RWD 75,7 kWh",bev,type2,ccs,70.0,16.5
+84,Ford,car,Mustang Mach e,2020.0,"AWD 75,7 kWh",bev,type2,ccs,70.0,17.9
+85,Ford,car,Mustang Mach e,2020.0,"RWD 98,8 kWh",bev,type2,ccs,88.0,16.5
+86,Ford,car,Mustang Mach e,2020.0,GT,bev,type2,ccs,88.0,20.0
+87,Honda,car,e,2020.0,,bev,type2,ccs,32.0,16.0
+88,Hyundai,car,Ioniq,2019.0,,bev,type2,ccs,38.3,15.3
+89,Hyundai,car,Ioniq 5,2021.0,,bev,type2,ccs,72.6,19.4
+90,Hyundai,car,Kona,2020.0,64 kWh 11 kW-AC,bev,type2,ccs,64.0,15.8
+91,Hyundai,car,Kona,2018.0,"39 kWh 7,2 kW-AC",bev,type2,ccs,39.2,15.4
+92,Hyundai,car,Kona,2018.0,"64 kWh 7,2 kW-AC",bev,type2,ccs,64.0,15.8
+93,Hyundai,car,Kona,2020.0,39 kWh 11 kW-AC,bev,type2,ccs,39.2,15.4
+94,Hyundai,car,Ioniq,2016.0,,bev,type2,ccs,28.0,14.4
+95,Hyundai,car,Ioniq,2016.0,PHEV,bev,type2,,8.9,15.4
+96,Jaguar,car,i-Pace,,,bev,type2,ccs,84.0,23.2
+97,Jaguar,car,i-Pace,2020.0,EV320,bev,type2,ccs,84.0,23.2
+98,Jaguar,car,i-Pace,2020.0,EV400,bev,type2,ccs,84.0,23.2
+99,Jeep,car,Renegade 4xe,2020.0,"11,4 kWh",phev,type2,,11.4,23.9
+100,Kia,car,EV6,2021.0,Standard Range 2WD,bev,type2,ccs,58.0,17.3
+101,Kia,car,EV6,2021.0,Long Range 2WD,bev,type2,ccs,77.4,18.5
+102,Kia,car,Soul,,30 kWh,bev,type2,chademo,30.0,17.6
+103,Kia,car,e-Niro,2020.0,64 kWh,bev,type2,ccs,64.0,17.3
+104,Kia,car,e-Niro,2018.0,64 kWh,bev,type2,ccs,64.0,17.3
+105,Kia,car,e-Niro,2018.0,39 kWh,bev,type2,ccs,39.0,16.3
+106,Kia,car,e-Niro,2020.0,39 kWh 11 kW-AC,bev,type2,ccs,39.0,16.3
+107,Kia,car,Soul,,27 kWh,bev,type2,chademo,27.0,17.6
+108,Kia,car,e-Soul,2020.0,64 kWh 11 kW-AC,bev,type2,ccs,64.0,17.5
+109,Kia,car,e-Soul,2019.0,39 kWh,bev,type2,ccs,39.0,17.0
+110,Kia,car,e-Soul,2019.0,64 kWh,bev,type2,ccs,64.0,17.5
+111,Kia,car,e-Soul,2019.0,39 kWh 11 kW-AC,bev,type2,ccs,39.0,17.0
+112,Kia,car,Ceed SW,2020.0,PHEV,phev,type2,,8.9,11.3
+113,Kia,car,XCeed,2020.0,PHEV,phev,type2,,8.9,11.3
+114,Kia,car,Niro,2020.0,PHEV,phev,type2,,8.9,9.8
+115,MAN,car,e TGE,2020.0,,bev,type2,ccs,35.8,30.9
+116,MG,car,MG5 EV,2020.0,,bev,type2,ccs,48.8,16.5
+117,MG,car,ZS EV,2020.0,,bev,type2,ccs,44.5,19.8
+118,Maxus,car,EV80,2018.0,,bev,type2,ccs,56.0,35.0
+119,Mazda,car,MX-30,2020.0,,bev,type2,ccs,32.0,17.8
+120,Mercedes Benz,car,EQC,2020.0,11 kW-AC,bev,type2,ccs,80.0,21.6
+121,Mercedes Benz,car,EQC,2019.0,"7,4 kW-AC",bev,type2,ccs,80.0,21.6
+122,Mercedes Benz,car,EQA,2021.0,250,bev,type2,ccs,66.6,17.7
+123,Mercedes Benz,car,EQV,2020.0,300 Long ,bev,type2,ccs,90.0,27.3
+124,Mercedes Benz,car,B-Klasse,,,bev,type2,,28.0,16.6
+125,Mercedes Benz,car,A 250 e,2020.0,"7,4 kW-AC + DC",phev,type2,ccs,10.7,15.0
+126,Mercedes Benz,car,A 250 e,2020.0,"7,4 kW-AC",phev,type2,,10.7,15.0
+127,Mercedes Benz,car,A 250 e,2020.0,"3,7 kW-AC",phev,type2,,10.7,15.0
+128,Mercedes Benz,car,GLC 300 de 4MATIC,2020.0,PHEV,phev,type2,,13.5,18.2
+129,Mercedes Benz,car,C 300,2019.0,de,phev,type2,,13.5,20.0
+130,Mercedes Benz,car,E 300,2019.0,e,phev,type2,,13.5,20.0
+131,Mercedes Benz,car,GLE,2020.0,350 de/e,phev,type2,ccs,31.2,31.2
+132,Mercedes Benz,car,C 300,2019.0,e,phev,type2,,13.5,20.0
+133,Mercedes Benz,car,CLA 250,2020.0,e,phev,type2,ccs,15.6,20.0
+134,Mercedes Benz,car,E 350,2016.0,e,phev,type2,,9.0,20.0
+135,Mercedes Benz,car,E 300,2019.0,de,phev,type2,,13.5,20.0
+136,Mercedes Benz,car,eVito,2019.0,Tourer,bev,type2,,41.0,26.2
+137,Mini,car,Countryman ALL4,2019.0,,phev,type2,,7.6,13.2
+138,Mini,car,Cooper SE,2020.0,,bev,type2,ccs,28.9,16.1
+139,Mitsubishi,car,i-Miev,,,bev,type1,chademo,14.5,12.9
+140,Mitsubishi,car,Outlander PHEV,2018.0,,phev,type1,chademo,11.0,15.2
+141,Nissan,car,e-NV 200,,"24 kWh 6,6 kW-AC",bev,type1,chademo,24.0,20.0
+142,Nissan,car,e-NV 200,,24 kWh,bev,type1,chademo,24.0,20.0
+143,Nissan,car,e-NV 200,,40 kWh,bev,type1,chademo,38.0,20.0
+144,Nissan,car,Leaf,2019.0,e+ 62 kWh,bev,type2,chademo,62.0,17.2
+145,Nissan,car,Leaf,2018.0,40 kWh,bev,type2,chademo,38.0,16.4
+146,Nissan,car,Leaf,2011.0,24 kWh,bev,type1,chademo,24.0,16.9
+147,Nissan,car,Leaf,2011.0,"24 kWh 6,6 kW-AC",bev,type1,chademo,24.0,16.9
+148,Nissan,car,Leaf,2015.0,30 kWh,bev,type1,chademo,30.0,16.5
+149,Nissan,car,Leaf,2015.0,"30 kWh 6,6 kW-AC",bev,type1,chademo,30.0,16.5
+150,Opel,car,Corsa-e,2020.0,"7,2 kW-AC",bev,type2,ccs,45.0,16.4
+151,Opel,car,Corsa-e,2020.0,11 kW-AC,bev,type2,ccs,45.0,16.4
+152,Opel,car,Mokka-e,2021.0,,bev,type2,ccs,47.5,17.6
+153,Opel,car,Vivaro-e,2020.0,50 kWh,bev,type2,ccs,50.0,21.7
+154,Opel,car,Vivaro-e,2020.0,75 kWh,bev,type2,ccs,75.0,21.7
+155,Opel,car,Ampera e,2017.0,CCS,bev,type2,ccs,60.0,17.3
+156,Opel,car,Ampera e-Pionier,2012.0,,bev,type1,,10.6,16.9
+157,Opel,car,Zafira e-life,2021.0,Zafira-e Life 50 kWh,bev,type2,ccs,46.0,16.4
+158,Peugeot,car,e-208,2020.0,"7,2 kW-AC",bev,type2,ccs,45.0,16.1
+159,Peugeot,car,E-Traveller,2020.0,50 kWh 7.4 kW-AC,bev,type2,ccs,45.0,24.3
+160,Peugeot,car,E-Traveller,2020.0,50 kWh 11 kW-AC,bev,type2,ccs,45.0,24.3
+161,Peugeot,car,e-208,2020.0,11 kW-AC,bev,type2,ccs,45.0,16.1
+162,Peugeot,car,I-on,,,bev,type1,chademo,14.5,12.9
+163,Peugeot,car,e-2008,2020.0,"7,2 kW-AC",bev,type2,ccs,47.5,18.0
+164,Peugeot,car,e-2008,2020.0,11 kW-AC,bev,type2,ccs,47.5,18.0
+165,Peugeot,car,Partner,,,bev,type1,chademo,22.5,20.5
+166,Peugeot,car,3008,2020.0,"HYbrid4 3,7 kW-AC",phev,type1,,11.2,15.2
+167,Peugeot,car,3008,2020.0,"HYbrid4 7,4 kW-AC",phev,type1,,11.2,15.2
+168,Polestar,car,2,2020.0,,bev,type2,ccs,72.5,17.1
+169,Porsche,car,Taycan,2020.0,Turbo S,bev,type2,ccs,83.7,22.3
+170,Porsche,car,Taycan,2020.0,4S,bev,type2,ccs,71.0,19.5
+171,Porsche,car,Taycan,2020.0,4S Plus,bev,type2,ccs,83.7,19.7
+172,Porsche,car,Taycan,2020.0,Turbo ,bev,type2,ccs,83.7,21.5
+173,Renault,car,Zoe,2017.0,R 90,bev,type2,,41.0,16.1
+174,Renault,car,Zoe,2019.0,R110 ZE40,bev,type2,ccs,41.0,16.1
+175,Renault,car,Zoe,2013.0,Q 210,bev,type2,,22.0,15.5
+176,Renault,car,Zoe,2015.0,R 240,bev,type2,,22.0,15.5
+177,Renault,car,Zoe,2019.0,R135 ZE50,bev,type2,ccs,52.0,17.4
+178,Renault,car,Zoe,2017.0,Q 90,bev,type2,,41.0,16.4
+179,Renault,car,Zoe,2019.0,R110 ZE50,bev,type2,ccs,52.0,16.5
+180,Renault,car,Kangoo ZE,,,bev,type2,,33.0,19.4
+181,Renault,car,Twizy,,,bev,type2,,6.1,8.4
+182,Renault,car,Captur E-Tech,2020.0,PHEV,phev,type2,,9.8,17.4
+183,Renault,car,Twingo Z.E.,2020.0,22 kWh,bev,type2,,21.3,16.3
+184,Seat,car,Leon eHybrid,2020.0,13 kWh - 204 ch,phev,type2,,13.0,14.0
+185,Seat,car,Mii Electric,2020.0,CCS,bev,type2,ccs,32.3,16.6
+186,Skoda,car,Enyaq iV,2020.0,82 kWh 125 kW-DC,bev,type2,ccs,77.0,19.0
+187,Skoda,car,Enyaq iV,2020.0,82 kWh 50 kW-DC,bev,type2,ccs,77.0,19.0
+188,Skoda,car,Enyaq iV,2020.0,62 kWh 50 kW-DC,bev,type2,ccs,58.0,18.7
+189,Skoda,car,Enyaq iV,2020.0,62 kWh 100 kW-DC,bev,type2,ccs,58.0,18.7
+190,Skoda,car,Octavia,2020.0,iV PHEV,phev,type2,,13.0,148.0
+191,Skoda,car,CITIGOe iV,2020.0,CCS,bev,type2,ccs,32.3,16.6
+192,Skoda,car,Superb iV,2020.0,PHEV,phev,type2,,13.0,14.0
+193,Skoda,car,Enyaq iV,2020.0,55 kWh,bev,type2,ccs,52.0,18.7
+194,Tesla,car,Roadster,2022.0,,bev,type2,tesla,200.0,20.6
+195,Tesla,car,Model S,,70,bev,type2,ccs,67.0,18.5
+196,Tesla,car,Model S,,"70, 22 kW-AC",bev,type2,ccs,67.0,18.5
+197,Tesla,car,Model 3,,LR,bev,type2,ccs,74.0,16.1
+198,Tesla,car,Model 3,,SR+,bev,type2,ccs,50.0,15.3
+199,Tesla,car,Model 3,,Performance,bev,type2,ccs,72.5,16.7
+200,Tesla,car,Model S,,85,bev,type2,ccs,76.0,19.1
+201,Tesla,car,Model S,,100,bev,type2,ccs,95.0,18.4
+202,Tesla,car,Model S,,90,bev,type2,ccs,81.0,18.2
+203,Tesla,car,Model S,,75,bev,type2,ccs,72.5,18.5
+204,Tesla,car,Model S,2012.0,85D,bev,type2,ccs,77.5,19.1
+205,Tesla,car,Model S,2015.0,P90D,bev,type2,ccs,82.0,18.2
+206,Tesla,car,Model S,2016.0,BEV,bev,type2,ccs,72.5,20.8
+207,Tesla,car,Model S,2016.0,P100D,bev,type2,ccs,98.0,20.0
+208,Tesla,car,Model S,,90D,bev,type2,ccs,83.5,18.2
+209,Tesla,car,Model S,,"P85D, 22 kW-AC",bev,type2,ccs,80.8,19.1
+210,Tesla,car,Model S,2017.0,100D,bev,type2,ccs,98.0,18.9
+211,Tesla,car,Model S,,75D,bev,type2,ccs,72.5,19.1
+212,Tesla,car,Model S,2019.0,Long Range (Raven),bev,type2,ccs,95.0,19.0
+213,Tesla,car,Model S,,60,bev,type2,ccs,62.0,18.0
+214,Tesla,car,Model S,,P85D,bev,type2,ccs,80.8,19.1
+215,Tesla,car,Model S,2019.0,Standard Range,bev,type2,ccs,72.5,18.4
+216,Tesla,car,Model S,2019.0,Performance,bev,type2,ccs,95.0,19.3
+217,Tesla,car,Model S,,60D,bev,type2,ccs,62.0,17.7
+218,Tesla,car,Model S,,70D,bev,type2,ccs,66.5,18.8
+219,Tesla,car,Model S,,"70D, 22 kW-AC",bev,type2,ccs,66.5,18.8
+220,Tesla,car,Model X,2016.0,90D,bev,type2,ccs,90.0,20.0
+221,Tesla,car,Model X,2016.0,P90D,bev,type2,ccs,90.0,21.0
+222,Tesla,car,Model X,2017.0,P100D,bev,type2,ccs,100.0,22.0
+223,Tesla,car,Model X,2019.0,Performance,bev,type2,ccs,100.0,22.0
+224,Tesla,car,Model X,2017.0,100D,bev,type2,ccs,100.0,20.0
+225,Tesla,car,Model X,2019.0,Maximum Range,bev,type2,ccs,100.0,20.0
+226,Tesla,car,Model X,2019.0,75D,bev,type2,ccs,75.0,20.0
+227,Tesla,car,Model X,2016.0,60D,bev,type2,ccs,60.0,16.0
+228,Tesla,car,Model X,2020.0,long range,bev,,tesla,95.0,22.6
+229,Tesla,car,Model X,2020.0,Performance,bev,,tesla,95.0,23.6
+230,Tesla,car,Model X,2019.0,Standard Range,bev,type2,ccs,75.0,20.0
+231,Tesla,car,Model X,2020.0,Standard Range,bev,,tesla,72.5,21.6
+232,Tesla,car,Model Y,2020.0,Long Range,bev,type2,ccs,72.5,14.4
+233,Tesla,car,Model Y,2020.0,Performance,bev,type2,ccs,72.5,14.4
+234,Volkswagen,car,Golf GTE,2020.0,8,phev,type2,,13.0,11.4
+235,Volkswagen,car,ID.4,2020.0,77 kWh,bev,type2,ccs,77.0,19.3
+236,Volkswagen,car,ID.3,2020.0,77 kWh,bev,type2,ccs,77.0,17.1
+237,Volkswagen,car,ID.3,2020.0,45 kWh,bev,type2,ccs,45.0,16.4
+238,Volkswagen,car,ID.3,2020.0,58 kWh,bev,type2,ccs,58.0,16.6
+239,Volkswagen,car,e-Golf,2014.0,CCS,bev,type2,ccs,21.2,15.8
+240,Volkswagen,car,e-Golf,2017.0,CCS,bev,type2,ccs,31.5,16.4
+241,Volkswagen,car,e-Golf,2017.0,,bev,type2,,31.5,16.4
+242,Volkswagen,car,e-Golf,2014.0,,bev,type2,,21.2,15.8
+243,Volkswagen,car,e-Golf,2020.0,,bev,type2,ccs,31.5,15.3
+244,Volkswagen,car,e-up,2013.0,CCS,bev,type2,ccs,16.5,16.8
+245,Volkswagen,car,e-up,2013.0,,bev,type2,,16.5,16.8
+246,Volkswagen,car,e-up,2020.0,,bev,type2,,32.3,16.6
+247,Volkswagen,car,Golf GTE,2017.0,,phev,type2,,8.7,11.4
+248,Volkswagen,car,Passat GTE,2019.0,,phev,type2,,13.1,16.2
+249,Volkswagen,car,e-up,2020.0,CCS,bev,type2,ccs,32.3,16.6
+250,Volvo,car,XC40 PHEV,2019.0,T5 Twin Engine,phev,type2,,10.7,16.1
+251,Volvo,car,XC 60 T8,2018.0,,phev,type2,,10.4,24.5
+252,Volvo,car,XC40,2020.0,P8 Recharge,bev,type2,ccs,75.0,17.6
+253,Zero Motorcycles,motorbike,S,2019.0,ZF14.4 11 KW + Charge Tank,bev,type2,,12.6,6.3
+254,Zero Motorcycles,motorbike,SR/S,2020.0,Standard + Power Tank,bev,type2,,15.8,8.5
+255,Zero Motorcycles,motorbike,SR,2019.0,ZF 14.4 + Charge Tank,bev,type2,,12.6,7.0
+256,Zero Motorcycles,motorbike,SR/S,2020.0,Standard + Charge Tank,bev,type2,,12.6,8.0
+257,Zero Motorcycles,motorbike,SR/F,2019.0,Standard,bev,type2,,12.6,8.0
+258,Zero Motorcycles,motorbike,SR/F,2019.0,Standard + Power Tank,bev,type2,,15.8,8.5
+259,Zero Motorcycles,motorbike,SR/F,2019.0,Premium,bev,type2,,12.6,8.0
+260,Zero Motorcycles,motorbike,SR/F,2019.0,Standard + Charge Tank,bev,type2,,12.6,8.0
+261,Zero Motorcycles,motorbike,SR/F,2019.0,Premium + Charge Tank,bev,type2,,12.6,8.0
+262,Zero Motorcycles,motorbike,SR/F,2019.0,Premium + Power Tank,bev,type2,,15.8,8.5
+263,Zero Motorcycles,motorbike,SR/S,2020.0,Standard,bev,type2,,12.6,8.0
+264,Zero Motorcycles,motorbike,SR/S,2020.0,Premium,bev,type2,,12.6,8.0
+265,Zero Motorcycles,motorbike,DSR,2019.0,ZF 14.4 + Charge Tank,bev,type2,,12.6,7.4
+266,Zero Motorcycles,motorbike,DS,2019.0,ZF14.4 11 KW + Charge Tank,bev,type2,,12.6,6.6
+267,Zero Motorcycles,motorbike,SR/S,2020.0,Premium + Charge Tank,bev,type2,,12.6,8.0
+268,Zero Motorcycles,motorbike,SR/S,2020.0,Premium + Power Tank,bev,type2,,15.8,8.5
+269,Zero Motorcycles,motorbike,DSR/BF,2019.0,ZF 14.4 + Charge Tank,bev,type2,,12.6,8.8
+270,e.GO Mobile,car,Life 60,2019.0,,bev,type2,,21.0,15.5
+271,e.GO Mobile,car,Life 40,2019.0,,bev,type2,,17.5,15.5
+272,e.GO Mobile,car,Life 20,2019.0,,bev,type2,,14.5,15.5
+273,smart,car,fortwo ED,,22 kW-AC,bev,type2,,17.6,16.7
+274,smart,car,fortwo EQ,,,bev,type2,,17.6,16.7
+275,smart,car,fortwo EQ,,22 kW-AC,bev,type2,,17.6,16.7
+276,smart,car,fortwo ED,,,bev,type2,,17.6,16.7
+277,smart,car,forfour EQ,,,bev,type2,,17.6,17.6
+278,smart,car,forfour EQ,,22 kW-AC,bev,type2,,17.6,17.6

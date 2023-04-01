@@ -1,0 +1,16 @@
+vehicle_port,station_port,type
+tesla,ccs,dc
+tesla,chademo,dc
+tesla,type1,ac
+tesla,type2,ac
+tesla,nema515,ac
+tesla,nema520,ac
+tesla,nema1450,ac
+type1,type2,ac
+type1,nema515,ac
+type1,nema520,ac
+type1,nema1450,ac
+type2,type1,ac
+type2,nema515,ac
+type2,nema520,ac
+type2,nema1450,ac
