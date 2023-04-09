@@ -32,10 +32,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - name: Create env file
-      working-directory: ./server
-      run: |
-        echo "${{ secrets.SERVER_CREDENTIALS }}" > .env
     - name: Do clean install of node dependencies
       working-directory: ./server
       run: npm ci
