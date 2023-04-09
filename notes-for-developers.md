@@ -1,5 +1,24 @@
 # Notes for Developers
 
+## General Stuff
+
+### Manage depedencies
+
+When you introduce a new dependency (install a new package), add it to `package.json` by using `-s` or `--save-dev` flags so that other collaborators can also `npm install` the same version of it.
+
+- To install *package needed in depolyment* and add an entry to the `"dependencies"` attribute of a `package.json` file, run the following command:
+
+    `npm install <package-name> -s`
+    
+- To install *package needed only in development* and add an entry to the `"devDependencies"` attribute of a `package.json` file, run the following command:
+
+    `npm install <package-name> --save-dev`
+
+- To delete a package and remove an entry in `package.json`, run the following command:
+
+    `npm uninstall <package_name>`
+
+
 ## Server
 
 ### How to add new routes
