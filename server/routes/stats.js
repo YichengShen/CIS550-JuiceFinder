@@ -284,7 +284,7 @@ router.get("/electricStation/searchPort", (req, res) => {
 );
 }); 
 
-// Route 5: GET /stats/electricStation/searchSpeed
+// Route 6: GET /stats/electricStation/searchSpeed
 router.get("/electricStation/searchSpeed", (req, res) => {
     // route parameter
     const state1 = String(req.query.state1);
@@ -360,7 +360,7 @@ router.get("/electricStation/searchSpeed", (req, res) => {
 );
 }); 
 
-// Route 5: GET /stats/electricStation/searchNetwork
+// Route 7: GET /stats/electricStation/searchNetwork
 router.get("/electricStation/searchNetwork", (req, res) => {
     // route parameter
     const state1 = String(req.query.state1);
