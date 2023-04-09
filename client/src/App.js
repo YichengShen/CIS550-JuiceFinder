@@ -2,6 +2,7 @@ import logo from "./logo.svg";
 import "./App.css";
 
 function App() {
+  // console.log("trigger client tests. Can safely delete this line later.");
   return (
     <div className="App">
       <header className="App-header">
