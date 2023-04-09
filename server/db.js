@@ -10,10 +10,4 @@ const connection = mysql.createConnection({
 });
 connection.connect((err) => err && console.log(err));
 
-const helloworld = async function (req, res) {
-  res.send("Hello world!");
-};
-
-module.exports = {
-  helloworld,
-};
+module.exports = connection;

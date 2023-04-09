@@ -2,7 +2,6 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const config = require("./config");
-const routes = require("./routes");
 
 const app = express();
 app.use(
@@ -11,9 +10,8 @@ app.use(
   })
 );
 
-// We use express to define our various API endpoints and
-// provide their handlers that we implemented in routes.js
-app.get("/", routes.helloworld);
+// Add new routes inside ./routes and edit index.js respectively
+app.use(require("./routes"));
 
 app.listen(config.server_port, () => {
   console.log(
