@@ -1,0 +1,21 @@
+{
+  "name": "cis550-juicefinder-global",
+  "version": "1.0.0",
+  "description": "client and server of juicefinder",
+  "main": "index.js",
+  "scripts": {
+    "lint-staged-pre-commit": "lint-staged --config lint-staged-pre-commit.js",
+    "lint-staged-pre-push": "lint-staged --config lint-staged-pre-push.js",
+    "husky-install": "husky install",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.1",
+    "prettier": "^2.8.7"
+  }
+}
