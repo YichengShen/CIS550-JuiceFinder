@@ -7,7 +7,7 @@ function Landing() {
     // Log a page_view event when the HomePage component is mounted
     logEvent(analytics, "page_view", { page_title: "HomePage" });
   }, []);
-  return <div>landing</div>;
+  return <div>landing page</div>;
 }
 
 export default Landing;
