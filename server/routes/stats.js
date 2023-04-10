@@ -424,4 +424,53 @@ router.get("/electricStation/searchNetwork", (req, res) => {
 );
 }); 
 
-  module.exports = router;
+// Route 8: GET /stats/friendliness/stationToVehicle
+router.get("/friendliness/stationToVehicle", (req, res) => {
+    connection.query(
+    `
+        WITH elec_stations AS (
+            SELECT state, COUNT(sid) AS numStations FROM electric_stations
+            NATURAL JOIN stations
+            GROUP BY state
+        )
+        SELECT EV.state, numStations, numVehicles, numStations/numVehicles AS stationToVehicleRatio FROM elec_stations
+        NATURAL JOIN (SELECT state, registration_count AS numVehicles FROM ev_registration) AS EV
+        ORDER BY stationToVehicleRatio desc
+    `, (err, data) => {
+            if (err) {
+            console.log(err);
+            res.status(500).json({});
+            } else if (data.length === 0) {
+            res.status(204).json({});
+            } else {
+            res.status(200).json(data);
+            }
+    });
+});  
+
+// Route 9: GET /stats/friendliness/restaurantToStation
+router.get("/friendliness/restaurantToStation", (req, res) => {
+    connection.query(
+    `
+        WITH elec_stations AS (
+            SELECT state, COUNT(sid) AS numStations FROM electric_stations
+            NATURAL JOIN stations
+            GROUP BY state
+        )
+        SELECT state, numStations, numRestaurants, numRestaurants/numStations AS restaurantToStationRatio
+        FROM (SELECT state, COUNT(business_id) AS numRestaurants FROM restaurants GROUP BY state ) AS R
+        NATURAL JOIN elec_stations
+        ORDER BY restaurantToStationRatio desc
+    `, (err, data) => {
+            if (err) {
+            console.log(err);
+            res.status(500).json({});
+            } else if (data.length === 0) {
+            res.status(204).json({});
+            } else {
+            res.status(200).json(data);
+            }
+    });
+}); 
+
+module.exports = router;
