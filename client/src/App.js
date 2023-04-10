@@ -10,6 +10,7 @@ import Statistics from "./statistics";
 import Settings from "./settings";
 
 function App() {
+  // console.log("trigger client tests. Can safely delete this line later.");
   return (
     <Router>
       <AuthProvider>
