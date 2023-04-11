@@ -21,4 +21,4 @@ const checkAuth = async (req, res, next) => {
   }
 };
 
-module.exports = checkAuth;
+module.exports = { checkAuth };
