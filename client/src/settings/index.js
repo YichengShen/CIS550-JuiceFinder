@@ -34,7 +34,7 @@ function Settings() {
         setVehicleInfo(null);
       }
     } catch (error) {
-      console.error("Error fetching vehicle info:", error);
+      // console.error("Error fetching vehicle info:", error);
       setVehicleInfo(null);
     }
   };
@@ -74,14 +74,14 @@ function Settings() {
       );
 
       if (response.ok) {
-        const data = await response.json();
-        console.log(data);
+        // const data = await response.json();
+        // console.log(data);
         fetchVehicleInfo(); // Re-fetch the updated vehicle information
       } else {
-        console.error("Error updating vehicle info:", response.statusText);
+        // console.error("Error updating vehicle info:", response.statusText);
       }
     } catch (error) {
-      console.error("Error updating vehicle info:", error);
+      // console.error("Error updating vehicle info:", error);
     }
   };
 
