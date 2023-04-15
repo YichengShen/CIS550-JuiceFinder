@@ -14,7 +14,6 @@ app.use(
 app.use(require("./routes"));
 
 app.listen(config.server_port, () => {
-  console.log("trigger server tests. Can safely delete this line later.");
   console.log(
     `Server running at http://${config.server_host}:${config.server_port}/`
   );

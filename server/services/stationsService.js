@@ -1,7 +1,7 @@
 const { camelToSnakeCase, escapeForSql } = require("./commonService");
 const { getCoordinatesFromAddress } = require("./locationService");
 
-let parseElectricFilters = () => {};
+let parseElectricFilters;
 
 const getWhereClause = async (filters, isElectric = false) => {
   const whereArr = [];
@@ -49,7 +49,7 @@ const getWhereClause = async (filters, isElectric = false) => {
       case "streetAddress":
         break;
       default:
-        unsupportedFilters[key] = [filters[key]];
+        unsupportedFilters[key] = filters[key];
         break;
     }
   });
@@ -59,9 +59,9 @@ const getWhereClause = async (filters, isElectric = false) => {
     resultArr = whereArr.concat(parseElectricFilters(unsupportedFilters));
   } else {
     resultArr = whereArr;
-    Object.entries.forEach(([key, value]) => {
+    Object.entries(unsupportedFilters).forEach(([key, value]) => {
       console.log(
-        `Station filter recognized but not supported yet: ${key}=${value}`
+        `Station filter recognized but not supported yet: {"${key}":"${value}"}`
       );
     });
   }
@@ -70,21 +70,64 @@ const getWhereClause = async (filters, isElectric = false) => {
 };
 
 parseElectricFilters = (filters) => {
+  const { stationPorts, chargeLevel } = filters;
   const electricWhereArr = [];
+
+  let portArr;
+  if (stationPorts) {
+    portArr = stationPorts.split(",");
+    if (portArr.length > 0) {
+      const stationPortSql = `('${portArr.join("', '")}')`;
+      electricWhereArr.push(`
+      sid in (
+        select sid 
+        from station_ports
+        where port in ${stationPortSql}
+      )
+    `);
+    }
+  }
+
+  if (chargeLevel) {
+    const chargeLevelPredicateArr = [];
+    chargeLevel.split(",").forEach((level) => {
+      if (level === "dc_fast") {
+        chargeLevelPredicateArr.push(`CLE.ev_dc_fast_num > 0`);
+      } else if (level === "level1") {
+        chargeLevelPredicateArr.push(`CLE.ev_level1_evse_num > 0`);
+      } else if (level === "level2") {
+        chargeLevelPredicateArr.push(`CLE.ev_level2_evse_num > 0`);
+      } else {
+        console.log(`Unrecognized charging level: ${level}`);
+      }
+    });
+    // optimization: use view to filter level 1, level 2, dc_fast stations first
+    const chargeLevelSql =
+      chargeLevelPredicateArr.length > 0
+        ? `(${chargeLevelPredicateArr.join(" OR ")})`
+        : "";
+    electricWhereArr.push(`
+    exists (
+      select * FROM electric_stations CLE 
+      where CLE.sid=E.sid 
+        AND ${chargeLevelSql}
+    )
+  `);
+  }
+
   Object.keys(filters).forEach((key) => {
     switch (key) {
-      case "vehiclePorts":
       case "stationPorts":
-      case "adaptors":
       case "chargeLevel":
         break;
       default:
         console.log(
-          `Station filter recognized but not supported yet: ${key}=${filters[key]}`
+          `Station filter recognized but not supported yet: {"${key}":"${filters[key]}"}`
         );
         break;
     }
   });
+
   return electricWhereArr;
 };
 
