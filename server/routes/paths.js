@@ -1,27 +1,28 @@
 const express = require("express");
-
 const router = express.Router();
-const axios = require("axios");
-const bodyParser = require("body-parser");
 const connection = require("../db");
-const { getCoordinates, getWhereClause } = require("./helper");
-
-router.use(bodyParser.json());
+const axios = require("axios");
 
 // Route 1: GET /paths/geocode/:fullAddress
-router.get("/geocode/:fullAddress", async (req, res) => {
+router.get("/geocode/:fullAddress", (req, res) => {
   const fullAddress = req.params.fullAddress;
-  try {
-    const coordinate = await getCoordinates(fullAddress);
-    res.status(200).json(coordinate);
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({});
-  }
+  const url = `https://nominatim.openstreetmap.org/search?q=${fullAddress}&format=json&limit=1`;
+  axios
+    .get(url)
+    .then((response) => {
+      const firstGeocode = response.data[0];
+      const lat = firstGeocode.lat;
+      const lon = firstGeocode.lon;
+      res.status(200).json({ latidude: lat, longitude: lon });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({});
+    });
 });
 
 // Route 2: GET /routes/plan/:startLng/:startLat/:destLng/:destLat
-router.get("/plan/:startLng/:startLat/:destLng/:destLat", async (req, res) => {
+router.get("/plan/:startLng/:startLat/:destLng/:destLat", (req, res) => {
   const { startLng, startLat, destLng, destLat } = req.params;
   const url = `https://api.openrouteservice.org/v2/directions/driving-car?api_key=${process.env.OPENROUTESERVICE_API_KEY}&start=${startLng},${startLat}&end=${destLng},${destLat}`;
 
@@ -39,54 +40,23 @@ router.get("/plan/:startLng/:startLat/:destLng/:destLat", async (req, res) => {
 });
 
 // Route 3: POST /routes/nearbyStations
-router.post("/nearbyStations", async (req, res) => {
+router.post("/nearbyStations", (req, res) => {
   const maxDistMile = req.query.maxDistMile ?? 10;
   const coordinates = req.body.coordinates;
   const stationLocationColName = "location";
-
-  // Get the regular attributes' constraints
-  const validFilters = [
-    "state",
-    "city",
-    "zip",
-    "streetAddress",
-    "accessCode",
-    "alwaysOpen",
-    // Ignore location-related constraints for now
-    // "latitude",
-    // "longitude",
-    // "meterDistance",
-  ];
-  const receivedFilters = {};
-  validFilters.forEach((validKeyName) => {
-    const value = req.query[validKeyName];
-    if (value || value === "") {
-      receivedFilters[validKeyName] = value;
+  let distConstraint = "";
+  for (let i = 0; i < coordinates.length; ++i) {
+    distConstraint += `ST_Distance_Sphere(${stationLocationColName}, ST_SRID(ST_GEOMFROMTEXT('POINT(${
+      coordinates[i][0]
+    } ${coordinates[i][1]})'), 4326)) < ${maxDistMile * 1609.34}`;
+    if (i < coordinates.length - 1) {
+      distConstraint += " OR ";
     }
-  });
-
-  const whereClause = getWhereClause(receivedFilters);
-  // whereClause = "WHERE state = 'CA' AND city = 'San Francisco'"
-  //               or an empty string if no constraints are given
-
-  // Handle the distance constraint along the path
-  const distConstraints = [];
-  coordinates.forEach((coordinate) => {
-    distConstraints.push(
-      `ST_Distance_Sphere(${stationLocationColName}, ST_SRID(ST_GEOMFROMTEXT('POINT(${
-        coordinate[0]
-      } ${coordinate[1]})'), 4326)) < ${maxDistMile * 1609.34}`
-    );
-  });
-  const distConstraintString = distConstraints.join(" OR ");
-
-  // Combine the queries
-  const query = `
+  }
+  let query = `
     SELECT DISTINCT sid, ST_Y(${stationLocationColName}) AS longitude, ST_X(${stationLocationColName}) AS latitude
     FROM stations
-    ${
-      whereClause === "" ? "WHERE" : `${whereClause} AND`
-    } (${distConstraintString})
+    WHERE ${distConstraint}
   `;
   connection.query(query, (err, data) => {
     if (err || data.length === 0) {

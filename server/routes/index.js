@@ -7,5 +7,6 @@ router.use("/adaptors", require("./adapters"));
 router.use("/stations", require("./stations"));
 router.use("/stats", require("./stats"));
 router.use("/users", require("./users"));
+router.use("/paths", require("./paths"));
 
 module.exports = router;
