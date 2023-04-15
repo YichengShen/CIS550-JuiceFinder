@@ -1,13 +1,5 @@
 const { camelToSnakeCase, escapeForSql } = require("./commonService");
-
-// eslint-disable-next-line no-unused-vars
-const getCoordinatesFromAddress = async (fullAddress) => {
-  // placeholder code
-  console.log("fetching coordinates of the address");
-  // eslint-disable-next-line no-promise-executor-return
-  await new Promise((resolve) => setTimeout(resolve, 2000));
-  return {};
-};
+const { getCoordinatesFromAddress } = require("./locationService");
 
 const getWhereClause = async (filters) => {
   const whereArr = [];
