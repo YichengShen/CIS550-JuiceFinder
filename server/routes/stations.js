@@ -6,7 +6,7 @@ const { getWhereClause } = require("../services/stationsService");
 
 // Route: GET /stations
 router.get("/", async (req, res) => {
-  console.log(req.query);
+  console.log(`/stations, filters=${req.query}`);
   const page = req.query.page;
   const pageSize = req.query.pageSize ?? 50;
   const validFilters = [
@@ -53,9 +53,38 @@ router.get("/", async (req, res) => {
 });
 
 // Route: GET /stations/electric
-router.get("/electric", (req, res) => {
+router.get("/electric", async (req, res) => {
+  console.log(`/stations/electric, filters=${req.query}`);
   const page = req.query.page;
   const pageSize = req.query.pageSize ?? 50;
+  const validFilters = [
+    "state",
+    "city",
+    "zip",
+    "streetAddress",
+    "accessCode",
+    "alwaysOpen",
+    "latitude",
+    "longitude",
+    "meterDistance",
+    "vehiclePorts",
+    "stationPorts",
+    "adaptors",
+    "chargeLevel",
+  ];
+  const receivedFilters = {};
+  for (let i = 0; i < validFilters.length; i += 1) {
+    const key = validFilters[i];
+    const value = req.query[key];
+    if (value || value === "") {
+      receivedFilters[key] = value;
+    }
+  }
+
+  let orderByObject = "sid";
+  if (req.query.orderBy === "num_ports") {
+    orderByObject = "num_ports DESC";
+  }
 
   const query = `
     SELECT * ${
@@ -64,10 +93,13 @@ router.get("/electric", (req, res) => {
         : ""
     }
     FROM stations S NATURAL JOIN electric_stations E
-    ORDER BY ${req.query.orderBy ?? "sid"}
+    ${await getWhereClause(receivedFilters, true)}
+    ORDER BY ${orderByObject}
     LIMIT ${pageSize}
     ${page ? `OFFSET ${(page - 1) * pageSize}` : ""}
   `;
+
+  console.log(query);
 
   connection.query(query, (err, data) => {
     if (err) {
