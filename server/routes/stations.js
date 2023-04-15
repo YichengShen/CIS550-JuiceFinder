@@ -6,7 +6,7 @@ const { getWhereClause } = require("../services/stationsService");
 
 // Route: GET /stations
 router.get("/", async (req, res) => {
-  console.log(`/stations, filters=${req.query}`);
+  console.log(`/stations, filters=${JSON.stringify(req.query)}`);
   const page = req.query.page;
   const pageSize = req.query.pageSize ?? 50;
   const validFilters = [
@@ -54,7 +54,7 @@ router.get("/", async (req, res) => {
 
 // Route: GET /stations/electric
 router.get("/electric", async (req, res) => {
-  console.log(`/stations/electric, filters=${req.query}`);
+  console.log(`/stations/electric, filters=${JSON.stringify(req.query)}`);
   const page = req.query.page;
   const pageSize = req.query.pageSize ?? 50;
   const validFilters = [
@@ -67,9 +67,9 @@ router.get("/electric", async (req, res) => {
     "latitude",
     "longitude",
     "meterDistance",
-    "vehiclePorts",
     "stationPorts",
-    "adaptors",
+    // "vehiclePorts", // move the adaptor logic to the client
+    // "adapters",
     "chargeLevel",
   ];
   const receivedFilters = {};
@@ -89,7 +89,7 @@ router.get("/electric", async (req, res) => {
   const query = `
     SELECT * ${
       req.query.orderBy === "num_ports"
-        ? ", e.ev_level1_evse_num + e.ev_level2_evse_num + e.ev_dc_fast_num AS num_ports"
+        ? ", E.ev_level1_evse_num + E.ev_level2_evse_num + E.ev_dc_fast_num AS num_ports"
         : ""
     }
     FROM stations S NATURAL JOIN electric_stations E
