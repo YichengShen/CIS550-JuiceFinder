@@ -47,7 +47,6 @@ const getWhereClause = (filters) => {
     }
   });
 
-  console.log(Object.prototype.hasOwnProperty.call(filters, "longitude"));
   if (
     Object.prototype.hasOwnProperty.call(filters, "latitude") &&
     Object.prototype.hasOwnProperty.call(filters, "longitude")
