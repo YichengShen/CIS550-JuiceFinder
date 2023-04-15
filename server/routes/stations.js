@@ -2,10 +2,10 @@ const express = require("express");
 
 const router = express.Router();
 const connection = require("../db");
-const { getWhereClause } = require("./helper");
+const { getWhereClause } = require("../services/stationsService");
 
 // Route: GET /stations
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
   console.log(req.query);
   const page = req.query.page;
   const pageSize = req.query.pageSize ?? 50;
@@ -28,19 +28,17 @@ router.get("/", (req, res) => {
       receivedFilters[key] = value;
     }
   }
-  const whereClause = getWhereClause(receivedFilters);
 
   const query = `
     SELECT *
     FROM stations
-    ${whereClause}
+    ${await getWhereClause(receivedFilters)}
     ORDER BY sid
     LIMIT ${pageSize}
     ${page ? `OFFSET ${(page - 1) * pageSize}` : ""}
   `;
 
   console.log(query);
-  // res.status(200).send(query);
 
   connection.query(query, (err, data) => {
     if (err) {
