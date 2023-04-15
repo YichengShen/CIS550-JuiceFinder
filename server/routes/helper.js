@@ -6,7 +6,9 @@ const camelToSnakeCase = (str) =>
 const escapeForSql = (str) => str.replace(/'/g, `\\'`);
 
 const getCoordinates = async (fullAddress) => {
-  const url = `https://nominatim.openstreetmap.org/search?q=${fullAddress}&format=json&limit=1`;
+  const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(
+    fullAddress
+  )}&format=json&limit=1`;
 
   try {
     const response = await axios.get(url);
