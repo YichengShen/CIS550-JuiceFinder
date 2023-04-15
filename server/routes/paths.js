@@ -63,6 +63,7 @@ router.post("/nearbyStations", async (req, res) => {
       receivedFilters[validKeyName] = value;
     }
   }
+
   const whereClause = getWhereClause(receivedFilters);
   // whereClause = "WHERE state = 'CA' AND city = 'San Francisco'"
   //               or empty string
