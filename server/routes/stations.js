@@ -2,9 +2,11 @@ const express = require("express");
 
 const router = express.Router();
 const connection = require("../db");
+const { getWhereClause } = require("./helper");
 
 // Route: GET /stations
 router.get("/", (req, res) => {
+  console.log(req.query);
   const page = req.query.page;
   const pageSize = req.query.pageSize ?? 50;
   const validFilters = [
@@ -12,22 +14,22 @@ router.get("/", (req, res) => {
     "city",
     "zip",
     "streetAddress",
+    "accessCode",
+    "alwaysOpen",
     "latitude",
     "longitute",
     "meterDistance",
-    "accessCode",
-    "alwaysOpen",
   ];
   const receivedFilters = {};
   for (let i = 0; i < validFilters.length; i += 1) {
     const key = validFilters[i];
-    const value = req.query.key;
-    if (value) {
+    const value = req.query[key];
+    if (value || value === "") {
       receivedFilters[key] = value;
     }
   }
-  console.log(receivedFilters);
-  const whereClause = "";
+
+  const whereClause = getWhereClause(receivedFilters);
 
   const query = `
     SELECT *
@@ -39,6 +41,7 @@ router.get("/", (req, res) => {
   `;
 
   console.log(query);
+  // res.status(200).send(query);
 
   connection.query(query, (err, data) => {
     if (err) {
