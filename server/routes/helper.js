@@ -1,7 +1,29 @@
+const axios = require("axios");
+
 const camelToSnakeCase = (str) =>
   str.replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`);
 
 const escapeForSql = (str) => str.replace(/'/g, `\\'`);
+
+const getCoordinates = async (fullAddress) => {
+  const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(
+    fullAddress
+  )}&format=json&limit=1`;
+
+  axios
+    .get(url)
+    .then((response) => {
+      const firstGeocode = response.data[0];
+      const lat = firstGeocode.lat;
+      const lon = firstGeocode.lon;
+      return { latidude: lat, longitude: lon };
+    })
+    .catch((err) => {
+      console.log(err);
+      return {};
+    });
+  return {};
+};
 
 const getWhereClause = (filters) => {
   const whereArr = [];
