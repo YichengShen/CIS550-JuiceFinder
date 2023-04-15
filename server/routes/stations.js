@@ -91,9 +91,10 @@ router.get("/electric", async (req, res) => {
       req.query.orderBy === "num_ports"
         ? ", E.ev_level1_evse_num + E.ev_level2_evse_num + E.ev_dc_fast_num AS num_ports"
         : ""
-    }
-    FROM stations S NATURAL JOIN electric_stations E
+    }, GROUP_CONCAT(port) AS port
+    FROM stations S NATURAL JOIN electric_stations E NATURAL JOIN station_ports SP
     ${await getWhereClause(receivedFilters, true)}
+    GROUP BY sid
     ORDER BY ${orderByObject}
     LIMIT ${pageSize}
     ${page ? `OFFSET ${(page - 1) * pageSize}` : ""}
@@ -136,10 +137,13 @@ router.get("/:id", (req, res) => {
 // Route: GET /stations/electric/:id
 router.get("/electric/:id", (req, res) => {
   const query = `
-        SELECT *
-        FROM stations NATURAL JOIN electric_stations
+        SELECT *, GROUP_CONCAT(port) AS port
+        FROM stations NATURAL JOIN electric_stations NATURAL JOIN station_ports
         WHERE sid='${req.params.id}'
+        GROUP BY sid
     `;
+
+  console.log(query);
 
   connection.query(query, (err, data) => {
     if (err) {

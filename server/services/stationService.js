@@ -1,8 +1,12 @@
 const { camelToSnakeCase, escapeForSql } = require("./commonService");
 const { getCoordinatesFromAddress } = require("./locationService");
 
+/* Generate and returns an array of WHERE predicates applicable only to electric stations in MySQL */
 let parseElectricFilters;
 
+/* Generate the WHERE clause for filtering stations (general or electric stations) in MySQL 
+  e.g. WHERE city='Philadelpha' AND state='PA'
+*/
 const getWhereClause = async (filters, isElectric = false) => {
   const whereArr = [];
   const unsupportedFilters = {};
