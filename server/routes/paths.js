@@ -1,8 +1,9 @@
 const express = require("express");
+
 const router = express.Router();
-const connection = require("../db");
 const axios = require("axios");
 const bodyParser = require("body-parser");
+const connection = require("../db");
 const { getCoordinates, getWhereClause } = require("./helper");
 
 router.use(bodyParser.json());
@@ -57,26 +58,26 @@ router.post("/nearbyStations", async (req, res) => {
     // "meterDistance",
   ];
   const receivedFilters = {};
-  for (const validKeyName of validFilters) {
+  validFilters.forEach((validKeyName) => {
     const value = req.query[validKeyName];
     if (value || value === "") {
       receivedFilters[validKeyName] = value;
     }
-  }
+  });
 
   const whereClause = getWhereClause(receivedFilters);
   // whereClause = "WHERE state = 'CA' AND city = 'San Francisco'"
-  //               or an empty string
+  //               or an empty string if no constraints are given
 
   // Handle the distance constraint along the path
   const distConstraints = [];
-  for (const coordinate of coordinates) {
+  coordinates.forEach((coordinate) => {
     distConstraints.push(
       `ST_Distance_Sphere(${stationLocationColName}, ST_SRID(ST_GEOMFROMTEXT('POINT(${
         coordinate[0]
       } ${coordinate[1]})'), 4326)) < ${maxDistMile * 1609.34}`
     );
-  }
+  });
   const distConstraintString = distConstraints.join(" OR ");
 
   // Combine the queries
@@ -84,7 +85,7 @@ router.post("/nearbyStations", async (req, res) => {
     SELECT DISTINCT sid, ST_Y(${stationLocationColName}) AS longitude, ST_X(${stationLocationColName}) AS latitude
     FROM stations
     ${
-      whereClause === "" ? "WHERE" : whereClause + " AND"
+      whereClause === "" ? "WHERE" : `${whereClause} AND`
     } (${distConstraintString})
   `;
   connection.query(query, (err, data) => {
