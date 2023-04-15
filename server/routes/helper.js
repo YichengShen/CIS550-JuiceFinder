@@ -6,23 +6,19 @@ const camelToSnakeCase = (str) =>
 const escapeForSql = (str) => str.replace(/'/g, `\\'`);
 
 const getCoordinates = async (fullAddress) => {
-  const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(
-    fullAddress
-  )}&format=json&limit=1`;
+  const url = `https://nominatim.openstreetmap.org/search?q=${fullAddress}&format=json&limit=1`;
 
-  axios
-    .get(url)
-    .then((response) => {
-      const firstGeocode = response.data[0];
-      const lat = firstGeocode.lat;
-      const lon = firstGeocode.lon;
-      return { latidude: lat, longitude: lon };
-    })
-    .catch((err) => {
-      console.log(err);
-      return {};
-    });
-  return {};
+  try {
+    const response = await axios.get(url);
+    const data = response.data[0];
+    return {
+      latitude: data.lat,
+      longitude: data.lon,
+    };
+  } catch (err) {
+    console.log(err);
+    return {};
+  }
 };
 
 const getWhereClause = (filters) => {
@@ -66,4 +62,4 @@ const getWhereClause = (filters) => {
   return whereArr.length > 0 ? `WHERE ${whereArr.join(" AND ")}` : "";
 };
 
-module.exports = { getWhereClause };
+module.exports = { getWhereClause, getCoordinates };

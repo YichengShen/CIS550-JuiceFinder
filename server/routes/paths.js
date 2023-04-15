@@ -2,27 +2,25 @@ const express = require("express");
 const router = express.Router();
 const connection = require("../db");
 const axios = require("axios");
+const bodyParser = require("body-parser");
+const { getCoordinates } = require("./helper");
+
+router.use(bodyParser.json());
 
 // Route 1: GET /paths/geocode/:fullAddress
-router.get("/geocode/:fullAddress", (req, res) => {
+router.get("/geocode/:fullAddress", async (req, res) => {
   const fullAddress = req.params.fullAddress;
-  const url = `https://nominatim.openstreetmap.org/search?q=${fullAddress}&format=json&limit=1`;
-  axios
-    .get(url)
-    .then((response) => {
-      const firstGeocode = response.data[0];
-      const lat = firstGeocode.lat;
-      const lon = firstGeocode.lon;
-      res.status(200).json({ latidude: lat, longitude: lon });
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json({});
-    });
+  try {
+    const coordinate = await getCoordinates(fullAddress);
+    res.status(200).json(coordinate);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({});
+  }
 });
 
 // Route 2: GET /routes/plan/:startLng/:startLat/:destLng/:destLat
-router.get("/plan/:startLng/:startLat/:destLng/:destLat", (req, res) => {
+router.get("/plan/:startLng/:startLat/:destLng/:destLat", async (req, res) => {
   const { startLng, startLat, destLng, destLat } = req.params;
   const url = `https://api.openrouteservice.org/v2/directions/driving-car?api_key=${process.env.OPENROUTESERVICE_API_KEY}&start=${startLng},${startLat}&end=${destLng},${destLat}`;
 
@@ -40,7 +38,7 @@ router.get("/plan/:startLng/:startLat/:destLng/:destLat", (req, res) => {
 });
 
 // Route 3: POST /routes/nearbyStations
-router.post("/nearbyStations", (req, res) => {
+router.post("/nearbyStations", async (req, res) => {
   const maxDistMile = req.query.maxDistMile ?? 10;
   const coordinates = req.body.coordinates;
   const stationLocationColName = "location";
