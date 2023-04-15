@@ -2,7 +2,7 @@ const express = require("express");
 
 const router = express.Router();
 const connection = require("../db");
-const { getWhereClause } = require("../services/stationsService");
+const { getWhereClause } = require("../services/stationService");
 
 // Route: GET /stations
 router.get("/", async (req, res) => {
