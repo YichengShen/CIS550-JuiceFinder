@@ -66,7 +66,7 @@ router.post("/nearbyStations", async (req, res) => {
 
   const whereClause = getWhereClause(receivedFilters);
   // whereClause = "WHERE state = 'CA' AND city = 'San Francisco'"
-  //               or empty string
+  //               or an empty string
 
   // Handle the distance constraint along the path
   const distConstraints = [];
