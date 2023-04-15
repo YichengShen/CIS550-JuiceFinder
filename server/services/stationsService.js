@@ -1,14 +1,17 @@
 const { camelToSnakeCase, escapeForSql } = require("./commonService");
 const { getCoordinatesFromAddress } = require("./locationService");
 
-const getWhereClause = async (filters) => {
+let parseElectricFilters = () => {};
+
+const getWhereClause = async (filters, isElectric = false) => {
   const whereArr = [];
+  const unsupportedFilters = {};
   let latitude;
   let longitude;
   const meterDistance = filters.meterDistance || 1609;
 
-  // if both street address and coordinates are provided
-  // use the coordinates provided
+  // generate filter predicate based on street address or coordinates
+  // if both street address and coordinates are provided, use the coordinates
   if (
     Object.prototype.hasOwnProperty.call(filters, "latitude") &&
     Object.prototype.hasOwnProperty.call(filters, "longitude")
@@ -46,12 +49,43 @@ const getWhereClause = async (filters) => {
       case "streetAddress":
         break;
       default:
-        console.log(`unsupported filter: ${key}=${filters[key]}`);
+        unsupportedFilters[key] = [filters[key]];
         break;
     }
   });
 
-  return whereArr.length > 0 ? `WHERE ${whereArr.join(" AND ")}` : "";
+  let resultArr;
+  if (isElectric) {
+    resultArr = whereArr.concat(parseElectricFilters(unsupportedFilters));
+  } else {
+    resultArr = whereArr;
+    Object.entries.forEach(([key, value]) => {
+      console.log(
+        `Station filter recognized but not supported yet: ${key}=${value}`
+      );
+    });
+  }
+
+  return resultArr.length > 0 ? `WHERE ${resultArr.join(" AND ")}` : "";
+};
+
+parseElectricFilters = (filters) => {
+  const electricWhereArr = [];
+  Object.keys(filters).forEach((key) => {
+    switch (key) {
+      case "vehiclePorts":
+      case "stationPorts":
+      case "adaptors":
+      case "chargeLevel":
+        break;
+      default:
+        console.log(
+          `Station filter recognized but not supported yet: ${key}=${filters[key]}`
+        );
+        break;
+    }
+  });
+  return electricWhereArr;
 };
 
 module.exports = { getWhereClause };
