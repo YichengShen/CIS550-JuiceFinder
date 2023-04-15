@@ -7,8 +7,9 @@ const { getWhereClause } = require("../services/stationService");
 // Route: GET /stations
 router.get("/", async (req, res) => {
   console.log(`/stations, filters=${JSON.stringify(req.query)}`);
-  const page = req.query.page;
-  const pageSize = req.query.pageSize ?? 50;
+  const { orderBy } = req.query;
+  const page = Math.max(0, req.query.page);
+  const pageSize = Math.max(0, req.query.pageSize) || 50;
   const validFilters = [
     "state",
     "city",
@@ -18,7 +19,7 @@ router.get("/", async (req, res) => {
     "alwaysOpen",
     "latitude",
     "longitude",
-    "meterDistance",
+    "mileDistance",
   ];
   const receivedFilters = {};
   for (let i = 0; i < validFilters.length; i += 1) {
@@ -29,11 +30,26 @@ router.get("/", async (req, res) => {
     }
   }
 
+  const whereClause = await getWhereClause(receivedFilters, false);
+  let orderByObject = "sid";
+  const additionalSelectAttrs = [];
+  if (whereClause.includes("ST_Distance_Sphere")) {
+    const result = whereClause.match(
+      /ST_Distance_Sphere.*?(?=\s*<=?\s*[\d\\.]+)/
+    );
+    if (result) {
+      additionalSelectAttrs.push(`${result[0]} AS meter_distance`);
+    }
+    if (!orderBy || orderBy === "distance") {
+      orderByObject = "meter_distance ASC";
+    }
+  }
+
   const query = `
-    SELECT *
+    SELECT *, ${additionalSelectAttrs.join(", ")}
     FROM stations
-    ${await getWhereClause(receivedFilters)}
-    ORDER BY sid
+    ${whereClause}
+    ORDER BY ${orderByObject}
     LIMIT ${pageSize}
     ${page ? `OFFSET ${(page - 1) * pageSize}` : ""}
   `;
@@ -55,8 +71,9 @@ router.get("/", async (req, res) => {
 // Route: GET /stations/electric
 router.get("/electric", async (req, res) => {
   console.log(`/stations/electric, filters=${JSON.stringify(req.query)}`);
-  const page = req.query.page;
-  const pageSize = req.query.pageSize ?? 50;
+  const { orderBy } = req.query;
+  const page = Math.max(0, req.query.page);
+  const pageSize = Math.max(0, req.query.pageSize) || 50;
   const validFilters = [
     "state",
     "city",
@@ -66,7 +83,7 @@ router.get("/electric", async (req, res) => {
     "alwaysOpen",
     "latitude",
     "longitude",
-    "meterDistance",
+    "mileDistance",
     "stationPorts",
     // "vehiclePorts", // move the adaptor logic to the client
     // "adapters",
@@ -81,8 +98,21 @@ router.get("/electric", async (req, res) => {
     }
   }
 
+  const whereClause = await getWhereClause(receivedFilters, true);
   let orderByObject = "sid";
-  if (req.query.orderBy === "num_ports") {
+  const additionalSelectAttrs = [];
+  if (whereClause.includes("ST_Distance_Sphere")) {
+    const result = whereClause.match(
+      /ST_Distance_Sphere.*?(?=\s*<=?\s*[\d\\.]+)/
+    );
+    if (result) {
+      additionalSelectAttrs.push(`${result[0]} AS meter_distance`);
+    }
+    if (!orderBy || orderBy === "distance") {
+      orderByObject = "meter_distance ASC";
+    }
+  }
+  if (orderBy === "num_ports") {
     orderByObject = "num_ports DESC";
   }
 
@@ -91,9 +121,9 @@ router.get("/electric", async (req, res) => {
       req.query.orderBy === "num_ports"
         ? ", E.ev_level1_evse_num + E.ev_level2_evse_num + E.ev_dc_fast_num AS num_ports"
         : ""
-    }, GROUP_CONCAT(port) AS port
+    }, GROUP_CONCAT(port) AS port, ${additionalSelectAttrs.join(", ")}
     FROM stations S NATURAL JOIN electric_stations E NATURAL JOIN station_ports SP
-    ${await getWhereClause(receivedFilters, true)}
+    ${whereClause}
     GROUP BY sid
     ORDER BY ${orderByObject}
     LIMIT ${pageSize}

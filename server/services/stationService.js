@@ -1,5 +1,9 @@
 const { camelToSnakeCase, escapeForSql } = require("./commonService");
-const { getCoordinatesFromAddress } = require("./locationService");
+const {
+  getCoordinates: getCoordinatesFromAddress,
+} = require("./locationService");
+
+const METER_PER_MILE = 1609.34;
 
 /* Generate and returns an array of WHERE predicates applicable only to electric stations in MySQL */
 let parseElectricFilters;
@@ -12,7 +16,8 @@ const getWhereClause = async (filters, isElectric = false) => {
   const unsupportedFilters = {};
   let latitude;
   let longitude;
-  const meterDistance = filters.meterDistance || 1609;
+  console.log(filters);
+  const meterDistance = (filters.mileDistance || 5) * METER_PER_MILE;
 
   // generate filter predicate based on street address or coordinates
   // if both street address and coordinates are provided, use the coordinates
@@ -28,7 +33,7 @@ const getWhereClause = async (filters, isElectric = false) => {
 
   if (latitude && longitude) {
     whereArr.push(
-      `ST_Distance_Sphere(location, ST_SRID(ST_GEOMFROMTEXT('POINT(${longitude} ${latitude})'), 4326)) < ${meterDistance}`
+      `ST_Distance_Sphere(location, ST_SRID(ST_GEOMFROMTEXT('POINT(${longitude} ${latitude})'), 4326)) <= ${meterDistance}`
     );
   }
 
@@ -49,7 +54,7 @@ const getWhereClause = async (filters, isElectric = false) => {
       // special filters that requires separate processing
       case "latitude":
       case "longitude":
-      case "meterDistance":
+      case "mileDistance":
       case "streetAddress":
         break;
       default:
