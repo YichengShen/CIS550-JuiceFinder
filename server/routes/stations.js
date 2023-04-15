@@ -17,7 +17,7 @@ router.get("/", (req, res) => {
     "accessCode",
     "alwaysOpen",
     "latitude",
-    "longitute",
+    "longitude",
     "meterDistance",
   ];
   const receivedFilters = {};
@@ -28,7 +28,6 @@ router.get("/", (req, res) => {
       receivedFilters[key] = value;
     }
   }
-
   const whereClause = getWhereClause(receivedFilters);
 
   const query = `

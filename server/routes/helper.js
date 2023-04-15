@@ -20,18 +20,27 @@ const getWhereClause = (filters) => {
         whereArr.push("access_days_time='24 hours daily'");
         break;
       case "latitude":
-      case "longitute":
+      case "longitude":
       case "meterDistance":
         break;
       default: // requires exact match
         console.log(`unsupported filter: ${key}: ${filters[key]}`);
         break;
     }
-    // if (obj.hasOwnProperty("latitude") && obj.hasOwnProperty("longitute") && obj.hasOwnProperty("meterDistance")) {
-
-    // }
-    // console.log(`${key}: ${filters[key]}`);
   });
+
+  console.log(Object.prototype.hasOwnProperty.call(filters, "longitude"));
+  if (
+    Object.prototype.hasOwnProperty.call(filters, "latitude") &&
+    Object.prototype.hasOwnProperty.call(filters, "longitude")
+  ) {
+    const { latitude, longitude } = filters;
+    const meterDistance = filters.meterDistance || 1609;
+    whereArr.push(
+      `ST_Distance_Sphere(location, ST_SRID(ST_GEOMFROMTEXT('POINT(${longitude} ${latitude})'), 4326)) < ${meterDistance}`
+    );
+  }
+
   return whereArr.length > 0 ? `WHERE ${whereArr.join(" AND ")}` : "";
 };
 
