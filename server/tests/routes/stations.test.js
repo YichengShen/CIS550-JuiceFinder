@@ -78,7 +78,7 @@ describe("Test /stations/electric with different filters", () => {
     );
     expect(resp.status).toEqual(200);
     for (let i = 0; i < resp.body.length; i += 1) {
-      console.log(resp.body[i].port);
+      // console.log(resp.body[i].port);
       expect(
         resp.body[i].port.includes("ccs") || resp.body[i].port.includes("type1")
       ).toBe(true);
