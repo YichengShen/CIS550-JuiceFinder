@@ -102,6 +102,52 @@ const speedOptions = [
   { key: "dcfast", value: "DC fast charging" },
 ];
 
+const network = [
+  "All",
+  "Non-Networked",
+  "Volta",
+  "EV Connect",
+  "POWERFLEX",
+  "ChargePoint Network",
+  "OpConnect",
+  "SHELL_RECHARGE",
+  "EVGATEWAY",
+  "eVgo Network",
+  "AMPUP",
+  "Webasto",
+  "SemaCharge Network",
+  "UNIVERSAL",
+  "EVCS",
+  "Blink Network",
+  "FCN",
+  "Tesla",
+  "Tesla Destination",
+  "EVRANGE",
+  "Electrify America",
+  "CHARGELAB",
+  "LIVINGSTON",
+  "FLO",
+  "ZEFNET",
+  "FPLEV",
+  "RIVIAN_WAYPOINTS",
+  "RED_E",
+  "SWTCH",
+  "CIRCLE_K",
+  "WAVE",
+  "GRAVITI_ENERGY",
+  "FLASH",
+  "RIVIAN_ADVENTURE",
+  "CHARGEUP",
+];
+// map an array to dictionary
+// const networkOptions = Object.fromEntries(network.map(x => {"key":x, "value":x}));
+const networkOptions = [];
+
+function arrToDict(item, index) {
+  networkOptions[index] = { key: item, value: item };
+}
+network.sort().forEach(arrToDict);
+
 function SelectComponent(type, text, defaultValue) {
   let obj = [];
   if (type === "port") {
@@ -114,6 +160,8 @@ function SelectComponent(type, text, defaultValue) {
     obj = vehicleTypeOptions;
   } else if (type === "speed") {
     obj = speedOptions;
+  } else if (type === "network") {
+    obj = networkOptions;
   }
   return (
     <div
@@ -127,7 +175,7 @@ function SelectComponent(type, text, defaultValue) {
       <p>{text}</p>
       <Select
         defaultValue={defaultValue}
-        style={{ width: 500 }}
+        style={{ width: 300 }}
         // onChange={this.handlePortChange}
       >
         {obj.map((option) => (
