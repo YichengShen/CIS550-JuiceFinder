@@ -69,6 +69,20 @@ const stationTypeOptions = [
   { key: "lng", value: "LNG" },
 ];
 
+const vehicleTypeOptions = [
+  { key: "All", value: "All vehicle types" },
+  { key: "ev", value: "EV" },
+  { key: "phev", value: "PHEV" },
+  { key: "hev", value: "HEV" },
+  { key: "biodiesel", value: "Biodiesel" },
+  { key: "e85", value: "E85" },
+  { key: "cng", value: "CNG" },
+  { key: "propane", value: "Propane" },
+  { key: "hydrogen", value: "Hydrogen" },
+  { key: "gasoline", value: "Gasoline" },
+  { key: "diesel", value: "Diesel" },
+];
+
 const portOptions = [
   { key: "All", value: "All ports" },
   { key: "type1", value: "Type 1" },
@@ -89,6 +103,8 @@ function SelectComponent(type, text, defaultValue) {
     obj = stateOptions;
   } else if (type === "stationType") {
     obj = stationTypeOptions;
+  } else if (type === "vehicleType") {
+    obj = vehicleTypeOptions;
   }
   return (
     <div

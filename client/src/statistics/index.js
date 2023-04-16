@@ -50,6 +50,13 @@ function Statistics() {
               "Select station type"
             )}
           </div>
+          <div>
+            {SelectComponent(
+              "vehicleType",
+              "Select light-duty vehicle type:",
+              "Select vehicle type"
+            )}
+          </div>
           <div>{SelectComponent("port", "Select port:", "Select port")}</div>
         </CardBody>
       </Card>
