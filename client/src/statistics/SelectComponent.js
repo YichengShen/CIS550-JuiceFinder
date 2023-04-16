@@ -95,6 +95,13 @@ const portOptions = [
   { key: "nema1450", value: "NEMA-1450" },
 ];
 
+const speedOptions = [
+  { key: "All", value: "All charging speeds" },
+  { key: "acLevel1", value: "AC level-1" },
+  { key: "acLevel2", value: "AC level-2" },
+  { key: "dcfast", value: "DC fast charging" },
+];
+
 function SelectComponent(type, text, defaultValue) {
   let obj = [];
   if (type === "port") {
@@ -105,6 +112,8 @@ function SelectComponent(type, text, defaultValue) {
     obj = stationTypeOptions;
   } else if (type === "vehicleType") {
     obj = vehicleTypeOptions;
+  } else if (type === "speed") {
+    obj = speedOptions;
   }
   return (
     <div

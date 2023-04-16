@@ -57,7 +57,22 @@ function Statistics() {
               "Select vehicle type"
             )}
           </div>
-          <div>{SelectComponent("port", "Select port:", "Select port")}</div>
+          <div>{SelectComponent("port", "Select port:", "Select port_1")}</div>
+          <div>{SelectComponent("port", "Select port:", "Select port_2")}</div>
+          <div>
+            {SelectComponent(
+              "speed",
+              "Select charging speed level:",
+              "Select speed_1"
+            )}
+          </div>
+          <div>
+            {SelectComponent(
+              "speed",
+              "Select charging speed level:",
+              "Select speed_2"
+            )}
+          </div>
         </CardBody>
       </Card>
     </div>
