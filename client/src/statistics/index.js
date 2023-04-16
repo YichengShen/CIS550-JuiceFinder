@@ -1,7 +1,5 @@
 import React from "react";
 
-// import { Select } from "antd";
-
 import {
   // Form,
   // FormInput,
@@ -14,21 +12,6 @@ import {
 } from "shards-react";
 
 import SelectComponent from "./SelectComponent";
-
-/* Set up our drop-down menus */
-// const { Option } = Select;
-
-// const afsTypeOptions = [
-//   { key: "All", value: "All Types" },
-//   { key: "“electric”", value: "“Electric”" },
-//   { key: "“e85”", value: "E85" },
-//   { key: "“lpg”", value: "LPG" },
-//   { key: "cng", value: "CNG" },
-//   { key: "bd", value: "BD" },
-//   { key: "rd", value: "RD" },
-//   { key: "hy", value: "HY" },
-//   { key: "lng", value: "LNG" },
-// ];
 
 function Statistics() {
   return (
@@ -59,8 +42,10 @@ function Statistics() {
           >
             Paragraph 1
           </div>
-          <div>{SelectComponent("state")}</div>
-          <div>{SelectComponent("port")}</div>
+          <div>
+            {SelectComponent("state", "Select state:", "Select state:")}
+          </div>
+          <div>{SelectComponent("port", "Select port:", "Select port:")}</div>
         </CardBody>
       </Card>
     </div>

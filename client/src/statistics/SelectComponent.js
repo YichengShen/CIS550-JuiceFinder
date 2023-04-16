@@ -4,7 +4,7 @@ import { Select } from "antd";
 const { Option } = Select;
 
 const stateOptions = [
-  { key: "ALL", value: "All States" },
+  { key: "All", value: "All states" },
   { key: "AL", value: "Alabama" },
   { key: "AK", value: "Alaska" },
   { key: "AZ", value: "Arizona" },
@@ -56,64 +56,61 @@ const stateOptions = [
   { key: "WI", value: "Wisconsin" },
   { key: "WY", value: "Wyoming" },
 ];
+// const stationTypeOptions = [
+//   { key: "All", value: "All Types" },
+//   { key: "“electric”", value: "“Electric”" },
+//   { key: "“e85”", value: "E85" },
+//   { key: "“lpg”", value: "LPG" },
+//   { key: "cng", value: "CNG" },
+//   { key: "bd", value: "BD" },
+//   { key: "rd", value: "RD" },
+//   { key: "hy", value: "HY" },
+//   { key: "lng", value: "LNG" },
+// ];
 
 const portOptions = [
-  { key: "All", value: "All Types" },
+  { key: "All", value: "All ports" },
   { key: "type1", value: "Type 1" },
   { key: "type2", value: "Type 2" },
+  { key: "ccs", value: "CCS" },
   { key: "chademo", value: "CHADEMO" },
   { key: "tesla", value: "Tesla" },
-  { key: "ccs", value: "CCS" },
   { key: "nema515", value: "NEMA-515" },
+  { key: "nema520", value: "NEMA-520" },
+  { key: "nema1450", value: "NEMA-1450" },
 ];
 
-function SelectComponent(type) {
+function SelectComponent(type, text, defaultValue) {
+  let obj = [];
+  // let text="";
+  // let defaultValue="";
   if (type === "port") {
-    return (
-      <div
-        style={{
-          width: "80vw",
-          margin: "auto auto",
-          marginTop: "3vh",
-          marginBottom: "3vh",
-        }}
-      >
-        <p>Select port type:</p>
-        <Select
-          defaultValue="All"
-          style={{ width: 500 }}
-          // onChange={this.handlePortChange}
-        >
-          {portOptions.map((option) => (
-            <Option key={option.key}>{option.value}</Option>
-          ))}
-        </Select>
-      </div>
-    );
+    obj = portOptions;
+  } else if (type === "state") {
+    obj = stateOptions;
   }
-  if (type === "state") {
-    return (
-      <div
-        style={{
-          width: "80vw",
-          margin: "auto auto",
-          marginTop: "3vh",
-          marginBottom: "3vh",
-        }}
+
+  return (
+    <div
+      style={{
+        width: "80vw",
+        margin: "auto auto",
+        marginTop: "3vh",
+        marginBottom: "3vh",
+      }}
+    >
+      <p>{text}</p>
+      <Select
+        defaultValue={defaultValue}
+        style={{ width: 500 }}
+        // onChange={this.handlePortChange}
       >
-        <p>Select state:</p>
-        <Select
-          defaultValue="All"
-          style={{ width: 500 }}
-          // onChange={this.handlePortChange}
-        >
-          {stateOptions.map((option) => (
-            <Option key={option.key}>{option.value}</Option>
-          ))}
-        </Select>
-      </div>
-    );
-  }
+        {obj.map((option) => (
+          <Option key={option.key}>{option.value}</Option>
+        ))}
+      </Select>
+    </div>
+  );
 }
 
 export default SelectComponent;
