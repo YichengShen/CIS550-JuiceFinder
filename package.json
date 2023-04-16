@@ -8,7 +8,7 @@
     "lint-staged-pre-push": "lint-staged --no-stash --config lint-staged-pre-push.js --diff=$(git remote)/$(git branch --show-current)",
     "husky-install": "husky install",
     "test-client": "cd client && npx react-scripts test --coverage --bail --watchAll=false --findRelatedTests --passWithNoTests",
-    "test-server": "cd server && npx jest --coverage --bail --watchAll=false --findRelatedTests --passWithNoTests",
+    "test-server": "cd server && npx jest --coverage --bail --watchAll=false --findRelatedTests --passWithNoTests --forceExit",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
