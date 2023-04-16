@@ -56,17 +56,18 @@ const stateOptions = [
   { key: "WI", value: "Wisconsin" },
   { key: "WY", value: "Wyoming" },
 ];
-// const stationTypeOptions = [
-//   { key: "All", value: "All Types" },
-//   { key: "“electric”", value: "“Electric”" },
-//   { key: "“e85”", value: "E85" },
-//   { key: "“lpg”", value: "LPG" },
-//   { key: "cng", value: "CNG" },
-//   { key: "bd", value: "BD" },
-//   { key: "rd", value: "RD" },
-//   { key: "hy", value: "HY" },
-//   { key: "lng", value: "LNG" },
-// ];
+
+const stationTypeOptions = [
+  { key: "All", value: "All Types" },
+  { key: "electric", value: "Electric" },
+  { key: "“e85”", value: "E85" },
+  { key: "lpg", value: "LPG" },
+  { key: "cng", value: "CNG" },
+  { key: "bd", value: "BD" },
+  { key: "rd", value: "RD" },
+  { key: "hy", value: "HY" },
+  { key: "lng", value: "LNG" },
+];
 
 const portOptions = [
   { key: "All", value: "All ports" },
@@ -82,14 +83,13 @@ const portOptions = [
 
 function SelectComponent(type, text, defaultValue) {
   let obj = [];
-  // let text="";
-  // let defaultValue="";
   if (type === "port") {
     obj = portOptions;
   } else if (type === "state") {
     obj = stateOptions;
+  } else if (type === "stationType") {
+    obj = stationTypeOptions;
   }
-
   return (
     <div
       style={{

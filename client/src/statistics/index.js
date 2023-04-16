@@ -42,10 +42,15 @@ function Statistics() {
           >
             Paragraph 1
           </div>
+          <div>{SelectComponent("state", "Select state:", "Select state")}</div>
           <div>
-            {SelectComponent("state", "Select state:", "Select state:")}
+            {SelectComponent(
+              "stationType",
+              "Select AFS station type:",
+              "Select station type"
+            )}
           </div>
-          <div>{SelectComponent("port", "Select port:", "Select port:")}</div>
+          <div>{SelectComponent("port", "Select port:", "Select port")}</div>
         </CardBody>
       </Card>
     </div>
