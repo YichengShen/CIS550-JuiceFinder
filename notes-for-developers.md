@@ -46,6 +46,13 @@ When you introduce a new dependency (install a new package), add it to `package.
 
 3. Import your js file into `src/App.js`, so that you can use the functions exported there. Examples will be provided later.
 
+### Theme related
+
+- We use [MUI theme](https://mui.com/material-ui/customization/theming/).
+- Themes are set in `./client/src/theme.js`.
+- A useful tool is [MUI Theme Creator](https://bareynol.github.io/mui-theme-creator/). You could try different visual options and it generates the code we need in `theme.js`.
+- For using theme, check `./client/src/landingPage/index.js` for an example.
+
 ## Automated tests
 
 If you encounter errors related to this part, make sure you have run `npm i` in all of the three dirs: `/`, `/client/`, `server`
