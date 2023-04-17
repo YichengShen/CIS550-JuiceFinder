@@ -16,7 +16,6 @@ const getWhereClause = async (filters, isElectric = false) => {
   const unsupportedFilters = {};
   let latitude;
   let longitude;
-  console.log(filters);
   const meterDistance = (filters.mileDistance || 5) * METER_PER_MILE;
 
   // generate filter predicate based on street address or coordinates

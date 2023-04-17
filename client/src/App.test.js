@@ -4,7 +4,7 @@
 // test("renders landing page", async () => {
 //   // When testing, code that causes React state updates should be wrapped into act(...):
 //   await act(async () => render(<App />));
-//   const linkElement = screen.getByText(/landing page/);
+//   const linkElement = screen.getByText(/Landing Page/);
 //   expect(linkElement).toBeInTheDocument();
 // });
 

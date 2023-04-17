@@ -1,5 +1,6 @@
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import PropTypes from "prop-types";
 import { AuthProvider } from "./auth/AuthContext";
 import WithAuthRedirect from "./common/WithAuthRedirect";
 import Landing from "./landingPage";
@@ -9,12 +10,16 @@ import HomePage from "./home";
 import Statistics from "./statistics";
 import Settings from "./settings";
 
-function App() {
+function App({ toggleTheme }) {
   return (
     <Router>
       <AuthProvider>
         <Routes>
-          <Route exact path="/" element={<Landing />} />
+          <Route
+            exact
+            path="/"
+            element={<Landing toggleTheme={toggleTheme} />}
+          />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/home" element={<HomePage />} />
@@ -32,5 +37,9 @@ function App() {
     </Router>
   );
 }
+
+App.propTypes = {
+  toggleTheme: PropTypes.func.isRequired,
+};
 
 export default App;
