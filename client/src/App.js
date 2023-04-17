@@ -6,12 +6,12 @@ import WithAuthRedirect from "./common/WithAuthRedirect";
 import Landing from "./landingPage";
 import Login from "./auth/Login";
 import Signup from "./auth/Signup";
-import Map from "./map";
+import ForgotPassword from "./auth/ForgotPassword";
+import HomePage from "./home";
 import Statistics from "./statistics";
 import Settings from "./settings";
 
 function App({ toggleTheme }) {
-  // console.log("trigger client tests. Can safely delete this line later.");
   return (
     <Router>
       <AuthProvider>
@@ -23,7 +23,8 @@ function App({ toggleTheme }) {
           />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/map" element={<Map />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/home" element={<HomePage />} />
           <Route path="/statistics" element={<Statistics />} />
           <Route
             path="/settings"
