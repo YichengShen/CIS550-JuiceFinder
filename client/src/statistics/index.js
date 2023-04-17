@@ -16,6 +16,8 @@ import { Card } from "antd";
 // } from "shards-react";
 
 import OverviewTab from "./OverviewTab";
+import ElectricStationTab from "./ElectricStationTab";
+import EVFriendlinessTab from "./EVFriendlinessTab";
 
 // variable for tab list
 const tabListNoTitle = [
@@ -24,19 +26,19 @@ const tabListNoTitle = [
     tab: "AFS Resources Overview",
   },
   {
-    key: "Tab2",
-    tab: "Tab2",
+    key: "ElectricStation",
+    tab: "Electric Charging Stations",
   },
   {
-    key: "Tab3",
-    tab: "Tab3",
+    key: "EVFriendliness",
+    tab: "EV Friendliness",
   },
 ];
 
 const contentListNoTitle = {
   Overview: <OverviewTab />,
-  Tab2: <p>Under construction</p>,
-  Tab3: <p>Under construction</p>,
+  ElectricStation: <ElectricStationTab />,
+  EVFriendliness: <EVFriendlinessTab />,
 };
 
 function Statistics() {
