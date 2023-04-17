@@ -8,6 +8,10 @@ import {
   TextField,
   Typography,
   Avatar,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  MenuItem,
 } from "@mui/material";
 import OfflineBoltIcon from "@mui/icons-material/OfflineBolt";
 import { styled } from "@mui/system";
@@ -32,6 +36,21 @@ function Settings() {
   const [loading, setLoading] = useState(false);
   const [vehicleId, setVehicleId] = useState("");
   const [vehicleInfo, setVehicleInfo] = useState(null);
+
+  const [openPopup, setOpenPopup] = useState(false);
+  const [brand, setBrand] = useState("");
+  const [model, setModel] = useState("");
+  const [releaseYear, setReleaseYear] = useState("");
+  const [variant, setVariant] = useState("");
+
+  const handleOpenPopup = () => {
+    setOpenPopup(true);
+  };
+
+  const handleClosePopup = () => {
+    setOpenPopup(false);
+  };
+
   const navigate = useNavigate();
 
   const fetchVehicleInfo = async () => {
@@ -109,6 +128,8 @@ function Settings() {
 
   const handleUpdateVehicle = () => {
     updateVehicle(vehicleId);
+    // Close the popup window
+    setOpenPopup(false);
   };
 
   return (
@@ -197,32 +218,114 @@ function Settings() {
         )}
       </div>
 
-      <Box>
-        <Typography variant="h6">
-          Add/Update Vehicle ID (for testing):
-        </Typography>
-        <StyledForm>
-          <TextField
-            fullWidth
-            value={vehicleId}
-            placeholder="Type in vehicle id"
-            onChange={(e) => setVehicleId(e.target.value)}
-          />
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={handleUpdateVehicle}
-          >
-            Update Vehicle
-          </Button>
-        </StyledForm>
-      </Box>
+      <div style={{ marginTop: theme.spacing(1) }}>
+        <Button onClick={handleOpenPopup} variant="contained" color="primary">
+          Update Saved Vehicle
+        </Button>
+        <Dialog open={openPopup} onClose={handleClosePopup}>
+          <DialogTitle>
+            <Box sx={{ fontWeight: "Bold" }}>
+              <Typography variant="h4">Save a new vehicle</Typography>
+            </Box>
+          </DialogTitle>
+          <DialogContent>
+            <Box
+              sx={{
+                "& .MuiTextField-root": { m: 1, width: "25ch" },
+              }}
+            >
+              <TextField
+                select
+                variant="outlined"
+                color="secondary"
+                label="Brand"
+                value={brand}
+                onChange={(e) => setBrand(e.target.value)}
+              >
+                {[""]?.map((option) => (
+                  <MenuItem key={option} value={option}>
+                    {option}
+                  </MenuItem>
+                ))}
+              </TextField>
+              <TextField
+                select
+                variant="outlined"
+                color="secondary"
+                label="Model"
+                value={model}
+                onChange={(e) => setModel(e.target.value)}
+              >
+                {[""]?.map((option) => (
+                  <MenuItem key={option} value={option}>
+                    {option}
+                  </MenuItem>
+                ))}
+              </TextField>
+              <TextField
+                select
+                variant="outlined"
+                color="secondary"
+                label="Release Year"
+                value={releaseYear}
+                onChange={(e) => setReleaseYear(e.target.value)}
+              >
+                {[""]?.map((option) => (
+                  <MenuItem key={option} value={option}>
+                    {option}
+                  </MenuItem>
+                ))}
+              </TextField>
+              <TextField
+                select
+                variant="outlined"
+                color="secondary"
+                label="Variant"
+                value={variant}
+                onChange={(e) => setVariant(e.target.value)}
+              >
+                {[""]?.map((option) => (
+                  <MenuItem key={option} value={option}>
+                    {option}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </Box>
+
+            <Box>
+              <Typography variant="h4">
+                Type in Vehicle ID (for testing):
+              </Typography>
+              <Typography>
+                Once the form above becomes functional, this input field can be
+                deleted.
+              </Typography>
+              <StyledForm>
+                <TextField
+                  fullWidth
+                  value={vehicleId}
+                  placeholder="Type in vehicle id"
+                  onChange={(e) => setVehicleId(e.target.value)}
+                />
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleUpdateVehicle}
+                >
+                  Update Vehicle
+                </Button>
+              </StyledForm>
+            </Box>
+          </DialogContent>
+        </Dialog>
+      </div>
 
       <Button
         variant="contained"
         color="primary"
         disabled={loading}
         onClick={handleLogout}
+        sx={{ marginTop: theme.spacing(2) }}
       >
         Logout (for testing)
       </Button>
