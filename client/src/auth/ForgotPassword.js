@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { useNavigate, Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import {
   Button,
@@ -47,29 +47,28 @@ function StyledTextField({ ...other }) {
   );
 }
 
-function Login() {
+function ForgotPassword() {
   const theme = useTheme();
 
   const emailRef = useRef();
-  const passwordRef = useRef();
 
-  const { login } = useAuth();
+  const { resetPassword } = useAuth();
   const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
-
-  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     setError("");
+    setMessage("");
     setLoading(true);
 
     try {
-      await login(emailRef.current.value, passwordRef.current.value);
-      navigate("/settings");
-    } catch (loginError) {
-      setError(`Failed to log in. ${loginError.message}`);
+      await resetPassword(emailRef.current.value);
+      setMessage("Check your inbox for further instructions");
+    } catch (resetError) {
+      setError(`Failed to reset password. ${resetError.message}`);
     } finally {
       setLoading(false);
     }
@@ -111,7 +110,7 @@ function Login() {
           <OfflineBoltIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Log in
+          Reset Password
         </Typography>
         {error && (
           <Alert severity="error">
@@ -119,101 +118,75 @@ function Login() {
             {error}
           </Alert>
         )}
+        {message && (
+          <Alert severity="success">
+            <AlertTitle>Reset Email Sent</AlertTitle>
+            {message}
+          </Alert>
+        )}
         <form onSubmit={handleSubmit} style={{ width: "100%", marginTop: 1 }}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <StyledTextField
                 variant="outlined"
+                margin="normal"
                 required
                 fullWidth
                 id="email"
                 label="Email Address"
                 name="email"
                 autoComplete="off"
+                autoFocus
                 inputRef={emailRef}
               />
             </Grid>
             <Grid item xs={12}>
-              <StyledTextField
-                variant="outlined"
-                required
+              <Button
+                disabled={loading}
+                type="submit"
                 fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="off"
-                inputRef={passwordRef}
-              />
-            </Grid>
-          </Grid>
-          <Button
-            disabled={loading}
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="success"
-            sx={{
-              marginTop: theme.spacing(2),
-              marginBottom: theme.spacing(1),
-              color: theme.palette.success.contrastText,
-              backgroundColor: theme.palette.success,
-              "&:hover": {
-                backgroundColor: theme.palette.success.light,
-              },
-            }}
-          >
-            Log In
-          </Button>
-          <Button
-            component={RouterLink}
-            to="/"
-            fullWidth
-            variant="contained"
-            color="primary"
-            sx={{
-              marginBottom: theme.spacing(1),
-              color: theme.palette.primary.contrastText,
-              backgroundColor: theme.palette.primary.dark,
-              "&:hover": {
-                backgroundColor: theme.palette.primary.light,
-              },
-            }}
-          >
-            Cancel
-          </Button>
-          {/* <Grid container justifyContent="flex-end">
-            <Grid item>
-              <Link
-                component={RouterLink}
-                to="/signup"
-                variant="body2"
-                color="primary"
+                variant="contained"
+                color="success"
+                sx={{
+                  marginBottom: theme.spacing(1),
+                  color: theme.palette.success.contrastText,
+                  backgroundColor: theme.palette.success,
+                  "&:hover": {
+                    backgroundColor: theme.palette.success.light,
+                  },
+                }}
               >
-                Dont have an account? Sign up
-              </Link>
-            </Grid>
-          </Grid> */}
-          <Grid container>
-            <Grid item xs>
-              <Link
+                Reset via Email
+              </Button>
+              <Button
                 component={RouterLink}
-                to="/forgot-password"
-                variant="body2"
+                to="/login"
+                fullWidth
+                variant="contained"
                 color="primary"
+                sx={{
+                  marginBottom: theme.spacing(1),
+                  color: theme.palette.primary.contrastText,
+                  backgroundColor: theme.palette.primary.dark,
+                  "&:hover": {
+                    backgroundColor: theme.palette.primary.light,
+                  },
+                }}
               >
-                Forgot password?
-              </Link>
+                Go to Log In
+              </Button>
             </Grid>
-            <Grid item>
-              <Link
-                component={RouterLink}
-                to="/signup"
-                variant="body2"
-                color="primary"
-              >
-                No account yet? Sign Up!
-              </Link>
+            <Grid container justifyContent="flex-end">
+              <Grid item>
+                <Link
+                  component={RouterLink}
+                  to="/signup"
+                  variant="body2"
+                  color="primary"
+                >
+                  No account yet? Sign Up!
+                </Link>
+              </Grid>
             </Grid>
           </Grid>
         </form>
@@ -222,4 +195,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default ForgotPassword;
