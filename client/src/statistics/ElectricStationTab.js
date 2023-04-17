@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
+
 import { Card, Col, Row } from "antd";
+
 import { Column } from "@ant-design/plots";
 
 import SelectComponent from "./SelectComponent";
+
 import serverConfig from "../config.json";
 
 function afsByTypeStateFig() {
