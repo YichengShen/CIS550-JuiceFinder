@@ -177,7 +177,7 @@ export default function MapInput({
       </Box>
       <Box
         sx={{
-          "& .MuiTextField-root": { m: 1, width: "50ch" },
+          "& .MuiTextField-root": { m: 1, width: "25ch" },
         }}
       >
         <h3>Advanced</h3>
