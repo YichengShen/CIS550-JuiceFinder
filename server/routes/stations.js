@@ -46,11 +46,12 @@ router.get("/", async (req, res) => {
   }
 
   const query = `
-    SELECT * ${
-      additionalSelectAttrs.length > 0
-        ? ", ".concat(additionalSelectAttrs.join(", "))
-        : ""
-    }
+    SELECT * 
+        ${
+          additionalSelectAttrs.length > 0
+            ? ", ".concat(additionalSelectAttrs.join(", "))
+            : ""
+        }
     FROM stations
     ${whereClause}
     ORDER BY ${orderByObject}
@@ -118,18 +119,18 @@ router.get("/electric", async (req, res) => {
   }
   if (orderBy === "num_ports") {
     orderByObject = "num_ports DESC";
+    additionalSelectAttrs.push(
+      "E.ev_level1_evse_num + E.ev_level2_evse_num + E.ev_dc_fast_num AS num_ports"
+    );
   }
 
   const query = `
-    SELECT * ${
-      req.query.orderBy === "num_ports"
-        ? ", E.ev_level1_evse_num + E.ev_level2_evse_num + E.ev_dc_fast_num AS num_ports"
-        : ""
-    }, GROUP_CONCAT(port) AS port ${
-    additionalSelectAttrs.length > 0
-      ? ", ".concat(additionalSelectAttrs.join(", "))
-      : ""
-  }
+    SELECT *, GROUP_CONCAT(port) AS port 
+        ${
+          additionalSelectAttrs.length > 0
+            ? ", ".concat(additionalSelectAttrs.join(", "))
+            : ""
+        }
     FROM stations S NATURAL JOIN electric_stations E NATURAL JOIN station_ports SP
     ${whereClause}
     GROUP BY sid
