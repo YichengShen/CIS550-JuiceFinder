@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { Card, Col, Row } from "antd";
 
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { Column } from "@ant-design/plots";
 
 import SelectComponent from "./SelectComponent";
