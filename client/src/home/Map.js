@@ -11,10 +11,10 @@ import pin from "../assets/pin.svg";
 
 const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
 
-export default function Map({ curLocation }) {
+export default function Map({ curLocation, maxDistance }) {
   // eslint-disable-next-line no-unused-vars
   const [viewport, setViewport] = useState({
-    zoom: 14,
+    zoom: 11,
     ...curLocation,
   });
   const [stations, setStations] = useState([]);
@@ -37,18 +37,18 @@ export default function Map({ curLocation }) {
   }, []);
 
   useEffect(() => {
-    getNearbyStations(curLocation).then((response) => {
+    getNearbyStations(curLocation, maxDistance).then((response) => {
       // console.log(response);
       setStations(response);
     });
-  }, [curLocation]);
+  }, [curLocation, maxDistance]);
 
   return (
     <MapGL
       ref={mapRef}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...viewport}
-      width="80%"
+      width="100%"
       height="100%"
       // zoom={zoom}
       // latitude={viewport.latitude}
@@ -99,6 +99,7 @@ Map.propTypes = {
     latitude: PropTypes.number,
     longitude: PropTypes.number,
   }),
+  maxDistance: PropTypes.number.isRequired,
 };
 
 Map.defaultProps = { curLocation: {} };

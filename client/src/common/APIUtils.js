@@ -3,7 +3,7 @@ import axios from "axios";
 const config = require("../config.json");
 
 // eslint-disable-next-line import/prefer-default-export
-export const getNearbyStations = async (location) => {
+export const getNearbyStations = async (location, maxDistance) => {
   if (!location || !location.latitude || !location.longitude) {
     return [];
   }
@@ -12,7 +12,7 @@ export const getNearbyStations = async (location) => {
     const response = await axios.get(
       `http://${config.server_host}:${config.server_port}/stations` +
         `?latitude=${location.latitude}&longitude=${location.longitude}` +
-        `&mileDistance=1`
+        `&mileDistance=${maxDistance}&pageSize=${150}`
     );
     return response.data;
   } catch (err) {

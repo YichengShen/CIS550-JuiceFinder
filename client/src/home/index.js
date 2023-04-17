@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Box } from "@mui/material";
 import Map from "./Map";
 import MapInput from "./MapInput";
 
@@ -23,43 +24,49 @@ export default function HomePage() {
 
   return (
     <div style={{ height: "100vh", width: "100vw" }}>
-      <Map
-        curLocation={curLocation}
-        state={state}
-        city={city}
-        zip={zip}
-        streetAddress={streetAddress}
-        maxDistance={maxDistance}
-        chargingLevel={chargingLevels}
-        stationPorts={preferredStationPorts}
-        adapters={adapters}
-      />
-      <MapInput
-        state={state}
-        setState={setState}
-        city={city}
-        setCity={setCity}
-        zip={zip}
-        setZip={setZip}
-        streetAddress={streetAddress}
-        setStreetAddress={setStreetAddress}
-        maxDistance={maxDistance}
-        setMaxDistance={setMaxDistance}
-        brand={brand}
-        setBrand={setBrand}
-        model={model}
-        setModel={setModel}
-        releaseYear={releaseYear}
-        setReleaseYear={setReleaseYear}
-        variant={variant}
-        setVariant={setVariant}
-        chargingLevels={chargingLevels}
-        setChargingLevels={setChargingLevels}
-        preferredStationPorts={preferredStationPorts}
-        setPreferredStationPorts={setPreferredStationPorts}
-        adapters={adapters}
-        setAdapters={setAdapters}
-      />
+      <Box sx={{ display: "grid", gridTemplateColumns: "1fr 4fr" }}>
+        <Box sx={{ mx: 1 }}>
+          <MapInput
+            state={state}
+            setState={setState}
+            city={city}
+            setCity={setCity}
+            zip={zip}
+            setZip={setZip}
+            streetAddress={streetAddress}
+            setStreetAddress={setStreetAddress}
+            maxDistance={maxDistance}
+            setMaxDistance={setMaxDistance}
+            brand={brand}
+            setBrand={setBrand}
+            model={model}
+            setModel={setModel}
+            releaseYear={releaseYear}
+            setReleaseYear={setReleaseYear}
+            variant={variant}
+            setVariant={setVariant}
+            chargingLevels={chargingLevels}
+            setChargingLevels={setChargingLevels}
+            preferredStationPorts={preferredStationPorts}
+            setPreferredStationPorts={setPreferredStationPorts}
+            adapters={adapters}
+            setAdapters={setAdapters}
+          />
+        </Box>
+        <Box>
+          <Map
+            curLocation={curLocation}
+            state={state}
+            city={city}
+            zip={zip}
+            streetAddress={streetAddress}
+            maxDistance={maxDistance}
+            chargingLevel={chargingLevels}
+            stationPorts={preferredStationPorts}
+            adapters={adapters}
+          />
+        </Box>
+      </Box>
     </div>
   );
 }
