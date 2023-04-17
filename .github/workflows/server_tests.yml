@@ -44,4 +44,4 @@ jobs:
       run: npm run build --if-present
     - name: Run server tests
       working-directory: ./server
-      run: npm run test -- --passWithNoTests
+      run: npm run test -- --passWithNoTests --forceExit
