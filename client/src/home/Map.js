@@ -3,6 +3,7 @@ import Geocoder from "react-map-gl-geocoder";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import React, { useState, useRef, useCallback, useEffect } from "react";
+import PropTypes from "prop-types";
 import { getNearbyStations } from "../common/APIUtils";
 
 // eslint-disable-next-line no-unused-vars
@@ -10,12 +11,7 @@ import pin from "../assets/pin.svg";
 
 const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
 
-export default function Map() {
-  // eslint-disable-next-line no-unused-vars
-  const [curLocation, setCurLocation] = useState({
-    latitude: 39.9524657202615,
-    longitude: -75.19028570489878,
-  });
+export default function Map({ curLocation }) {
   // eslint-disable-next-line no-unused-vars
   const [viewport, setViewport] = useState({
     zoom: 14,
@@ -97,3 +93,12 @@ export default function Map() {
     </MapGL>
   );
 }
+
+Map.propTypes = {
+  curLocation: PropTypes.shape({
+    latitude: PropTypes.number,
+    longitude: PropTypes.number,
+  }),
+};
+
+Map.defaultProps = { curLocation: {} };
