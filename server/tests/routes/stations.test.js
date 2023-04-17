@@ -7,9 +7,8 @@ const METER_PER_MILE = 1609.34;
 
 describe("Test /stations with different filters", () => {
   beforeAll(async () => {});
-  afterAll(async () => {
-    // await server.close();
-  });
+  // close server and mysql connection after all tests are done
+  afterAll(async () => {});
 
   test("pageSize limits num of stations returned; ", async () => {
     const resp = await request(app).get(`/stations?orderBy=sid&pageSize=3`);
