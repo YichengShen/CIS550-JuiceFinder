@@ -12,6 +12,7 @@ import EVFriendlinessTab from "./EVFriendlinessTab";
 const { TabPane } = Tabs;
 const { Title } = Typography;
 
+// statistics page
 function Statistics() {
   return (
     <div>
