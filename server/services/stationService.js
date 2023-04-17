@@ -1,7 +1,5 @@
 const { camelToSnakeCase, escapeForSql } = require("./commonService");
-const {
-  getCoordinates: getCoordinatesFromAddress,
-} = require("./locationService");
+const { getCoordinatesFromAddress } = require("./locationService");
 
 const METER_PER_MILE = 1609.34;
 
