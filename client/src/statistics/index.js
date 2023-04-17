@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { Button, Card, Col, Row } from "antd";
-import { Column } from "@ant-design/plots";
+import React, { useState } from "react";
+import { Card } from "antd";
 
-import serverConfig from "../config.json";
+// import React, { useState, useEffect } from "react";
+// import { Card, Col, Row } from "antd";
 
 // import {c
 //   // Form,
@@ -15,198 +15,51 @@ import serverConfig from "../config.json";
 //   // Container,
 // } from "shards-react";
 
-import SelectComponent from "./SelectComponent";
+import OverviewTab from "./OverviewTab";
 
-function groupedChart() {
-  const [data, setData] = useState([]);
+// variable for tab list
+const tabListNoTitle = [
+  {
+    key: "Overview",
+    tab: "AFS Resources Overview",
+  },
+  {
+    key: "Tab2",
+    tab: "Tab2",
+  },
+  {
+    key: "Tab3",
+    tab: "Tab3",
+  },
+];
 
-  const asyncFetch = () => {
-    fetch(
-      `http://${serverConfig.server_host}:${serverConfig.server_port}/stats/overview/afsByTypeState?stationType=electric`
-    )
-      .then((response) => response.json())
-      .then((json) => setData(json))
-      .catch((error) => {
-        // eslint-disable-next-line no-console
-        console.log("fetch data failed", error);
-      });
-  };
-
-  useEffect(() => {
-    asyncFetch();
-  }, []);
-
-  const config = {
-    data,
-    xField: "state",
-    yField: "numStations",
-    isGroup: true,
-    isStack: true,
-    seriesField: "stype",
-    columnStyle: {
-      radius: [20, 20, 0, 0],
-    },
-  };
-
-  // eslint-disable-next-line react/jsx-props-no-spreading
-  return <Column {...config} />;
-}
-
-function afsByTypeStateFig() {
-  const [data, setData] = useState([]);
-
-  const asyncFetch = () => {
-    fetch(
-      `http://${serverConfig.server_host}:${serverConfig.server_port}/stats/overview/afsByTypeState?stationType=All`
-    )
-      .then((response) => response.json())
-      .then((json) => setData(json))
-      .catch((error) => {
-        // eslint-disable-next-line no-console
-        console.log("fetch data failed", error);
-      });
-  };
-
-  useEffect(() => {
-    asyncFetch();
-  }, []);
-
-  const config = {
-    data,
-    xField: "state",
-    yField: "numStations",
-    isGroup: true,
-    isStack: false,
-    seriesField: "stype",
-    columnStyle: {
-      radius: [20, 20, 0, 0],
-    },
-  };
-
-  // eslint-disable-next-line react/jsx-props-no-spreading
-  return <Column {...config} />;
-}
+const contentListNoTitle = {
+  Overview: <OverviewTab />,
+  Tab2: <p>Under construction</p>,
+  Tab3: <p>Under construction</p>,
+};
 
 function Statistics() {
+  const [activeTabKey, setActiveTabKey] = useState("app");
+
+  const onTabChange = (key) => {
+    setActiveTabKey(key);
+  };
+
   return (
     <div>
       <h1>Statistics</h1>
-      <Button type="primary">Primary Button</Button>
-      <Row gutter={16} type="flex">
-        <Col span={6}>
-          <Card title="🏅 Title1">
-            Paragraph 1
-            <div>
-              {SelectComponent("state", "Select state:", "Select state")}
-            </div>
-            <div>
-              {SelectComponent(
-                "stationType",
-                "Select AFS station type:",
-                "Select station type"
-              )}
-            </div>
-          </Card>
-        </Col>
-        <Col span={18}>
-          <Card>Content 1{afsByTypeStateFig()}</Card>
-        </Col>
-      </Row>
-
-      <Row gutter={16} type="flex">
-        <Col span={6}>
-          <Card title="🏅 Title2">
-            Paragraph 2
-            <div>
-              {SelectComponent("state", "Select state:", "Select state")}
-            </div>
-            <div>
-              {SelectComponent(
-                "vehicleType",
-                "Select light-duty vehicle type:",
-                "Select vehicle type"
-              )}
-            </div>
-          </Card>
-        </Col>
-        <Col span={18}>
-          <Card>Content 2{groupedChart()}</Card>
-        </Col>
-      </Row>
-
-      <Row gutter={16} type="flex">
-        <Col span={6}>
-          <Card title="🏅 Title3">
-            Paragraph 3
-            <div>
-              {SelectComponent("state", "Select state:", "Select state")}
-            </div>
-            <div>
-              {SelectComponent("port", "Select port:", "Select port_1")}
-            </div>
-            <div>
-              {SelectComponent("port", "Select port:", "Select port_2")}
-            </div>
-          </Card>
-        </Col>
-        <Col span={18}>
-          <Card>Content 3{groupedChart()}</Card>
-        </Col>
-      </Row>
-
-      <Row gutter={16} type="flex">
-        <Col span={6}>
-          <Card title="🏅 Title4">
-            Paragraph 4
-            <div>
-              {SelectComponent("state", "Select state:", "Select state")}
-            </div>
-            <div>
-              {SelectComponent(
-                "speed",
-                "Select charging speed level:",
-                "Select speed_1"
-              )}
-            </div>
-            <div>
-              {SelectComponent(
-                "speed",
-                "Select charging speed level:",
-                "Select speed_2"
-              )}
-            </div>
-          </Card>
-        </Col>
-        <Col span={18}>
-          <Card>Content 4{groupedChart()}</Card>
-        </Col>
-      </Row>
-
-      <Row gutter={16} type="flex">
-        <Col span={6}>
-          <Card title="🏅 Title5">
-            Paragraph 5
-            <div>
-              {SelectComponent("state", "Select state:", "Select state")}
-            </div>
-            <div>
-              {SelectComponent(
-                "network",
-                "Select network:",
-                "Select network_1"
-              )}
-              {SelectComponent(
-                "network",
-                "Select network:",
-                "Select network_2"
-              )}
-            </div>
-          </Card>
-        </Col>
-        <Col span={18}>
-          <Card>Content 5{groupedChart()}</Card>
-        </Col>
-      </Row>
+      <Card
+        style={{
+          width: "100%",
+        }}
+        tabList={tabListNoTitle}
+        activeTabKey={activeTabKey}
+        // tabBarExtraContent={<a href="#">More</a>}
+        onTabChange={onTabChange}
+      >
+        {contentListNoTitle[activeTabKey]}
+      </Card>
     </div>
   );
 }
