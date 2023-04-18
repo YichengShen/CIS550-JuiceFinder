@@ -131,7 +131,6 @@ function OverviewTab() {
           <Card title="🏅 Energy Resources Heat map"> {afsByStateMap()}</Card>
         </Col>
       </Row>
-
       <Row gutter={16} type="flex">
         <Col span={6}>
           <Card title="🏅 Title2">
