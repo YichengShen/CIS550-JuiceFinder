@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import csvtojson from "csvtojson";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import {
@@ -24,24 +25,42 @@ const StyledContainer = styled(Container)(() => ({
   alignItems: "center",
 }));
 
-const StyledForm = styled("form")(({ theme }) => ({
-  width: "100%",
-  marginTop: theme.spacing(1),
-}));
-
 function Settings() {
   const theme = useTheme();
+  const navigate = useNavigate();
+
   const { currentUser, logout } = useAuth();
   const [errorMsg, setErrorMsg] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const [dataArray, setDataArray] = useState([]);
+
+  // Fetch EV data (~200 rows stored as csv)
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch("data/electric_vehicles.csv");
+        const csvData = await response.text();
+        const jsonData = await csvtojson().fromString(csvData);
+        setDataArray(jsonData);
+      } catch (error) {
+        console.error("Error loading CSV data:", error);
+      }
+    }
+    fetchData();
+  }, []);
+
   const [vehicleId, setVehicleId] = useState("");
   const [vehicleInfo, setVehicleInfo] = useState(null);
 
+  // Popup
   const [openPopup, setOpenPopup] = useState(false);
+  const [errorMsgPopup, setErrorMsgPopup] = useState("");
   const [brand, setBrand] = useState("");
   const [model, setModel] = useState("");
-  const [releaseYear, setReleaseYear] = useState("");
+  const [releaseYear, setReleaseYear] = useState(9999);
   const [variant, setVariant] = useState("");
+  const [availableVariants, setAvailableVariants] = useState([]);
 
   const handleOpenPopup = () => {
     setOpenPopup(true);
@@ -51,7 +70,72 @@ function Settings() {
     setOpenPopup(false);
   };
 
-  const navigate = useNavigate();
+  useEffect(() => {
+    if (brand) {
+      // setModel("");
+      // setReleaseYear(9999);
+      // setVariant("");
+      const availableModels = Array.from(
+        new Set(
+          dataArray
+            .filter((item) => item.brand === brand)
+            .map((item) => item.model)
+        )
+      );
+      setModel(availableModels[0]);
+    }
+  }, [brand, dataArray]);
+
+  useEffect(() => {
+    if (model) {
+      // setReleaseYear(9999);
+      // setVariant("");
+      const firstReleaseYear = dataArray
+        .filter((item) => item.brand === brand && item.model === model)
+        .map((item) => item.release_year)[0];
+
+      setReleaseYear(firstReleaseYear);
+    }
+  }, [model, dataArray]);
+
+  useEffect(() => {
+    const newAvailableVariants = Array.from(
+      new Set(
+        dataArray
+          .filter((item) => item.brand === brand && item.model === model)
+          .map((item) => item.variant)
+      )
+    );
+
+    setAvailableVariants(newAvailableVariants);
+    setVariant(newAvailableVariants[0]);
+  }, [releaseYear, dataArray]);
+
+  // Filter vid
+  const getVid = (_brand, _model, _releaseYear, _variant) => {
+    const items = dataArray.filter(
+      (dataItem) => dataItem.brand === _brand && dataItem.model === _model
+    );
+
+    if (!items.length) {
+      return null;
+    }
+
+    let bestMatch = items[0];
+
+    items.forEach((item) => {
+      const releaseYearMatches = _releaseYear
+        ? item.release_year === parseFloat(_releaseYear)
+        : true;
+      const variantMatches = _variant ? item.variant === _variant : true;
+
+      if (releaseYearMatches && variantMatches) {
+        bestMatch = item;
+      }
+    });
+
+    return bestMatch.id;
+  };
 
   const fetchVehicleInfo = async () => {
     try {
@@ -73,9 +157,10 @@ function Settings() {
         setVehicleInfo(data);
       } else {
         setVehicleInfo(null);
+        setErrorMsg("Vehicle info is empty");
       }
     } catch (error) {
-      // console.error("Error fetching vehicle info:", error);
+      setErrorMsg("Error fetching vehicle info:", error);
       setVehicleInfo(null);
     }
   };
@@ -100,7 +185,19 @@ function Settings() {
   };
 
   // Update the vehicle information based on the provided vehicle ID and re-fetch the updated information
-  const updateVehicle = async (vid) => {
+  const updateVehicle = async () => {
+    setErrorMsgPopup("");
+    const vid = getVid(brand, model, releaseYear, variant);
+
+    if (!vid) {
+      setErrorMsgPopup(
+        "Failed to update your saved vehicle. Please fill in all feasible fields in the form."
+      );
+      return;
+    }
+
+    setVehicleId(vid);
+
     try {
       const token = await currentUser.getIdToken(/* forceRefresh */ true);
       const response = await fetch(
@@ -119,17 +216,16 @@ function Settings() {
         // console.log(data);
         fetchVehicleInfo(); // Re-fetch the updated vehicle information
       } else {
-        // console.error("Error updating vehicle info:", response.statusText);
+        setErrorMsg("Error updating vehicle info:", response.statusText);
       }
     } catch (error) {
-      // console.error("Error updating vehicle info:", error);
+      setErrorMsg("Error updating vehicle info:", error);
     }
+    setOpenPopup(false); // Close the popup window
   };
 
   const handleUpdateVehicle = () => {
     updateVehicle(vehicleId);
-    // Close the popup window
-    setOpenPopup(false);
   };
 
   return (
@@ -178,18 +274,18 @@ function Settings() {
         <Typography>
           <b>Email:</b> {currentUser.email}
         </Typography>
-        <Typography>
+        {/* <Typography>
           <b>User ID:</b> {currentUser.uid}
-        </Typography>
+        </Typography> */}
 
         {vehicleInfo && (
           <div style={{ marginTop: theme.spacing(3) }}>
             <Box sx={{ fontWeight: "Bold" }}>
               <Typography variant="h4">Saved Vehicle Information</Typography>
             </Box>
-            <Typography>
+            {/* <Typography>
               <b>Vehicle ID:</b> {vehicleInfo.id}
-            </Typography>
+            </Typography> */}
             <Typography>
               <b>Brand:</b> {vehicleInfo.brand}
             </Typography>
@@ -202,18 +298,24 @@ function Settings() {
             <Typography>
               <b>Release Year:</b> {vehicleInfo.release_year}
             </Typography>
-            <Typography>
-              <b>Variant:</b> {vehicleInfo.variant}
-            </Typography>
+            {vehicleInfo.variant && (
+              <Typography>
+                <b>Variant:</b> {vehicleInfo.variant}
+              </Typography>
+            )}
             <Typography>
               <b>Vehicle Type:</b> {vehicleInfo.type}
             </Typography>
-            <Typography>
-              <b>Usable Battery Size:</b> {vehicleInfo.usable_battery_size}
-            </Typography>
-            <Typography>
-              <b>Energy Consumption:</b> {vehicleInfo.energy_consumption}
-            </Typography>
+            {vehicleInfo.usable_battery_size && (
+              <Typography>
+                <b>Usable Battery Size:</b> {vehicleInfo.usable_battery_size}
+              </Typography>
+            )}
+            {vehicleInfo.energy_consumption && (
+              <Typography>
+                <b>Energy Consumption:</b> {vehicleInfo.energy_consumption}
+              </Typography>
+            )}
           </div>
         )}
       </div>
@@ -229,84 +331,123 @@ function Settings() {
             </Box>
           </DialogTitle>
           <DialogContent>
+            {errorMsgPopup && (
+              <Box>
+                <Typography color="error">{errorMsgPopup}</Typography>
+              </Box>
+            )}
             <Box
               sx={{
+                display: "flex",
+                flexDirection: "column",
                 "& .MuiTextField-root": { m: 1, width: "25ch" },
               }}
             >
+              {/* Brand Text Field */}
               <TextField
                 select
                 variant="outlined"
-                color="secondary"
+                color="primary"
                 label="Brand"
                 value={brand}
                 onChange={(e) => setBrand(e.target.value)}
               >
-                {[""]?.map((option) => (
-                  <MenuItem key={option} value={option}>
-                    {option}
-                  </MenuItem>
-                ))}
+                {Array.from(new Set(dataArray.map((item) => item.brand))).map(
+                  (option) => (
+                    <MenuItem key={option} value={option}>
+                      {option}
+                    </MenuItem>
+                  )
+                )}
               </TextField>
+
+              {/* Model Text Field */}
               <TextField
                 select
                 variant="outlined"
-                color="secondary"
+                color="primary"
                 label="Model"
                 value={model}
                 onChange={(e) => setModel(e.target.value)}
               >
-                {[""]?.map((option) => (
+                {Array.from(
+                  new Set(
+                    dataArray
+                      .filter((item) => item.brand === brand)
+                      .map((item) => item.model)
+                  )
+                ).map((option) => (
                   <MenuItem key={option} value={option}>
                     {option}
                   </MenuItem>
                 ))}
               </TextField>
-              <TextField
-                select
-                variant="outlined"
-                color="secondary"
-                label="Release Year"
-                value={releaseYear}
-                onChange={(e) => setReleaseYear(e.target.value)}
-              >
-                {[""]?.map((option) => (
-                  <MenuItem key={option} value={option}>
-                    {option}
-                  </MenuItem>
-                ))}
-              </TextField>
-              <TextField
-                select
-                variant="outlined"
-                color="secondary"
-                label="Variant"
-                value={variant}
-                onChange={(e) => setVariant(e.target.value)}
-              >
-                {[""]?.map((option) => (
-                  <MenuItem key={option} value={option}>
-                    {option}
-                  </MenuItem>
-                ))}
-              </TextField>
-            </Box>
 
-            <Box>
-              <Typography variant="h4">
-                Type in Vehicle ID (for testing):
-              </Typography>
-              <Typography>
-                Once the form above becomes functional, this input field can be
-                deleted.
-              </Typography>
-              <StyledForm>
-                <TextField
-                  fullWidth
-                  value={vehicleId}
-                  placeholder="Type in vehicle id"
-                  onChange={(e) => setVehicleId(e.target.value)}
-                />
+              {/* Release Year Text Field */}
+              {Array.from(
+                new Set(
+                  dataArray
+                    .filter(
+                      (item) => item.brand === brand && item.model === model
+                    )
+                    .map((item) => item.release_year)
+                )
+              ).length > 0 && (
+                <Box>
+                  <TextField
+                    select
+                    variant="outlined"
+                    color="primary"
+                    label="Release Year"
+                    value={parseFloat(releaseYear)}
+                    onChange={(e) => {
+                      setReleaseYear(e.target.value);
+                    }}
+                  >
+                    {Array.from(
+                      new Set(
+                        dataArray
+                          .filter(
+                            (item) =>
+                              item.brand === brand && item.model === model
+                          )
+                          .map((item) => parseInt(item.release_year, 10))
+                      )
+                    ).map((option) => (
+                      <MenuItem key={option} value={option}>
+                        {option}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </Box>
+              )}
+              {/* Variant Text Field */}
+              {availableVariants[0] !== "" && (
+                <Box>
+                  <TextField
+                    select
+                    variant="outlined"
+                    color="primary"
+                    label="Variant"
+                    value={variant}
+                    onChange={(e) => setVariant(e.target.value)}
+                  >
+                    {availableVariants.map((option) => (
+                      <MenuItem key={option} value={option}>
+                        {option}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </Box>
+              )}
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  alignItems: "flex-end",
+                  marginTop: "auto",
+                }}
+              >
                 <Button
                   variant="contained"
                   color="primary"
@@ -314,7 +455,7 @@ function Settings() {
                 >
                   Update Vehicle
                 </Button>
-              </StyledForm>
+              </Box>
             </Box>
           </DialogContent>
         </Dialog>
