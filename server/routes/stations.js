@@ -29,7 +29,6 @@ router.get("/", async (req, res) => {
       receivedFilters[key] = value;
     }
   }
-<<<<<<< HEAD
 
   const whereClause = await getWhereClause(receivedFilters, false);
   let orderByObject = "sid";
@@ -45,8 +44,6 @@ router.get("/", async (req, res) => {
       orderByObject = "meter_distance ASC";
     }
   }
-=======
->>>>>>> 2bea99f (Convert street address to coordinates when needed; Renamed helper.js to stationService.js)
 
   const query = `
     SELECT * 
@@ -56,13 +53,8 @@ router.get("/", async (req, res) => {
             : ""
         }
     FROM stations
-<<<<<<< HEAD
     ${whereClause}
     ORDER BY ${orderByObject}
-=======
-    ${await getWhereClause(receivedFilters)}
-    ORDER BY sid
->>>>>>> 2bea99f (Convert street address to coordinates when needed; Renamed helper.js to stationService.js)
     LIMIT ${pageSize}
     ${page ? `OFFSET ${(page - 1) * pageSize}` : ""}
   `;

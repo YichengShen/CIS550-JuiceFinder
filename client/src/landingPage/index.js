@@ -9,7 +9,11 @@ function Landing({ toggleTheme }) {
   const theme = useTheme();
   useEffect(() => {
     // Log a page_view event when the HomePage component is mounted
-    logEvent(analytics, "page_view", { page_title: "HomePage" });
+    isSupported().then((yes) =>
+      yes
+        ? logEvent(analytics, "page_view", { page_title: "HomePage" })
+        : () => {}
+    );
   }, []);
   return (
     <Box
