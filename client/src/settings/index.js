@@ -33,23 +33,6 @@ function Settings() {
   const [errorMsg, setErrorMsg] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const [dataArray, setDataArray] = useState([]);
-
-  // Fetch EV data (~200 rows stored as csv)
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch("data/electric_vehicles.csv");
-        const csvData = await response.text();
-        const jsonData = await csvtojson().fromString(csvData);
-        setDataArray(jsonData);
-      } catch (error) {
-        console.error("Error loading CSV data:", error);
-      }
-    }
-    fetchData();
-  }, []);
-
   const [vehicleId, setVehicleId] = useState("");
   const [vehicleInfo, setVehicleInfo] = useState(null);
 
@@ -62,6 +45,31 @@ function Settings() {
   const [variant, setVariant] = useState("");
   const [availableVariants, setAvailableVariants] = useState([]);
 
+  const [dataArray, setDataArray] = useState([]);
+
+  // Fetch EV data (~200 rows stored as csv)
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch("data/electric_vehicles.csv");
+        const csvData = await response.text();
+        const jsonData = await csvtojson().fromString(csvData);
+        setDataArray(jsonData);
+
+        // Set default values after fetching the data
+        if (jsonData.length > 0) {
+          setBrand(jsonData[0].brand);
+          setModel(jsonData[0].model);
+          setReleaseYear(jsonData[0].release_year);
+          setVariant(jsonData[0].variant);
+        }
+      } catch (error) {
+        console.error("Error loading CSV data:", error);
+      }
+    }
+    fetchData();
+  }, []);
+
   const handleOpenPopup = () => {
     setOpenPopup(true);
   };
@@ -72,9 +80,9 @@ function Settings() {
 
   useEffect(() => {
     if (brand) {
-      // setModel("");
-      // setReleaseYear(9999);
-      // setVariant("");
+      setModel("");
+      setReleaseYear(9999);
+      setVariant("");
       const availableModels = Array.from(
         new Set(
           dataArray
@@ -88,8 +96,8 @@ function Settings() {
 
   useEffect(() => {
     if (model) {
-      // setReleaseYear(9999);
-      // setVariant("");
+      setReleaseYear(9999);
+      setVariant("");
       const firstReleaseYear = dataArray
         .filter((item) => item.brand === brand && item.model === model)
         .map((item) => item.release_year)[0];
