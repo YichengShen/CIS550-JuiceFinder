@@ -165,7 +165,13 @@ router.get("/stationsNearPath/:startAddress/:destAddress", async (req, res) => {
 
   // Handle the distance constraint along the path
   const distConstraints = [];
-  waypoints.forEach((waypoint) => {
+
+  // Filter waypoints to reduce the number of queries. Default step of 32 makes each pair of adjacent waypoints 2 miles apart.
+  const filteredWaypoints = waypoints.filter(
+    (_, index) => index % (req.query.filterFactor ?? 32) === 0
+  );
+
+  filteredWaypoints.forEach((waypoint) => {
     distConstraints.push(
       `ST_Distance_Sphere(${stationLocationColName}, ST_SRID(ST_GEOMFROMTEXT('POINT(${
         waypoint[0]

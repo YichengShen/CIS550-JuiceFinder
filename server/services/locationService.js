@@ -1,16 +1,15 @@
 const axios = require("axios");
 
 const getCoordinatesFromAddress = async (fullAddress) => {
-  const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(
+  const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
     fullAddress
-  )}&format=json&limit=1`;
-
+  )}&key=${process.env.GEOCODING_API_KEY}`;
   try {
     const response = await axios.get(url);
-    const data = response.data[0];
+    const coordinate = response.data.results[0].geometry.location;
     return {
-      latitude: data.lat,
-      longitude: data.lon,
+      latitude: coordinate.lat,
+      longitude: coordinate.lng,
     };
   } catch (err) {
     console.log(err);
