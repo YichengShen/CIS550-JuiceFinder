@@ -25,7 +25,9 @@ const getWhereClause = async (filters, isElectric = false) => {
     latitude = filters.latitude;
     longitude = filters.longitude;
   } else if (filters.streetAddress) {
-    ({ latitude, longitude } = await getCoordinatesFromAddress());
+    ({ latitude, longitude } = await getCoordinatesFromAddress(
+      filters.streetAddress
+    ));
   }
 
   if (latitude && longitude) {
