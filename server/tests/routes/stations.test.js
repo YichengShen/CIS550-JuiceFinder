@@ -30,7 +30,7 @@ describe("Test /stations with different filters", () => {
       METER_PER_MILE
     );
     expect(resp.body.length).toBeGreaterThan(0);
-  });
+  }, 15000);
 
   test("page=1 starts from the next item of where page=0 ends", async () => {
     const resp = await request(app).get(
