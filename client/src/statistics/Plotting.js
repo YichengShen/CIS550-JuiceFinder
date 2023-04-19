@@ -6,6 +6,7 @@ import { Column, Pie } from "@ant-design/plots";
 
 import serverConfig from "../config.json";
 
+// Stats-Fig #1
 function afsByTypePie() {
   const [data, setData] = useState([]);
 
@@ -33,12 +34,16 @@ function afsByTypePie() {
     radius: 0.9,
     label: {
       type: "inner",
-      offset: "-30%",
+      offset: "-15%",
       content: ({ percent }) => `${(percent * 100).toFixed(0)}%`,
       style: {
         fontSize: 14,
         textAlign: "center",
       },
+    },
+    legend: {
+      position: "bottom",
+      flipPage: false,
     },
     interactions: [
       {
@@ -49,7 +54,7 @@ function afsByTypePie() {
   // eslint-disable-next-line react/jsx-props-no-spreading
   return <Pie {...config} />;
 }
-
+// Stats-Fig #2
 function afsByStateMap() {
   const [data, setData] = useState([]);
 
@@ -80,7 +85,7 @@ function afsByStateMap() {
   return <USAMap customize={dataDict} />;
 }
 
-// Figure plotting
+// Stats-Fig #3
 function afsByTypeStateBar(data) {
   const config = {
     data,
@@ -123,7 +128,7 @@ function afsByTypeStateBar(data) {
     ],
     slider: {
       start: 0,
-      end: 1,
+      end: 1.0,
     },
     minColumnWidth: 10,
   };
@@ -131,7 +136,7 @@ function afsByTypeStateBar(data) {
   // eslint-disable-next-line react/jsx-props-no-spreading
   return <Column {...config} />;
 }
-
+// Stats-Fig #4
 function vehicleByTypeStateBar(data) {
   const config = {
     data,
@@ -143,15 +148,15 @@ function vehicleByTypeStateBar(data) {
     columnStyle: {
       radius: [20, 20, 0, 0],
     },
-    label: {
-      position: "middle",
-      style: {
-        fill: "#FFFFFF",
-        opacity: 0.6,
-      },
-      offsetY: 8,
-      formatter: ({ value }) => value,
-    },
+    // label: {
+    //   position: "middle",
+    //   style: {
+    //     fill: "#FFFFFF",
+    //     opacity: 0.6,
+    //   },
+    //   offsetY: 8,
+    //   formatter: ({ value }) => value,
+    // },
     xAxis: {
       label: {
         autoHide: false,
@@ -174,7 +179,7 @@ function vehicleByTypeStateBar(data) {
     ],
     slider: {
       start: 0,
-      end: 1,
+      end: 1.0,
     },
     minColumnWidth: 10,
   };
@@ -183,9 +188,166 @@ function vehicleByTypeStateBar(data) {
   return <Column {...config} />;
 }
 
+// Stats-Fig #5
+function stationCountByPortStateBar(data) {
+  const config = {
+    data,
+    xField: "state",
+    yField: "numStations",
+    isGroup: false,
+    isStack: true,
+    seriesField: "portType",
+    columnStyle: {
+      radius: [0, 0, 0, 0],
+    },
+    // label: {
+    //   position: "top",
+    //   style: {
+    //     fill: "#FFFFFF",
+    //     opacity: 0.8,
+
+    //   },
+    //   offsetY: 8,
+    //   formatter: ({ numStations }) => numStations,
+    // },
+    xAxis: {
+      label: {
+        autoHide: false,
+        autoRotate: false,
+      },
+    },
+    yAxis: {
+      label: {
+        formatter: (v) => v,
+      },
+    },
+    legend: {
+      position: "top",
+      flipPage: false,
+    },
+    interactions: [
+      {
+        type: "element-active",
+      },
+    ],
+    slider: {
+      start: 0,
+      end: 1.0,
+    },
+    minColumnWidth: 10,
+  };
+
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  return <Column {...config} />;
+}
+// Stats-Fig #6
+function stationCountBySpeedStateBar(data) {
+  const config = {
+    data,
+    xField: "state",
+    yField: "numStations",
+    isGroup: false,
+    isStack: true,
+    seriesField: "speedLevel",
+    columnStyle: {
+      radius: [0, 0, 0, 0],
+    },
+    // label: {
+    //   position: "middle",
+    //   style: {
+    //     fill: "#FFFFFF",
+    //     opacity: 0.6,
+    //   },
+    //   offsetY: 8,
+    //   formatter: ({ value }) => value,
+    // },
+    xAxis: {
+      label: {
+        autoHide: false,
+        autoRotate: false,
+      },
+    },
+    yAxis: {
+      label: {
+        formatter: (v) => v,
+      },
+    },
+    legend: {
+      position: "top",
+      flipPage: false,
+    },
+    interactions: [
+      {
+        type: "element-active",
+      },
+    ],
+    slider: {
+      start: 0,
+      end: 1.0,
+    },
+    minColumnWidth: 10,
+  };
+
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  return <Column {...config} />;
+}
+// Stats-Fig #7
+function stationCountByNetworkStateBar(data) {
+  const config = {
+    data,
+    xField: "state",
+    yField: "numStations",
+    isGroup: false,
+    isStack: true,
+    seriesField: "network",
+    columnStyle: {
+      radius: [0, 0, 0, 0],
+    },
+    // label: {
+    //   position: "middle",
+    //   style: {
+    //     fill: "#FFFFFF",
+    //     opacity: 0.6,
+    //   },
+    //   offsetY: 8,
+    //   formatter: ({ value }) => value,
+    // },
+    xAxis: {
+      label: {
+        autoHide: false,
+        autoRotate: false,
+      },
+    },
+    yAxis: {
+      label: {
+        formatter: (v) => v,
+      },
+    },
+    legend: {
+      position: "top",
+      flipPage: false,
+    },
+    interactions: [
+      {
+        type: "element-active",
+      },
+    ],
+    slider: {
+      start: 0,
+      end: 1.0,
+    },
+    minColumnWidth: 10,
+  };
+
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  return <Column {...config} />;
+}
 export {
   afsByTypePie,
   afsByStateMap,
   afsByTypeStateBar,
   vehicleByTypeStateBar,
+  stationCountByPortStateBar,
+  stationCountBySpeedStateBar,
+  stationCountByNetworkStateBar,
 };
