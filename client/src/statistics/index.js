@@ -111,7 +111,7 @@ function Statistics() {
         <TabPane tab="Electric Charging Stations" key="ElectricStation">
           <ElectricStationTab />
         </TabPane>
-        <TabPane tab="EVFriendliness" key="EVFriendliness">
+        <TabPane tab="The Most EV-Friendly State" key="EVFriendliness">
           <EVFriendlinessTab />
         </TabPane>
       </Tabs>
