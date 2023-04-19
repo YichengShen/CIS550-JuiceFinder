@@ -25,15 +25,18 @@ router.get("/nearby/:longitude/:latitude", async (req, res) => {
   let { maxDistMile, sortBy } = req.query;
   maxDistMile = maxDistMile ?? 1;
   sortBy = sortBy ?? "distance";
-  const { day, period, category } = req.query;
-  const periodRegex = /^\d{1,2}:\d{2}-\d{1,2}:\d{2}$/; // Regular expression to validate the format of the period
+  const { stars, day, period, category } = req.query;
+  // const periodRegex = /^\d{1,2}:\d{2}-\d{1,2}:\d{2}$/; // Regular expression to validate the format of the period
 
-  if (period && !periodRegex.test(period)) {
-    res
-      .status(400)
-      .json({ error: "Invalid period format. Should be like 8:30-17:00" });
-  }
-  const [startTime, endTime] = period?.split("-") ?? ["", ""];
+  // if (period && !periodRegex.test(period)) {
+  //   res
+  //     .status(400)
+  //     .json({ error: "Invalid period format. Should be like 8:30-17:00" });
+  // }
+  // const [startTime, endTime] = period?.split("-") ?? ["", ""];
+  let [startTime, endTime] = period?.split(",") ?? ["", ""];
+  startTime = `${startTime}:00`;
+  endTime = `${endTime}:00`;
 
   // Validate sortBy parameter
   if (sortBy && !["distance", "stars", "review_count"].includes(sortBy)) {
@@ -77,17 +80,22 @@ router.get("/nearby/:longitude/:latitude", async (req, res) => {
   const query = `
     SELECT *, ${distanceString} AS distance FROM restaurants
     WHERE ${distanceString} < ${maxDistMile * 1609.34}
+    ${stars ? `AND stars >= ${stars}` : ""}
     ${category ? `AND categories LIKE '%${category}%'` : ""}
     ${periodQuery}
     ORDER BY ${sortBy === "distance" ? "distance" : `${sortBy} DESC`}
   `;
 
+  console.log(query);
+
   connection.query(query, (err, data) => {
-    if (err || data.length === 0) {
-      console.log(err);
-      res.status(500).json({});
+    if (err) {
+      console.error(err);
+      res.status(500).json({ error: "Internal server error" }); // Send a 500 Internal Server Error status code
+    } else if (data.length === 0) {
+      res.status(404).json({ message: "No data found" }); // Send a 404 Not Found status code
     } else {
-      res.status(200).json(data);
+      res.status(200).json(data); // Send a 200 OK status code and the data
     }
   });
 });
