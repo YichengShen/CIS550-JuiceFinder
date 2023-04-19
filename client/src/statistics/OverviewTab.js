@@ -82,7 +82,7 @@ function afsByStateMap() {
   return <USAMap customize={dataDict} />;
 }
 
-function afsByTypeStateFig(data) {
+function afsByTypeStateBar(data) {
   const config = {
     data,
     xField: "state",
@@ -99,24 +99,44 @@ function afsByTypeStateFig(data) {
   return <Column {...config} />;
 }
 
+function vehicleByTypeBar(data) {
+  const config = {
+    data,
+    xField: "state",
+    yField: "numVehicle",
+    isGroup: true,
+    isStack: false,
+    seriesField: "vtype",
+    columnStyle: {
+      radius: [20, 20, 0, 0],
+    },
+  };
+
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  return <Column {...config} />;
+}
+
 function OverviewTab() {
   // state variable for station type select menu
   const [stationType, setStationType] = useState("All");
+  const [vehicleType, setVehicleType] = useState("All");
+
   // event handler
   const handleStationTypeChange = useCallback((event) => {
-    // eslint-disable-next-line no-console
     setStationType(event);
-    // eslint-disable-next-line no-console
-    console.log("handler");
-    // eslint-disable-next-line no-console
-    console.log(stationType);
   }, []);
-  // fetched data
-  const [AfsByTypeStateData, setAfsByTypeStateData] = useState([]);
+  const handleVehicleTypeChange = useCallback((event) => {
+    setVehicleType(event);
+  }, []);
+
+  // state variable for fetched data
+  const [afsByTypeStateData, setAfsByTypeStateData] = useState([]);
+  const [vehicleByTypeData, setVehicleByTypeData] = useState([]);
+
   // fetcher
-  const getAfsByTypeState = (type) => {
+  const getAfsByTypeState = (stype) => {
     fetch(
-      `http://${serverConfig.server_host}:${serverConfig.server_port}/stats/overview/afsByTypeState?stationType=${type}`
+      `http://${serverConfig.server_host}:${serverConfig.server_port}/stats/overview/afsByTypeState?stationType=${stype}`
     )
       .then((response) => response.json())
       .then((json) => setAfsByTypeStateData(json))
@@ -126,9 +146,25 @@ function OverviewTab() {
       });
   };
 
+  const getVehicleByType = (vtype) => {
+    fetch(
+      `http://${serverConfig.server_host}:${serverConfig.server_port}/stats/overview/vehicleByTypeState?vehicleType=${vtype}`
+    )
+      .then((response) => response.json())
+      .then((json) => setVehicleByTypeData(json))
+      .catch((error) => {
+        // eslint-disable-next-line no-console
+        console.log("fetch data failed", error);
+      });
+  };
+  // render
   useEffect(() => {
     getAfsByTypeState(stationType);
   }, [stationType]);
+
+  useEffect(() => {
+    getVehicleByType(vehicleType);
+  }, [vehicleType]);
 
   return (
     <>
@@ -158,7 +194,7 @@ function OverviewTab() {
           </Card>
         </Col>
         <Col span={18}>
-          <Card>Content 2{afsByTypeStateFig(AfsByTypeStateData)}</Card>
+          <Card>Content 2{afsByTypeStateBar(afsByTypeStateData)}</Card>
         </Col>
       </Row>
       <Row gutter={16} type="flex">
@@ -170,13 +206,13 @@ function OverviewTab() {
                 "vehicleType",
                 "Select light-duty vehicle type:",
                 "Select vehicle type",
-                handleStationTypeChange
+                handleVehicleTypeChange
               )}
             </div>
           </Card>
         </Col>
         <Col span={18}>
-          <Card>Content 3{afsByTypePie()}</Card>
+          <Card>Content 3{vehicleByTypeBar(vehicleByTypeData)}</Card>
         </Col>
       </Row>
     </>
