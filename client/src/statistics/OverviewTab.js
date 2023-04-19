@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { Card, Col, Row } from "antd";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import USAMap from "react-usa-map";
@@ -82,25 +82,7 @@ function afsByStateMap() {
   return <USAMap customize={dataDict} />;
 }
 
-function afsByTypeStateFig() {
-  const [data, setData] = useState([]);
-
-  const asyncFetch = () => {
-    fetch(
-      `http://${serverConfig.server_host}:${serverConfig.server_port}/stats/overview/afsByTypeState?stationType=All`
-    )
-      .then((response) => response.json())
-      .then((json) => setData(json))
-      .catch((error) => {
-        // eslint-disable-next-line no-console
-        console.log("fetch data failed", error);
-      });
-  };
-
-  useEffect(() => {
-    asyncFetch();
-  }, []);
-
+function afsByTypeStateFig(data) {
   const config = {
     data,
     xField: "state",
@@ -118,6 +100,36 @@ function afsByTypeStateFig() {
 }
 
 function OverviewTab() {
+  // state variable for station type select menu
+  const [stationType, setStationType] = useState("All");
+  // event handler
+  const handleStationTypeChange = useCallback((event) => {
+    // eslint-disable-next-line no-console
+    setStationType(event);
+    // eslint-disable-next-line no-console
+    console.log("handler");
+    // eslint-disable-next-line no-console
+    console.log(stationType);
+  }, []);
+  // fetched data
+  const [AfsByTypeStateData, setAfsByTypeStateData] = useState([]);
+  // fetcher
+  const getAfsByTypeState = (type) => {
+    fetch(
+      `http://${serverConfig.server_host}:${serverConfig.server_port}/stats/overview/afsByTypeState?stationType=${type}`
+    )
+      .then((response) => response.json())
+      .then((json) => setAfsByTypeStateData(json))
+      .catch((error) => {
+        // eslint-disable-next-line no-console
+        console.log("fetch data failed", error);
+      });
+  };
+
+  useEffect(() => {
+    getAfsByTypeState(stationType);
+  }, [stationType]);
+
   return (
     <>
       <Row gutter={16} type="flex">
@@ -139,13 +151,14 @@ function OverviewTab() {
               {SelectComponent(
                 "stationType",
                 "Select AFS station type:",
-                "Select station type"
+                "Select station type",
+                handleStationTypeChange
               )}
             </div>
           </Card>
         </Col>
         <Col span={18}>
-          <Card>Content 2{afsByTypeStateFig()}</Card>
+          <Card>Content 2{afsByTypeStateFig(AfsByTypeStateData)}</Card>
         </Col>
       </Row>
       <Row gutter={16} type="flex">
@@ -156,13 +169,14 @@ function OverviewTab() {
               {SelectComponent(
                 "vehicleType",
                 "Select light-duty vehicle type:",
-                "Select vehicle type"
+                "Select vehicle type",
+                handleStationTypeChange
               )}
             </div>
           </Card>
         </Col>
         <Col span={18}>
-          <Card>Content 3{afsByTypeStateFig()}</Card>
+          <Card>Content 3{afsByTypePie()}</Card>
         </Col>
       </Row>
     </>

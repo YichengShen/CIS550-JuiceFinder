@@ -60,7 +60,7 @@ const stateOptions = [
 const stationTypeOptions = [
   { key: "All", value: "All Types" },
   { key: "electric", value: "Electric" },
-  { key: "“e85”", value: "E85" },
+  { key: "e85", value: "E85" },
   { key: "lpg", value: "LPG" },
   { key: "cng", value: "CNG" },
   { key: "bd", value: "BD" },
@@ -148,7 +148,7 @@ function arrToDict(item, index) {
 }
 network.sort().forEach(arrToDict);
 
-function SelectComponent(type, text, defaultValue) {
+function SelectComponent(type, text, defaultValue, handler) {
   let obj = [];
   if (type === "port") {
     obj = portOptions;
@@ -176,7 +176,7 @@ function SelectComponent(type, text, defaultValue) {
       <Select
         defaultValue={defaultValue}
         style={{ width: 300 }}
-        // onChange={this.handlePortChange}
+        onChange={handler}
       >
         {obj.map((option) => (
           <Option key={option.key}>{option.value}</Option>
