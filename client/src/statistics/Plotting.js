@@ -342,6 +342,108 @@ function stationCountByNetworkStateBar(data) {
   // eslint-disable-next-line react/jsx-props-no-spreading
   return <Column {...config} />;
 }
+// Stats-Fig #8
+function stationToVehicleBar(data) {
+  const config = {
+    data,
+    xField: "state",
+    yField: "nunberOf",
+    isGroup: true,
+    isStack: false,
+    seriesField: "type",
+    columnStyle: {
+      radius: [20, 20, 0, 0],
+    },
+    label: {
+      position: "middle",
+      style: {
+        fill: "#FFFFFF",
+        opacity: 0.6,
+      },
+      offsetY: 8,
+      formatter: ({ stationToVehicleRatio }) => stationToVehicleRatio,
+    },
+    xAxis: {
+      label: {
+        autoHide: false,
+        autoRotate: false,
+      },
+    },
+    yAxis: {
+      label: {
+        formatter: (v) => v,
+      },
+    },
+    legend: {
+      position: "top",
+      flipPage: false,
+    },
+    interactions: [
+      {
+        type: "element-active",
+      },
+    ],
+    slider: {
+      start: 0,
+      end: 1.0,
+    },
+    minColumnWidth: 10,
+  };
+
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  return <Column {...config} />;
+}
+// Stats-Fig #9
+function restaurantToStationBar(data) {
+  const config = {
+    data,
+    xField: "state",
+    yField: "nunberOf",
+    isGroup: true,
+    isStack: false,
+    seriesField: "type",
+    columnStyle: {
+      radius: [20, 20, 0, 0],
+    },
+    label: {
+      position: "middle",
+      style: {
+        fill: "#FFFFFF",
+        opacity: 0.6,
+      },
+      offsetY: 8,
+      formatter: ({ value }) => value,
+    },
+    xAxis: {
+      label: {
+        autoHide: false,
+        autoRotate: false,
+      },
+    },
+    yAxis: {
+      label: {
+        formatter: (v) => v,
+      },
+    },
+    legend: {
+      position: "top",
+      flipPage: false,
+    },
+    interactions: [
+      {
+        type: "element-active",
+      },
+    ],
+    slider: {
+      start: 0,
+      end: 1.0,
+    },
+    minColumnWidth: 10,
+  };
+
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  return <Column {...config} />;
+}
 export {
   afsByTypePie,
   afsByStateMap,
@@ -350,4 +452,6 @@ export {
   stationCountByPortStateBar,
   stationCountBySpeedStateBar,
   stationCountByNetworkStateBar,
+  stationToVehicleBar,
+  restaurantToStationBar,
 };
