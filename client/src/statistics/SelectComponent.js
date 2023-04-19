@@ -58,7 +58,7 @@ const stateOptions = [
 ];
 
 const stationTypeOptions = [
-  { key: "All", value: "All Types" },
+  { key: "All", value: "All station types" },
   { key: "electric", value: "Electric" },
   { key: "e85", value: "E85" },
   { key: "lpg", value: "LPG" },
@@ -85,10 +85,10 @@ const vehicleTypeOptions = [
 
 const portOptions = [
   { key: "All", value: "All ports" },
-  { key: "type1", value: "Type 1" },
-  { key: "type2", value: "Type 2" },
-  { key: "ccs", value: "CCS" },
-  { key: "chademo", value: "CHADEMO" },
+  { key: "type1", value: "Type-1" },
+  { key: "type2", value: "Type-2" },
+  { key: "ccs", value: "Ccs" },
+  { key: "chademo", value: "Chademo" },
   { key: "tesla", value: "Tesla" },
   { key: "nema515", value: "NEMA-515" },
   { key: "nema520", value: "NEMA-520" },
@@ -96,14 +96,13 @@ const portOptions = [
 ];
 
 const speedOptions = [
-  { key: "All", value: "All charging speeds" },
+  { key: "All", value: "All speeds" },
   { key: "acLevel1", value: "AC level-1" },
   { key: "acLevel2", value: "AC level-2" },
   { key: "dcfast", value: "DC fast charging" },
 ];
 
 const network = [
-  "All",
   "Non-Networked",
   "Volta",
   "EV Connect",
@@ -141,11 +140,13 @@ const network = [
 ];
 // map an array to dictionary
 // const networkOptions = Object.fromEntries(network.map(x => {"key":x, "value":x}));
-const networkOptions = [];
+const networkOptions=[];
+networkOptions[0] = { key: "All", value: "All" };
 
 function arrToDict(item, index) {
-  networkOptions[index] = { key: item, value: item };
+  networkOptions[index+1] = { key: item, value: item };
 }
+// Sort by string order to make sure the plotting order is consistent.
 network.sort().forEach(arrToDict);
 
 function SelectComponent(type, text, defaultValue, handler) {
@@ -164,14 +165,7 @@ function SelectComponent(type, text, defaultValue, handler) {
     obj = networkOptions;
   }
   return (
-    <div
-      style={{
-        width: "80vw",
-        margin: "auto auto",
-        marginTop: "3vh",
-        marginBottom: "3vh",
-      }}
-    >
+    <>
       <p>{text}</p>
       <Select
         defaultValue={defaultValue}
@@ -182,7 +176,7 @@ function SelectComponent(type, text, defaultValue, handler) {
           <Option key={option.key}>{option.value}</Option>
         ))}
       </Select>
-    </div>
+    </>
   );
 }
 
