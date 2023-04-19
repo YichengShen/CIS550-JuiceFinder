@@ -15,6 +15,8 @@ import {
   MenuItem,
   Slider,
   Select,
+  Switch,
+  CircularProgress,
 } from "@mui/material";
 
 import { BootstrapDialog, BootstrapDialogTitle } from "./BootstrapDialog";
@@ -28,14 +30,16 @@ function valuetext(value) {
 // eslint-disable-next-line react/prop-types
 function CategoryTag({ label }) {
   const getRandomColor = () => {
-    const r = Math.floor(Math.random() * 128) + 88;
-    const g = Math.floor(Math.random() * 128) + 88;
-    const b = Math.floor(Math.random() * 128) + 88;
+    const r = Math.floor(Math.random() * 128) + 127;
+    const g = Math.floor(Math.random() * 100) + 88;
+    const b = Math.floor(Math.random() * 128);
+
     return `rgb(${r}, ${g}, ${b})`;
   };
 
   const tagStyle = {
     backgroundColor: getRandomColor(),
+    opacity: 0.66,
     color: "white",
     borderRadius: "4px",
     padding: "2px 4px",
@@ -147,6 +151,7 @@ function NearbyRestaurantsPopup({ open, handleClose, longitude, latitude }) {
   const [category, setCategory] = useState("");
   const [selectedDay, setSelectedDay] = useState("");
   const [timeRange, setTimeRange] = useState([0, 24]);
+  const [sortByRating, setSortByRating] = useState(false); // sort
   const [page, setPage] = useState(1); // page is for pagination
   const handleRatingChange = (event, newValue) => {
     setRating(newValue);
@@ -168,7 +173,10 @@ function NearbyRestaurantsPopup({ open, handleClose, longitude, latitude }) {
     setPage(1);
   };
 
-  useEffect(() => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const fetchRestaurants = () => {
+    setIsLoading(true);
     fetch(
       `http://${config.server_host}:${
         config.server_port
@@ -176,15 +184,35 @@ function NearbyRestaurantsPopup({ open, handleClose, longitude, latitude }) {
         category && `&category=${category}`
       }${selectedDay && `&day=${selectedDay}`}${
         timeRange[0] === 0 && timeRange[1] === 24 ? "" : `&period=${timeRange}`
-      }`
+      }${sortByRating ? `&sortBy=stars` : ""}`
     )
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.status === 404) {
+          throw new Error("No restaurant found in database");
+        }
+        return res.json();
+      })
       .then((resJson) => {
         setSearchResults(resJson);
+      })
+      .catch((error) => {
+        console.error(error.message);
+        setSearchResults([]);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
-  }, [rating, distance, category, selectedDay, timeRange]);
+  };
 
-  //   console.log(searchResults);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      fetchRestaurants();
+    }, 300); // 300ms delay
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [rating, distance, category, selectedDay, timeRange, sortByRating]);
 
   // Pagination
   const handlePageChange = (event, value) => {
@@ -332,56 +360,108 @@ function NearbyRestaurantsPopup({ open, handleClose, longitude, latitude }) {
 
             {/* search results */}
             <Grid item xs={12} sm={9} sx={{ borderLeft: 2 }}>
-              <Typography
-                gutterBottom
-                component="p"
-                variant="h5"
-                color="primary"
+              <Grid
+                container
+                justifyContent="space-between"
+                alignItems="center"
               >
-                Search Results
-              </Typography>
+                <Grid item>
+                  <Typography
+                    gutterBottom
+                    component="p"
+                    variant="h5"
+                    color="primary"
+                  >
+                    Search Results
+                  </Typography>
+                </Grid>
+                <Grid item>
+                  <FormControlLabel
+                    control={
+                      <Switch
+                        checked={sortByRating}
+                        size="large"
+                        onChange={(event) =>
+                          setSortByRating(event.target.checked)
+                        }
+                        color="success"
+                      />
+                    }
+                    label="Sort by Rating"
+                  />
+                </Grid>
+              </Grid>
 
               <Grid container spacing={2}>
-                {displayResults.map((result) => (
-                  <Grid item xs={12} key={result.bussiness_id}>
-                    <Box>
-                      <Typography component="div" variant="h6">
-                        {result.name}{" "}
-                        <Typography
-                          component="span"
-                          variant="body2"
-                          sx={{ ml: myTheme.spacing(2) }}
-                        >
-                          {(result.distance / 1609.34).toFixed(2)} miles
-                        </Typography>
-                      </Typography>
-                      <Box display="flex" alignItems="center">
-                        <Rating value={result.stars} precision={0.1} readOnly />
-                        <Typography
-                          variant="body2"
-                          color="text.secondary"
-                          sx={{ ml: myTheme.spacing(2) }}
-                        >
-                          {result.review_count} reviews
-                        </Typography>
-                      </Box>
-                      <Typography variant="body2" color="text">
-                        {result.categories.split(",").map((c) => (
-                          <CategoryTag key={c} label={c.trim()} />
-                        ))}
-                      </Typography>
-                      <Typography variant="body2" color="text">
-                        {result.address}, {result.city}, {result.state},{" "}
-                        {result.postal_code}
-                      </Typography>
-                      {/* <Typography variant="body2" color="text.secondary">
-                        Hours: {result.hours}
-                      </Typography> */}
-                      {formatHours(result.hours)}
-                    </Box>
-                    <Divider />
+                {isLoading && (
+                  <Grid
+                    item
+                    xs={12}
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      marginTop: myTheme.spacing(2),
+                    }}
+                  >
+                    <CircularProgress />
                   </Grid>
-                ))}
+                )}
+                {!isLoading && searchResults.length === 0 && (
+                  <Typography
+                    variant="h6"
+                    color="textSecondary"
+                    sx={{ mt: myTheme.spacing(2), ml: myTheme.spacing(2) }}
+                  >
+                    No results found
+                  </Typography>
+                )}
+                {!isLoading &&
+                  searchResults.length > 0 &&
+                  displayResults.map((result) => (
+                    <Grid item xs={12} key={result.business_id}>
+                      <Box>
+                        <Typography component="div" variant="h6">
+                          {result.name}{" "}
+                          <Typography
+                            component="span"
+                            variant="body2"
+                            sx={{ ml: myTheme.spacing(2) }}
+                          >
+                            {(result.distance / 1609.34).toFixed(2)} miles
+                          </Typography>
+                        </Typography>
+                        <Box display="flex" alignItems="center">
+                          <Rating
+                            value={result.stars}
+                            precision={0.1}
+                            readOnly
+                          />
+                          <Typography
+                            variant="body2"
+                            color="text.secondary"
+                            sx={{ ml: myTheme.spacing(2) }}
+                          >
+                            {result.review_count} reviews
+                          </Typography>
+                        </Box>
+                        <Typography variant="body2" color="text">
+                          {result.categories.split(",").map((c) => (
+                            <CategoryTag
+                              key={`${result.bussiness_id}-${c.trim()}`}
+                              label={c.trim()}
+                            />
+                          ))}
+                        </Typography>
+                        <Typography variant="body2" color="text">
+                          {result.address}, {result.city}, {result.state},{" "}
+                          {result.postal_code}
+                        </Typography>
+                        {formatHours(result.hours)}
+                      </Box>
+                      <Divider />
+                    </Grid>
+                  ))}
               </Grid>
               <Pagination
                 count={Math.ceil(searchResults.length / itemsPerPage)}
