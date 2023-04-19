@@ -94,60 +94,66 @@ function OverviewTab() {
   }, [vehicleType]);
 
   return (
-    <>
-      <Row gutter={16} type="flex">
-        <Col span={6}>
-          <Card title="🏅 US Alternating fueling resources">
-            {" "}
-            {plt.afsByTypePie()}
-          </Card>
-        </Col>
-        <Col span={18}>
-          <Card title="🏅 Energy Resources Heat map">
-            {" "}
-            {plt.afsByStateMap()}
-          </Card>
-        </Col>
-      </Row>
-      <Row gutter={16} type="flex">
-        <Col span={6}>
-          <Card title="🏅 Title2">
-            Paragraph 2
-            <div>
-              {SelectComponent(
-                "stationType",
-                "Select AFS station type:",
-                "Select station type",
-                handleStationTypeChange
-              )}
-            </div>
-          </Card>
-        </Col>
-        <Col span={18}>
-          <Card>Content 2{plt.afsByTypeStateBar(afsByTypeStateData)}</Card>
-        </Col>
-      </Row>
-      <Row gutter={16} type="flex">
-        <Col span={6}>
-          <Card title="🏅 Title3">
-            Paragraph 3
-            <div>
-              {SelectComponent(
-                "vehicleType",
-                "Select light-duty vehicle type:",
-                "Select vehicle type",
-                handleVehicleTypeChange
-              )}
-            </div>
-          </Card>
-        </Col>
-        <Col span={18}>
-          <Card>
-            Content 3{plt.vehicleByTypeStateBar(vehicleByTypeStateData)}
+    <Card>
+      <Row>
+        <Col span={24}>
+          <Card title="🏅 Alternating fueling resources percentages and distribution in US">
+            <Row>
+              <Col span={6}>
+                <Card>{plt.afsByTypePie()}</Card>
+              </Col>
+              <Col span={18}>
+                <Card>{plt.afsByStateMap()}</Card>
+              </Col>
+            </Row>
           </Card>
         </Col>
       </Row>
-    </>
+
+      <Row>
+        <Col span={24}>
+          <Card title="🏅 Alternative fueling stations count by state in US">
+            <Row>
+              <Col span={6}>
+                <Card>
+                  {SelectComponent(
+                    "stationType",
+                    "Select AFS station type:",
+                    "All station types",
+                    handleStationTypeChange
+                  )}
+                </Card>
+              </Col>
+              <Col span={18}>
+                <Card>{plt.afsByTypeStateBar(afsByTypeStateData)}</Card>
+              </Col>
+            </Row>
+          </Card>
+        </Col>
+      </Row>
+
+      <Row>
+        <Col span={24}>
+          <Card title="🏅 Light-duty vehicle registration count by state in US">
+            <Row>
+              <Col span={6}>
+                <Card>
+                  {SelectComponent(
+                    "vehicleType",
+                    "Select light-duty vehicle type:",
+                    "All vehicle types",
+                    handleVehicleTypeChange
+                  )}
+                </Card>
+              </Col>
+              <Col span={18}>
+                <Card>{plt.vehicleByTypeStateBar(vehicleByTypeStateData)}</Card>
+              </Col>
+            </Row>
+          </Card>
+        </Col>
+      </Row>
+    </Card>
   );
 }
 
