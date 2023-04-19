@@ -132,7 +132,7 @@ function afsByTypeStateBar(data) {
   return <Column {...config} />;
 }
 
-function vehicleByTypeBar(data) {
+function vehicleByTypeStateBar(data) {
   const config = {
     data,
     xField: "state",
@@ -183,4 +183,9 @@ function vehicleByTypeBar(data) {
   return <Column {...config} />;
 }
 
-export { afsByTypePie, afsByStateMap, afsByTypeStateBar, vehicleByTypeBar };
+export {
+  afsByTypePie,
+  afsByStateMap,
+  afsByTypeStateBar,
+  vehicleByTypeStateBar,
+};
