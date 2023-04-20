@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
-
-import { Card, Col, Row } from "antd";
-
+import { Box, Container, Grid, Typography } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import * as plt from "./Plotting";
 import serverConfig from "../config.json";
 
 function EVFriendlinessTab() {
+  // use theme for this page
+  const theme = useTheme();
+
   // state variable for fetched data
   const [stationToVehicle, setStationToVehicleData] = useState([]);
   const [restaurantToStation, setRestaurantToStationData] = useState([]);
@@ -121,26 +123,37 @@ function EVFriendlinessTab() {
   }, []);
 
   return (
-    <Card>
-      <Row>
-        <Col span={24}>
-          <Row>
-            <Col span={24}>
-              <Card title="🏅 How hard to find a charging stations?">
-                <Card>{plt.stationToVehicleBar(stationToVehicle)}</Card>
-              </Card>
-            </Col>
-          </Row>
-          <Row>
-            <Col span={24}>
-              <Card title="🏅 Charge yourself when you are charging your car!">
-                <Card>{plt.restaurantToStationBar(restaurantToStation)}</Card>
-              </Card>
-            </Col>
-          </Row>
-        </Col>
-      </Row>
-    </Card>
+    <Box
+      sx={{
+        backgroundColor: theme.palette.background.default,
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      <Box sx={{ flexGrow: 1 }}>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <Typography variant="h6" sx={{ color: theme.palette.primary.main }}>
+              🏅 How hard to find a charging stations?
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Container>{plt.stationToVehicleBar(stationToVehicle)}</Container>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant="h6" sx={{ color: theme.palette.primary.main }}>
+              🏅 Charge yourself when you are charging your car!
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Container>
+              {plt.restaurantToStationBar(restaurantToStation)}
+            </Container>
+          </Grid>
+        </Grid>
+      </Box>
+    </Box>
   );
 }
 

@@ -1,12 +1,14 @@
 import React, { useState, useCallback, useEffect } from "react";
-
-import { Card, Col, Row } from "antd";
-
+import { Box, Container, Grid, Typography } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import SelectComponent from "./SelectComponent";
 import * as plt from "./Plotting";
 import serverConfig from "../config.json";
 
 function ElectricStationTab() {
+  // use theme for this page
+  const theme = useTheme();
+
   // State variable for station type select menu
   const [state1, setState1] = useState("All");
   const [state2, setState2] = useState("All");
@@ -52,7 +54,6 @@ function ElectricStationTab() {
   );
   const [stationCountByNetworkState, setStationCountByNetworkStateData] =
     useState([]);
-
   /*  #5
       Route: /stats/electricStation/searchPort
       Description: Returns the electric station count aggregate by given port and state, order by portType(ascending) and numStations(descending)
@@ -166,139 +167,141 @@ function ElectricStationTab() {
   }, [state1, state2, network1, network2]);
 
   return (
-    <>
-      <Row>
-        <Col span={12}>
-          <Card />
-        </Col>
-        <Col span={6}>
-          <Card>
-            {SelectComponent(
-              "state",
-              "Select state_1:",
-              "All states",
-              handleState1Change,
-              state1
-            )}
-          </Card>
-        </Col>
-        <Col span={6}>
-          <Card>
-            {SelectComponent(
-              "state",
-              "Select state_2:",
-              "All states",
-              handleState2Change,
-              state2
-            )}
-          </Card>
-        </Col>
-      </Row>
+    <Box
+      sx={{
+        backgroundColor: theme.palette.background.default,
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      <Box sx={{ flexGrow: 1 }}>
+        <Grid container spacing={2}>
+          <Grid item xs={6} />
+          <Grid item xs={3}>
+            <Container>
+              {SelectComponent(
+                "state",
+                "Select state 1:",
+                "All states",
+                handleState1Change,
+                state1
+              )}
+            </Container>
+          </Grid>
+          <Grid item xs={3}>
+            <Container>
+              {SelectComponent(
+                "state",
+                "Select state 2:",
+                "All states",
+                handleState2Change,
+                state2
+              )}
+            </Container>
+          </Grid>
+        </Grid>
+      </Box>
 
-      <Row>
-        <Col span={24}>
-          <Card title="🏅 Number of electric stations with different ports in US">
-            <Row>
-              <Col span={6}>
-                <Card>
-                  {SelectComponent(
-                    "port",
-                    "Select port_1:",
-                    "All ports",
-                    handlePort1Change,
-                    port1
-                  )}
-                  {SelectComponent(
-                    "port",
-                    "Select port_2:",
-                    "All ports",
-                    handlePort2Change,
-                    port2
-                  )}
-                </Card>
-              </Col>
-              <Col span={18}>
-                <Card>
-                  {plt.stationCountByPortStateBar(stationCountByPortState)}
-                </Card>
-              </Col>
-            </Row>
-          </Card>
-        </Col>
-      </Row>
+      <Box sx={{ flexGrow: 1 }}>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <Typography variant="h6" sx={{ color: theme.palette.primary.main }}>
+              🏅 Number of electric stations with different ports in US
+            </Typography>
+          </Grid>
+          <Grid item xs={3}>
+            <Container>
+              {SelectComponent(
+                "port",
+                "Select port 1:",
+                "All ports",
+                handlePort1Change,
+                port1
+              )}
+              {SelectComponent(
+                "port",
+                "Select port 2:",
+                "All ports",
+                handlePort2Change,
+                port2
+              )}
+            </Container>
+          </Grid>
+          <Grid item xs={9}>
+            <Container>
+              {plt.stationCountByPortStateBar(stationCountByPortState)}
+            </Container>
+          </Grid>
+        </Grid>
+      </Box>
 
-      <Row>
-        <Col span={24}>
-          <Card title="🏅 Number of electric stations with different charging speed in US">
-            <Row>
-              <Col span={6}>
-                <Card>
-                  <div>
-                    {SelectComponent(
-                      "speed",
-                      "Select charging speed 1:",
-                      "All speeds",
-                      handleSpeed1Change,
-                      speed1
-                    )}
-                  </div>
-                  <div>
-                    {SelectComponent(
-                      "speed",
-                      "Select charging speed 2:",
-                      "All speeds",
-                      handleSpeed2Change,
-                      speed2
-                    )}
-                  </div>
-                </Card>
-              </Col>
-              <Col span={18}>
-                <Card>
-                  {plt.stationCountBySpeedStateBar(stationCountBySpeedState)}
-                </Card>
-              </Col>
-            </Row>
-          </Card>
-        </Col>
-      </Row>
+      <Box sx={{ flexGrow: 1 }}>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <Typography variant="h6" sx={{ color: theme.palette.primary.main }}>
+              🏅 Number of electric stations with different charging speed in US
+            </Typography>
+          </Grid>
+          <Grid item xs={3}>
+            <Container>
+              {SelectComponent(
+                "speed",
+                "Select charging speed 1:",
+                "All speeds",
+                handleSpeed1Change,
+                speed1
+              )}
+              {SelectComponent(
+                "speed",
+                "Select charging speed 2:",
+                "All speeds",
+                handleSpeed2Change,
+                speed2
+              )}
+            </Container>
+          </Grid>
+          <Grid item xs={9}>
+            <Container>
+              {plt.stationCountBySpeedStateBar(stationCountBySpeedState)}
+            </Container>
+          </Grid>
+        </Grid>
+      </Box>
 
-      <Row>
-        <Col span={24}>
-          <Card title="🏅 Number of electric stations with different networks in US">
-            <Row gutter={16} type="flex">
-              <Col span={6}>
-                <Card>
-                  <div>
-                    {SelectComponent(
-                      "network",
-                      "Select network 1:",
-                      "All networks",
-                      handleNetwork1Change,
-                      network1
-                    )}
-                    {SelectComponent(
-                      "network",
-                      "Select network 2:",
-                      "All networks",
-                      handleNetwork2Change,
-                      network2
-                    )}
-                  </div>
-                </Card>
-              </Col>
-              <Col span={18}>
-                <Card>
-                  {plt.stationCountByNetworkStateBar(
-                    stationCountByNetworkState
-                  )}
-                </Card>
-              </Col>
-            </Row>
-          </Card>
-        </Col>
-      </Row>
-    </>
+      <Box sx={{ flexGrow: 1 }}>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <Typography variant="h6" sx={{ color: theme.palette.primary.main }}>
+              🏅 Number of electric stations with different networks in US
+            </Typography>
+          </Grid>
+          <Grid item xs={3}>
+            <Container>
+              {SelectComponent(
+                "network",
+                "Select network 1:",
+                "All networks",
+                handleNetwork1Change,
+                network1
+              )}
+              {SelectComponent(
+                "network",
+                "Select network 2:",
+                "All networks",
+                handleNetwork2Change,
+                network2
+              )}
+            </Container>
+          </Grid>
+          <Grid item xs={9}>
+            <Container>
+              {plt.stationCountByNetworkStateBar(stationCountByNetworkState)}
+            </Container>
+          </Grid>
+        </Grid>
+      </Box>
+    </Box>
   );
 }
 
