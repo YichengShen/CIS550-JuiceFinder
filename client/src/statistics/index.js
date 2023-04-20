@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from "react";
 import PropTypes from "prop-types";
-import { Box, Tab, Tabs, Typography } from "@mui/material";
+import { Box, Button, Tab, Tabs, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
 // Import .js files, each page will be rendered when the tab was toggled
@@ -45,7 +45,7 @@ function a11yProps(index) {
 }
 
 // statistics page
-function Statistics() {
+function Statistics({ toggleTheme }) {
   // use theme for this page
   const theme = useTheme();
 
@@ -60,19 +60,33 @@ function Statistics() {
     <Box
       sx={{
         backgroundColor: theme.palette.background.default,
-        minHeight: "100vh",
+        // minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
       }}
     >
-      <Typography variant="h3" sx={{ color: theme.palette.primary.main }}>
-        Statistics
-      </Typography>
+      <Box
+        sx={{
+          backgroundColor: theme.palette.background.default,
+          color: theme.palette.primary.main,
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "right",
+          justifyContent: "space-between",
+        }}
+      >
+        <Typography variant="h3" sx={{ color: theme.palette.primary.main }}>
+          Statistics
+        </Typography>
+        <Button variant="outlined" color="primary" onClick={toggleTheme}>
+          Light/Dark
+        </Button>
+      </Box>
       <Box sx={{ borderBottom: 1, borderColor: theme.palette.secondary.main }}>
         <Tabs
           value={value}
           onChange={handleChange}
-          textColor="inherit"
+          textColor="primary"
           indicatorColor="primary"
         >
           <Tab
@@ -92,17 +106,33 @@ function Statistics() {
           />
         </Tabs>
       </Box>
-      <TabPanel value={value} index={0}>
+      <TabPanel
+        value={value}
+        index={0}
+        sx={{ color: theme.palette.primary.main }}
+      >
         <OverviewTab />
       </TabPanel>
-      <TabPanel value={value} index={1}>
+      <TabPanel
+        value={value}
+        index={1}
+        sx={{ color: theme.palette.primary.main }}
+      >
         <ElectricStationTab />
       </TabPanel>
-      <TabPanel value={value} index={2}>
+      <TabPanel
+        value={value}
+        index={2}
+        sx={{ color: theme.palette.primary.main }}
+      >
         <EVFriendlinessTab />
       </TabPanel>
     </Box>
   );
 }
+
+Statistics.propTypes = {
+  toggleTheme: PropTypes.func.isRequired,
+};
 
 export default Statistics;
