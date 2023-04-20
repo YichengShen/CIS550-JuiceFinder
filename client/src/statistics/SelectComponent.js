@@ -1,105 +1,106 @@
-import { Select } from "antd";
-
+// import { Select } from "antd";
+import * as React from "react";
+import { Select, FormControl, MenuItem, InputLabel } from "@mui/material";
 /* Set up our drop-down menus */
-const { Option } = Select;
+// const { Option } = Select;
 
 const stateOptions = [
-  { key: "All", value: "All states" },
-  { key: "AL", value: "Alabama" },
-  { key: "AK", value: "Alaska" },
-  { key: "AZ", value: "Arizona" },
-  { key: "AR", value: "Arkansas" },
-  { key: "CA", value: "California" },
-  { key: "CO", value: "Colorado" },
-  { key: "CT", value: "Connecticut" },
-  { key: "DE", value: "Delaware" },
-  { key: "FL", value: "Florida" },
-  { key: "GA", value: "Georgia" },
-  { key: "HI", value: "Hawaii" },
-  { key: "ID", value: "Idaho" },
-  { key: "IL", value: "Illinois" },
-  { key: "IN", value: "Indiana" },
-  { key: "IA", value: "Iowa" },
-  { key: "KS", value: "Kansas" },
-  { key: "KY", value: "Kentucky" },
-  { key: "LA", value: "Louisiana" },
-  { key: "ME", value: "Maine" },
-  { key: "MD", value: "Maryland" },
-  { key: "MA", value: "Massachusetts" },
-  { key: "MI", value: "Michigan" },
-  { key: "MN", value: "Minnesota" },
-  { key: "MS", value: "Mississippi" },
-  { key: "MO", value: "Missouri" },
-  { key: "MT", value: "Montana" },
-  { key: "NE", value: "Nebraska" },
-  { key: "NV", value: "Nevada" },
-  { key: "NH", value: "New Hampshire" },
-  { key: "NJ", value: "New Jersey" },
-  { key: "NM", value: "New Mexico" },
-  { key: "NY", value: "New York" },
-  { key: "NC", value: "North Carolina" },
-  { key: "ND", value: "North Dakota" },
-  { key: "OH", value: "Ohio" },
-  { key: "OK", value: "Oklahoma" },
-  { key: "OR", value: "Oregon" },
-  { key: "PA", value: "Pennsylvania" },
-  { key: "RI", value: "Rhode Island" },
-  { key: "SC", value: "South Carolina" },
-  { key: "SD", value: "South Dakota" },
-  { key: "TN", value: "Tennessee" },
-  { key: "TX", value: "Texas" },
-  { key: "UT", value: "Utah" },
-  { key: "VT", value: "Vermont" },
-  { key: "VA", value: "Virginia" },
-  { key: "WA", value: "Washington" },
-  { key: "WV", value: "West Virginia" },
-  { key: "WI", value: "Wisconsin" },
-  { key: "WY", value: "Wyoming" },
+  { key: "All", text: "All states" },
+  { key: "AL", text: "Alabama" },
+  { key: "AK", text: "Alaska" },
+  { key: "AZ", text: "Arizona" },
+  { key: "AR", text: "Arkansas" },
+  { key: "CA", text: "California" },
+  { key: "CO", text: "Colorado" },
+  { key: "CT", text: "Connecticut" },
+  { key: "DE", text: "Delaware" },
+  { key: "FL", text: "Florida" },
+  { key: "GA", text: "Georgia" },
+  { key: "HI", text: "Hawaii" },
+  { key: "ID", text: "Idaho" },
+  { key: "IL", text: "Illinois" },
+  { key: "IN", text: "Indiana" },
+  { key: "IA", text: "Iowa" },
+  { key: "KS", text: "Kansas" },
+  { key: "KY", text: "Kentucky" },
+  { key: "LA", text: "Louisiana" },
+  { key: "ME", text: "Maine" },
+  { key: "MD", text: "Maryland" },
+  { key: "MA", text: "Massachusetts" },
+  { key: "MI", text: "Michigan" },
+  { key: "MN", text: "Minnesota" },
+  { key: "MS", text: "Mississippi" },
+  { key: "MO", text: "Missouri" },
+  { key: "MT", text: "Montana" },
+  { key: "NE", text: "Nebraska" },
+  { key: "NV", text: "Nevada" },
+  { key: "NH", text: "New Hampshire" },
+  { key: "NJ", text: "New Jersey" },
+  { key: "NM", text: "New Mexico" },
+  { key: "NY", text: "New York" },
+  { key: "NC", text: "North Carolina" },
+  { key: "ND", text: "North Dakota" },
+  { key: "OH", text: "Ohio" },
+  { key: "OK", text: "Oklahoma" },
+  { key: "OR", text: "Oregon" },
+  { key: "PA", text: "Pennsylvania" },
+  { key: "RI", text: "Rhode Island" },
+  { key: "SC", text: "South Carolina" },
+  { key: "SD", text: "South Dakota" },
+  { key: "TN", text: "Tennessee" },
+  { key: "TX", text: "Texas" },
+  { key: "UT", text: "Utah" },
+  { key: "VT", text: "Vermont" },
+  { key: "VA", text: "Virginia" },
+  { key: "WA", text: "Washington" },
+  { key: "WV", text: "West Virginia" },
+  { key: "WI", text: "Wisconsin" },
+  { key: "WY", text: "Wyoming" },
 ];
 
 const stationTypeOptions = [
-  { key: "All", value: "All station types" },
-  { key: "electric", value: "Electric" },
-  { key: "e85", value: "E85" },
-  { key: "lpg", value: "LPG" },
-  { key: "cng", value: "CNG" },
-  { key: "bd", value: "BD" },
-  { key: "rd", value: "RD" },
-  { key: "hy", value: "HY" },
-  { key: "lng", value: "LNG" },
+  { key: "All", text: "All station types" },
+  { key: "electric", text: "Electric" },
+  { key: "e85", text: "E85" },
+  { key: "lpg", text: "LPG" },
+  { key: "cng", text: "CNG" },
+  { key: "bd", text: "BD" },
+  { key: "rd", text: "RD" },
+  { key: "hy", text: "HY" },
+  { key: "lng", text: "LNG" },
 ];
 
 const vehicleTypeOptions = [
-  { key: "All", value: "All vehicle types" },
-  { key: "ev", value: "EV" },
-  { key: "phev", value: "PHEV" },
-  { key: "hev", value: "HEV" },
-  { key: "biodiesel", value: "Biodiesel" },
-  { key: "e85", value: "E85" },
-  { key: "cng", value: "CNG" },
-  { key: "propane", value: "Propane" },
-  { key: "hydrogen", value: "Hydrogen" },
-  { key: "gasoline", value: "Gasoline" },
-  { key: "diesel", value: "Diesel" },
+  { key: "All", text: "All vehicle types" },
+  { key: "ev", text: "EV" },
+  { key: "phev", text: "PHEV" },
+  { key: "hev", text: "HEV" },
+  { key: "biodiesel", text: "Biodiesel" },
+  { key: "e85", text: "E85" },
+  { key: "cng", text: "CNG" },
+  { key: "propane", text: "Propane" },
+  { key: "hydrogen", text: "Hydrogen" },
+  { key: "gasoline", text: "Gasoline" },
+  { key: "diesel", text: "Diesel" },
 ];
 
 const portOptions = [
-  { key: "All", value: "All ports" },
-  { key: "type1", value: "Type-1" },
-  { key: "type2", value: "Type-2" },
-  { key: "ccs", value: "Ccs" },
-  { key: "chademo", value: "Chademo" },
-  { key: "tesla", value: "Tesla" },
-  { key: "nema515", value: "NEMA-515" },
-  { key: "nema520", value: "NEMA-520" },
-  { key: "nema1450", value: "NEMA-1450" },
+  { key: "All", text: "All ports" },
+  { key: "type1", text: "Type-1" },
+  { key: "type2", text: "Type-2" },
+  { key: "ccs", text: "Ccs" },
+  { key: "chademo", text: "Chademo" },
+  { key: "tesla", text: "Tesla" },
+  { key: "nema515", text: "NEMA-515" },
+  { key: "nema520", text: "NEMA-520" },
+  { key: "nema1450", text: "NEMA-1450" },
 ];
 
 const speedOptions = [
-  { key: "All", value: "All speeds" },
-  { key: "acLevel1", value: "AC level-1" },
-  { key: "acLevel2", value: "AC level-2" },
-  { key: "dcfast", value: "DC fast charging" },
+  { key: "All", text: "All speeds" },
+  { key: "acLevel1", text: "AC level-1" },
+  { key: "acLevel2", text: "AC level-2" },
+  { key: "dcfast", text: "DC fast charging" },
 ];
 
 const network = [
@@ -140,16 +141,16 @@ const network = [
 ];
 // map an array to dictionary
 // const networkOptions = Object.fromEntries(network.map(x => {"key":x, "value":x}));
-const networkOptions=[];
-networkOptions[0] = { key: "All", value: "All" };
+const networkOptions = [];
+networkOptions[0] = { key: "All", text: "All" };
 
 function arrToDict(item, index) {
-  networkOptions[index+1] = { key: item, value: item };
+  networkOptions[index + 1] = { key: item, text: item };
 }
 // Sort by string order to make sure the plotting order is consistent.
 network.sort().forEach(arrToDict);
 
-function SelectComponent(type, text, defaultValue, handler) {
+function SelectComponent(type, label, defaultValue, handler, stateVariable) {
   let obj = [];
   if (type === "port") {
     obj = portOptions;
@@ -165,18 +166,21 @@ function SelectComponent(type, text, defaultValue, handler) {
     obj = networkOptions;
   }
   return (
-    <>
-      <p>{text}</p>
+    <FormControl sx={{ m: 1, minWidth: 300 }} size="small">
+      <InputLabel>{label}</InputLabel>
       <Select
+        // labelId="demo-select-small"
+        // id="demo-select-small"
         defaultValue={defaultValue}
-        style={{ width: 300 }}
+        value={stateVariable}
+        label={label}
         onChange={handler}
       >
-        {obj.map((option) => (
-          <Option key={option.key}>{option.value}</Option>
+        {obj.map((row) => (
+          <MenuItem value={row.key}>{row.text}</MenuItem>
         ))}
       </Select>
-    </>
+    </FormControl>
   );
 }
 
