@@ -19,28 +19,28 @@ function ElectricStationTab() {
 
   // Event handler
   const handleState1Change = useCallback((event) => {
-    setState1(event);
+    setState1(event.target.value);
   }, []);
   const handleState2Change = useCallback((event) => {
-    setState2(event);
+    setState2(event.target.value);
   }, []);
   const handlePort1Change = useCallback((event) => {
-    setPort1(event);
+    setPort1(event.target.value);
   }, []);
   const handlePort2Change = useCallback((event) => {
-    setPort2(event);
+    setPort2(event.target.value);
   }, []);
   const handleSpeed1Change = useCallback((event) => {
-    setSpeed1(event);
+    setSpeed1(event.target.value);
   }, []);
   const handleSpeed2Change = useCallback((event) => {
-    setSpeed2(event);
+    setSpeed2(event.target.value);
   }, []);
   const handleNetwork1Change = useCallback((event) => {
-    setNetwork1(event);
+    setNetwork1(event.target.value);
   }, []);
   const handleNetwork2Change = useCallback((event) => {
-    setNetwork2(event);
+    setNetwork2(event.target.value);
   }, []);
 
   // state variable for fetched data
@@ -177,7 +177,8 @@ function ElectricStationTab() {
               "state",
               "Select state_1:",
               "All states",
-              handleState1Change
+              handleState1Change,
+              state1
             )}
           </Card>
         </Col>
@@ -187,7 +188,8 @@ function ElectricStationTab() {
               "state",
               "Select state_2:",
               "All states",
-              handleState2Change
+              handleState2Change,
+              state2
             )}
           </Card>
         </Col>
@@ -203,13 +205,15 @@ function ElectricStationTab() {
                     "port",
                     "Select port_1:",
                     "All ports",
-                    handlePort1Change
+                    handlePort1Change,
+                    port1
                   )}
                   {SelectComponent(
                     "port",
                     "Select port_2:",
                     "All ports",
-                    handlePort2Change
+                    handlePort2Change,
+                    port2
                   )}
                 </Card>
               </Col>
@@ -234,7 +238,8 @@ function ElectricStationTab() {
                       "speed",
                       "Select charging speed 1:",
                       "All speeds",
-                      handleSpeed1Change
+                      handleSpeed1Change,
+                      speed1
                     )}
                   </div>
                   <div>
@@ -242,7 +247,8 @@ function ElectricStationTab() {
                       "speed",
                       "Select charging speed 2:",
                       "All speeds",
-                      handleSpeed2Change
+                      handleSpeed2Change,
+                      speed2
                     )}
                   </div>
                 </Card>
@@ -268,13 +274,15 @@ function ElectricStationTab() {
                       "network",
                       "Select network 1:",
                       "All networks",
-                      handleNetwork1Change
+                      handleNetwork1Change,
+                      network1
                     )}
                     {SelectComponent(
                       "network",
                       "Select network 2:",
                       "All networks",
-                      handleNetwork2Change
+                      handleNetwork2Change,
+                      network2
                     )}
                   </div>
                 </Card>

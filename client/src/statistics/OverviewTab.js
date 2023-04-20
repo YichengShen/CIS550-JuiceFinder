@@ -1,32 +1,31 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { Card, Col, Row } from "antd";
-
+import { Box, Container, Grid, Typography } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import SelectComponent from "./SelectComponent";
 import * as plt from "./Plotting";
 import serverConfig from "../config.json";
 
 function OverviewTab() {
-  // State variable for station type select menu
+  // use theme for this page
+  const theme = useTheme();
 
+  // State variable for station type select menu
   const [stationType, setStationType] = useState("All");
   const [vehicleType, setVehicleType] = useState("All");
 
   // Event handler
-
   const handleStationTypeChange = useCallback((event) => {
-    setStationType(event);
+    setStationType(event.target.value);
   }, []);
   const handleVehicleTypeChange = useCallback((event) => {
-    setVehicleType(event);
+    setVehicleType(event.target.value);
   }, []);
 
   // State variable for fetched data
-
   const [afsByTypeStateData, setAfsByTypeStateData] = useState([]);
   const [vehicleByTypeStateData, setVehicleByTypeStateData] = useState([]);
 
   // Fetcher for Statistics page
-
   /* #3 
     Route: /stats/overview/afsByTypeState
     Description: Returns the AFS station count aggregate by type and state, order by numStations(descending)
@@ -94,66 +93,81 @@ function OverviewTab() {
   }, [vehicleType]);
 
   return (
-    <Card>
-      <Row>
-        <Col span={24}>
-          <Card title="🏅 Alternating fueling resources percentages and distribution in US">
-            <Row>
-              <Col span={6}>
-                <Card>{plt.afsByTypePie()}</Card>
-              </Col>
-              <Col span={18}>
-                <Card>{plt.afsByStateMap()}</Card>
-              </Col>
-            </Row>
-          </Card>
-        </Col>
-      </Row>
+    <>
+      <Box
+        sx={{
+          backgroundColor: theme.palette.background.default,
+          minHeight: "100vh",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <Typography variant="h6" sx={{ color: theme.palette.primary.main }}>
+              🏅 Alternating fueling resources percentages and distribution in
+              US
+            </Typography>
+          </Grid>
+          <Grid item xs={4}>
+            <Container>{plt.afsByTypePie()}</Container>
+          </Grid>
+          <Grid item xs={8}>
+            <Container>{plt.afsByStateMap()}</Container>
+          </Grid>
+        </Grid>
+      </Box>
 
-      <Row>
-        <Col span={24}>
-          <Card title="🏅 Alternative fueling stations count by state in US">
-            <Row>
-              <Col span={6}>
-                <Card>
-                  {SelectComponent(
-                    "stationType",
-                    "Select AFS station type:",
-                    "All station types",
-                    handleStationTypeChange
-                  )}
-                </Card>
-              </Col>
-              <Col span={18}>
-                <Card>{plt.afsByTypeStateBar(afsByTypeStateData)}</Card>
-              </Col>
-            </Row>
-          </Card>
-        </Col>
-      </Row>
+      <Box sx={{ flexGrow: 1 }}>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <Typography variant="h6" sx={{ color: theme.palette.primary.main }}>
+              🏅 Alternative fueling stations count by state in US
+            </Typography>
+          </Grid>
+          <Grid item xs={3}>
+            <Container>
+              {SelectComponent(
+                "stationType",
+                "Select AFS station type:",
+                "All station types",
+                handleStationTypeChange,
+                stationType
+              )}
+            </Container>
+          </Grid>
+          <Grid item xs={9}>
+            <Container>{plt.afsByTypeStateBar(afsByTypeStateData)}</Container>
+          </Grid>
+        </Grid>
+      </Box>
 
-      <Row>
-        <Col span={24}>
-          <Card title="🏅 Light-duty vehicle registration count by state in US">
-            <Row>
-              <Col span={6}>
-                <Card>
-                  {SelectComponent(
-                    "vehicleType",
-                    "Select light-duty vehicle type:",
-                    "All vehicle types",
-                    handleVehicleTypeChange
-                  )}
-                </Card>
-              </Col>
-              <Col span={18}>
-                <Card>{plt.vehicleByTypeStateBar(vehicleByTypeStateData)}</Card>
-              </Col>
-            </Row>
-          </Card>
-        </Col>
-      </Row>
-    </Card>
+      <Box sx={{ flexGrow: 1 }}>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <Typography variant="h6" sx={{ color: theme.palette.primary.main }}>
+              🏅 Light-duty vehicle registration count by state in US
+            </Typography>
+          </Grid>
+          <Grid item xs={3}>
+            <Container>
+              {SelectComponent(
+                "vehicleType",
+                "Select light-duty vehicle type:",
+                "All vehicle types",
+                handleVehicleTypeChange,
+                vehicleType
+              )}
+            </Container>
+          </Grid>
+          <Grid item xs={9}>
+            <Container>
+              {plt.vehicleByTypeStateBar(vehicleByTypeStateData)}
+            </Container>
+          </Grid>
+        </Grid>
+      </Box>
+    </>
   );
 }
 
