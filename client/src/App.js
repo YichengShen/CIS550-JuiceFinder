@@ -24,7 +24,10 @@ function App({ toggleTheme }) {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/map" element={<Map />} />
-          <Route path="/statistics" element={<Statistics />} />
+          <Route
+            path="/statistics"
+            element={<Statistics toggleTheme={toggleTheme} />}
+          />
           <Route
             path="/settings"
             element={
