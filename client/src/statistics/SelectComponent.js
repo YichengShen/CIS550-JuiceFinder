@@ -1,8 +1,6 @@
-// import { Select } from "antd";
 import * as React from "react";
 import { Select, FormControl, MenuItem, InputLabel } from "@mui/material";
-/* Set up our drop-down menus */
-// const { Option } = Select;
+import { useTheme } from "@mui/material/styles";
 
 const stateOptions = [
   { key: "All", text: "All states" },
@@ -142,7 +140,7 @@ const network = [
 // map an array to dictionary
 // const networkOptions = Object.fromEntries(network.map(x => {"key":x, "value":x}));
 const networkOptions = [];
-networkOptions[0] = { key: "All", text: "All" };
+networkOptions[0] = { key: "All", text: "All networks" };
 
 function arrToDict(item, index) {
   networkOptions[index + 1] = { key: item, text: item };
@@ -151,6 +149,9 @@ function arrToDict(item, index) {
 network.sort().forEach(arrToDict);
 
 function SelectComponent(type, label, defaultValue, handler, stateVariable) {
+  // use theme for this page
+  const theme = useTheme();
+  // loaded menu options based on given type
   let obj = [];
   if (type === "port") {
     obj = portOptions;
@@ -175,9 +176,15 @@ function SelectComponent(type, label, defaultValue, handler, stateVariable) {
         value={stateVariable}
         label={label}
         onChange={handler}
+        sx={{
+          backgroundColor: theme.palette.background.default,
+          color: theme.palette.primary.main,
+        }}
       >
         {obj.map((row) => (
-          <MenuItem value={row.key}>{row.text}</MenuItem>
+          <MenuItem value={row.key} color={theme.palette.background.default}>
+            {row.text}
+          </MenuItem>
         ))}
       </Select>
     </FormControl>
