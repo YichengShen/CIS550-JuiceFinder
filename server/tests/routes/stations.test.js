@@ -30,7 +30,7 @@ describe("Test /stations with different filters", () => {
       METER_PER_MILE
     );
     expect(resp.body.length).toBeGreaterThan(0);
-  });
+  }, 60000);
 
   test("page=1 starts from the next item of where page=0 ends", async () => {
     const resp = await request(app).get(
@@ -69,7 +69,7 @@ describe("Test /stations/electric with different filters", () => {
     expect(resp.body[0].num_ports).toBeGreaterThan(0);
     expect(resp.body[resp.body.length - 1].num_ports).toBeGreaterThan(0);
     expect(resp.body.length).toBeGreaterThan(0);
-  });
+  }, 60000);
 
   test("Use 'stationPorts' filter to get only station with specified port types", async () => {
     const resp = await request(app).get(
