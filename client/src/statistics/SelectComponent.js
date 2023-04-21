@@ -182,7 +182,11 @@ function SelectComponent(type, label, defaultValue, handler, stateVariable) {
         }}
       >
         {obj.map((row) => (
-          <MenuItem value={row.key} color={theme.palette.background.default}>
+          <MenuItem
+            key={row.key}
+            value={row.key}
+            color={theme.palette.background.default}
+          >
             {row.text}
           </MenuItem>
         ))}
