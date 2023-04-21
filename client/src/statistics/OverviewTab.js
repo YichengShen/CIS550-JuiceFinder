@@ -104,7 +104,11 @@ function OverviewTab() {
       >
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <Typography variant="h6" sx={{ color: theme.palette.primary.main }}>
+            <Typography
+              component="div"
+              variant="h6"
+              sx={{ color: theme.palette.primary.main }}
+            >
               🏅 Alternating fueling resources percentages and distribution in
               US
             </Typography>
@@ -121,7 +125,11 @@ function OverviewTab() {
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <Typography variant="h6" sx={{ color: theme.palette.primary.main }}>
+            <Typography
+              component="div"
+              variant="h6"
+              sx={{ color: theme.palette.primary.main }}
+            >
               🏅 Alternative fueling stations count by state in US
             </Typography>
           </Grid>
@@ -145,7 +153,11 @@ function OverviewTab() {
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <Typography variant="h6" sx={{ color: theme.palette.primary.main }}>
+            <Typography
+              component="div"
+              variant="h6"
+              sx={{ color: theme.palette.primary.main }}
+            >
               🏅 Light-duty vehicle registration count by state in US
             </Typography>
           </Grid>

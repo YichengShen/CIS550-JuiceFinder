@@ -22,9 +22,17 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
+        <Typography
+          component="div"
+          sx={{
+            padding: 3,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "left",
+          }}
+        >
+          {children}
+        </Typography>
       )}
     </div>
   );
@@ -60,7 +68,6 @@ function Statistics({ toggleTheme }) {
     <Box
       sx={{
         backgroundColor: theme.palette.background.default,
-        // minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
       }}
@@ -75,14 +82,33 @@ function Statistics({ toggleTheme }) {
           justifyContent: "space-between",
         }}
       >
-        <Typography variant="h3" sx={{ color: theme.palette.primary.main }}>
+        <Typography
+          variant="h3"
+          sx={{
+            backgroundColor: theme.palette.background.default,
+            color: theme.palette.primary.main,
+          }}
+        >
           Statistics
         </Typography>
-        <Button variant="outlined" color="primary" onClick={toggleTheme}>
+        <Button
+          variant="outlined"
+          color="primary"
+          onClick={toggleTheme}
+          sx={{
+            backgroundColor: theme.palette.background.default,
+            color: theme.palette.primary.main,
+          }}
+        >
           Light/Dark
         </Button>
       </Box>
-      <Box sx={{ borderBottom: 1, borderColor: theme.palette.secondary.main }}>
+      <Box
+        sx={{
+          borderBottom: 1,
+          borderColor: theme.palette.secondary.main,
+        }}
+      >
         <Tabs
           value={value}
           onChange={handleChange}
@@ -92,17 +118,26 @@ function Statistics({ toggleTheme }) {
           <Tab
             label="AFS Resources Overview"
             {...a11yProps(0)}
-            sx={{ color: theme.palette.primary.main }}
+            sx={{
+              backgroundColor: theme.palette.background.default,
+              color: theme.palette.primary.main,
+            }}
           />
           <Tab
             label="Electric Charging Stations"
             {...a11yProps(1)}
-            sx={{ color: theme.palette.primary.main }}
+            sx={{
+              backgroundColor: theme.palette.background.default,
+              color: theme.palette.primary.main,
+            }}
           />
           <Tab
             label="EV Friendliness"
             {...a11yProps(2)}
-            sx={{ color: theme.palette.primary.main }}
+            sx={{
+              backgroundColor: theme.palette.background.default,
+              color: theme.palette.primary.main,
+            }}
           />
         </Tabs>
       </Box>
