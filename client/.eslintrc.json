@@ -23,6 +23,7 @@
       }
     ],
     "react/react-in-jsx-scope": "off",
+    "prettier/prettier": 0,
     "no-console": ["warn", { "allow": ["warn", "error"] }]
   }
 }
