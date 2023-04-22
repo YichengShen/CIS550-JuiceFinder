@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Box } from "@mui/material";
 import Map from "./Map";
-import MapInput from "./MapInput";
+import InputTabs from "./InputTabs";
 
 export default function HomePage() {
   // eslint-disable-next-line no-unused-vars
@@ -14,19 +14,27 @@ export default function HomePage() {
   const [zip, setZip] = useState("");
   const [streetAddress, setStreetAddress] = useState("");
   const [maxDistance, setMaxDistance] = useState(1);
-  const [brand, setBrand] = useState("");
-  const [model, setModel] = useState("");
-  const [releaseYear, setReleaseYear] = useState("");
-  const [variant, setVariant] = useState("");
   const [chargingLevels, setChargingLevels] = useState([]);
   const [preferredStationPorts, setPreferredStationPorts] = useState([]);
   const [adapters, setAdapters] = useState([]);
 
   return (
     <div style={{ height: "100vh", width: "100vw" }}>
-      <Box sx={{ display: "grid", gridTemplateColumns: "1fr 4fr" }}>
-        <Box sx={{ mx: 1 }}>
-          <MapInput
+      <Box
+        sx={{
+          display: "grid",
+          gridTemplateColumns: "1fr 4fr",
+          height: "100%",
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "flex-start",
+            justifyContent: "center",
+          }}
+        >
+          <InputTabs
             state={state}
             setState={setState}
             city={city}
@@ -37,14 +45,6 @@ export default function HomePage() {
             setStreetAddress={setStreetAddress}
             maxDistance={maxDistance}
             setMaxDistance={setMaxDistance}
-            brand={brand}
-            setBrand={setBrand}
-            model={model}
-            setModel={setModel}
-            releaseYear={releaseYear}
-            setReleaseYear={setReleaseYear}
-            variant={variant}
-            setVariant={setVariant}
             chargingLevels={chargingLevels}
             setChargingLevels={setChargingLevels}
             preferredStationPorts={preferredStationPorts}
