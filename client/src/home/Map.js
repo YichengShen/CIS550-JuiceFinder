@@ -16,7 +16,7 @@ export default function Map({
   stations,
   setStations,
 }) {
-  // eslint-disable-next-line no-unused-vars
+  // console.log(curLocation);
   const [viewport, setViewport] = useState({
     zoom: 11,
     ...curLocation,
@@ -100,8 +100,8 @@ Map.propTypes = {
     PropTypes.shape({
       sid: PropTypes.number.isRequired,
       location: PropTypes.shape({
-        longitude: PropTypes.number.isRequired,
-        latitude: PropTypes.number.isRequired,
+        x: PropTypes.number.isRequired,
+        y: PropTypes.number.isRequired,
       }),
     })
   ).isRequired,

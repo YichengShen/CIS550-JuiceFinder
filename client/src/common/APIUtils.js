@@ -32,3 +32,16 @@ export const getCoordinatesFromAddress = async (address) => {
     return {};
   }
 };
+
+export const getPath = async (start, end) => {
+  try {
+    const response = await axios.get(
+      `http://${config.server_host}:${config.server_port}/paths` +
+        `${start.longitude}/${start.latitude}/${end.longitude}/${end.latitude}`
+    );
+    return response.data;
+  } catch (err) {
+    console.error(err);
+    return [];
+  }
+};

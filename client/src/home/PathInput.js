@@ -17,8 +17,10 @@ import chargingLevelArr from "../assets/charging_levels.json";
 import stationPortArr from "../assets/port_types.json";
 
 export default function PathInput({
-  streetAddress,
-  setStreetAddress,
+  startAddress,
+  setStartAddress,
+  endAddress,
+  setEndAddress,
   maxDistance,
   setMaxDistance,
   chargingLevels,
@@ -27,10 +29,11 @@ export default function PathInput({
   setPreferredStationPorts,
   adapters,
   setAdapters,
+  handlePathInputSubmit,
 }) {
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log("submitted");
+    handlePathInputSubmit();
   };
   return (
     <form onSubmit={handleSubmit}>
@@ -49,16 +52,18 @@ export default function PathInput({
             variant="outlined"
             color="secondary"
             label="Starting Address"
-            value={streetAddress}
-            onChange={(e) => setStreetAddress(e.target.value)}
+            placeholder="123 Main St, San Francisco, CA 94105"
+            value={startAddress}
+            onChange={(e) => setStartAddress(e.target.value)}
           />
           <TextField
             type="text"
             variant="outlined"
             color="secondary"
             label="Ending Address"
-            value={streetAddress}
-            onChange={(e) => setStreetAddress(e.target.value)}
+            placeholder="123 Main St, San Francisco, CA 94105"
+            value={endAddress}
+            onChange={(e) => setEndAddress(e.target.value)}
           />
           <FormControl>
             <FormLabel id="distance-radio-buttons-group-label">
@@ -137,7 +142,11 @@ export default function PathInput({
           />
         </Box>
         <Box>
-          <Button variant="contained" sx={{ py: 1, my: 3, width: "100%" }}>
+          <Button
+            variant="contained"
+            sx={{ py: 1, my: 3, width: "100%" }}
+            onClick={handleSubmit}
+          >
             Show My Juice Track
           </Button>
         </Box>
@@ -147,14 +156,10 @@ export default function PathInput({
 }
 
 PathInput.propTypes = {
-  state: PropTypes.string.isRequired,
-  setState: PropTypes.func.isRequired,
-  city: PropTypes.string.isRequired,
-  setCity: PropTypes.func.isRequired,
-  zip: PropTypes.string.isRequired,
-  setZip: PropTypes.func.isRequired,
-  streetAddress: PropTypes.string.isRequired,
-  setStreetAddress: PropTypes.func.isRequired,
+  startAddress: PropTypes.string.isRequired,
+  setStartAddress: PropTypes.func.isRequired,
+  endAddress: PropTypes.string.isRequired,
+  setEndAddress: PropTypes.func.isRequired,
   maxDistance: PropTypes.number.isRequired,
   setMaxDistance: PropTypes.func.isRequired,
   chargingLevels: PropTypes.arrayOf(PropTypes.string).isRequired,
@@ -168,4 +173,5 @@ PathInput.propTypes = {
     })
   ).isRequired,
   setAdapters: PropTypes.func.isRequired,
+  handlePathInputSubmit: PropTypes.func.isRequired,
 };

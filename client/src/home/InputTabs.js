@@ -48,6 +48,11 @@ export default function InputTabs({
   adapters,
   setAdapters,
   handleStationInputSubmit,
+  startAddress,
+  setStartAddress,
+  endAddress,
+  setEndAddress,
+  handlePathInputSubmit,
 }) {
   const [value, setValue] = useState(0);
 
@@ -92,7 +97,21 @@ export default function InputTabs({
         />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <PathInput />
+        <PathInput
+          startAddress={startAddress}
+          setStartAddress={setStartAddress}
+          endAddress={endAddress}
+          setEndAddress={setEndAddress}
+          maxDistance={maxDistance}
+          setMaxDistance={setMaxDistance}
+          chargingLevels={chargingLevels}
+          setChargingLevels={setChargingLevels}
+          preferredStationPorts={preferredStationPorts}
+          setPreferredStationPorts={setPreferredStationPorts}
+          adapters={adapters}
+          setAdapters={setAdapters}
+          handlePathInputSubmit={handlePathInputSubmit}
+        />
       </TabPanel>
     </Box>
   );
@@ -121,4 +140,9 @@ InputTabs.propTypes = {
   ).isRequired,
   setAdapters: PropTypes.func.isRequired,
   handleStationInputSubmit: PropTypes.func.isRequired,
+  startAddress: PropTypes.string.isRequired,
+  setStartAddress: PropTypes.func.isRequired,
+  endAddress: PropTypes.string.isRequired,
+  setEndAddress: PropTypes.func.isRequired,
+  handlePathInputSubmit: PropTypes.func.isRequired,
 };

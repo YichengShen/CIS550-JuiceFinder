@@ -5,14 +5,17 @@ import InputTabs from "./InputTabs";
 import {
   getNearbyStations,
   getCoordinatesFromAddress,
+  getPath,
 } from "../common/APIUtils";
 
 export default function HomePage() {
-  // eslint-disable-next-line no-unused-vars
-  const [curLocation, setCurLocation] = useState({
+  const DEFAULT_LOCATION = {
     latitude: 39.9524657202615,
     longitude: -75.19028570489878,
-  });
+  };
+  const [curLocation, setCurLocation] = useState(DEFAULT_LOCATION);
+
+  // Props for StationInput
   const [state, setState] = useState("");
   const [city, setCity] = useState("");
   const [zip, setZip] = useState("");
@@ -22,6 +25,11 @@ export default function HomePage() {
   const [preferredStationPorts, setPreferredStationPorts] = useState([]);
   const [adapters, setAdapters] = useState([]);
 
+  // Props for PathInput
+  const [startAddress, setStartAddress] = useState("");
+  const [endAddress, setEndAddress] = useState("");
+
+  // Props for Map
   const [stations, setStations] = useState([]);
   const [path, setPath] = useState([]);
 
@@ -31,12 +39,22 @@ export default function HomePage() {
     });
   }, [curLocation]);
 
-  const handleStationInputSubmit = () => {
+  const handleStationInputSubmit = async () => {
     getCoordinatesFromAddress(`${streetAddress} ${state} ${city} ${zip}`).then(
       (response) => {
         setCurLocation(response);
       }
     );
+  };
+
+  const handlePathInputSubmit = async () => {
+    const [startCoordinates, endCoordinates] = await Promise.all([
+      getCoordinatesFromAddress(startAddress),
+      getCoordinatesFromAddress(endAddress),
+    ]);
+    getPath(startCoordinates, endCoordinates).then((response) => {
+      setPath(response);
+    });
   };
 
   return (
@@ -73,6 +91,11 @@ export default function HomePage() {
             adapters={adapters}
             setAdapters={setAdapters}
             handleStationInputSubmit={handleStationInputSubmit}
+            startAddress={startAddress}
+            setStartAddress={setStartAddress}
+            endAddress={endAddress}
+            setEndAddress={setEndAddress}
+            handlePathInputSubmit={handlePathInputSubmit}
           />
         </Box>
         <Box>
