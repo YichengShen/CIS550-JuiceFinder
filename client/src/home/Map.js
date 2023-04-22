@@ -4,20 +4,23 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import PropTypes from "prop-types";
-import { getNearbyStations } from "../common/APIUtils";
 
 // eslint-disable-next-line no-unused-vars
 import pin from "../assets/pin.svg";
 
 const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
 
-export default function Map({ curLocation, maxDistance }) {
+export default function Map({
+  curLocation,
+  setCurLocation,
+  stations,
+  setStations,
+}) {
   // eslint-disable-next-line no-unused-vars
   const [viewport, setViewport] = useState({
     zoom: 11,
     ...curLocation,
   });
-  const [stations, setStations] = useState([]);
   // eslint-disable-next-line no-unused-vars
   // const [zoom, setZoom] = useState(14);
   const mapRef = useRef();
@@ -35,13 +38,6 @@ export default function Map({ curLocation, maxDistance }) {
       ...geocoderDefaultOverrides,
     });
   }, []);
-
-  useEffect(() => {
-    getNearbyStations(curLocation, maxDistance).then((response) => {
-      // console.log(response);
-      setStations(response);
-    });
-  }, [curLocation, maxDistance]);
 
   return (
     <MapGL
@@ -99,7 +95,17 @@ Map.propTypes = {
     latitude: PropTypes.number,
     longitude: PropTypes.number,
   }),
-  maxDistance: PropTypes.number.isRequired,
+  setCurLocation: PropTypes.func.isRequired,
+  stations: PropTypes.arrayOf(
+    PropTypes.shape({
+      sid: PropTypes.number.isRequired,
+      location: PropTypes.shape({
+        longitude: PropTypes.number.isRequired,
+        latitude: PropTypes.number.isRequired,
+      }),
+    })
+  ).isRequired,
+  setStations: PropTypes.func.isRequired,
 };
 
 Map.defaultProps = { curLocation: {} };

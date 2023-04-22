@@ -10,6 +10,7 @@ import {
   FormLabel,
   Radio,
   RadioGroup,
+  Button,
 } from "@mui/material";
 
 import chargingLevelArr from "../assets/charging_levels.json";
@@ -55,7 +56,7 @@ export default function PathInput({
             type="text"
             variant="outlined"
             color="secondary"
-            label="Destination Address"
+            label="Ending Address"
             value={streetAddress}
             onChange={(e) => setStreetAddress(e.target.value)}
           />
@@ -97,12 +98,7 @@ export default function PathInput({
             filterSelectedOptions
             onChange={(e, value) => setChargingLevels(value)}
             renderInput={(params) => (
-              <TextField
-                // eslint-disable-next-line react/jsx-props-no-spreading
-                {...params}
-                label="Charging Level"
-                // placeholder="Favorites"
-              />
+              <TextField {...params} label="Charging Level" />
             )}
           />
           <Autocomplete
@@ -135,15 +131,15 @@ export default function PathInput({
             value={adapters}
             filterSelectedOptions
             onChange={(e, value) => setAdapters(value)}
-            // eslint-disable-next-line no-unused-vars
             renderInput={(params) => (
-              <TextField
-                // eslint-disable-next-line react/jsx-props-no-spreading
-                {...params}
-                label="Adapters at Hand"
-              />
+              <TextField {...params} label="Adapters at Hand" />
             )}
           />
+        </Box>
+        <Box>
+          <Button variant="contained" sx={{ py: 1, my: 3, width: "100%" }}>
+            Show My Juice Track
+          </Button>
         </Box>
       </Box>
     </form>

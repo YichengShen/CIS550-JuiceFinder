@@ -30,7 +30,25 @@ function a11yProps(index) {
   };
 }
 
-export default function InputTabs() {
+export default function InputTabs({
+  state,
+  setState,
+  city,
+  setCity,
+  zip,
+  setZip,
+  streetAddress,
+  setStreetAddress,
+  maxDistance,
+  setMaxDistance,
+  chargingLevels,
+  setChargingLevels,
+  preferredStationPorts,
+  setPreferredStationPorts,
+  adapters,
+  setAdapters,
+  handleStationInputSubmit,
+}) {
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
@@ -53,7 +71,25 @@ export default function InputTabs() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <StationInput />
+        <StationInput
+          state={state}
+          setState={setState}
+          city={city}
+          setCity={setCity}
+          zip={zip}
+          setZip={setZip}
+          streetAddress={streetAddress}
+          setStreetAddress={setStreetAddress}
+          maxDistance={maxDistance}
+          setMaxDistance={setMaxDistance}
+          chargingLevels={chargingLevels}
+          setChargingLevels={setChargingLevels}
+          preferredStationPorts={preferredStationPorts}
+          setPreferredStationPorts={setPreferredStationPorts}
+          adapters={adapters}
+          setAdapters={setAdapters}
+          handleStationInputSubmit={handleStationInputSubmit}
+        />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <PathInput />
@@ -84,4 +120,5 @@ InputTabs.propTypes = {
     })
   ).isRequired,
   setAdapters: PropTypes.func.isRequired,
+  handleStationInputSubmit: PropTypes.func.isRequired,
 };

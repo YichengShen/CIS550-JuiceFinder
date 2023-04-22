@@ -11,6 +11,7 @@ import {
   FormLabel,
   Radio,
   RadioGroup,
+  Button,
 } from "@mui/material";
 
 import stateDict from "../assets/states_hash.json";
@@ -34,10 +35,11 @@ export default function StationInput({
   setPreferredStationPorts,
   adapters,
   setAdapters,
+  handleStationInputSubmit,
 }) {
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log("submitted");
+    handleStationInputSubmit();
   };
   return (
     <form onSubmit={handleSubmit}>
@@ -128,12 +130,7 @@ export default function StationInput({
             filterSelectedOptions
             onChange={(e, value) => setChargingLevels(value)}
             renderInput={(params) => (
-              <TextField
-                // eslint-disable-next-line react/jsx-props-no-spreading
-                {...params}
-                label="Charging Level"
-                // placeholder="Favorites"
-              />
+              <TextField {...params} label="Charging Level" />
             )}
           />
           <Autocomplete
@@ -146,11 +143,7 @@ export default function StationInput({
             filterSelectedOptions
             onChange={(e, value) => setPreferredStationPorts(value)}
             renderInput={(params) => (
-              <TextField
-                // eslint-disable-next-line react/jsx-props-no-spreading
-                {...params}
-                label="Station Port Type(s)"
-              />
+              <TextField {...params} label="Station Port Type(s)" />
             )}
           />
           <Autocomplete
@@ -168,13 +161,18 @@ export default function StationInput({
             onChange={(e, value) => setAdapters(value)}
             // eslint-disable-next-line no-unused-vars
             renderInput={(params) => (
-              <TextField
-                // eslint-disable-next-line react/jsx-props-no-spreading
-                {...params}
-                label="Adapters at Hand"
-              />
+              <TextField {...params} label="Adapters at Hand" />
             )}
           />
+        </Box>
+        <Box>
+          <Button
+            variant="contained"
+            sx={{ py: 1, my: 3, width: "100%" }}
+            onClick={handleSubmit}
+          >
+            Find Juice
+          </Button>
         </Box>
       </Box>
     </form>
@@ -203,4 +201,5 @@ StationInput.propTypes = {
     })
   ).isRequired,
   setAdapters: PropTypes.func.isRequired,
+  handleStationInputSubmit: PropTypes.func.isRequired,
 };

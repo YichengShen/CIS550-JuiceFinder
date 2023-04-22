@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import Map from "./Map";
 import InputTabs from "./InputTabs";
+import {
+  getNearbyStations,
+  getCoordinatesFromAddress,
+} from "../common/APIUtils";
 
 export default function HomePage() {
   // eslint-disable-next-line no-unused-vars
@@ -17,6 +21,23 @@ export default function HomePage() {
   const [chargingLevels, setChargingLevels] = useState([]);
   const [preferredStationPorts, setPreferredStationPorts] = useState([]);
   const [adapters, setAdapters] = useState([]);
+
+  const [stations, setStations] = useState([]);
+  const [path, setPath] = useState([]);
+
+  useEffect(() => {
+    getNearbyStations(curLocation, maxDistance).then((response) => {
+      setStations(response);
+    });
+  }, [curLocation]);
+
+  const handleStationInputSubmit = () => {
+    getCoordinatesFromAddress(`${streetAddress} ${state} ${city} ${zip}`).then(
+      (response) => {
+        setCurLocation(response);
+      }
+    );
+  };
 
   return (
     <div style={{ height: "100vh", width: "100vw" }}>
@@ -51,19 +72,17 @@ export default function HomePage() {
             setPreferredStationPorts={setPreferredStationPorts}
             adapters={adapters}
             setAdapters={setAdapters}
+            handleStationInputSubmit={handleStationInputSubmit}
           />
         </Box>
         <Box>
           <Map
             curLocation={curLocation}
-            state={state}
-            city={city}
-            zip={zip}
-            streetAddress={streetAddress}
-            maxDistance={maxDistance}
-            chargingLevel={chargingLevels}
-            stationPorts={preferredStationPorts}
-            adapters={adapters}
+            setCurLocation={setCurLocation}
+            stations={stations}
+            setStations={setStations}
+            path={path}
+            setPath={setPath}
           />
         </Box>
       </Box>

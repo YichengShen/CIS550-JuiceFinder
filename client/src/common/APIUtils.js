@@ -20,3 +20,15 @@ export const getNearbyStations = async (location, maxDistance) => {
     return [];
   }
 };
+
+export const getCoordinatesFromAddress = async (address) => {
+  try {
+    const response = await axios.get(
+      `http://${config.server_host}:${config.server_port}/paths/geocode/${address}`
+    );
+    return response.data;
+  } catch (err) {
+    console.error(err);
+    return {};
+  }
+};
