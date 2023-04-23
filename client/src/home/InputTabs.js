@@ -47,6 +47,10 @@ export default function InputTabs({
   setPreferredStationPorts,
   adapters,
   setAdapters,
+  stationFormError,
+  setStationFormError,
+  stationFormErrorText,
+  setStationFormErrorText,
   handleStationInputSubmit,
   startAddress,
   setStartAddress,
@@ -93,6 +97,10 @@ export default function InputTabs({
           setPreferredStationPorts={setPreferredStationPorts}
           adapters={adapters}
           setAdapters={setAdapters}
+          formError={stationFormError}
+          setFormError={setStationFormError}
+          formErrorText={stationFormErrorText}
+          setFormErrorText={setStationFormErrorText}
           handleStationInputSubmit={handleStationInputSubmit}
         />
       </TabPanel>
@@ -139,6 +147,10 @@ InputTabs.propTypes = {
     })
   ).isRequired,
   setAdapters: PropTypes.func.isRequired,
+  stationFormError: PropTypes.bool.isRequired,
+  setStationFormError: PropTypes.func.isRequired,
+  stationFormErrorText: PropTypes.string.isRequired,
+  setStationFormErrorText: PropTypes.func.isRequired,
   handleStationInputSubmit: PropTypes.func.isRequired,
   startAddress: PropTypes.string.isRequired,
   setStartAddress: PropTypes.func.isRequired,

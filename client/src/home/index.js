@@ -24,6 +24,8 @@ export default function HomePage() {
   const [chargingLevels, setChargingLevels] = useState([]);
   const [preferredStationPorts, setPreferredStationPorts] = useState([]);
   const [adapters, setAdapters] = useState([]);
+  const [stationFormError, setStationFormError] = useState(false);
+  const [stationFormErrorText, setStationFormErrorText] = useState("");
 
   // Props for PathInput
   const [startAddress, setStartAddress] = useState("");
@@ -42,7 +44,15 @@ export default function HomePage() {
   const handleStationInputSubmit = async () => {
     getCoordinatesFromAddress(`${streetAddress} ${state} ${city} ${zip}`).then(
       (response) => {
-        setCurLocation(response);
+        if (response && response.latitude && response.longitude) {
+          setCurLocation(response);
+          setStations([]);
+        } else {
+          setStationFormError(true);
+          setStationFormErrorText(
+            "Invalid address. Please try again with a valid address."
+          );
+        }
       }
     );
   };
@@ -95,6 +105,10 @@ export default function HomePage() {
             setStartAddress={setStartAddress}
             endAddress={endAddress}
             setEndAddress={setEndAddress}
+            stationFormError={stationFormError}
+            setStationFormError={setStationFormError}
+            stationFormErrorText={stationFormErrorText}
+            setStationFormErrorText={setStationFormErrorText}
             handlePathInputSubmit={handlePathInputSubmit}
           />
         </Box>
