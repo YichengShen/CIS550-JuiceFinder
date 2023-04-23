@@ -93,17 +93,19 @@ function OverviewTab() {
   }, [vehicleType]);
 
   return (
-    <>
-      <Box
-        sx={{
-          backgroundColor: theme.palette.background.default,
-          minHeight: "100vh",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
+    <Box
+      sx={{
+        backgroundColor: theme.palette.background.default,
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      <Box>
+        {" "}
+        {/* sx={{ flexGrow: 1 }} */}
+        <Grid container>
+          <Grid item xs={12} padding={2}>
             <Typography
               component="div"
               variant="h6"
@@ -113,18 +115,21 @@ function OverviewTab() {
               US
             </Typography>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={3}>
             <Container>{plt.afsByTypePie()}</Container>
           </Grid>
           <Grid item xs={8}>
-            <Container>{plt.afsByStateMap()}</Container>
+            {plt.afsByStateMap()}
+          </Grid>
+          <Grid item xs={1}>
+            {plt.mapLegend()}
           </Grid>
         </Grid>
       </Box>
 
       <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
+        <Grid container>
+          <Grid item xs={12} padding={3}>
             <Typography
               component="div"
               variant="h6"
@@ -151,8 +156,8 @@ function OverviewTab() {
       </Box>
 
       <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
+        <Grid container>
+          <Grid item xs={12} padding={3}>
             <Typography
               component="div"
               variant="h6"
@@ -162,7 +167,7 @@ function OverviewTab() {
             </Typography>
           </Grid>
           <Grid item xs={3}>
-            <Container>
+            <Container paddingtop={3}>
               {SelectComponent(
                 "vehicleType",
                 "Select light-duty vehicle type:",
@@ -179,7 +184,7 @@ function OverviewTab() {
           </Grid>
         </Grid>
       </Box>
-    </>
+    </Box>
   );
 }
 
