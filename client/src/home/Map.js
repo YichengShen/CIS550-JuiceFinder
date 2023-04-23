@@ -62,7 +62,10 @@ export default function Map({
           <img
             src={pin}
             alt="pin"
-            style={{ transform: "translate(-50%, -85%)" }}
+            style={{
+              transform: "translate(-50%, -85%)",
+              filter: "hue-rotate(160deg) saturate(3)",
+            }}
           />
         </Marker>
       )}
