@@ -30,6 +30,8 @@ export default function HomePage() {
   // Props for PathInput
   const [startAddress, setStartAddress] = useState("");
   const [endAddress, setEndAddress] = useState("");
+  const [pathFormError, setPathFormError] = useState(false);
+  const [pathFormErrorText, setPathFormErrorText] = useState("");
 
   // Props for Map
   const [stations, setStations] = useState([]);
@@ -38,6 +40,12 @@ export default function HomePage() {
   useEffect(() => {
     getNearbyStations(curLocation, maxDistance).then((response) => {
       setStations(response);
+      if (!response || response.length === 0) {
+        setStationFormError(true);
+        setStationFormErrorText(
+          "No stations found within the specified distance and location. Please try again with a different distance or location."
+        );
+      }
     });
   }, [curLocation]);
 
@@ -62,9 +70,23 @@ export default function HomePage() {
       getCoordinatesFromAddress(startAddress),
       getCoordinatesFromAddress(endAddress),
     ]);
-    getPath(startCoordinates, endCoordinates).then((response) => {
-      setPath(response);
-    });
+    if (
+      startCoordinates &&
+      startCoordinates.latitude &&
+      startCoordinates.longitude &&
+      endCoordinates &&
+      endCoordinates.latitude &&
+      endCoordinates.longitude
+    ) {
+      getPath(startCoordinates, endCoordinates).then((response) => {
+        setPath(response);
+      });
+    } else {
+      setPathFormError(true);
+      setPathFormErrorText(
+        "Invalid address(es). Please try again with valid addresses."
+      );
+    }
   };
 
   return (
@@ -100,15 +122,19 @@ export default function HomePage() {
             setPreferredStationPorts={setPreferredStationPorts}
             adapters={adapters}
             setAdapters={setAdapters}
+            stationFormError={stationFormError}
+            setStationFormError={setStationFormError}
+            stationFormErrorText={stationFormErrorText}
+            setStationFormErrorText={setStationFormErrorText}
             handleStationInputSubmit={handleStationInputSubmit}
             startAddress={startAddress}
             setStartAddress={setStartAddress}
             endAddress={endAddress}
             setEndAddress={setEndAddress}
-            stationFormError={stationFormError}
-            setStationFormError={setStationFormError}
-            stationFormErrorText={stationFormErrorText}
-            setStationFormErrorText={setStationFormErrorText}
+            pathFormError={pathFormError}
+            setPathFormError={setPathFormError}
+            pathFormErrorText={pathFormErrorText}
+            setPathFormErrorText={setPathFormErrorText}
             handlePathInputSubmit={handlePathInputSubmit}
           />
         </Box>

@@ -8,6 +8,7 @@ import {
   FormControl,
   FormControlLabel,
   FormLabel,
+  FormHelperText,
   Radio,
   RadioGroup,
   Button,
@@ -29,11 +30,22 @@ export default function PathInput({
   setPreferredStationPorts,
   adapters,
   setAdapters,
+  formError,
+  setFormError,
+  formErrorText,
+  setFormErrorText,
   handlePathInputSubmit,
 }) {
   const handleSubmit = (e) => {
     e.preventDefault();
-    handlePathInputSubmit();
+
+    if (!startAddress || !endAddress) {
+      setFormError(true);
+      setFormErrorText("Please enter a starting and ending address.");
+    } else {
+      setFormError(false);
+      handlePathInputSubmit();
+    }
   };
   return (
     <form onSubmit={handleSubmit}>
@@ -46,45 +58,56 @@ export default function PathInput({
             },
           }}
         >
-          <h3>Locations</h3>
-          <TextField
-            type="text"
-            variant="outlined"
-            color="secondary"
-            label="Starting Address"
-            placeholder="123 Main St, San Francisco, CA 94105"
-            value={startAddress}
-            onChange={(e) => setStartAddress(e.target.value)}
-          />
-          <TextField
-            type="text"
-            variant="outlined"
-            color="secondary"
-            label="Ending Address"
-            placeholder="123 Main St, San Francisco, CA 94105"
-            value={endAddress}
-            onChange={(e) => setEndAddress(e.target.value)}
-          />
-          <FormControl>
-            <FormLabel id="distance-radio-buttons-group-label">
-              Max Distance
-            </FormLabel>
-            <RadioGroup
-              row
-              defaultValue={1}
-              value={maxDistance}
-              onChange={(e) => setMaxDistance(parseInt(e.target.value, 10))}
-              aria-labelledby="distance-radio-buttons-group-label"
-              name="distance-row-radio-buttons-group"
-            >
-              <FormControlLabel value={1} control={<Radio />} label="1 mile" />
-              <FormControlLabel value={5} control={<Radio />} label="5 miles" />
-              <FormControlLabel
-                value={10}
-                control={<Radio />}
-                label="10 miles"
-              />
-            </RadioGroup>
+          <FormControl error={formError} fullWidth>
+            <h3>Locations</h3>
+            <TextField
+              type="text"
+              variant="outlined"
+              color="secondary"
+              label="Starting Address"
+              placeholder="123 Main St, San Francisco, CA 94105"
+              value={startAddress}
+              onChange={(e) => setStartAddress(e.target.value)}
+            />
+            <TextField
+              type="text"
+              variant="outlined"
+              color="secondary"
+              label="Ending Address"
+              placeholder="123 Main St, San Francisco, CA 94105"
+              value={endAddress}
+              onChange={(e) => setEndAddress(e.target.value)}
+            />
+            {formError && <FormHelperText>{formErrorText}</FormHelperText>}
+            <FormControl>
+              <FormLabel id="distance-radio-buttons-group-label">
+                Max Distance
+              </FormLabel>
+              <RadioGroup
+                row
+                defaultValue={1}
+                value={maxDistance}
+                onChange={(e) => setMaxDistance(parseInt(e.target.value, 10))}
+                aria-labelledby="distance-radio-buttons-group-label"
+                name="distance-row-radio-buttons-group"
+              >
+                <FormControlLabel
+                  value={1}
+                  control={<Radio />}
+                  label="1 mile"
+                />
+                <FormControlLabel
+                  value={5}
+                  control={<Radio />}
+                  label="5 miles"
+                />
+                <FormControlLabel
+                  value={10}
+                  control={<Radio />}
+                  label="10 miles"
+                />
+              </RadioGroup>
+            </FormControl>
           </FormControl>
         </Box>
         <Box
@@ -116,11 +139,7 @@ export default function PathInput({
             filterSelectedOptions
             onChange={(e, value) => setPreferredStationPorts(value)}
             renderInput={(params) => (
-              <TextField
-                // eslint-disable-next-line react/jsx-props-no-spreading
-                {...params}
-                label="Station Port Type(s)"
-              />
+              <TextField {...params} label="Station Port Type(s)" />
             )}
           />
           <Autocomplete
@@ -173,5 +192,9 @@ PathInput.propTypes = {
     })
   ).isRequired,
   setAdapters: PropTypes.func.isRequired,
+  formError: PropTypes.bool.isRequired,
+  setFormError: PropTypes.func.isRequired,
+  formErrorText: PropTypes.string.isRequired,
+  setFormErrorText: PropTypes.func.isRequired,
   handlePathInputSubmit: PropTypes.func.isRequired,
 };

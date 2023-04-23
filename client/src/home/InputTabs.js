@@ -56,6 +56,10 @@ export default function InputTabs({
   setStartAddress,
   endAddress,
   setEndAddress,
+  pathFormError,
+  setPathFormError,
+  pathFormErrorText,
+  setPathFormErrorText,
   handlePathInputSubmit,
 }) {
   const [value, setValue] = useState(0);
@@ -118,6 +122,10 @@ export default function InputTabs({
           setPreferredStationPorts={setPreferredStationPorts}
           adapters={adapters}
           setAdapters={setAdapters}
+          formError={pathFormError}
+          setFormError={setPathFormError}
+          formErrorText={pathFormErrorText}
+          setFormErrorText={setPathFormErrorText}
           handlePathInputSubmit={handlePathInputSubmit}
         />
       </TabPanel>
@@ -156,5 +164,9 @@ InputTabs.propTypes = {
   setStartAddress: PropTypes.func.isRequired,
   endAddress: PropTypes.string.isRequired,
   setEndAddress: PropTypes.func.isRequired,
+  pathFormError: PropTypes.bool.isRequired,
+  setPathFormError: PropTypes.func.isRequired,
+  pathFormErrorText: PropTypes.string.isRequired,
+  setPathFormErrorText: PropTypes.func.isRequired,
   handlePathInputSubmit: PropTypes.func.isRequired,
 };
