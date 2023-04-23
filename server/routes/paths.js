@@ -2,6 +2,7 @@ const express = require("express");
 
 const router = express.Router();
 const bodyParser = require("body-parser");
+const simplify = require("simplify-js");
 const connection = require("../db");
 const { getWhereClause } = require("../services/stationService");
 const {
@@ -10,6 +11,20 @@ const {
 } = require("../services/locationService");
 
 router.use(bodyParser.json());
+
+function toMercator([longitude, latitude]) {
+  const R = 6378137; // Earth's radius in meters
+  const x = R * ((longitude * Math.PI) / 180);
+  const y = R * Math.log(Math.tan(((90 + latitude) * Math.PI) / 360));
+  return { x, y };
+}
+
+function fromMercator({ x, y }) {
+  const R = 6378137; // Earth's radius in meters
+  const longitude = x / ((R * Math.PI) / 180);
+  const latitude = (360 / Math.PI) * Math.atan(Math.exp(y / R)) - 90;
+  return [longitude, latitude];
+}
 
 // Route 1: GET /paths/geocode/:fullAddress
 router.get("/geocode/:fullAddress", async (req, res) => {
@@ -104,6 +119,7 @@ router.post("/nearbyStations", async (req, res) => {
 // Query parameters: maxDistMile, [attributes specified in getWhereClause]
 // Return {waypoints: <a waypoint list>, stations: <a list of {sid, longitude, latitude}>}
 router.get("/stationsNearPath/:startAddress/:destAddress", async (req, res) => {
+  const startTime = performance.now();
   // Get the coordinates of the start and destination addresses
   const { startAddress, destAddress } = req.params;
   const startPromise = getCoordinatesFromAddress(startAddress);
@@ -163,32 +179,37 @@ router.get("/stationsNearPath/:startAddress/:destAddress", async (req, res) => {
   // whereClause = "WHERE state = 'CA' AND city = 'San Francisco'"
   //               or an empty string if no constraints are given
 
-  // Handle the distance constraint along the path
-  const distConstraints = [];
-
-  // Filter waypoints to reduce the number of queries. Default step of 32 makes each pair of adjacent waypoints 2 miles apart.
-  const filteredWaypoints = waypoints.filter(
-    (_, index) => index % (req.query.filterFactor ?? 32) === 0
+  const cartesianWaypoints = waypoints.map(toMercator);
+  const simplifiedCartesianWaypoints = simplify(
+    cartesianWaypoints,
+    waypoints.length,
+    false
   );
-
-  filteredWaypoints.forEach((waypoint) => {
-    distConstraints.push(
-      `ST_Distance_Sphere(${stationLocationColName}, ST_SRID(ST_GEOMFROMTEXT('POINT(${
-        waypoint[0]
-      } ${waypoint[1]})'), 4326)) < ${maxDistMile * 1609.34}`
-    );
-  });
-  const distConstraintString = distConstraints.join(" OR ");
+  const simplifiedWaypoints = simplifiedCartesianWaypoints.map(fromMercator); // [[lng,lat]...]
+  console.log(
+    `Waypoints: ${waypoints.length} -> ${simplifiedWaypoints.length} points\n`
+  );
+  const linestringArr = simplifiedWaypoints
+    .map((waypoint) => waypoint.join(" "))
+    .join(", ");
 
   // Combine the queries
   const query = `
     SELECT DISTINCT sid, ST_Y(${stationLocationColName}) AS longitude, ST_X(${stationLocationColName}) AS latitude
     FROM stations
-    ${
-      whereClause === "" ? "WHERE" : `${whereClause} AND`
-    } (${distConstraintString})
+    WHERE ST_DISTANCE(
+      ${stationLocationColName},
+      ST_SRID(ST_GEOMFROMTEXT('LINESTRING(${linestringArr})'), 4326)
+    ) < ${maxDistMile * 1609.34}
+    AND ${whereClause === "" ? "TRUE" : whereClause.substring(6)}
   `;
+  const queryStartTime = performance.now();
   connection.query(query, (err, data) => {
+    const queryEndTime = performance.now();
+    console.log(
+      `[stationsNearPath] Query time: ${queryEndTime - queryStartTime}ms\n` +
+        `Total time: ${queryEndTime - startTime}ms\n`
+    );
     if (err || data.length === 0) {
       console.log(err);
       res.status(500).json({});
