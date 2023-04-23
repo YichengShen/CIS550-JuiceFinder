@@ -24,6 +24,8 @@
     ],
     "react/react-in-jsx-scope": "off",
     "react/jsx-props-no-spreading": "off",
-    "no-console": ["warn", { "allow": ["warn", "error"] }]
+    "no-unused-vars": "warn",
+    "no-console": ["warn", { "allow": ["warn", "error"] }],
+    "prettier/prettier": "off"
   }
 }

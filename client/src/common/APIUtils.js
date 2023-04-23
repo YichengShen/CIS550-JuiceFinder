@@ -45,3 +45,19 @@ export const getPath = async (start, end) => {
     return [];
   }
 };
+
+export const getStationsNearPath = async (start, end, maxDistance = 10) => {
+  try {
+    const response = await axios.get(
+      encodeURI(
+        `http://${config.server_host}:${config.server_port}/paths/stationsNearPath` +
+          `/${start}/${end}` +
+          `?maxDistMile=${maxDistance}`
+      )
+    );
+    return response.data;
+  } catch (err) {
+    console.error(err);
+    return [];
+  }
+};

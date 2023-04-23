@@ -2,21 +2,14 @@ import MapGL, { Marker } from "react-map-gl";
 import Geocoder from "react-map-gl-geocoder";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
-import React, { useState, useRef, useCallback, useEffect } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import PropTypes from "prop-types";
 
-// eslint-disable-next-line no-unused-vars
 import pin from "../assets/pin.svg";
 
 const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
 
-export default function Map({
-  curLocation,
-  setCurLocation,
-  stations,
-  setStations,
-}) {
-  // console.log(curLocation);
+export default function Map({ curLocation, stations }) {
   const [viewport, setViewport] = useState({
     zoom: 11,
     ...curLocation,
@@ -53,6 +46,20 @@ export default function Map({
       mapStyle="mapbox://styles/mapbox/streets-v9"
       mapboxApiAccessToken={MAPBOX_TOKEN}
     >
+      {Array.isArray(stations) &&
+        stations?.map((station) => (
+          <Marker
+            latitude={station.location.y}
+            longitude={station.location.x}
+            key={station.sid}
+          >
+            <img
+              src={pin}
+              alt="pin"
+              style={{ transform: "translate(-50%, -85%)" }}
+            />
+          </Marker>
+        ))}
       {curLocation && (
         <Marker
           latitude={curLocation.latitude}
@@ -69,19 +76,6 @@ export default function Map({
           />
         </Marker>
       )}
-      {stations?.map((station) => (
-        <Marker
-          latitude={station.location.y}
-          longitude={station.location.x}
-          key={station.sid}
-        >
-          <img
-            src={pin}
-            alt="pin"
-            style={{ transform: "translate(-50%, -85%)" }}
-          />
-        </Marker>
-      ))}
       <Geocoder
         mapRef={mapRef}
         onViewportChange={handleGeocoderViewportChange}

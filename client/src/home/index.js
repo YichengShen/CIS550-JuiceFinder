@@ -5,7 +5,7 @@ import InputTabs from "./InputTabs";
 import {
   getNearbyStations,
   getCoordinatesFromAddress,
-  getPath,
+  getStationsNearPath,
 } from "../common/APIUtils";
 
 export default function HomePage() {
@@ -66,27 +66,29 @@ export default function HomePage() {
   };
 
   const handlePathInputSubmit = async () => {
-    const [startCoordinates, endCoordinates] = await Promise.all([
-      getCoordinatesFromAddress(startAddress),
-      getCoordinatesFromAddress(endAddress),
-    ]);
-    if (
-      startCoordinates &&
-      startCoordinates.latitude &&
-      startCoordinates.longitude &&
-      endCoordinates &&
-      endCoordinates.latitude &&
-      endCoordinates.longitude
-    ) {
-      getPath(startCoordinates, endCoordinates).then((response) => {
-        setPath(response);
-      });
-    } else {
-      setPathFormError(true);
-      setPathFormErrorText(
-        "Invalid address(es). Please try again with valid addresses."
-      );
-    }
+    getStationsNearPath(startAddress, endAddress, maxDistance).then(
+      (response) => {
+        const stationData = response.stations.map((station) => {
+          return {
+            sid: station.sid,
+            location: {
+              y: station.latitude,
+              x: station.longitude,
+            },
+          };
+        });
+        // console.log(response);
+        // console.log(stationData);
+        setStations(stationData);
+
+        if (!response || response.length === 0) {
+          setStationFormError(true);
+          setStationFormErrorText(
+            "No stations found given the specified distance and locations. Please try again with different distance or locations."
+          );
+        }
+      }
+    );
   };
 
   return (
