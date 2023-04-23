@@ -15,7 +15,8 @@
     "express": "^4.18.2",
     "firebase-admin": "^11.6.0",
     "mysql": "^2.18.1",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "simplify-js": "^1.2.4"
   },
   "devDependencies": {
     "eslint": "^8.38.0",
