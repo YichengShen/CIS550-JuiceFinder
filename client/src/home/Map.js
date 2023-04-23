@@ -7,6 +7,8 @@ import PropTypes from "prop-types";
 
 import pin from "../assets/pin.svg";
 
+import ChargingStationPopup from "../popups/StationPopup";
+
 const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
 
 export default function Map({ curLocation, stations }) {
@@ -32,6 +34,15 @@ export default function Map({ curLocation, stations }) {
     });
   }, []);
 
+  const [popupOpen, setPopupOpen] = useState(null);
+
+  const handlePopupClose = () => {
+    setPopupOpen(null);
+  };
+  const openPopup = (sid) => {
+    setPopupOpen(sid);
+  };
+
   return (
     <MapGL
       ref={mapRef}
@@ -53,10 +64,27 @@ export default function Map({ curLocation, stations }) {
             longitude={station.location.x}
             key={station.sid}
           >
-            <img
-              src={pin}
-              alt="pin"
-              style={{ transform: "translate(-50%, -85%)" }}
+            <button
+              type="button"
+              onClick={() => openPopup(station.sid)}
+              style={{
+                background: "none",
+                border: "none",
+                padding: 0,
+                margin: 0,
+                cursor: "pointer",
+              }}
+            >
+              <img
+                src={pin}
+                alt="pin"
+                style={{ transform: "translate(-50%, -85%)" }}
+              />
+            </button>
+            <ChargingStationPopup
+              open={popupOpen === station.sid}
+              handleClose={handlePopupClose}
+              stationId={`${station.sid}`}
             />
           </Marker>
         ))}
