@@ -42,9 +42,10 @@ When you introduce a new dependency (install a new package), add it to `package.
     - Otherwise, create a new javascript file
     - Feel free to create helper js files. It is recommended in React to break pages into smaller reusable components.
 
-2. Implement your js file to create specific page.
+2. Write [component(s)](https://react.dev/learn/your-first-component) inside the js file to create specific pages or elements. We use functional components as we did in HW2. Export the components so that they can be used in other js files. See `./src/home/Map.js` for an example.
+    - You can pass props into components just like passing arguments into functions. To share props between 2 or more components, we can lift the props definition to their parent and passing down props into the child components. This is called prop drilling, see `./src/home/index.js`, `./src/home/Map.js`, `./src/home/MapInput.js` for an example.
 
-3. Import your js file into `src/App.js`, so that you can use the functions exported there. Examples will be provided later.
+3. Import your js file into `src/App.js` and reference them inside <Route />. For example, `<Route path="/login" element={<Login />} />` tells react to render the `Login` component when you visit the '/' route, i.e. `http://localhost:3000/` if you are running react development server locally.
 
 ### Theme related
 

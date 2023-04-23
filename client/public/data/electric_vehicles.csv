@@ -1,0 +1,278 @@
+id,brand,vehicle_type,model,release_year,variant,type,usable_battery_size,energy_consumption
+72475a6a-aae2-da13-1d17-94cc07e5104f,Aiways,car,U5,2021.0,,bev,63.0,18.8
+6033b26c-1b3c-441b-9f78-7b7cd5512051,Aiways,car,U5,2020.0,,bev,63.0,18.8
+1c9126d4-24d6-4e9f-a49d-15813fa49728,Artega,car,Karo,2020.0,Range Plus,bev,14.4,7.2
+d97748b1-e384-4238-a225-d498bccd902c,Artega,car,Karo,2020.0,Range,bev,8.0,6.4
+3e99e8b9-dcea-755b-2b49-781757dd3946,Audi,car,Q4 Sportback e-tron,2021.0,35,bev,52.0,176.0
+04baeaa4-6bfc-4700-a553-20748aab54be,Audi,car,Q4 Sportback e-tron,2021.0,50 quattro ,bev,77.0,190.0
+6f9de791-c484-9c22-ba3c-306ace49de76,Audi,car,Q4 e-tron,2021.0,50 quattro,bev,77.0,197.0
+0ae12bf4-e82a-622b-f669-2fa7bdf4b2fb,Audi,car,Q4 e-tron,2021.0,35,bev,52.0,182.0
+409a3d54-3dec-b5bb-5d6c-2a48749728c3,Audi,car,Q4 e-tron,2021.0,,bev,77.0,188.0
+c6a6bd26-6a8f-4ab7-baf3-6cfa057044e3,Audi,car,e-tron 50,2019.0,,bev,65.0,22.7
+cfaf82d8-0255-4e13-8bf7-2711ed619bfb,Audi,car,e-tron S,2020.0,,bev,95.0,27.0
+a9a177bf-9ce5-4b67-b3ef-51af248b48c2,Audi,car,e-tron 55,2019.0,,bev,86.5,23.4
+27d7610e-9a77-498a-b1b5-28d4bc92cbf2,Audi,car,e-tron 55,2019.0,22kW-AC,bev,86.5,23.4
+059c028d-b2a6-4a8d-947a-158c7537b290,Audi,car,e-tron 50,2019.0,22kW-AC,bev,65.0,22.7
+c8e05c0b-05c0-4aac-9f12-35a6a3687e10,Audi,car,A3 Sportback 40 e-tron,2020.0,,phev,8.8,12.4
+d5719a82-d898-45b5-a8f7-95cd89c9d886,Audi,car,e-tron S,2020.0,Sportback,bev,86.5,27.0
+0ee859e4-e1d4-4a1c-88bc-acc42ba0d503,Audi,car,A6,2020.0,50 TFSI e,phev,14.1,17.0
+81fabe9c-6f4a-4590-8170-8672cf556342,Audi,car,A6,2020.0,55 TFSI e,phev,14.1,17.0
+dd6918fe-4a13-4420-b6f1-508b0a4f959d,Audi,car,A7 55TFSI E,2019.0,Sportback e quattro,phev,14.1,14.1
+63028928-53d3-4049-9964-9109ba005599,Audi,car,Q5 55 TFSI,2019.0,e Quattro,phev,14.1,17.0
+9cb39abb-097d-442c-87e4-1437134898e1,Audi,car,Q7 e-tron,2020.0,,phev,17.3,17.0
+aceb9326-181f-cc73-0467-4c63ee47c0fb,BMW,car,i3S,2020.0,120 Ah,bev,37.9,16.2
+e59115ea-4d72-094c-2941-1494f8005ae2,BMW,car,i3,2020.0,120 Ah,bev,37.9,15.4
+65dbdb2c-2dc1-55c8-2c64-52aa1a058bde,BMW,car,X5,2020.0,xDrive25e,phev,22.2,29.1
+afc8b8fa-3bd3-0488-1c5e-3dee70e61eff,BMW,car,X3,2020.0,xDrive25e,phev,11.15,28.4
+a616dcbc-4149-0421-9e0b-0dc594a702e0,BMW,car,X2,2020.0,xDrive25e,phev,8.8,19.1
+b322c1ff-4efd-fa27-bb63-6974227c4c91,BMW,car,X1,2020.0,xDrive25e,phev,8.8,19.7
+9685bd64-53aa-4b5f-9322-c04005d11edf,BMW,car,745Le,2020.0,xDrive,phev,11.15,25.6
+70606668-9b9e-a8d7-6c15-e4198f3eb38a,BMW,car,745Le,2020.0,,phev,11.15,23.3
+157486bb-1636-1b35-6382-b6320ab2a80e,BMW,car,740 E,2016.0,,phev,7.4,17.0
+6177d44b-2aae-dc5f-a770-6900b81c91dd,BMW,car,545,2020.0,xDrive Berline,phev,11.15,17.2
+01936832-c987-da0e-cbb3-9f6793becdfe,BMW,car,530e,2020.0,xDrive Touring,phev,11.15,18.5
+9587d885-c16c-7465-9a18-59b5d50fd046,BMW,car,530e,2020.0,Touring,phev,11.15,17.0
+8be48c23-71fe-04a4-b8e6-36364a3d0cc0,BMW,car,530e,2020.0,xDrive Berline,phev,11.15,17.4
+1914d6e6-7d1b-c453-53ac-69a302a6a339,BMW,car,530e,2020.0,Berline,phev,11.15,16.3
+dda42a87-6ea2-fbb5-7728-f25badd52364,BMW,car,330e,2020.0,xDrive Touring,phev,11.5,17.2
+0efa3174-34f1-bc1d-cd5a-07610fa59c15,BMW,car,330e,2020.0,Touring,phev,11.15,16.2
+2b04eeba-1de9-9719-adce-0a9df359b329,BMW,car,330e,2020.0,xDrive Berline,phev,11.15,16.5
+8c3ec01d-8419-6ef6-8411-56b351fb6643,BMW,car,330e,2020.0,berline,phev,11.5,16.5
+8653e2d2-5e7d-5172-89ef-71ba177ec0ee,BMW,car,330e,2016.0,,phev,12.0,17.0
+2db395d2-56a0-d1a7-cddb-0b4076071e76,BMW,car,225XE,2020.0,Active Tourer 220 ch,phev,8.8,14.5
+bed96790-afa0-be7a-015a-55bc42c49894,BMW,car,225XE,2016.0,Serie 2 ActiveTourer,phev,10.0,17.0
+39e0d641-d1c4-0764-16f8-2ff6bc1d97de,BMW,car,225XE,2019.0,10.0 kWh,phev,8.8,17.0
+564ce4d8-404c-6840-5bf6-9ffd6a9768ac,BMW,car,I8,2018.0,Roadster,phev,9.4,18.0
+555c0b5b-ba1e-741a-27e0-dee32087e2a2,BMW,car,iX3,2020.0,286 ch,bev,73.8,18.6
+e67dc450-d658-4bee-bd0f-a750d445b2f9,BMW,car,i3,,60 Ah,bev,18.8,14.5
+dbf24ffc-3270-409b-b4da-ec386fa36657,BMW,car,i3,,120 Ah,bev,37.9,16.1
+4df1d4d6-f001-4d0a-b284-5ffc07e6ade2,BMW,car,X5,2020.0,PHEV,phev,21.0,21.3
+0ec3f440-136c-49f1-8917-c629a27146c7,BMW,car,i3,,94 Ah,bev,27.2,16.0
+cf9d35a6-8c61-44da-97fc-e1212b0f8fbd,BMW,car,iX3,2020.0,,bev,74.0,18.5
+823d8294-a3b3-40ab-a140-fa1e11e44c4e,BMW,car,i3S,2019.0,94 Ah REX,bev,27.2,16.1
+262ae184-9095-41ca-aaa0-9db46869f362,BMW,car,i3S,2019.0,94 Ah,bev,27.2,16.1
+2390340c-4405-4ca8-b0a5-1565dc842d5a,BMW,car,i3S,2019.0,120 Ah,bev,37.9,16.1
+5da32d2e-f470-42c0-bf12-1db2336326ab,BMW,car,X1,2019.0,xDrive 25e,phev,9.7,19.0
+ec2fa6bc-3470-4e80-a10f-eecc62321580,BMW,car,X3,2019.0,xDrive30e,phev,12.0,16.4
+c0217035-4247-877f-43ba-446d583db76c,CUPRA,car,Born,2021.0,150 kW - 62 kWh,bev,58.0,166.0
+a9344438-3cea-e564-5532-969591f070c8,CUPRA,car,Born,2022.0,170 kW - 62 kWh,bev,58.0,168.0
+93754920-4a86-c1e9-7f58-7b183afbdbef,CUPRA,car,Born,2021.0,170 kW - 82 kWh,bev,77.0,171.0
+ab631897-9d68-4971-8cbc-b81d0ef2ccaa,CUPRA,car,Born,2021.0,110 kW - 55 kWh,bev,45.0,164.0
+7508892b-e7e7-42ba-9cca-57753426cd86,Chevrolet,car,Spark EV,2013.0,21 kWh,bev,21.3,16.0
+6a4c5e58-d1cb-49ad-a1cf-c0025fb7246f,Chevrolet,car,Spark EV,2015.0,19 kWh,bev,19.0,14.0
+b8a76fa8-97f1-4f27-8f9f-80f26df230d1,Chevrolet,car,Bolt,2017.0,60 kWh,bev,58.0,12.9
+45b68c71-cd11-4bd7-a03f-fdaae259635d,Citroen,car,C-Zero,,,bev,14.5,17.1
+e8773876-6036-4a6c-926e-5490aae58971,Citroen,car,Berlingo Electric,,,bev,22.5,17.7
+69d3b6cb-70a7-47a5-8e04-3a14d3576b36,Citroen,car,ë-C4,2020.0,,bev,46.0,18.0
+e2d5a248-d966-4b08-8fb0-9383fa84b713,Citroen,car,C5,2020.0,Hybrid,phev,13.2,16.0
+870f1edc-6c06-444f-9bc1-0074b6409cbb,Citroen,car,ë-Spacetourer,2020.0,50 kWh,bev,46.0,18.0
+8bcc442d-1c0e-4efc-9bda-98cac700a98d,Citroen,car,ë-Spacetourer,2020.0,75 kWh,bev,75.0,18.0
+430ca2cd-bd4b-482a-8776-85a8c7d3435c,DS,car,3 Crossback E-Tense,2020.0,11 kW-AC,bev,46.0,18.4
+3b5bb8d1-0f34-4c05-861c-45d19a8883b9,DS,car,3 Crossback E-Tense,2020.0,"7,2 kW-AC",bev,46.0,18.4
+ee64213e-fa1d-425e-b90e-6cff9c2a3469,DS,car,7 Crossback,2020.0,E-Tense 4X4 PHEV,phev,13.2,17.4
+db0f0c27-ec80-7479-a5ff-ca8fef1adb1b,Dacia,car,Spring Electric,2021.0,,bev,26.8,15.8
+52528a60-360d-0fd8-05ec-826572b4d327,Energica,motorbike,Eva,2020.0,Ribelle,bev,18.9,11.59
+791a1d30-5072-d27e-7f01-7b2f4bf5d4f3,Energica,motorbike,Ego,2019.0,,bev,18.9,11.59
+e69c9424-5b15-e141-ea6a-963c93a9039c,Energica,motorbike,Eva,2019.0,,bev,18.9,11.59
+2f2b159b-9b03-450f-9818-c139323d1735,Fiat,car,500e,2014.0,,bev,19.2,18.0
+22f521ce-42ca-40d7-bfdb-5d33b1bd9cbe,Fiat,car,500e,2020.0,,bev,42.0,16.8
+6cd5ba89-6523-4bca-9423-ea92227a8b8d,Ford,car,Focus electric,2013.0,,bev,23.0,16.4
+c0a26929-1157-4fb4-a999-4f172df9cad7,Ford,car,Focus electric,2017.0,,bev,33.5,16.4
+4ea0fb0a-8d77-4a03-a147-5e962f8ea766,Ford,car,Kuga,2020.0,PHEV,phev,14.4,19.0
+4d84c2e6-2902-4086-aa87-f3852a42d15d,Ford,car,Mustang Mach e,2020.0,"AWD 98,8 kWh",bev,88.0,18.1
+f44095b1-b4b0-430b-a88f-257a164d9dfd,Ford,car,Mustang Mach e,2020.0,"RWD 75,7 kWh",bev,70.0,16.5
+b93051f8-a4c4-488f-9862-6c92a8ab7f11,Ford,car,Mustang Mach e,2020.0,"AWD 75,7 kWh",bev,70.0,17.9
+b1aa6457-c0af-458d-96dc-178ad1977e47,Ford,car,Mustang Mach e,2020.0,"RWD 98,8 kWh",bev,88.0,16.5
+2a41f004-7fe8-4dfe-8e6c-57691c9b6283,Ford,car,Mustang Mach e,2020.0,GT,bev,88.0,20.0
+5bfa9a87-7b35-4e3a-bd3f-dc2ac55e184b,Honda,car,e,2020.0,,bev,32.0,16.0
+3038b11b-2dfc-4f9f-b22c-4bfdc08d0c4b,Hyundai,car,Ioniq,2019.0,,bev,38.3,15.3
+b58bc94d-d929-ad71-d95b-08b877bf76ba,Hyundai,car,Ioniq 5,2021.0,,bev,72.6,19.4
+c1fd1277-5d77-416b-bb25-84bd21f57963,Hyundai,car,Kona,2020.0,64 kWh 11 kW-AC,bev,64.0,15.8
+6cc437e9-b842-4c1b-9c08-9ca2d46d22a9,Hyundai,car,Kona,2018.0,"39 kWh 7,2 kW-AC",bev,39.2,15.4
+8df35b23-dcc6-4590-83c7-5578da4c4809,Hyundai,car,Kona,2018.0,"64 kWh 7,2 kW-AC",bev,64.0,15.8
+e81564b0-46e3-41f6-b6a6-70370a37f685,Hyundai,car,Kona,2020.0,39 kWh 11 kW-AC,bev,39.2,15.4
+c576bee8-8066-4174-bc69-5fe9f2e666ee,Hyundai,car,Ioniq,2016.0,,bev,28.0,14.4
+3667752d-17a5-4166-abaf-dcf227948bfd,Hyundai,car,Ioniq,2016.0,PHEV,bev,8.9,15.4
+8da12395-cf7a-4ccf-886f-e25ade426457,Jaguar,car,i-Pace,,,bev,84.0,23.2
+755da8dd-f3d7-48de-a92a-bee65c5e6201,Jaguar,car,i-Pace,2020.0,EV320,bev,84.0,23.2
+f77ac610-ac67-48c7-af8a-f78e0bf31c70,Jaguar,car,i-Pace,2020.0,EV400,bev,84.0,23.2
+fe545103-2f35-fe06-302a-8d1f5e673d0f,Jeep,car,Renegade 4xe,2020.0,"11,4 kWh",phev,11.4,23.9
+9b0481fc-60cf-5975-6eb2-ce03cd7bc5f8,Kia,car,EV6,2021.0,Standard Range 2WD,bev,58.0,17.3
+776644a5-1ec8-cb13-92d1-ac9d10c36826,Kia,car,EV6,2021.0,Long Range 2WD,bev,77.4,18.5
+5e1746c9-56a2-4fb9-8a76-b75c95a037ee,Kia,car,Soul,,30 kWh,bev,30.0,17.6
+68cbedff-8994-4b77-bfb5-6aa22962e3a2,Kia,car,e-Niro,2020.0,64 kWh,bev,64.0,17.3
+0f7eae0b-43be-48f8-b4a0-1a8266fd07a9,Kia,car,e-Niro,2018.0,64 kWh,bev,64.0,17.3
+66cb7bea-24b7-458f-ae3e-11d4a852568b,Kia,car,e-Niro,2018.0,39 kWh,bev,39.0,16.3
+63cd9718-5737-4898-a4f4-e594b28c74c0,Kia,car,e-Niro,2020.0,39 kWh 11 kW-AC,bev,39.0,16.3
+add28704-7b59-474d-bfa6-2338e54ccaef,Kia,car,Soul,,27 kWh,bev,27.0,17.6
+87e73c44-93ba-4687-877c-32a3aa940a09,Kia,car,e-Soul,2020.0,64 kWh 11 kW-AC,bev,64.0,17.5
+58661a4c-e1f9-4dc2-8d09-3bb42be62554,Kia,car,e-Soul,2019.0,39 kWh,bev,39.0,17.0
+3c933da2-1fa1-4094-825a-a181610dbfd0,Kia,car,e-Soul,2019.0,64 kWh,bev,64.0,17.5
+600a7816-ea65-4e6a-ac91-c5528b379028,Kia,car,e-Soul,2019.0,39 kWh 11 kW-AC,bev,39.0,17.0
+b97f749b-5361-4116-8103-c208dc601a0b,Kia,car,Ceed SW,2020.0,PHEV,phev,8.9,11.3
+84f2fcc1-cc73-4919-8d76-0f1ba8eaf685,Kia,car,XCeed,2020.0,PHEV,phev,8.9,11.3
+a883bb35-270d-4f31-9169-ccf06ae3c0c5,Kia,car,Niro,2020.0,PHEV,phev,8.9,9.8
+e7717ac1-90fa-4bea-9272-52afc10facc4,MAN,car,e TGE,2020.0,,bev,35.8,30.9
+c1fda7bf-9307-03c9-86c1-0350de0994cb,MG,car,MG5 EV,2020.0,,bev,48.8,16.5
+8b0195b6-5318-46d9-a6fd-1b5f75e8b495,MG,car,ZS EV,2020.0,,bev,44.5,19.8
+2ae110f8-8906-4b03-b4bc-83e5577c1cc1,Maxus,car,EV80,2018.0,,bev,56.0,35.0
+176af738-f385-4dc8-9243-9c701fbd7759,Mazda,car,MX-30,2020.0,,bev,32.0,17.8
+8a5cd1a2-f84a-22b9-b397-470fe5ca5bca,Mercedes Benz,car,EQC,2020.0,11 kW-AC,bev,80.0,21.6
+5335d545-cfeb-4bca-bb11-cf0966f1b5ca,Mercedes Benz,car,EQC,2019.0,"7,4 kW-AC",bev,80.0,21.6
+0fad0871-8a99-6506-9c09-837f9ede132d,Mercedes Benz,car,EQA,2021.0,250,bev,66.6,17.7
+6bbd3cdd-2b11-43cd-85b9-4556937f9f82,Mercedes Benz,car,EQV,2020.0,300 Long ,bev,90.0,27.3
+71cc8552-391f-49b0-b106-2202fa222161,Mercedes Benz,car,B-Klasse,,,bev,28.0,16.6
+1e8c0cc5-20db-491f-9242-12cf3bc7b962,Mercedes Benz,car,A 250 e,2020.0,"7,4 kW-AC + DC",phev,10.7,15.0
+46240342-6f7e-4767-b66d-3234ba874a30,Mercedes Benz,car,A 250 e,2020.0,"7,4 kW-AC",phev,10.7,15.0
+f45de10a-764f-4a7e-9591-b974d0b87038,Mercedes Benz,car,A 250 e,2020.0,"3,7 kW-AC",phev,10.7,15.0
+b0da6660-c20e-40c3-9db7-0b19c478c6cb,Mercedes Benz,car,GLC 300 de 4MATIC,2020.0,PHEV,phev,13.5,18.2
+7fe5b0f6-aa07-4900-a109-a2b04117b762,Mercedes Benz,car,C 300,2019.0,de,phev,13.5,20.0
+22cd1b30-c5ec-4042-85c0-159a154c590a,Mercedes Benz,car,E 300,2019.0,e,phev,13.5,20.0
+8b51a06f-676a-46aa-9074-4d3364ea1cca,Mercedes Benz,car,GLE,2020.0,350 de/e,phev,31.2,31.2
+4a5d82a6-9778-41a6-8e85-1fa108897f30,Mercedes Benz,car,C 300,2019.0,e,phev,13.5,20.0
+ed02b1b2-f89d-432d-9e62-4feb8fb9cf97,Mercedes Benz,car,CLA 250,2020.0,e,phev,15.6,20.0
+0a853f34-7c1f-492a-ae34-937767f53cbd,Mercedes Benz,car,E 350,2016.0,e,phev,9.0,20.0
+cb56eb6c-33a6-40d7-9e4b-53625fd8385c,Mercedes Benz,car,E 300,2019.0,de,phev,13.5,20.0
+5ca66d3a-8a33-48f5-a0b9-d8bbf25a6e24,Mercedes Benz,car,eVito,2019.0,Tourer,bev,41.0,26.2
+8cfce5f4-23b6-470a-87fa-a04095fe0334,Mini,car,Countryman ALL4,2019.0,,phev,7.6,13.2
+d8c11860-a582-4784-9e58-d29e94a67fc2,Mini,car,Cooper SE,2020.0,,bev,28.9,16.1
+2c7abcf4-0ba0-4feb-9e9b-b47661072feb,Mitsubishi,car,i-Miev,,,bev,14.5,12.9
+1847e3aa-750c-4b12-a80a-56e792b3aadb,Mitsubishi,car,Outlander PHEV,2018.0,,phev,11.0,15.2
+2644bfd3-a593-4276-bb1f-c8965e33797e,Nissan,car,e-NV 200,,"24 kWh 6,6 kW-AC",bev,24.0,20.0
+86290f48-f554-4db5-bd35-4a8b7828689a,Nissan,car,e-NV 200,,24 kWh,bev,24.0,20.0
+daa3573d-60ea-4c7a-8048-79c575e3db4c,Nissan,car,e-NV 200,,40 kWh,bev,38.0,20.0
+78b14a0f-5c62-4885-95ef-2e3f81197260,Nissan,car,Leaf,2019.0,e+ 62 kWh,bev,62.0,17.2
+77028f96-eb9b-4c65-b452-c92011b1fc1c,Nissan,car,Leaf,2018.0,40 kWh,bev,38.0,16.4
+dc7d163b-29bc-45cf-8156-60eb3e3b1294,Nissan,car,Leaf,2011.0,24 kWh,bev,24.0,16.9
+3b649ae3-935b-425b-b5d6-75c549b96d40,Nissan,car,Leaf,2011.0,"24 kWh 6,6 kW-AC",bev,24.0,16.9
+83ec0576-bfb8-400a-9af9-483b2684673c,Nissan,car,Leaf,2015.0,30 kWh,bev,30.0,16.5
+74f2c3a5-f78f-459a-823a-dfc0a21e5aeb,Nissan,car,Leaf,2015.0,"30 kWh 6,6 kW-AC",bev,30.0,16.5
+1cec7821-632f-4f17-8a58-644b6ab23f44,Opel,car,Corsa-e,2020.0,"7,2 kW-AC",bev,45.0,16.4
+6f96c616-e87a-4958-bbe7-b4278be00170,Opel,car,Corsa-e,2020.0,11 kW-AC,bev,45.0,16.4
+557ce8e0-56c0-258e-6012-60c591df3b77,Opel,car,Mokka-e,2021.0,,bev,47.5,17.6
+7bff132a-ecad-af92-99e6-9bea47805e21,Opel,car,Vivaro-e,2020.0,50 kWh,bev,50.0,21.7
+c9e46cfd-6fb0-99b1-1911-d25a9d762e37,Opel,car,Vivaro-e,2020.0,75 kWh,bev,75.0,21.7
+f33f0a4f-9b53-4e21-807b-f8b2ca4a24f6,Opel,car,Ampera e,2017.0,CCS,bev,60.0,17.3
+7f4bf402-f8e2-47da-b456-30f1bdfce8ac,Opel,car,Ampera e-Pionier,2012.0,,bev,10.6,16.9
+5655021c-128f-49cf-970e-91b133335eec,Opel,car,Zafira e-life,2021.0,Zafira-e Life 50 kWh,bev,46.0,16.4
+926efa33-4c55-43df-80f3-4b8d2d65a00a,Peugeot,car,e-208,2020.0,"7,2 kW-AC",bev,45.0,16.1
+04980813-ec12-1047-40ea-4c6c44b60171,Peugeot,car,E-Traveller,2020.0,50 kWh 7.4 kW-AC,bev,45.0,24.3
+ca526f1f-69d7-9c32-ac5b-13333fe57e78,Peugeot,car,E-Traveller,2020.0,50 kWh 11 kW-AC,bev,45.0,24.3
+de7bac96-33ed-44f2-964e-21a4878e9f00,Peugeot,car,e-208,2020.0,11 kW-AC,bev,45.0,16.1
+28b61ff5-734a-412e-9241-dec4c27d1a38,Peugeot,car,I-on,,,bev,14.5,12.9
+72695d36-29c4-4726-8ca8-5333fb3f9865,Peugeot,car,e-2008,2020.0,"7,2 kW-AC",bev,47.5,18.0
+9d101a26-eaaa-4058-a251-5221b45ffd91,Peugeot,car,e-2008,2020.0,11 kW-AC,bev,47.5,18.0
+e60a8ec6-a6dd-46ae-846a-35cb57f1d8e3,Peugeot,car,Partner,,,bev,22.5,20.5
+09022e0a-c322-46e7-9171-b48fdd953cca,Peugeot,car,3008,2020.0,"HYbrid4 3,7 kW-AC",phev,11.2,15.2
+7ba60564-7eda-457b-b7d5-46dd1b15cc0e,Peugeot,car,3008,2020.0,"HYbrid4 7,4 kW-AC",phev,11.2,15.2
+c9025ab4-1c85-40d8-86ab-ee406de3b716,Polestar,car,2,2020.0,,bev,72.5,17.1
+4c04db3b-c493-4b90-9859-21b7304a4ffc,Porsche,car,Taycan,2020.0,Turbo S,bev,83.7,22.3
+34b5ef32-efea-48fc-8386-3800d0b737f0,Porsche,car,Taycan,2020.0,4S,bev,71.0,19.5
+6990914a-6a0d-49d4-87f5-ee86ee33344c,Porsche,car,Taycan,2020.0,4S Plus,bev,83.7,19.7
+a12f033f-f2c2-44bd-b62c-7019898a72d0,Porsche,car,Taycan,2020.0,Turbo ,bev,83.7,21.5
+737441e8-6b5f-4185-9b0b-e51585ab6ea8,Renault,car,Zoe,2017.0,R 90,bev,41.0,16.1
+c53b5947-23a3-420c-9798-f3846732e41a,Renault,car,Zoe,2019.0,R110 ZE40,bev,41.0,16.1
+9666138c-1d24-4fa8-9083-0ffba09ab1ef,Renault,car,Zoe,2013.0,Q 210,bev,22.0,15.5
+b3fd3e84-4dd4-4ac0-914f-3c3c582fc600,Renault,car,Zoe,2015.0,R 240,bev,22.0,15.5
+5079c683-69ba-44b3-b8c8-d31fa00c97a1,Renault,car,Zoe,2019.0,R135 ZE50,bev,52.0,17.4
+e604a056-9338-4044-93dd-5a595d4a3ef3,Renault,car,Zoe,2017.0,Q 90,bev,41.0,16.4
+de3a8751-00c9-46d1-9e7a-ad830835c6a7,Renault,car,Zoe,2019.0,R110 ZE50,bev,52.0,16.5
+1c13fba9-2c09-4be1-b5c6-aecd2b253afb,Renault,car,Kangoo ZE,,,bev,33.0,19.4
+8f6db2f5-1dd9-46f6-bb97-eba419dbaea4,Renault,car,Twizy,,,bev,6.1,8.4
+6fa12374-6162-451e-8464-5e0e73091839,Renault,car,Captur E-Tech,2020.0,PHEV,phev,9.8,17.4
+46e4f46b-09d3-4beb-8649-f7a7f670bb45,Renault,car,Twingo Z.E.,2020.0,22 kWh,bev,21.3,16.3
+1d05cd18-d724-c60a-e8a4-c54b33b580e6,Seat,car,Leon eHybrid,2020.0,13 kWh - 204 ch,phev,13.0,14.0
+2eea1ef2-0fd1-481d-adee-68044666614e,Seat,car,Mii Electric,2020.0,CCS,bev,32.3,16.6
+aa69b5e8-fc4e-40f8-8060-2c96248f62ef,Skoda,car,Enyaq iV,2020.0,82 kWh 125 kW-DC,bev,77.0,19.0
+18bb40bd-321b-4326-a404-e46652538830,Skoda,car,Enyaq iV,2020.0,82 kWh 50 kW-DC,bev,77.0,19.0
+4dc6b014-8612-4fa7-bb34-9ea4d7fa5220,Skoda,car,Enyaq iV,2020.0,62 kWh 50 kW-DC,bev,58.0,18.7
+55ac0aaf-6bae-4a8e-ba50-4a9a7ab5b4af,Skoda,car,Enyaq iV,2020.0,62 kWh 100 kW-DC,bev,58.0,18.7
+52a90ece-7261-20a4-55fc-34c11b1cdc92,Skoda,car,Octavia,2020.0,iV PHEV,phev,13.0,148.0
+ffcd3116-4e17-49ff-a926-941c062643ea,Skoda,car,CITIGOe iV,2020.0,CCS,bev,32.3,16.6
+41c9d96c-6a19-4db0-ba3a-931ab99c6f15,Skoda,car,Superb iV,2020.0,PHEV,phev,13.0,14.0
+ff261470-8556-4051-afec-c049abd5fe6a,Skoda,car,Enyaq iV,2020.0,55 kWh,bev,52.0,18.7
+0620ba23-8f0e-1a09-f96d-4fa691c84a54,Tesla,car,Roadster,2022.0,,bev,200.0,20.6
+80e7ef22-27f8-4e93-8c86-7a6a0a227e5d,Tesla,car,Model S,,70,bev,67.0,18.5
+ed3fe177-d852-49bd-84ca-8ecd8d7ec3b1,Tesla,car,Model S,,"70, 22 kW-AC",bev,67.0,18.5
+7de25a64-e9fa-484f-bf99-d02b02cfb17d,Tesla,car,Model 3,,LR,bev,74.0,16.1
+93c82e06-1aa3-4c19-8f81-b9fac0c598c3,Tesla,car,Model 3,,SR+,bev,50.0,15.3
+7dbad968-7058-4440-9c8f-8f483cdd973a,Tesla,car,Model 3,,Performance,bev,72.5,16.7
+0a663bbf-3b87-4e7a-bd7a-3e9c39961a2b,Tesla,car,Model S,,85,bev,76.0,19.1
+b5aa307e-a6b9-46e7-939e-2dd525870c13,Tesla,car,Model S,,100,bev,95.0,18.4
+32922583-e434-4ed2-afc1-4d8fde67aeda,Tesla,car,Model S,,90,bev,81.0,18.2
+7f709186-39c3-420f-9caf-1fdb424f7953,Tesla,car,Model S,,75,bev,72.5,18.5
+40e94478-d8f9-4a53-8e62-b1c571d7db29,Tesla,car,Model S,2012.0,85D,bev,77.5,19.1
+01de7c99-366b-4084-909d-5723aad78668,Tesla,car,Model S,2015.0,P90D,bev,82.0,18.2
+0551e45d-a5f5-4b78-b119-092b1b63a6bb,Tesla,car,Model S,2016.0,BEV,bev,72.5,20.8
+5f6b0607-8844-4484-8030-f1479d0b4fe9,Tesla,car,Model S,2016.0,P100D,bev,98.0,20.0
+4e1a275f-c333-40b8-bf8b-8f6ff271f720,Tesla,car,Model S,,90D,bev,83.5,18.2
+6f30c707-a785-42e7-80dc-fff32e16bfcc,Tesla,car,Model S,,"P85D, 22 kW-AC",bev,80.8,19.1
+a9d800d2-be3d-48d5-a732-7768d9ce4bde,Tesla,car,Model S,2017.0,100D,bev,98.0,18.9
+b017f476-2111-4322-a843-97ba5be641e2,Tesla,car,Model S,,75D,bev,72.5,19.1
+1e752c58-220d-4d3a-bc9f-264cf095138a,Tesla,car,Model S,2019.0,Long Range (Raven),bev,95.0,19.0
+f70eec15-6a6e-4f8c-8640-bb99ec06fe43,Tesla,car,Model S,,60,bev,62.0,18.0
+72720dc0-75b1-4e93-9c6c-0c07c7930412,Tesla,car,Model S,,P85D,bev,80.8,19.1
+10317508-4fed-4aa2-a4da-d95fb20470eb,Tesla,car,Model S,2019.0,Standard Range,bev,72.5,18.4
+4e172d17-11b4-4360-93ee-4e4b6ddb6fb6,Tesla,car,Model S,2019.0,Performance,bev,95.0,19.3
+d43501d6-32b3-4601-bd24-605682e873fd,Tesla,car,Model S,,60D,bev,62.0,17.7
+d302a787-ff60-489a-b69b-2d1713009e88,Tesla,car,Model S,,70D,bev,66.5,18.8
+8a5ea62e-5c8c-483e-93f3-eebd659c0968,Tesla,car,Model S,,"70D, 22 kW-AC",bev,66.5,18.8
+d03d6e42-d6f8-4e3f-b527-a3c1d1e40f9d,Tesla,car,Model X,2016.0,90D,bev,90.0,20.0
+908e578f-f890-4716-93e8-7c0f75e46bb5,Tesla,car,Model X,2016.0,P90D,bev,90.0,21.0
+0aa5220a-6da7-4dc0-a0a1-714bea4fded3,Tesla,car,Model X,2017.0,P100D,bev,100.0,22.0
+355eadbb-0c97-4a66-993d-8fdc61a77ef5,Tesla,car,Model X,2019.0,Performance,bev,100.0,22.0
+7490520f-fe11-4148-a9b6-3882f06ee082,Tesla,car,Model X,2017.0,100D,bev,100.0,20.0
+eb8d28ec-8df7-40a8-8dd7-badf738f0832,Tesla,car,Model X,2019.0,Maximum Range,bev,100.0,20.0
+1b3105fa-527a-491f-ac26-5bfa94bfa45d,Tesla,car,Model X,2019.0,75D,bev,75.0,20.0
+92ffd46c-fe26-4805-81ba-fbadce4d524f,Tesla,car,Model X,2016.0,60D,bev,60.0,16.0
+2768baf4-08a8-4760-a2a6-8e39a11664a8,Tesla,car,Model X,2020.0,long range,bev,95.0,22.6
+3d010bc6-84ad-480c-9dbb-5a8c7c0210b9,Tesla,car,Model X,2020.0,Performance,bev,95.0,23.6
+b7c4ddb8-4806-4328-a4e6-4abb4746016d,Tesla,car,Model X,2019.0,Standard Range,bev,75.0,20.0
+6e66aeb0-7680-416c-912d-0cbbf38fc920,Tesla,car,Model X,2020.0,Standard Range,bev,72.5,21.6
+aade3809-159e-415d-a9ce-e5633a173fb8,Tesla,car,Model Y,2020.0,Long Range,bev,72.5,14.4
+48fe5bfc-89c4-4408-b262-52900a562b12,Tesla,car,Model Y,2020.0,Performance,bev,72.5,14.4
+5b501d1c-6e2a-f409-efe9-9a53e405c4eb,Volkswagen,car,Golf GTE,2020.0,8,phev,13.0,11.4
+50baff44-fcbe-48ac-a7ae-7a5181d9bb8c,Volkswagen,car,ID.4,2020.0,77 kWh,bev,77.0,19.3
+cb995cc3-84d9-4c87-89dc-f9dee7a47156,Volkswagen,car,ID.3,2020.0,77 kWh,bev,77.0,17.1
+0a7e79c1-ecd6-4639-bac1-9c9e49fec84c,Volkswagen,car,ID.3,2020.0,45 kWh,bev,45.0,16.4
+d8044adf-2538-4d45-b2d8-2b2fd0951766,Volkswagen,car,ID.3,2020.0,58 kWh,bev,58.0,16.6
+f1b46b0a-b101-4072-a246-0b52f0cc51f5,Volkswagen,car,e-Golf,2014.0,CCS,bev,21.2,15.8
+f0132135-9415-4403-818b-cee07f81ceb2,Volkswagen,car,e-Golf,2017.0,CCS,bev,31.5,16.4
+bad55b90-4b4f-4760-83ea-fa96280e7310,Volkswagen,car,e-Golf,2017.0,,bev,31.5,16.4
+fda95cb7-d391-4344-851e-a1b5a548b42b,Volkswagen,car,e-Golf,2014.0,,bev,21.2,15.8
+3fc921eb-7a43-4b09-a819-73b9d5a5c14f,Volkswagen,car,e-Golf,2020.0,,bev,31.5,15.3
+a0347619-a7fe-4dd2-be4e-3ef615783481,Volkswagen,car,e-up,2013.0,CCS,bev,16.5,16.8
+bcd8700d-241c-43a1-b9df-24ee310ea8e4,Volkswagen,car,e-up,2013.0,,bev,16.5,16.8
+57184038-ae77-4540-9367-ccb98beb8cc3,Volkswagen,car,e-up,2020.0,,bev,32.3,16.6
+15023eb9-eba6-436e-ad98-2086f1cb31c4,Volkswagen,car,Golf GTE,2017.0,,phev,8.7,11.4
+ec3b0af7-67c6-400d-b3c2-aa2f3be24c8a,Volkswagen,car,Passat GTE,2019.0,,phev,13.1,16.2
+fc5b3c94-c0eb-4515-af3d-4a4106ffe29f,Volkswagen,car,e-up,2020.0,CCS,bev,32.3,16.6
+0aaf072a-2655-49ef-4aed-6f66a3caf8c7,Volvo,car,XC40 PHEV,2019.0,T5 Twin Engine,phev,10.7,16.1
+ac812f08-3c8a-4af5-a07a-b520ec9e16cc,Volvo,car,XC 60 T8,2018.0,,phev,10.4,24.5
+a746d26e-2a73-4816-a0e4-a40bfb6ba7d7,Volvo,car,XC40,2020.0,P8 Recharge,bev,75.0,17.6
+5f67bab0-e79a-4f79-ae8d-5643b9379bba,Zero Motorcycles,motorbike,S,2019.0,ZF14.4 11 KW + Charge Tank,bev,12.6,6.3
+f810b11d-d3c7-4c16-9841-4892b91052fa,Zero Motorcycles,motorbike,SR/S,2020.0,Standard + Power Tank,bev,15.8,8.5
+6bbab829-06e6-4180-b01c-b31abeffca9c,Zero Motorcycles,motorbike,SR,2019.0,ZF 14.4 + Charge Tank,bev,12.6,7.0
+900a4767-ca7e-4b26-82f1-810de98d7bdd,Zero Motorcycles,motorbike,SR/S,2020.0,Standard + Charge Tank,bev,12.6,8.0
+b8e01c64-6751-42ec-b894-06c06609876c,Zero Motorcycles,motorbike,SR/F,2019.0,Standard,bev,12.6,8.0
+43765332-045e-42f6-8e32-e73ab1f54ba1,Zero Motorcycles,motorbike,SR/F,2019.0,Standard + Power Tank,bev,15.8,8.5
+847b6828-575a-41c6-82ea-07292186dd9b,Zero Motorcycles,motorbike,SR/F,2019.0,Premium,bev,12.6,8.0
+2802c16b-e3a9-491f-83cb-50059216c495,Zero Motorcycles,motorbike,SR/F,2019.0,Standard + Charge Tank,bev,12.6,8.0
+dc945e47-3cfb-476c-9976-6771d21f8e16,Zero Motorcycles,motorbike,SR/F,2019.0,Premium + Charge Tank,bev,12.6,8.0
+68057277-d06f-4c87-a7bd-e9cebd8c52c1,Zero Motorcycles,motorbike,SR/F,2019.0,Premium + Power Tank,bev,15.8,8.5
+9173a0f2-190c-4397-963e-25dbf89e398b,Zero Motorcycles,motorbike,SR/S,2020.0,Standard,bev,12.6,8.0
+49d41944-7bc9-4eeb-b952-ec4cc8173fb3,Zero Motorcycles,motorbike,SR/S,2020.0,Premium,bev,12.6,8.0
+79dbcf78-fdf5-4e80-9563-35efde72094b,Zero Motorcycles,motorbike,DSR,2019.0,ZF 14.4 + Charge Tank,bev,12.6,7.4
+f12c671b-90c1-44f3-bd13-bd67b58a9491,Zero Motorcycles,motorbike,DS,2019.0,ZF14.4 11 KW + Charge Tank,bev,12.6,6.6
+62af9d98-b361-44f6-bcab-ea2c01f0ea98,Zero Motorcycles,motorbike,SR/S,2020.0,Premium + Charge Tank,bev,12.6,8.0
+d50e4d30-8737-4585-abb1-237339c4a798,Zero Motorcycles,motorbike,SR/S,2020.0,Premium + Power Tank,bev,15.8,8.5
+670ca5a8-af25-44b8-b50a-708500daf37a,Zero Motorcycles,motorbike,DSR/BF,2019.0,ZF 14.4 + Charge Tank,bev,12.6,8.8
+98aacbc9-5a97-4fe4-abcf-4f7bb2910a9f,e.GO Mobile,car,Life 60,2019.0,,bev,21.0,15.5
+4f408d10-82c3-4850-ae2b-141f21d745b3,e.GO Mobile,car,Life 40,2019.0,,bev,17.5,15.5
+975b064b-626e-4318-b60c-3ce0729743fd,e.GO Mobile,car,Life 20,2019.0,,bev,14.5,15.5
+e3525b59-d3b9-4eef-9a01-1408358c5534,smart,car,fortwo ED,,22 kW-AC,bev,17.6,16.7
+1d43c981-02be-4d41-a34b-65a40ff25f7b,smart,car,fortwo EQ,,,bev,17.6,16.7
+f0b185de-9b9d-4a08-924f-450c4dadc7a6,smart,car,fortwo EQ,,22 kW-AC,bev,17.6,16.7
+785c65be-3122-44ad-b574-9291c0793c37,smart,car,fortwo ED,,,bev,17.6,16.7
+6a3a76f6-a0d0-41ff-afc9-5ad2f0879b4d,smart,car,forfour EQ,,,bev,17.6,17.6
+805b5810-074c-449b-ad19-d6c852ebf8f6,smart,car,forfour EQ,,22 kW-AC,bev,17.6,17.6

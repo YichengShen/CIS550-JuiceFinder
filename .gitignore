@@ -124,6 +124,7 @@ dist
 
 # VSCode setting files
 .vscode/
+.vscode/*
 
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
