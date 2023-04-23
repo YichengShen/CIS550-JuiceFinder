@@ -20,3 +20,44 @@ export const getNearbyStations = async (location, maxDistance) => {
     return [];
   }
 };
+
+export const getCoordinatesFromAddress = async (address) => {
+  try {
+    const response = await axios.get(
+      `http://${config.server_host}:${config.server_port}/paths/geocode/${address}`
+    );
+    return response.data;
+  } catch (err) {
+    console.error(err);
+    return {};
+  }
+};
+
+export const getPath = async (start, end) => {
+  try {
+    const response = await axios.get(
+      `http://${config.server_host}:${config.server_port}/paths/plan` +
+        `/${start.longitude}/${start.latitude}/${end.longitude}/${end.latitude}`
+    );
+    return response.data;
+  } catch (err) {
+    console.error(err);
+    return [];
+  }
+};
+
+export const getStationsNearPath = async (start, end, maxDistance = 10) => {
+  try {
+    const response = await axios.get(
+      encodeURI(
+        `http://${config.server_host}:${config.server_port}/paths/stationsNearPath` +
+          `/${start}/${end}` +
+          `?maxDistMile=${maxDistance}`
+      )
+    );
+    return response.data;
+  } catch (err) {
+    console.error(err);
+    return [];
+  }
+};

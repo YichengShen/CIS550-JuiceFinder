@@ -23,6 +23,8 @@
       }
     ],
     "react/react-in-jsx-scope": "off",
+    "react/jsx-props-no-spreading": "off",
+    "no-unused-vars": "warn",
     "prettier/prettier": 0,
     "no-console": ["warn", { "allow": ["warn", "error"] }]
   }

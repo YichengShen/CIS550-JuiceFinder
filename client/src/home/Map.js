@@ -2,22 +2,18 @@ import MapGL, { Marker } from "react-map-gl";
 import Geocoder from "react-map-gl-geocoder";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
-import React, { useState, useRef, useCallback, useEffect } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import PropTypes from "prop-types";
-import { getNearbyStations } from "../common/APIUtils";
 
-// eslint-disable-next-line no-unused-vars
 import pin from "../assets/pin.svg";
 
 const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
 
-export default function Map({ curLocation, maxDistance }) {
-  // eslint-disable-next-line no-unused-vars
+export default function Map({ curLocation, stations }) {
   const [viewport, setViewport] = useState({
     zoom: 11,
     ...curLocation,
   });
-  const [stations, setStations] = useState([]);
   // eslint-disable-next-line no-unused-vars
   // const [zoom, setZoom] = useState(14);
   const mapRef = useRef();
@@ -36,13 +32,6 @@ export default function Map({ curLocation, maxDistance }) {
     });
   }, []);
 
-  useEffect(() => {
-    getNearbyStations(curLocation, maxDistance).then((response) => {
-      // console.log(response);
-      setStations(response);
-    });
-  }, [curLocation, maxDistance]);
-
   return (
     <MapGL
       ref={mapRef}
@@ -57,6 +46,20 @@ export default function Map({ curLocation, maxDistance }) {
       mapStyle="mapbox://styles/mapbox/streets-v9"
       mapboxApiAccessToken={MAPBOX_TOKEN}
     >
+      {Array.isArray(stations) &&
+        stations?.map((station) => (
+          <Marker
+            latitude={station.location.y}
+            longitude={station.location.x}
+            key={station.sid}
+          >
+            <img
+              src={pin}
+              alt="pin"
+              style={{ transform: "translate(-50%, -85%)" }}
+            />
+          </Marker>
+        ))}
       {curLocation && (
         <Marker
           latitude={curLocation.latitude}
@@ -66,23 +69,13 @@ export default function Map({ curLocation, maxDistance }) {
           <img
             src={pin}
             alt="pin"
-            style={{ transform: "translate(-50%, -85%)" }}
+            style={{
+              transform: "translate(-50%, -85%)",
+              filter: "hue-rotate(160deg) saturate(3)",
+            }}
           />
         </Marker>
       )}
-      {stations?.map((station) => (
-        <Marker
-          latitude={station.location.y}
-          longitude={station.location.x}
-          key={station.sid}
-        >
-          <img
-            src={pin}
-            alt="pin"
-            style={{ transform: "translate(-50%, -85%)" }}
-          />
-        </Marker>
-      ))}
       <Geocoder
         mapRef={mapRef}
         onViewportChange={handleGeocoderViewportChange}
@@ -99,7 +92,17 @@ Map.propTypes = {
     latitude: PropTypes.number,
     longitude: PropTypes.number,
   }),
-  maxDistance: PropTypes.number.isRequired,
+  setCurLocation: PropTypes.func.isRequired,
+  stations: PropTypes.arrayOf(
+    PropTypes.shape({
+      sid: PropTypes.number.isRequired,
+      location: PropTypes.shape({
+        x: PropTypes.number.isRequired,
+        y: PropTypes.number.isRequired,
+      }),
+    })
+  ).isRequired,
+  setStations: PropTypes.func.isRequired,
 };
 
 Map.defaultProps = { curLocation: {} };
