@@ -1,6 +1,11 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { Box, Container, Grid, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+// import MUI icons
+import ElectricalServicesIcon from "@mui/icons-material/ElectricalServices";
+import SpeedIcon from "@mui/icons-material/Speed";
+import MediationIcon from "@mui/icons-material/Mediation";
+// import components plotting functions
 import SelectComponent from "./SelectComponent";
 import * as plt from "./Plotting";
 import serverConfig from "../config.json";
@@ -206,9 +211,22 @@ function ElectricStationTab() {
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <Typography variant="h6" sx={{ color: theme.palette.primary.main }}>
-              🏅 Number of electric stations with different ports in US
-            </Typography>
+            <Box
+              sx={{
+                display: "flex",
+                direction: "row",
+                alignItems: "center",
+                color: theme.palette.primary.main,
+              }}
+            >
+              <ElectricalServicesIcon fontSize="large" />
+              <Typography
+                variant="h6"
+                sx={{ color: theme.palette.primary.main }}
+              >
+                Number of electric stations with different ports in US
+              </Typography>
+            </Box>
           </Grid>
           <Grid item xs={3}>
             <Container>
@@ -239,9 +257,22 @@ function ElectricStationTab() {
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <Typography variant="h6" sx={{ color: theme.palette.primary.main }}>
-              🏅 Number of electric stations with different charging speed in US
-            </Typography>
+            <Box
+              sx={{
+                display: "flex",
+                direction: "row",
+                alignItems: "center",
+                color: theme.palette.primary.main,
+              }}
+            >
+              <SpeedIcon fontSize="large" />
+              <Typography
+                variant="h6"
+                sx={{ color: theme.palette.primary.main }}
+              >
+                Number of electric stations with different charging speed in US
+              </Typography>
+            </Box>
           </Grid>
           <Grid item xs={3}>
             <Container>
@@ -272,9 +303,22 @@ function ElectricStationTab() {
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <Typography variant="h6" sx={{ color: theme.palette.primary.main }}>
-              🏅 Number of electric stations with different networks in US
-            </Typography>
+            <Box
+              sx={{
+                display: "flex",
+                direction: "row",
+                alignItems: "center",
+                color: theme.palette.primary.main,
+              }}
+            >
+              <MediationIcon fontSize="large" />
+              <Typography
+                variant="h6"
+                sx={{ color: theme.palette.primary.main }}
+              >
+                Number of electric stations with different networks in US
+              </Typography>
+            </Box>
           </Grid>
           <Grid item xs={3}>
             <Container>
