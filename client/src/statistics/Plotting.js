@@ -1,5 +1,7 @@
 /* eslint-disable func-names */
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+
 import { Container } from "@mui/material";
 import USAMap from "react-usa-map";
 import * as d3 from "d3";
@@ -182,6 +184,8 @@ function afsByStateMap() {
           };
         });
         setMapData(usmapJson);
+        // eslint-disable-next-line no-console
+        console.log(typeof mapData);
       })
       .catch((error) => {
         // eslint-disable-next-line no-console
@@ -199,6 +203,10 @@ function afsByStateMap() {
     </Container>
   );
 }
+afsByStateMap.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  mapData: PropTypes.object.isRequired,
+};
 // Stats-Fig #2 USA map legend
 function mapLegend() {
   return (
