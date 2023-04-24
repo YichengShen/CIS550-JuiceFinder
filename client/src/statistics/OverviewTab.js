@@ -1,6 +1,11 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { Box, Container, Grid, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+// import MUI icons
+import MapIcon from "@mui/icons-material/Map";
+import LocalGasStationIcon from "@mui/icons-material/LocalGasStation";
+import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
+// import components and plotting functions
 import SelectComponent from "./SelectComponent";
 import * as plt from "./Plotting";
 import serverConfig from "../config.json";
@@ -93,45 +98,69 @@ function OverviewTab() {
   }, [vehicleType]);
 
   return (
-    <>
-      <Box
-        sx={{
-          backgroundColor: theme.palette.background.default,
-          minHeight: "100vh",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <Typography
-              component="div"
-              variant="h6"
-              sx={{ color: theme.palette.primary.main }}
+    <Box
+      sx={{
+        backgroundColor: theme.palette.background.default,
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      <Box>
+        <Grid container>
+          <Grid item xs={12} padding={2}>
+            <Box
+              sx={{
+                display: "flex",
+                direction: "row",
+                alignItems: "center",
+                color: theme.palette.primary.main,
+              }}
             >
-              🏅 Alternating fueling resources percentages and distribution in
-              US
-            </Typography>
+              <MapIcon fontSize="large" />
+              <Typography
+                component="div"
+                variant="h6"
+                sx={{
+                  color: theme.palette.primary.main,
+                }}
+              >
+                Alternating fueling resources percentages and distribution in US
+              </Typography>
+            </Box>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={3}>
             <Container>{plt.afsByTypePie()}</Container>
           </Grid>
           <Grid item xs={8}>
-            <Container>{plt.afsByStateMap()}</Container>
+            {plt.afsByStateMap()}
+          </Grid>
+          <Grid item xs={1}>
+            {plt.mapLegend()}
           </Grid>
         </Grid>
       </Box>
 
       <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <Typography
-              component="div"
-              variant="h6"
-              sx={{ color: theme.palette.primary.main }}
+        <Grid container>
+          <Grid item xs={12} padding={3}>
+            <Box
+              sx={{
+                display: "flex",
+                direction: "row",
+                alignItems: "center",
+                color: theme.palette.primary.main,
+              }}
             >
-              🏅 Alternative fueling stations count by state in US
-            </Typography>
+              <LocalGasStationIcon fontSize="large" />
+              <Typography
+                component="div"
+                variant="h6"
+                sx={{ color: theme.palette.primary.main }}
+              >
+                Alternative fueling stations count by state in US
+              </Typography>
+            </Box>
           </Grid>
           <Grid item xs={3}>
             <Container>
@@ -151,18 +180,28 @@ function OverviewTab() {
       </Box>
 
       <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <Typography
-              component="div"
-              variant="h6"
-              sx={{ color: theme.palette.primary.main }}
+        <Grid container>
+          <Grid item xs={12} padding={3}>
+            <Box
+              sx={{
+                display: "flex",
+                direction: "row",
+                alignItems: "center",
+                color: theme.palette.primary.main,
+              }}
             >
-              🏅 Light-duty vehicle registration count by state in US
-            </Typography>
+              <DirectionsCarIcon fontSize="large" />
+              <Typography
+                component="div"
+                variant="h6"
+                sx={{ color: theme.palette.primary.main }}
+              >
+                Light-duty vehicle registration count by state in US
+              </Typography>
+            </Box>
           </Grid>
           <Grid item xs={3}>
-            <Container>
+            <Container paddingtop={3}>
               {SelectComponent(
                 "vehicleType",
                 "Select light-duty vehicle type:",
@@ -179,7 +218,7 @@ function OverviewTab() {
           </Grid>
         </Grid>
       </Box>
-    </>
+    </Box>
   );
 }
 

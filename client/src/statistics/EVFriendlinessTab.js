@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Box, Container, Grid, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+// import MUI icons
+import EvStationIcon from "@mui/icons-material/EvStation";
+import ElectricCarIcon from "@mui/icons-material/ElectricCar";
+import FastfoodIcon from "@mui/icons-material/Fastfood";
+// import plotting functions
 import * as plt from "./Plotting";
 import serverConfig from "../config.json";
 
@@ -134,17 +139,45 @@ function EVFriendlinessTab() {
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <Typography variant="h6" sx={{ color: theme.palette.primary.main }}>
-              🏅 How hard to find a charging stations?
-            </Typography>
+            <Box
+              sx={{
+                display: "flex",
+                direction: "row",
+                alignItems: "center",
+                color: theme.palette.primary.main,
+              }}
+            >
+              <EvStationIcon fontSize="large" />
+              <ElectricCarIcon fontSize="large" />
+              <Typography
+                variant="h6"
+                sx={{ color: theme.palette.primary.main }}
+              >
+                How hard to find a charging stations?
+              </Typography>
+            </Box>
           </Grid>
           <Grid item xs={12}>
             <Container>{plt.stationToVehicleBar(stationToVehicle)}</Container>
           </Grid>
           <Grid item xs={12}>
-            <Typography variant="h6" sx={{ color: theme.palette.primary.main }}>
-              🏅 Charge yourself when you are charging your car!
-            </Typography>
+            <Box
+              sx={{
+                display: "flex",
+                direction: "row",
+                alignItems: "center",
+                color: theme.palette.primary.main,
+              }}
+            >
+              <FastfoodIcon fontSize="large" />
+              <EvStationIcon fontSize="large" />
+              <Typography
+                variant="h6"
+                sx={{ color: theme.palette.primary.main }}
+              >
+                Charge yourself when you are charging your car!
+              </Typography>
+            </Box>
           </Grid>
           <Grid item xs={12}>
             <Container>

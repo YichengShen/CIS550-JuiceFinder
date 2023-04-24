@@ -3,7 +3,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Box, Button, Tab, Tabs, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-
+// import MUI icons
+import DarkModeSharpIcon from "@mui/icons-material/DarkModeSharp";
+import EqualizerIcon from "@mui/icons-material/Equalizer";
+import EvStationIcon from "@mui/icons-material/EvStation";
+import MoodIcon from "@mui/icons-material/Mood";
 // Import .js files, each page will be rendered when the tab was toggled
 import OverviewTab from "./OverviewTab";
 import ElectricStationTab from "./ElectricStationTab";
@@ -92,7 +96,7 @@ function Statistics({ toggleTheme }) {
           Statistics
         </Typography>
         <Button
-          variant="outlined"
+          variant="contained"
           color="primary"
           onClick={toggleTheme}
           sx={{
@@ -100,7 +104,7 @@ function Statistics({ toggleTheme }) {
             color: theme.palette.primary.main,
           }}
         >
-          Light/Dark
+          <DarkModeSharpIcon />
         </Button>
       </Box>
       <Box
@@ -121,7 +125,12 @@ function Statistics({ toggleTheme }) {
             sx={{
               backgroundColor: theme.palette.background.default,
               color: theme.palette.primary.main,
+              display: "flex",
+              alignItems: "center",
+              flexDirection: "row",
+              justifyContent: "center",
             }}
+            icon={<EqualizerIcon fontSize="large" />}
           />
           <Tab
             label="Electric Charging Stations"
@@ -129,7 +138,12 @@ function Statistics({ toggleTheme }) {
             sx={{
               backgroundColor: theme.palette.background.default,
               color: theme.palette.primary.main,
+              display: "flex",
+              alignItems: "center",
+              flexDirection: "row",
+              justifyContent: "center",
             }}
+            icon={<EvStationIcon fontSize="large" />}
           />
           <Tab
             label="EV Friendliness"
@@ -137,7 +151,12 @@ function Statistics({ toggleTheme }) {
             sx={{
               backgroundColor: theme.palette.background.default,
               color: theme.palette.primary.main,
+              display: "flex",
+              alignItems: "center",
+              flexDirection: "row",
+              justifyContent: "center",
             }}
+            icon={<MoodIcon fontSize="large" />}
           />
         </Tabs>
       </Box>
