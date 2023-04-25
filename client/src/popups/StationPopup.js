@@ -161,8 +161,8 @@ function StationPopup({ open, handleClose, stationId }) {
             <NearbyRestaurantsPopup
               open={nearbyRestaurantsOpen}
               handleClose={handleNearbyRestaurantsClose}
-              longitude={stationData.location.x}
-              latitude={stationData.location.y}
+              longitude={stationData.location?.x}
+              latitude={stationData.location?.y}
             />
           </DialogActions>
         </>

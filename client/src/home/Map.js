@@ -58,7 +58,8 @@ export default function Map({ curLocation, stations }) {
       mapboxApiAccessToken={MAPBOX_TOKEN}
     >
       {Array.isArray(stations) &&
-        stations?.map((station) => (
+        stations.length > 0 &&
+        stations.map((station) => (
           <Marker
             latitude={station.location.y}
             longitude={station.location.x}
