@@ -38,15 +38,17 @@ export default function HomePage() {
   const [path, setPath] = useState([]);
 
   useEffect(() => {
-    getNearbyStations(curLocation, maxDistance).then((response) => {
-      setStations(response);
-      if (!response || response.length === 0) {
-        setStationFormError(true);
-        setStationFormErrorText(
-          "No stations found within the specified distance and location. Please try again with a different distance or location."
-        );
+    getNearbyStations(curLocation, maxDistance, { isElectric: true }).then(
+      (response) => {
+        setStations(response);
+        if (!response || response.length === 0) {
+          setStationFormError(true);
+          setStationFormErrorText(
+            "No stations found within the specified distance and location. Please try again with a different distance or location."
+          );
+        }
       }
-    });
+    );
   }, [curLocation]);
 
   const handleStationInputSubmit = async () => {
