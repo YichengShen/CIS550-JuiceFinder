@@ -14,6 +14,8 @@ export default function HomePage() {
     longitude: -75.19028570489878,
   };
   const [curLocation, setCurLocation] = useState(DEFAULT_LOCATION);
+  const [srcLocation, setSrcLocation] = useState("");
+  const [destLocation, setDestLocation] = useState("");
 
   // Props for StationInput
   const [state, setState] = useState("");
@@ -52,6 +54,9 @@ export default function HomePage() {
   }, [curLocation]);
 
   const handleStationInputSubmit = async () => {
+    setSrcLocation("");
+    setDestLocation("");
+
     getCoordinatesFromAddress(`${streetAddress} ${state} ${city} ${zip}`).then(
       (response) => {
         if (response && response.latitude && response.longitude) {
@@ -68,6 +73,23 @@ export default function HomePage() {
   };
 
   const handlePathInputSubmit = async () => {
+    setCurLocation("");
+
+    Promise.all([
+      getCoordinatesFromAddress(startAddress),
+      getCoordinatesFromAddress(endAddress),
+    ])
+      .then(([srcCoor, destCoor]) => {
+        setSrcLocation(srcCoor);
+        setDestLocation(destCoor);
+      })
+      .catch(() => {
+        setPathFormError(true);
+        setPathFormErrorText(
+          "Invalid address. Please try again with a valid address."
+        );
+      });
+
     getStationsNearPath(startAddress, endAddress, maxDistance).then(
       (response) => {
         const stationData = response.stations.map((station) => {
@@ -146,6 +168,10 @@ export default function HomePage() {
           <Map
             curLocation={curLocation}
             setCurLocation={setCurLocation}
+            srcLocation={srcLocation}
+            setSrcLocation={setSrcLocation}
+            destLocation={destLocation}
+            setDestLocation={setDestLocation}
             stations={stations}
             setStations={setStations}
             path={path}

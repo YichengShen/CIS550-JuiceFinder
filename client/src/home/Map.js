@@ -11,7 +11,12 @@ import ChargingStationPopup from "../popups/StationPopup";
 
 const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
 
-export default function Map({ curLocation, stations }) {
+export default function Map({
+  curLocation,
+  srcLocation,
+  destLocation,
+  stations,
+}) {
   const [viewport, setViewport] = useState({
     zoom: 11,
     ...curLocation,
@@ -108,6 +113,38 @@ export default function Map({ curLocation, stations }) {
           />
         </Marker>
       )}
+      {srcLocation && (
+        <Marker
+          latitude={srcLocation.latitude}
+          longitude={srcLocation.longitude}
+          draggable
+        >
+          <img
+            src={pin}
+            alt="pin"
+            style={{
+              transform: "translate(-50%, -85%)",
+              filter: "hue-rotate(160deg) saturate(3)",
+            }}
+          />
+        </Marker>
+      )}
+      {destLocation && (
+        <Marker
+          latitude={destLocation.latitude}
+          longitude={destLocation.longitude}
+          draggable
+        >
+          <img
+            src={pin}
+            alt="pin"
+            style={{
+              transform: "translate(-50%, -85%)",
+              filter: "hue-rotate(280deg) saturate(3)",
+            }}
+          />
+        </Marker>
+      )}
       <Geocoder
         mapRef={mapRef}
         onViewportChange={handleGeocoderViewportChange}
@@ -125,6 +162,16 @@ Map.propTypes = {
     longitude: PropTypes.number,
   }),
   setCurLocation: PropTypes.func.isRequired,
+  srcLocation: PropTypes.shape({
+    latitude: PropTypes.number,
+    longitude: PropTypes.number,
+  }).isRequired,
+  setSrcLocation: PropTypes.func.isRequired,
+  destLocation: PropTypes.shape({
+    latitude: PropTypes.number,
+    longitude: PropTypes.number,
+  }).isRequired,
+  setDestLocation: PropTypes.func.isRequired,
   stations: PropTypes.arrayOf(
     PropTypes.shape({
       sid: PropTypes.number.isRequired,
