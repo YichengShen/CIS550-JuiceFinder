@@ -1,4 +1,4 @@
-import MapGL, { Marker } from "react-map-gl";
+import MapGL, { Marker, NavigationControl } from "react-map-gl";
 import Geocoder from "react-map-gl-geocoder";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
@@ -57,6 +57,9 @@ export default function Map({ curLocation, stations }) {
       mapStyle="mapbox://styles/mapbox/streets-v9"
       mapboxApiAccessToken={MAPBOX_TOKEN}
     >
+      <div style={{ position: "absolute", top: 20, right: 70 }}>
+        <NavigationControl showZoom zoomInLabel="+" zoomOutLabel="-" />
+      </div>
       {Array.isArray(stations) &&
         stations.length > 0 &&
         stations.map((station) => (
