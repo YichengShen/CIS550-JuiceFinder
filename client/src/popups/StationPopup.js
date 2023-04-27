@@ -20,7 +20,7 @@ function StationPopup({ open, handleClose, stationId }) {
   const myTheme = useTheme();
   const [stationData, setStationData] = useState(null);
 
-  useEffect(() => {
+  const fetchStationData = () => {
     fetch(
       `http://${config.server_host}:${config.server_port}/stations/electric/${stationId}`
     )
@@ -28,7 +28,13 @@ function StationPopup({ open, handleClose, stationId }) {
       .then((resJson) => {
         setStationData(resJson);
       });
-  }, []);
+  };
+
+  useEffect(() => {
+    if (open) {
+      fetchStationData();
+    }
+  }, [open]);
 
   // Restaurant Search
   const [nearbyRestaurantsOpen, setNearbyRestaurantsOpen] =
