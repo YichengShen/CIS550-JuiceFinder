@@ -14,8 +14,8 @@ export default function HomePage() {
     longitude: -75.19028570489878,
   };
   const [curLocation, setCurLocation] = useState(DEFAULT_LOCATION);
-  const [srcLocation, setSrcLocation] = useState("");
-  const [destLocation, setDestLocation] = useState("");
+  const [srcLocation, setSrcLocation] = useState({});
+  const [destLocation, setDestLocation] = useState({});
 
   // Props for StationInput
   const [state, setState] = useState("");
@@ -54,8 +54,9 @@ export default function HomePage() {
   }, [curLocation]);
 
   const handleStationInputSubmit = async () => {
-    setSrcLocation("");
-    setDestLocation("");
+    setPath([]);
+    setSrcLocation({});
+    setDestLocation({});
 
     getCoordinatesFromAddress(`${streetAddress} ${state} ${city} ${zip}`).then(
       (response) => {
@@ -73,7 +74,8 @@ export default function HomePage() {
   };
 
   const handlePathInputSubmit = async () => {
-    setCurLocation("");
+    setCurLocation({});
+    setPath([]);
 
     Promise.all([
       getCoordinatesFromAddress(startAddress),
@@ -92,6 +94,7 @@ export default function HomePage() {
 
     getStationsNearPath(startAddress, endAddress, maxDistance).then(
       (response) => {
+        setPath(response.waypoints);
         const stationData = response.stations.map((station) => {
           return {
             sid: station.sid,

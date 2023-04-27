@@ -1,4 +1,4 @@
-import MapGL, { Marker, NavigationControl } from "react-map-gl";
+import MapGL, { Marker, NavigationControl, Layer, Source } from "react-map-gl";
 import Geocoder from "react-map-gl-geocoder";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
@@ -15,6 +15,7 @@ export default function Map({
   curLocation,
   srcLocation,
   destLocation,
+  path,
   stations,
 }) {
   const [viewport, setViewport] = useState({
@@ -46,6 +47,14 @@ export default function Map({
   };
   const openPopup = (sid) => {
     setPopupOpen(sid);
+  };
+
+  const routeGeojson = {
+    type: "Feature",
+    geometry: {
+      type: "LineString",
+      coordinates: path,
+    },
   };
 
   return (
@@ -97,7 +106,7 @@ export default function Map({
             />
           </Marker>
         ))}
-      {curLocation && (
+      {curLocation && curLocation.latitude && curLocation.longitude && (
         <Marker
           latitude={curLocation.latitude}
           longitude={curLocation.longitude}
@@ -113,7 +122,7 @@ export default function Map({
           />
         </Marker>
       )}
-      {srcLocation && (
+      {srcLocation && srcLocation.latitude && srcLocation.longitude && (
         <Marker
           latitude={srcLocation.latitude}
           longitude={srcLocation.longitude}
@@ -129,7 +138,7 @@ export default function Map({
           />
         </Marker>
       )}
-      {destLocation && (
+      {destLocation && destLocation.latitude && destLocation.longitude && (
         <Marker
           latitude={destLocation.latitude}
           longitude={destLocation.longitude}
@@ -145,6 +154,14 @@ export default function Map({
           />
         </Marker>
       )}
+      <Source id="route-source" type="geojson" data={routeGeojson}>
+        <Layer
+          id="plannedPath"
+          type="line"
+          source="route-source"
+          paint={{ "line-color": "#007F00", "line-width": 5 }}
+        />
+      </Source>
       <Geocoder
         mapRef={mapRef}
         onViewportChange={handleGeocoderViewportChange}
@@ -182,6 +199,7 @@ Map.propTypes = {
     })
   ).isRequired,
   setStations: PropTypes.func.isRequired,
+  path: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
 };
 
 Map.defaultProps = { curLocation: {} };
