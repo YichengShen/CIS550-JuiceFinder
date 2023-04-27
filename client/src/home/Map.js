@@ -2,8 +2,9 @@ import MapGL, { Marker, NavigationControl, Layer, Source } from "react-map-gl";
 import Geocoder from "react-map-gl-geocoder";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
-import React, { useState, useRef, useCallback } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import PropTypes from "prop-types";
+import { getDistance } from "geolib";
 
 import pin from "../assets/pin.svg";
 
@@ -25,6 +26,40 @@ export default function Map({
   // eslint-disable-next-line no-unused-vars
   // const [zoom, setZoom] = useState(14);
   const mapRef = useRef();
+
+  useEffect(() => {
+    if (curLocation.latitude && curLocation.longitude) {
+      setViewport((prevViewport) => ({
+        ...prevViewport,
+        latitude: curLocation.latitude,
+        longitude: curLocation.longitude,
+      }));
+    }
+  }, [curLocation]);
+
+  useEffect(() => {
+    if (srcLocation.latitude && srcLocation.longitude) {
+      const distance = getDistance(
+        { latitude: srcLocation.latitude, longitude: srcLocation.longitude },
+        { latitude: destLocation.latitude, longitude: destLocation.longitude }
+      );
+      let zoomValue;
+      if (distance < 10000) {
+        zoomValue = 13;
+      } else if (distance < 50000) {
+        zoomValue = 11;
+      } else {
+        zoomValue = 8;
+      }
+      setViewport((prevViewport) => ({
+        ...prevViewport,
+        zoom: zoomValue,
+        latitude: srcLocation.latitude,
+        longitude: srcLocation.longitude,
+      }));
+    }
+  }, [srcLocation]);
+
   const handleViewportChange = useCallback(
     (newViewport) => setViewport(newViewport),
     []
@@ -67,7 +102,7 @@ export default function Map({
       // zoom={zoom}
       // latitude={viewport.latitude}
       // longitude={viewport.longitude}
-      onViewStateChange={handleViewportChange}
+      onViewportChange={handleViewportChange}
       mapStyle="mapbox://styles/mapbox/streets-v9"
       mapboxApiAccessToken={MAPBOX_TOKEN}
     >
