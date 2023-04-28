@@ -454,16 +454,6 @@ function Settings() {
             </DialogContent>
           </Dialog>
         </div>
-
-        <Button
-          variant="contained"
-          color="primary"
-          disabled={loading}
-          onClick={handleLogout}
-          sx={{ marginTop: theme.spacing(2) }}
-        >
-          Logout (for testing)
-        </Button>
       </StyledContainer>
     </>
   );
