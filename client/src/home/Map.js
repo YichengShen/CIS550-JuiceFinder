@@ -4,13 +4,15 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import PropTypes from "prop-types";
-import { getDistance } from "geolib";
 
 import pin from "../assets/pin.svg";
 
 import ChargingStationPopup from "../popups/StationPopup";
 
 const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
+const BBOX_RATIO = 0.67; // features should be within the bbox of 2/3 the size of the viewport
+const LAT_SPAN_11 = 0.2414907913; // viewport latitude span at zoom level 11
+const LNG_SPAN_11 = 0.374714631; // viewport longitude span at zoom level 11
 
 export default function Map({
   curLocation,
@@ -25,7 +27,7 @@ export default function Map({
   });
   // eslint-disable-next-line no-unused-vars
   // const [zoom, setZoom] = useState(14);
-  const mapRef = useRef();
+  const mapRef = useRef(null);
 
   useEffect(() => {
     if (curLocation.latitude && curLocation.longitude) {
@@ -40,26 +42,23 @@ export default function Map({
 
   useEffect(() => {
     if (srcLocation.latitude && srcLocation.longitude) {
-      const distance = getDistance(
-        { latitude: srcLocation.latitude, longitude: srcLocation.longitude },
-        { latitude: destLocation.latitude, longitude: destLocation.longitude }
+      const latSpan =
+        Math.abs(srcLocation.latitude - destLocation.latitude) / BBOX_RATIO;
+      const lngSpan =
+        Math.abs(srcLocation.longitude - destLocation.longitude) / BBOX_RATIO;
+      let zoomValue = Math.min(
+        Math.log2(LAT_SPAN_11 / latSpan) + 11,
+        Math.log2(LNG_SPAN_11 / lngSpan) + 11
       );
-      let zoomValue;
-      if (distance < 10000) {
-        zoomValue = 13;
-      } else if (distance < 50000) {
-        zoomValue = 11;
-      } else {
-        zoomValue = 8;
-      }
+      zoomValue = Math.max(zoomValue, 1);
       setViewport((prevViewport) => ({
         ...prevViewport,
         zoom: zoomValue,
-        latitude: srcLocation.latitude,
-        longitude: srcLocation.longitude,
+        latitude: (srcLocation.latitude + destLocation.latitude) / 2,
+        longitude: (srcLocation.longitude + destLocation.longitude) / 2,
       }));
     }
-  }, [srcLocation]);
+  }, [srcLocation, destLocation]);
 
   const handleViewportChange = useCallback(
     (newViewport) => setViewport(newViewport),

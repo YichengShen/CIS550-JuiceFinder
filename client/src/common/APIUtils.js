@@ -55,6 +55,7 @@ export const getPath = async (start, end) => {
   }
 };
 
+// This retrieves the path as well as the stations near the path
 export const getStationsNearPath = async (
   start,
   end,
