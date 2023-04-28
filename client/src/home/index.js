@@ -92,7 +92,7 @@ export default function HomePage() {
       .catch(() => {
         setPathFormError(true);
         setPathFormErrorText(
-          "Invalid address. Please try again with a valid address."
+          "Invalid address. Please try again with a more specific address, preferably with city and state."
         );
       });
 
