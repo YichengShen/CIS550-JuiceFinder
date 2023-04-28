@@ -223,7 +223,7 @@ function afsByTypeStateBar(data) {
     xField: "state",
     yField: "numStations",
     isGroup: true,
-    isStack: true,
+    isStack: false,
     seriesField: "stype",
     columnStyle: {
       radius: [20, 20, 0, 0],
