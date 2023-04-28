@@ -92,7 +92,7 @@ router.get("/electric", async (req, res) => {
     "stationPorts",
     // "vehiclePorts", // move the adaptor logic to the client
     // "adapters",
-    "chargeLevel",
+    "chargeLevels",
   ];
   const receivedFilters = {};
   for (let i = 0; i < validFilters.length; i += 1) {

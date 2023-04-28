@@ -40,17 +40,21 @@ export default function HomePage() {
   const [path, setPath] = useState([]);
 
   useEffect(() => {
-    getNearbyStations(curLocation, maxDistance, { isElectric: true }).then(
-      (response) => {
-        setStations(response);
-        if (!response || response.length === 0) {
-          setStationFormError(true);
-          setStationFormErrorText(
-            "No stations found within the specified distance and location. Please try again with a different distance or location."
-          );
-        }
+    getNearbyStations(
+      curLocation,
+      maxDistance,
+      chargingLevels,
+      preferredStationPorts,
+      { isElectric: true }
+    ).then((response) => {
+      setStations(response);
+      if (!response || response.length === 0) {
+        setStationFormError(true);
+        setStationFormErrorText(
+          "No stations found within the specified distance and location. Please try again with a different distance or location."
+        );
       }
-    );
+    });
   }, [curLocation]);
 
   const handleStationInputSubmit = async () => {
@@ -92,30 +96,34 @@ export default function HomePage() {
         );
       });
 
-    getStationsNearPath(startAddress, endAddress, maxDistance).then(
-      (response) => {
-        setPath(response.waypoints);
-        const stationData = response.stations.map((station) => {
-          return {
-            sid: station.sid,
-            location: {
-              y: station.latitude,
-              x: station.longitude,
-            },
-          };
-        });
-        // console.log(response);
-        // console.log(stationData);
-        setStations(stationData);
+    getStationsNearPath(
+      startAddress,
+      endAddress,
+      maxDistance,
+      chargingLevels,
+      preferredStationPorts
+    ).then((response) => {
+      setPath(response.waypoints);
+      const stationData = response.stations.map((station) => {
+        return {
+          sid: station.sid,
+          location: {
+            y: station.latitude,
+            x: station.longitude,
+          },
+        };
+      });
+      // console.log(response);
+      // console.log(stationData);
+      setStations(stationData);
 
-        if (!response || response.length === 0) {
-          setStationFormError(true);
-          setStationFormErrorText(
-            "No stations found given the specified distance and locations. Please try again with different distance or locations."
-          );
-        }
+      if (!response || response.length === 0) {
+        setStationFormError(true);
+        setStationFormErrorText(
+          "No stations found given the specified distance and locations. Please try again with different distance or locations."
+        );
       }
-    );
+    });
   };
 
   return (

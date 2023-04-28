@@ -31,6 +31,7 @@ export default function Map({
     if (curLocation.latitude && curLocation.longitude) {
       setViewport((prevViewport) => ({
         ...prevViewport,
+        zoom: 13,
         latitude: curLocation.latitude,
         longitude: curLocation.longitude,
       }));
