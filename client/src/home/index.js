@@ -7,7 +7,6 @@ import {
   getCoordinatesFromAddress,
   getStationsNearPath,
 } from "../common/APIUtils";
-import ResponsiveAppBar from "../common/AppBar";
 
 export default function HomePage() {
   const DEFAULT_LOCATION = {
@@ -131,8 +130,7 @@ export default function HomePage() {
   };
 
   return (
-    <div style={{ height: "100vh", width: "100vw" }}>
-      <ResponsiveAppBar />
+    <div style={{ width: "100vw" }}>
       <Box
         sx={{
           display: "grid",

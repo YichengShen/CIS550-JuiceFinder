@@ -13,8 +13,6 @@ import OverviewTab from "./OverviewTab";
 import ElectricStationTab from "./ElectricStationTab";
 import EVFriendlinessTab from "./EVFriendlinessTab";
 
-import ResponsiveAppBar from "../common/AppBar";
-
 // functions required by MUI-tab component
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -78,7 +76,6 @@ function Statistics({ toggleTheme }) {
         flexDirection: "column",
       }}
     >
-      <ResponsiveAppBar />
       <Box
         sx={{
           backgroundColor: theme.palette.background.default,
