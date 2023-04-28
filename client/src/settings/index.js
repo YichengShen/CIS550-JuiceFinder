@@ -17,7 +17,6 @@ import OfflineBoltIcon from "@mui/icons-material/OfflineBolt";
 import { styled } from "@mui/system";
 import { useAuth } from "../auth/AuthContext";
 import config from "../config.json";
-import ResponsiveAppBar from "../common/AppBar";
 
 const StyledContainer = styled(Container)(() => ({
   display: "flex",
@@ -221,241 +220,238 @@ function Settings() {
   };
 
   return (
-    <>
-      <ResponsiveAppBar />
-      <StyledContainer
-        maxWidth="md"
+    <StyledContainer
+      maxWidth="md"
+      sx={{
+        marginTop: theme.spacing(2),
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        backgroundColor: theme.palette.background.paper,
+        borderRadius: theme.shape.borderRadius,
+        paddingTop: theme.spacing(6),
+        paddingBottom: theme.spacing(10),
+        paddingLeft: theme.spacing(6),
+        paddingRight: theme.spacing(6),
+        boxShadow: theme.shadows[3],
+      }}
+    >
+      <Typography
+        component="h1"
+        variant="h3"
+        color="primary"
+        sx={{ textAlign: "center" }}
+      >
+        JuiceFinder
+      </Typography>
+      <Avatar
         sx={{
-          marginTop: theme.spacing(2),
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          backgroundColor: theme.palette.background.paper,
-          borderRadius: theme.shape.borderRadius,
-          paddingTop: theme.spacing(6),
-          paddingBottom: theme.spacing(10),
-          paddingLeft: theme.spacing(6),
-          paddingRight: theme.spacing(6),
-          boxShadow: theme.shadows[3],
+          margin: theme.spacing(1),
+          color: theme.palette.secondary.main,
+          backgroundColor: theme.palette.success.main,
         }}
       >
-        <Typography
-          component="h1"
-          variant="h3"
-          color="primary"
-          sx={{ textAlign: "center" }}
-        >
-          JuiceFinder
-        </Typography>
-        <Avatar
-          sx={{
-            margin: theme.spacing(1),
-            color: theme.palette.secondary.main,
-            backgroundColor: theme.palette.success.main,
-          }}
-        >
-          <OfflineBoltIcon />
-        </Avatar>
-        <div>
-          {errorMsg && (
-            <Box>
-              <Typography color="error">{errorMsg}</Typography>
-            </Box>
-          )}
-          <Box sx={{ fontWeight: "Bold", marginTop: theme.spacing(3) }}>
-            <Typography variant="h4">Account Information</Typography>
+        <OfflineBoltIcon />
+      </Avatar>
+      <div>
+        {errorMsg && (
+          <Box>
+            <Typography color="error">{errorMsg}</Typography>
           </Box>
-          <Typography>
-            <b>Email:</b> {currentUser.email}
-          </Typography>
-          {/* <Typography>
+        )}
+        <Box sx={{ fontWeight: "Bold", marginTop: theme.spacing(3) }}>
+          <Typography variant="h4">Account Information</Typography>
+        </Box>
+        <Typography>
+          <b>Email:</b> {currentUser.email}
+        </Typography>
+        {/* <Typography>
           <b>User ID:</b> {currentUser.uid}
         </Typography> */}
 
-          {vehicleInfo && (
-            <div style={{ marginTop: theme.spacing(3) }}>
-              <Box sx={{ fontWeight: "Bold" }}>
-                <Typography variant="h4">Saved Vehicle Information</Typography>
-              </Box>
-              {/* <Typography>
+        {vehicleInfo && (
+          <div style={{ marginTop: theme.spacing(3) }}>
+            <Box sx={{ fontWeight: "Bold" }}>
+              <Typography variant="h4">Saved Vehicle Information</Typography>
+            </Box>
+            {/* <Typography>
               <b>Vehicle ID:</b> {vehicleInfo.id}
             </Typography> */}
+            <Typography>
+              <b>Brand:</b> {vehicleInfo.brand}
+            </Typography>
+            <Typography>
+              <b>Type:</b> {vehicleInfo.vehicle_type}
+            </Typography>
+            <Typography>
+              <b>Model:</b> {vehicleInfo.model}
+            </Typography>
+            <Typography>
+              <b>Release Year:</b> {vehicleInfo.release_year}
+            </Typography>
+            {vehicleInfo.variant && (
               <Typography>
-                <b>Brand:</b> {vehicleInfo.brand}
+                <b>Variant:</b> {vehicleInfo.variant}
               </Typography>
+            )}
+            <Typography>
+              <b>Vehicle Type:</b> {vehicleInfo.type}
+            </Typography>
+            {vehicleInfo.usable_battery_size && (
               <Typography>
-                <b>Type:</b> {vehicleInfo.vehicle_type}
+                <b>Usable Battery Size:</b> {vehicleInfo.usable_battery_size}
               </Typography>
+            )}
+            {vehicleInfo.energy_consumption && (
               <Typography>
-                <b>Model:</b> {vehicleInfo.model}
+                <b>Energy Consumption:</b> {vehicleInfo.energy_consumption}
               </Typography>
-              <Typography>
-                <b>Release Year:</b> {vehicleInfo.release_year}
-              </Typography>
-              {vehicleInfo.variant && (
-                <Typography>
-                  <b>Variant:</b> {vehicleInfo.variant}
-                </Typography>
-              )}
-              <Typography>
-                <b>Vehicle Type:</b> {vehicleInfo.type}
-              </Typography>
-              {vehicleInfo.usable_battery_size && (
-                <Typography>
-                  <b>Usable Battery Size:</b> {vehicleInfo.usable_battery_size}
-                </Typography>
-              )}
-              {vehicleInfo.energy_consumption && (
-                <Typography>
-                  <b>Energy Consumption:</b> {vehicleInfo.energy_consumption}
-                </Typography>
-              )}
-            </div>
-          )}
-        </div>
+            )}
+          </div>
+        )}
+      </div>
 
-        <div style={{ marginTop: theme.spacing(1) }}>
-          <Button onClick={handleOpenPopup} variant="contained" color="primary">
-            Update Saved Vehicle
-          </Button>
-          <Dialog open={openPopup} onClose={handleClosePopup}>
-            <DialogTitle>
-              <Box sx={{ fontWeight: "Bold" }}>
-                <Typography variant="h4">Save a new vehicle</Typography>
+      <div style={{ marginTop: theme.spacing(1) }}>
+        <Button onClick={handleOpenPopup} variant="contained" color="primary">
+          Update Saved Vehicle
+        </Button>
+        <Dialog open={openPopup} onClose={handleClosePopup}>
+          <DialogTitle>
+            <Box sx={{ fontWeight: "Bold" }}>
+              <Typography variant="h4">Save a new vehicle</Typography>
+            </Box>
+          </DialogTitle>
+          <DialogContent>
+            {errorMsgPopup && (
+              <Box>
+                <Typography color="error">{errorMsgPopup}</Typography>
               </Box>
-            </DialogTitle>
-            <DialogContent>
-              {errorMsgPopup && (
+            )}
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                "& .MuiTextField-root": { m: 1, width: "25ch" },
+              }}
+            >
+              {/* Brand Text Field */}
+              <TextField
+                select
+                variant="outlined"
+                color="primary"
+                label="Brand"
+                value={brand}
+                onChange={(e) => setBrand(e.target.value)}
+              >
+                {Array.from(new Set(dataArray.map((item) => item.brand))).map(
+                  (option) => (
+                    <MenuItem key={option} value={option}>
+                      {option}
+                    </MenuItem>
+                  )
+                )}
+              </TextField>
+
+              {/* Model Text Field */}
+              <TextField
+                select
+                variant="outlined"
+                color="primary"
+                label="Model"
+                value={model}
+                onChange={(e) => setModel(e.target.value)}
+              >
+                {Array.from(
+                  new Set(
+                    dataArray
+                      .filter((item) => item.brand === brand)
+                      .map((item) => item.model)
+                  )
+                ).map((option) => (
+                  <MenuItem key={option} value={option}>
+                    {option}
+                  </MenuItem>
+                ))}
+              </TextField>
+
+              {/* Release Year Text Field */}
+              {Array.from(
+                new Set(
+                  dataArray
+                    .filter(
+                      (item) => item.brand === brand && item.model === model
+                    )
+                    .map((item) => item.release_year)
+                )
+              ).length > 0 && (
                 <Box>
-                  <Typography color="error">{errorMsgPopup}</Typography>
+                  <TextField
+                    select
+                    variant="outlined"
+                    color="primary"
+                    label="Release Year"
+                    value={parseFloat(releaseYear)}
+                    onChange={(e) => {
+                      setReleaseYear(e.target.value);
+                    }}
+                  >
+                    {Array.from(
+                      new Set(
+                        dataArray
+                          .filter(
+                            (item) =>
+                              item.brand === brand && item.model === model
+                          )
+                          .map((item) => parseInt(item.release_year, 10))
+                      )
+                    ).map((option) => (
+                      <MenuItem key={option} value={option}>
+                        {option}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </Box>
+              )}
+              {/* Variant Text Field */}
+              {availableVariants[0] !== "" && (
+                <Box>
+                  <TextField
+                    select
+                    variant="outlined"
+                    color="primary"
+                    label="Variant"
+                    value={variant}
+                    onChange={(e) => setVariant(e.target.value)}
+                  >
+                    {availableVariants.map((option) => (
+                      <MenuItem key={option} value={option}>
+                        {option}
+                      </MenuItem>
+                    ))}
+                  </TextField>
                 </Box>
               )}
               <Box
                 sx={{
                   display: "flex",
-                  flexDirection: "column",
-                  "& .MuiTextField-root": { m: 1, width: "25ch" },
+                  justifyContent: "flex-end",
+                  alignItems: "flex-end",
+                  marginTop: "auto",
                 }}
               >
-                {/* Brand Text Field */}
-                <TextField
-                  select
-                  variant="outlined"
+                <Button
+                  variant="contained"
                   color="primary"
-                  label="Brand"
-                  value={brand}
-                  onChange={(e) => setBrand(e.target.value)}
+                  onClick={handleUpdateVehicle}
                 >
-                  {Array.from(new Set(dataArray.map((item) => item.brand))).map(
-                    (option) => (
-                      <MenuItem key={option} value={option}>
-                        {option}
-                      </MenuItem>
-                    )
-                  )}
-                </TextField>
-
-                {/* Model Text Field */}
-                <TextField
-                  select
-                  variant="outlined"
-                  color="primary"
-                  label="Model"
-                  value={model}
-                  onChange={(e) => setModel(e.target.value)}
-                >
-                  {Array.from(
-                    new Set(
-                      dataArray
-                        .filter((item) => item.brand === brand)
-                        .map((item) => item.model)
-                    )
-                  ).map((option) => (
-                    <MenuItem key={option} value={option}>
-                      {option}
-                    </MenuItem>
-                  ))}
-                </TextField>
-
-                {/* Release Year Text Field */}
-                {Array.from(
-                  new Set(
-                    dataArray
-                      .filter(
-                        (item) => item.brand === brand && item.model === model
-                      )
-                      .map((item) => item.release_year)
-                  )
-                ).length > 0 && (
-                  <Box>
-                    <TextField
-                      select
-                      variant="outlined"
-                      color="primary"
-                      label="Release Year"
-                      value={parseFloat(releaseYear)}
-                      onChange={(e) => {
-                        setReleaseYear(e.target.value);
-                      }}
-                    >
-                      {Array.from(
-                        new Set(
-                          dataArray
-                            .filter(
-                              (item) =>
-                                item.brand === brand && item.model === model
-                            )
-                            .map((item) => parseInt(item.release_year, 10))
-                        )
-                      ).map((option) => (
-                        <MenuItem key={option} value={option}>
-                          {option}
-                        </MenuItem>
-                      ))}
-                    </TextField>
-                  </Box>
-                )}
-                {/* Variant Text Field */}
-                {availableVariants[0] !== "" && (
-                  <Box>
-                    <TextField
-                      select
-                      variant="outlined"
-                      color="primary"
-                      label="Variant"
-                      value={variant}
-                      onChange={(e) => setVariant(e.target.value)}
-                    >
-                      {availableVariants.map((option) => (
-                        <MenuItem key={option} value={option}>
-                          {option}
-                        </MenuItem>
-                      ))}
-                    </TextField>
-                  </Box>
-                )}
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "flex-end",
-                    alignItems: "flex-end",
-                    marginTop: "auto",
-                  }}
-                >
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleUpdateVehicle}
-                  >
-                    Update Vehicle
-                  </Button>
-                </Box>
+                  Update Vehicle
+                </Button>
               </Box>
-            </DialogContent>
-          </Dialog>
-        </div>
-      </StyledContainer>
-    </>
+            </Box>
+          </DialogContent>
+        </Dialog>
+      </div>
+    </StyledContainer>
   );
 }
 
