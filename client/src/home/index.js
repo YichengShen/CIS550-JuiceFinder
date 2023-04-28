@@ -188,6 +188,7 @@ export default function HomePage() {
             setDestLocation={setDestLocation}
             stations={stations}
             setStations={setStations}
+            distance={maxDistance}
             path={path}
             setPath={setPath}
           />
