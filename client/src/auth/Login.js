@@ -14,6 +14,14 @@ import {
   Avatar,
 } from "@mui/material";
 import OfflineBoltIcon from "@mui/icons-material/OfflineBolt";
+import GoogleIcon from "@mui/icons-material/Google";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  GithubAuthProvider,
+} from "firebase/auth";
 import { useAuth } from "./AuthContext";
 
 function StyledTextField({ ...other }) {
@@ -70,6 +78,36 @@ function Login() {
       navigate("/settings");
     } catch (loginError) {
       setError(`Failed to log in. ${loginError.message}`);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    const auth = getAuth();
+    const provider = new GoogleAuthProvider();
+
+    try {
+      setLoading(true);
+      await signInWithPopup(auth, provider);
+      navigate("/settings");
+    } catch (e) {
+      setError(`Failed to log in. ${e.message}`);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGithubSignIn = async () => {
+    const auth = getAuth();
+    const provider = new GithubAuthProvider();
+
+    try {
+      setLoading(true);
+      await signInWithPopup(auth, provider);
+      navigate("/settings");
+    } catch (e) {
+      setError(`Failed to log in. ${e.message}`);
     } finally {
       setLoading(false);
     }
@@ -182,18 +220,7 @@ function Login() {
           >
             Cancel
           </Button>
-          {/* <Grid container justifyContent="flex-end">
-            <Grid item>
-              <Link
-                component={RouterLink}
-                to="/signup"
-                variant="body2"
-                color="primary"
-              >
-                Dont have an account? Sign up
-              </Link>
-            </Grid>
-          </Grid> */}
+
           <Grid container>
             <Grid item xs>
               <Link
@@ -217,6 +244,38 @@ function Login() {
             </Grid>
           </Grid>
         </form>
+        <Button
+          onClick={handleGoogleSignIn}
+          fullWidth
+          variant="contained"
+          color="primary"
+          sx={{
+            marginTop: theme.spacing(1),
+            color: theme.palette.primary.contrastText,
+            backgroundColor: theme.palette.primary.main,
+            "&:hover": {
+              backgroundColor: theme.palette.primary.light,
+            },
+          }}
+        >
+          <GoogleIcon fontSize="small" /> &nbsp; Login with Google
+        </Button>
+        <Button
+          onClick={handleGithubSignIn}
+          fullWidth
+          variant="contained"
+          color="primary"
+          sx={{
+            marginTop: theme.spacing(1),
+            color: theme.palette.primary.contrastText,
+            backgroundColor: theme.palette.primary.main,
+            "&:hover": {
+              backgroundColor: theme.palette.primary.light,
+            },
+          }}
+        >
+          <GitHubIcon fontSize="small" /> &nbsp; Login with GitHub
+        </Button>
       </div>
     </Container>
   );
