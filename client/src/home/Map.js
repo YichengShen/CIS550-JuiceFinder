@@ -1,4 +1,5 @@
 import MapGL, { Marker, NavigationControl, Layer, Source } from "react-map-gl";
+import { getBoundsOfDistance } from "geolib";
 import Geocoder from "react-map-gl-geocoder";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
@@ -13,6 +14,7 @@ const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
 const BBOX_RATIO = 0.67; // features should be within the bbox of 2/3 the size of the viewport
 const LAT_SPAN_11 = 0.2414907913; // viewport latitude span at zoom level 11
 const LNG_SPAN_11 = 0.374714631; // viewport longitude span at zoom level 11
+const METER_PER_MILE = 1609.34;
 
 export default function Map({
   curLocation,
@@ -20,20 +22,33 @@ export default function Map({
   destLocation,
   path,
   stations,
+  distance,
 }) {
   const [viewport, setViewport] = useState({
     zoom: 11,
     ...curLocation,
   });
-  // eslint-disable-next-line no-unused-vars
-  // const [zoom, setZoom] = useState(14);
   const mapRef = useRef(null);
 
   useEffect(() => {
-    if (curLocation.latitude && curLocation.longitude) {
+    if (curLocation && curLocation.latitude && curLocation.longitude) {
+      const bounds = getBoundsOfDistance(
+        curLocation,
+        distance * METER_PER_MILE
+      );
+      const latSpan =
+        Math.abs(bounds[0].latitude - bounds[1].latitude) / BBOX_RATIO;
+      const lngSpan =
+        Math.abs(bounds[0].longitude - bounds[1].longitude) / BBOX_RATIO;
+      let zoomValue = Math.min(
+        Math.log2(LAT_SPAN_11 / latSpan) + 11,
+        Math.log2(LNG_SPAN_11 / lngSpan) + 11
+      );
+      zoomValue = Math.min(Math.max(zoomValue, 1), 20); // limit zoom range to [1,20]
+
       setViewport((prevViewport) => ({
         ...prevViewport,
-        zoom: 13,
+        zoom: zoomValue,
         latitude: curLocation.latitude,
         longitude: curLocation.longitude,
       }));
@@ -41,7 +56,7 @@ export default function Map({
   }, [curLocation]);
 
   useEffect(() => {
-    if (srcLocation.latitude && srcLocation.longitude) {
+    if (srcLocation && srcLocation.latitude && srcLocation.longitude) {
       const latSpan =
         Math.abs(srcLocation.latitude - destLocation.latitude) / BBOX_RATIO;
       const lngSpan =
@@ -50,7 +65,7 @@ export default function Map({
         Math.log2(LAT_SPAN_11 / latSpan) + 11,
         Math.log2(LNG_SPAN_11 / lngSpan) + 11
       );
-      zoomValue = Math.max(zoomValue, 1);
+      zoomValue = Math.min(Math.max(zoomValue, 1), 20); // limit zoom range to [1,20]
       setViewport((prevViewport) => ({
         ...prevViewport,
         zoom: zoomValue,
@@ -234,6 +249,7 @@ Map.propTypes = {
     })
   ).isRequired,
   setStations: PropTypes.func.isRequired,
+  distance: PropTypes.number.isRequired,
   path: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
 };
 
