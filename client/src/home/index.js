@@ -82,6 +82,7 @@ export default function HomePage() {
   const handlePathInputSubmit = async () => {
     setCurLocation({});
     setPath([]);
+    setStations([]);
 
     Promise.all([
       getCoordinatesFromAddress(startAddress),
