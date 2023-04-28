@@ -83,7 +83,10 @@ router.get("/overview/afsByTypeState", (req, res) => {
             SELECT * FROM lng
         `;
   } else {
-    selectClause = `SELECT * FROM ${stationType}`;
+    selectClause = `SELECT allState.state, IFNULL(numStations,0) AS numStations, IFNULL(stype, '${stationType}') AS stype
+                    FROM ${stationType} 
+                    RIGHT JOIN allState
+                    ON ${stationType}.state = allState.state`;
   }
   connection.query(
     `
@@ -134,7 +137,16 @@ router.get("/overview/afsByTypeState", (req, res) => {
             (   SELECT DISTINCT S.sid, state FROM lng
                 JOIN stations S on S.sid = lng.sid     ) AS A
             GROUP BY state
-        ) ${selectClause} ORDER BY numStations desc`,
+        ),
+        allState AS (
+            SELECT DISTINCT(state) FROM stations
+            WHERE state IN ('AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA',
+                    'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD',
+                    'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ',
+                    'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC',
+                    'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY')
+        )
+        ${selectClause} ORDER BY numStations desc`,
     (err, data) => {
       if (err) {
         console.log(err);
