@@ -152,32 +152,9 @@ router.get("/stationsNearPath/:startAddress/:destAddress", async (req, res) => {
 
   // Do distance- and attribute-based filtering on the stations
   const maxDistMile = req.query.maxDistMile ?? 10;
-  const stationLocationColName = "location";
 
-  // Get the regular attributes' constraints
-  const validFilters = [
-    "state",
-    "city",
-    "zip",
-    "streetAddress",
-    "accessCode",
-    "alwaysOpen",
-    // Ignore location-related constraints for now
-    // "latitude",
-    // "longitude",
-    // "meterDistance",
-  ];
-  const receivedFilters = {};
-  validFilters.forEach((validKeyName) => {
-    const value = req.query[validKeyName];
-    if (value || value === "") {
-      receivedFilters[validKeyName] = value;
-    }
-  });
-
-  const whereClause = await getWhereClause(receivedFilters);
-  // whereClause = "WHERE state = 'CA' AND city = 'San Francisco'"
-  //               or an empty string if no constraints are given
+  const whereClause = await getWhereClause(req.query, true);
+  // whereClause contains charging attributes
 
   const cartesianWaypoints = waypoints.map(toMercator);
   const simplifiedCartesianWaypoints = simplify(
@@ -195,10 +172,10 @@ router.get("/stationsNearPath/:startAddress/:destAddress", async (req, res) => {
 
   // Combine the queries
   const query = `
-    SELECT DISTINCT sid, ST_Y(${stationLocationColName}) AS longitude, ST_X(${stationLocationColName}) AS latitude
-    FROM stations
+    SELECT DISTINCT sid, ST_Y(location) AS longitude, ST_X(location) AS latitude
+    FROM stations S NATURAL JOIN electric_stations E NATURAL JOIN station_ports SP
     WHERE ST_DISTANCE(
-      ${stationLocationColName},
+      location,
       ST_SRID(ST_GEOMFROMTEXT('LINESTRING(${linestringArr})'), 4326)
     ) < ${maxDistMile * 1609.34}
     AND ${whereClause === "" ? "TRUE" : whereClause.substring(6)}

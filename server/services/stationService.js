@@ -78,7 +78,7 @@ const getWhereClause = async (filters, isElectric = false) => {
 };
 
 parseElectricFilters = (filters) => {
-  const { stationPorts, chargeLevel } = filters;
+  const { stationPorts, chargeLevels } = filters;
   const electricWhereArr = [];
 
   let portArr;
@@ -96,14 +96,17 @@ parseElectricFilters = (filters) => {
     }
   }
 
-  if (chargeLevel) {
+  if (chargeLevels) {
     const chargeLevelPredicateArr = [];
-    chargeLevel.split(",").forEach((level) => {
-      if (level === "dc_fast") {
+    const level1Flags = ["level1", "level 1"];
+    const level2Flags = ["level2", "level 2"];
+    const dcFastFlags = ["dc_fast", "dc fast", "DC fast"];
+    chargeLevels.split(",").forEach((level) => {
+      if (dcFastFlags.some((flag) => level.includes(flag))) {
         chargeLevelPredicateArr.push(`CLE.ev_dc_fast_num > 0`);
-      } else if (level === "level1") {
+      } else if (level1Flags.some((flag) => level.includes(flag))) {
         chargeLevelPredicateArr.push(`CLE.ev_level1_evse_num > 0`);
-      } else if (level === "level2") {
+      } else if (level2Flags.some((flag) => level.includes(flag))) {
         chargeLevelPredicateArr.push(`CLE.ev_level2_evse_num > 0`);
       } else {
         console.log(`Unrecognized charging level: ${level}`);
@@ -126,7 +129,7 @@ parseElectricFilters = (filters) => {
   Object.keys(filters).forEach((key) => {
     switch (key) {
       case "stationPorts":
-      case "chargeLevel":
+      case "chargeLevels":
         break;
       default:
         console.log(
