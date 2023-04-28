@@ -57,45 +57,45 @@ const stateOptions = [
 ];
 
 const stationTypeOptions = [
-  { key: "All", text: "All station types" },
+  { key: "All", text: "All fuel types" },
   { key: "electric", text: "Electric" },
-  { key: "e85", text: "E85" },
-  { key: "lpg", text: "LPG" },
-  { key: "cng", text: "CNG" },
-  { key: "bd", text: "BD" },
-  { key: "rd", text: "RD" },
-  { key: "hy", text: "HY" },
-  { key: "lng", text: "LNG" },
+  { key: "e85", text: "Ethanol(E85)" },
+  { key: "lpg", text: "Propane(LPG)" },
+  { key: "cng", text: "Compressed Natural Gas(CNG)" },
+  { key: "bd", text: "Biodiesel(BD)" },
+  { key: "hy", text: "Hydrogen(HY)" },
+  { key: "lng", text: "Liquefied Natural Gas(LNG)" },
+  { key: "rd", text: "Renewable Diesel(RD)" },
 ];
 
 const vehicleTypeOptions = [
   { key: "All", text: "All vehicle types" },
-  { key: "ev", text: "EV" },
-  { key: "phev", text: "PHEV" },
-  { key: "hev", text: "HEV" },
-  { key: "biodiesel", text: "Biodiesel" },
-  { key: "e85", text: "E85" },
-  { key: "cng", text: "CNG" },
-  { key: "propane", text: "Propane" },
-  { key: "hydrogen", text: "Hydrogen" },
+  { key: "ev", text: "Electric Vehicles(EV)" },
+  { key: "phev", text: "Plug-in Hybrid Electric Vehicles(PHEV)" },
+  { key: "hev", text: "Hybrid Electric Vehicles(HEV)" },
+  { key: "e85", text: "Ethanol(E85)" },
+  { key: "propane", text: "Propane(LPG)" },
+  { key: "cng", text: "Compressed Natural Gas(CNG)" },
+  { key: "biodiesel", text: "Biodiesel(BD)" },
+  { key: "hydrogen", text: "Hydrogen(HY)" },
   { key: "gasoline", text: "Gasoline" },
   { key: "diesel", text: "Diesel" },
 ];
 
 const portOptions = [
-  { key: "All", text: "All ports" },
+  { key: "All", text: "All port types" },
   { key: "type1", text: "Type-1" },
   { key: "type2", text: "Type-2" },
   { key: "ccs", text: "Ccs" },
   { key: "chademo", text: "Chademo" },
   { key: "tesla", text: "Tesla" },
-  { key: "nema515", text: "NEMA-515" },
-  { key: "nema520", text: "NEMA-520" },
-  { key: "nema1450", text: "NEMA-1450" },
+  { key: "nema515", text: "Nema-515" },
+  { key: "nema520", text: "Nema-520" },
+  { key: "nema1450", text: "Nema-1450" },
 ];
 
 const speedOptions = [
-  { key: "All", text: "All speeds" },
+  { key: "All", text: "All speed levels" },
   { key: "acLevel1", text: "AC level-1" },
   { key: "acLevel2", text: "AC level-2" },
   { key: "dcfast", text: "DC fast charging" },
