@@ -18,6 +18,7 @@ const lightThemeOptions = {
     background: {
       default: "#ffffff",
       paper: "#f5f5f5",
+      landing: "#f3f3ff",
     },
   },
   typography: {
@@ -118,6 +119,7 @@ const darkThemeOptions = {
     background: {
       default: "#121212",
       paper: "#1f1f1f",
+      landing: "#121212",
     },
   },
   typography: {
