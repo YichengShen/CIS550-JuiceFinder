@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import csvtojson from "csvtojson";
-import { useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import {
   Box,
@@ -27,11 +26,9 @@ const StyledContainer = styled(Container)(() => ({
 
 function Settings() {
   const theme = useTheme();
-  const navigate = useNavigate();
 
-  const { currentUser, logout } = useAuth();
+  const { currentUser } = useAuth();
   const [errorMsg, setErrorMsg] = useState("");
-  const [loading, setLoading] = useState(false);
 
   const [vehicleId, setVehicleId] = useState("");
   const [vehicleInfo, setVehicleInfo] = useState(null);
@@ -177,20 +174,6 @@ function Settings() {
   useEffect(() => {
     fetchVehicleInfo();
   }, [currentUser, vehicleId]);
-
-  // Log out the current user and navigate to the login page
-  const handleLogout = async () => {
-    setErrorMsg("");
-    setLoading(true);
-    try {
-      await logout();
-      navigate("/login");
-    } catch (logoutError) {
-      setErrorMsg(`Failed to log out. ${logoutError.message}`);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   // Update the vehicle information based on the provided vehicle ID and re-fetch the updated information
   const updateVehicle = async () => {
@@ -468,16 +451,6 @@ function Settings() {
           </DialogContent>
         </Dialog>
       </div>
-
-      <Button
-        variant="contained"
-        color="primary"
-        disabled={loading}
-        onClick={handleLogout}
-        sx={{ marginTop: theme.spacing(2) }}
-      >
-        Logout (for testing)
-      </Button>
     </StyledContainer>
   );
 }

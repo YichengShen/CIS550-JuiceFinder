@@ -87,17 +87,24 @@ export default function HomePage() {
     Promise.all([
       getCoordinatesFromAddress(startAddress),
       getCoordinatesFromAddress(endAddress),
-    ])
-      .then(([srcCoor, destCoor]) => {
+    ]).then(([srcCoor, destCoor]) => {
+      if (
+        srcCoor &&
+        srcCoor.latitude &&
+        srcCoor.longitude &&
+        destCoor &&
+        destCoor.latitude &&
+        destCoor.longitude
+      ) {
         setSrcLocation(srcCoor);
         setDestLocation(destCoor);
-      })
-      .catch(() => {
+      } else {
         setPathFormError(true);
         setPathFormErrorText(
           "Invalid address. Please try again with a more specific address, preferably with city and state."
         );
-      });
+      }
+    });
 
     getStationsNearPath(
       startAddress,
@@ -130,12 +137,11 @@ export default function HomePage() {
   };
 
   return (
-    <div style={{ height: "100vh", width: "100vw" }}>
+    <div style={{ width: "100vw" }}>
       <Box
         sx={{
           display: "grid",
           gridTemplateColumns: "1fr 4fr",
-          height: "100%",
         }}
       >
         <Box
