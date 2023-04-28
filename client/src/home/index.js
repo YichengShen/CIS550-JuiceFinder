@@ -40,21 +40,23 @@ export default function HomePage() {
   const [path, setPath] = useState([]);
 
   useEffect(() => {
-    getNearbyStations(
-      curLocation,
-      maxDistance,
-      chargingLevels,
-      preferredStationPorts,
-      { isElectric: true }
-    ).then((response) => {
-      setStations(response);
-      if (!response || response.length === 0) {
-        setStationFormError(true);
-        setStationFormErrorText(
-          "No stations found within the specified distance and location. Please try again with a different distance or location."
-        );
-      }
-    });
+    if (curLocation && curLocation.latitude && curLocation.longitude) {
+      getNearbyStations(
+        curLocation,
+        maxDistance,
+        chargingLevels,
+        preferredStationPorts,
+        { isElectric: true }
+      ).then((response) => {
+        setStations(response);
+        if (!response || response.length === 0) {
+          setStationFormError(true);
+          setStationFormErrorText(
+            "No stations found within the specified distance and location. Please try again with a different distance or location."
+          );
+        }
+      });
+    }
   }, [curLocation]);
 
   const handleStationInputSubmit = async () => {
