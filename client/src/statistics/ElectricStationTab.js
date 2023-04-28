@@ -270,7 +270,7 @@ function ElectricStationTab() {
                 variant="h6"
                 sx={{ color: theme.palette.primary.main }}
               >
-                Number of electric stations with different charging speed in US
+                Number of charging ports with different speed level in US
               </Typography>
             </Box>
           </Grid>
