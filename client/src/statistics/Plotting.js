@@ -376,7 +376,7 @@ function stationCountBySpeedStateBar(data) {
   const config = {
     data,
     xField: "state",
-    yField: "numStations",
+    yField: "numPort",
     isGroup: false,
     isStack: true,
     seriesField: "speedLevel",
