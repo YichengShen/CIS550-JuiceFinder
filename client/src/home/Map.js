@@ -31,7 +31,7 @@ export default function Map({
   radius,
 }) {
   const [viewport, setViewport] = useState({
-    zoom: 11,
+    zoom: 13,
     duration: 1000,
     ...curLocation,
   });
