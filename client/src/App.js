@@ -19,7 +19,7 @@ function App({ toggleTheme }) {
     <Router>
       <AuthProvider>
         <HasMapGLProvider>
-          <Layout>
+          <Layout toggleTheme={toggleTheme}>
             <Routes>
               <Route
                 exact

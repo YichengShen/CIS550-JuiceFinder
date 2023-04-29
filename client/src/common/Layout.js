@@ -6,7 +6,7 @@ import ResponsiveAppBar from "./AppBar";
 
 import { useHasMapGL } from "./HasMapGLContext";
 
-function Layout({ children }) {
+function Layout({ children, toggleTheme }) {
   const { hasMapGL } = useHasMapGL();
 
   const getSx1 = () => {
@@ -32,7 +32,7 @@ function Layout({ children }) {
 
   return (
     <Box sx={getSx1()}>
-      <ResponsiveAppBar />
+      <ResponsiveAppBar toggleTheme={toggleTheme} />
       <Box sx={getSx2()}>{children}</Box>
       <Footer />
     </Box>
@@ -41,6 +41,7 @@ function Layout({ children }) {
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
+  toggleTheme: PropTypes.func.isRequired,
 };
 
 export default Layout;

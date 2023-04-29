@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 import { Link, useNavigate } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -15,13 +16,15 @@ import MenuItem from "@mui/material/MenuItem";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import OfflineBoltIcon from "@mui/icons-material/OfflineBolt";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { useTheme } from "@mui/material/styles";
 import { useAuth } from "../auth/AuthContext";
 
 const pages = ["Home", "Statistics"];
 const settings = ["Settings", "Logout"];
 
-function ResponsiveAppBar() {
+function ResponsiveAppBar({ toggleTheme }) {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -185,6 +188,23 @@ function ResponsiveAppBar() {
               ))}
             </Box>
 
+            <Tooltip title="Light/Dark Theme">
+              <IconButton
+                onClick={toggleTheme}
+                sx={{ p: 0, mr: myTheme.spacing(2) }}
+              >
+                {myTheme.palette.type === "dark" ? (
+                  <Brightness7Icon
+                    sx={{ color: myTheme.palette.primary.main }}
+                  />
+                ) : (
+                  <Brightness4Icon
+                    sx={{ color: myTheme.palette.primary.main }}
+                  />
+                )}
+              </IconButton>
+            </Tooltip>
+
             <Box sx={{ flexGrow: 0 }}>
               {currentUser ? (
                 <>
@@ -260,4 +280,9 @@ function ResponsiveAppBar() {
     </>
   );
 }
+
+ResponsiveAppBar.propTypes = {
+  toggleTheme: PropTypes.func.isRequired,
+};
+
 export default ResponsiveAppBar;
