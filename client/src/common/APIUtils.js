@@ -19,7 +19,7 @@ export const getNearbyStations = async (
       `http://${config.server_host}:${config.server_port}/stations/` +
         `${isElectric ? "electric/" : ""}` +
         `?latitude=${location.latitude}&longitude=${location.longitude}` +
-        `&mileDistance=${maxDistance}&pageSize=${150}` +
+        `&mileDistance=${maxDistance}&pageSize=${150}&orderBy=sid` +
         `${chargeLevels ? `&chargeLevels=${chargeLevels}` : ""}` +
         `${stationPorts ? `&stationPorts=${stationPorts}` : ""}`
     );
