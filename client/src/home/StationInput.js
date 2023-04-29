@@ -12,6 +12,7 @@ import {
   Radio,
   RadioGroup,
   Button,
+  Checkbox,
 } from "@mui/material";
 
 import stateDict from "../assets/states_hash.json";
@@ -35,6 +36,9 @@ export default function StationInput({
   setPreferredStationPorts,
   adapters,
   setAdapters,
+  vehiclePorts,
+  matchVehicle,
+  setMatchVehicle,
   formError,
   setFormError,
   formErrorText,
@@ -143,6 +147,37 @@ export default function StationInput({
             }}
           >
             <h3>Advanced</h3>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  disabled={!vehiclePorts}
+                  checked={matchVehicle}
+                  onChange={(e) => setMatchVehicle(e.target.checked)}
+                  icon={
+                    <span
+                      style={{
+                        borderRadius: 2,
+                        border: "1px solid #000",
+                        width: 16,
+                        height: 16,
+                      }}
+                    />
+                  }
+                  checkedIcon={
+                    <span
+                      style={{
+                        borderRadius: 2,
+                        border: "1px solid #000",
+                        width: 16,
+                        height: 16,
+                        backgroundColor: "#000",
+                      }}
+                    />
+                  }
+                />
+              }
+              label="Match My Vehicle's Ports"
+            />
             <Autocomplete
               multiple
               disableCloseOnSelect
@@ -159,6 +194,7 @@ export default function StationInput({
             <Autocomplete
               multiple
               disableCloseOnSelect
+              disabled={matchVehicle}
               id="station-port-types"
               options={stationPortArr}
               defaultValue={[]}
@@ -225,6 +261,9 @@ StationInput.propTypes = {
     })
   ).isRequired,
   setAdapters: PropTypes.func.isRequired,
+  vehiclePorts: PropTypes.string.isRequired,
+  matchVehicle: PropTypes.bool.isRequired,
+  setMatchVehicle: PropTypes.func.isRequired,
   formError: PropTypes.bool.isRequired,
   setFormError: PropTypes.func.isRequired,
   formErrorText: PropTypes.string.isRequired,

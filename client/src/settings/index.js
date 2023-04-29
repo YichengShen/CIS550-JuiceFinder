@@ -307,6 +307,11 @@ function Settings() {
                 <b>Energy Consumption:</b> {vehicleInfo.energy_consumption}
               </Typography>
             )}
+            {vehicleInfo.port && (
+              <Typography>
+                <b>Port(s):</b> {vehicleInfo.port}
+              </Typography>
+            )}
           </div>
         )}
       </div>

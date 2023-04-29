@@ -6,7 +6,9 @@ import {
   getNearbyStations,
   getCoordinatesFromAddress,
   getStationsNearPath,
+  fetchVehicleInfo,
 } from "../common/APIUtils";
+import { useAuth } from "../auth/AuthContext";
 
 export default function HomePage() {
   const DEFAULT_LOCATION = {
@@ -41,6 +43,19 @@ export default function HomePage() {
   const [path, setPath] = useState([]);
 
   const [loading, setLoading] = useState(false);
+
+  const { currentUser } = useAuth();
+  const [vehiclePorts, setVehiclePorts] = useState("");
+
+  useEffect(() => {
+    if (currentUser) {
+      fetchVehicleInfo(currentUser).then((response) => {
+        if (response && response.port) {
+          setVehiclePorts(response.port);
+        }
+      });
+    }
+  }, []);
 
   useEffect(() => {
     if (curLocation && curLocation.latitude && curLocation.longitude) {
@@ -119,23 +134,23 @@ export default function HomePage() {
       chargingLevels,
       preferredStationPorts
     ).then((response) => {
-      setPath(response.waypoints);
-      const stationData = response.stations.map((station) => {
-        return {
-          sid: station.sid,
-          location: {
-            y: station.latitude,
-            x: station.longitude,
-          },
-        };
-      });
-      setStations(stationData);
-
       if (!response || response.length === 0) {
-        setStationFormError(true);
-        setStationFormErrorText(
+        setPathFormError(true);
+        setPathFormErrorText(
           "No stations found given the specified distance and locations. Please try again with different distance or locations."
         );
+      } else {
+        setPath(response.waypoints);
+        const stationData = response.stations.map((station) => {
+          return {
+            sid: station.sid,
+            location: {
+              y: station.latitude,
+              x: station.longitude,
+            },
+          };
+        });
+        setStations(stationData);
       }
       setLoading(false);
     });
@@ -176,6 +191,7 @@ export default function HomePage() {
             setPreferredStationPorts={setPreferredStationPorts}
             adapters={adapters}
             setAdapters={setAdapters}
+            vehiclePorts={vehiclePorts}
             stationFormError={stationFormError}
             setStationFormError={setStationFormError}
             stationFormErrorText={stationFormErrorText}
