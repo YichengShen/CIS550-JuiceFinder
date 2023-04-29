@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box } from "@mui/material";
+import { Box, Backdrop, CircularProgress } from "@mui/material";
 import Map from "./Map";
 import InputTabs from "./InputTabs";
 import {
@@ -39,6 +39,8 @@ export default function HomePage() {
   const [stations, setStations] = useState([]);
   const [path, setPath] = useState([]);
 
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     if (curLocation && curLocation.latitude && curLocation.longitude) {
       getNearbyStations(
@@ -60,6 +62,7 @@ export default function HomePage() {
   }, [curLocation]);
 
   const handleStationInputSubmit = async () => {
+    setLoading(true);
     setPath([]);
     setSrcLocation({});
     setDestLocation({});
@@ -75,11 +78,13 @@ export default function HomePage() {
             "Invalid address. Please try again with a valid address."
           );
         }
+        setLoading(false);
       }
     );
   };
 
   const handlePathInputSubmit = async () => {
+    setLoading(true);
     setCurLocation({});
     setPath([]);
     setStations([]);
@@ -123,8 +128,6 @@ export default function HomePage() {
           },
         };
       });
-      // console.log(response);
-      // console.log(stationData);
       setStations(stationData);
 
       if (!response || response.length === 0) {
@@ -133,11 +136,15 @@ export default function HomePage() {
           "No stations found given the specified distance and locations. Please try again with different distance or locations."
         );
       }
+      setLoading(false);
     });
   };
 
   return (
     <div style={{ width: "100vw" }}>
+      <Backdrop sx={{ color: "#fff", zIndex: 1000 }} open={loading}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <Box
         sx={{
           display: "grid",
