@@ -22,8 +22,8 @@ export default function PathInput({
   setStartAddress,
   endAddress,
   setEndAddress,
-  maxDistance,
-  setMaxDistance,
+  pathDistance,
+  setPathDistance,
   chargingLevels,
   setChargingLevels,
   preferredStationPorts,
@@ -85,26 +85,26 @@ export default function PathInput({
               </FormLabel>
               <RadioGroup
                 row
-                defaultValue={1}
-                value={maxDistance}
-                onChange={(e) => setMaxDistance(parseInt(e.target.value, 10))}
+                defaultValue={0.1}
+                value={pathDistance}
+                onChange={(e) => setPathDistance(parseInt(e.target.value, 10))}
                 aria-labelledby="distance-radio-buttons-group-label"
                 name="distance-row-radio-buttons-group"
               >
                 <FormControlLabel
+                  value={0.1}
+                  control={<Radio />}
+                  label="0.1 mile"
+                />
+                <FormControlLabel
+                  value={0.5}
+                  control={<Radio />}
+                  label="0.5 mile"
+                />
+                <FormControlLabel
                   value={1}
                   control={<Radio />}
                   label="1 mile"
-                />
-                <FormControlLabel
-                  value={5}
-                  control={<Radio />}
-                  label="5 miles"
-                />
-                <FormControlLabel
-                  value={10}
-                  control={<Radio />}
-                  label="10 miles"
                 />
               </RadioGroup>
             </FormControl>
@@ -179,8 +179,8 @@ PathInput.propTypes = {
   setStartAddress: PropTypes.func.isRequired,
   endAddress: PropTypes.string.isRequired,
   setEndAddress: PropTypes.func.isRequired,
-  maxDistance: PropTypes.number.isRequired,
-  setMaxDistance: PropTypes.func.isRequired,
+  pathDistance: PropTypes.number.isRequired,
+  setPathDistance: PropTypes.func.isRequired,
   chargingLevels: PropTypes.arrayOf(PropTypes.string).isRequired,
   setChargingLevels: PropTypes.func.isRequired,
   preferredStationPorts: PropTypes.arrayOf(PropTypes.string).isRequired,
