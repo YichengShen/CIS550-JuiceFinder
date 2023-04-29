@@ -8,9 +8,19 @@ import {
   getStationsNearPath,
   fetchVehicleInfo,
 } from "../common/APIUtils";
+import { useHasMapGL } from "../common/HasMapGLContext";
 import { useAuth } from "../auth/AuthContext";
 
 export default function HomePage() {
+  const { setHasMapGL } = useHasMapGL();
+
+  useEffect(() => {
+    setHasMapGL(true);
+    return () => {
+      setHasMapGL(false);
+    };
+  }, [setHasMapGL]);
+
   const DEFAULT_LOCATION = {
     latitude: 39.9524657202615,
     longitude: -75.19028570489878,
@@ -157,7 +167,7 @@ export default function HomePage() {
   };
 
   return (
-    <div style={{ width: "100vw" }}>
+    <div style={{ width: "100vw", height: "100%" }}>
       <Backdrop sx={{ color: "#fff", zIndex: 1000 }} open={loading}>
         <CircularProgress color="inherit" />
       </Backdrop>
@@ -165,51 +175,56 @@ export default function HomePage() {
         sx={{
           display: "grid",
           gridTemplateColumns: "1fr 4fr",
+          height: "100%",
         }}
       >
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "flex-start",
-            justifyContent: "center",
-          }}
-        >
-          <InputTabs
-            state={state}
-            setState={setState}
-            city={city}
-            setCity={setCity}
-            zip={zip}
-            setZip={setZip}
-            streetAddress={streetAddress}
-            setStreetAddress={setStreetAddress}
-            stationDistance={stationDistance}
-            setStationDistance={setStationDistance}
-            chargingLevels={chargingLevels}
-            setChargingLevels={setChargingLevels}
-            preferredStationPorts={preferredStationPorts}
-            setPreferredStationPorts={setPreferredStationPorts}
-            adapters={adapters}
-            setAdapters={setAdapters}
-            vehiclePorts={vehiclePorts}
-            stationFormError={stationFormError}
-            setStationFormError={setStationFormError}
-            stationFormErrorText={stationFormErrorText}
-            setStationFormErrorText={setStationFormErrorText}
-            handleStationInputSubmit={handleStationInputSubmit}
-            startAddress={startAddress}
-            setStartAddress={setStartAddress}
-            endAddress={endAddress}
-            setEndAddress={setEndAddress}
-            pathDistance={pathDistance}
-            setPathDistance={setPathDistance}
-            pathFormError={pathFormError}
-            setPathFormError={setPathFormError}
-            pathFormErrorText={pathFormErrorText}
-            setPathFormErrorText={setPathFormErrorText}
-            handlePathInputSubmit={handlePathInputSubmit}
-          />
-        </Box>
+        <div>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "flex-start",
+              justifyContent: "center",
+              height: "100%",
+              overflowY: "visible",
+            }}
+          >
+            <InputTabs
+              state={state}
+              setState={setState}
+              city={city}
+              setCity={setCity}
+              zip={zip}
+              setZip={setZip}
+              streetAddress={streetAddress}
+              setStreetAddress={setStreetAddress}
+              stationDistance={stationDistance}
+              setStationDistance={setStationDistance}
+              chargingLevels={chargingLevels}
+              setChargingLevels={setChargingLevels}
+              preferredStationPorts={preferredStationPorts}
+              setPreferredStationPorts={setPreferredStationPorts}
+              adapters={adapters}
+              setAdapters={setAdapters}
+              vehiclePorts={vehiclePorts}
+              stationFormError={stationFormError}
+              setStationFormError={setStationFormError}
+              stationFormErrorText={stationFormErrorText}
+              setStationFormErrorText={setStationFormErrorText}
+              handleStationInputSubmit={handleStationInputSubmit}
+              startAddress={startAddress}
+              setStartAddress={setStartAddress}
+              endAddress={endAddress}
+              setEndAddress={setEndAddress}
+              pathDistance={pathDistance}
+              setPathDistance={setPathDistance}
+              pathFormError={pathFormError}
+              setPathFormError={setPathFormError}
+              pathFormErrorText={pathFormErrorText}
+              setPathFormErrorText={setPathFormErrorText}
+              handlePathInputSubmit={handlePathInputSubmit}
+            />
+          </Box>
+        </div>
         <Box>
           <Map
             curLocation={curLocation}
