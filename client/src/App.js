@@ -21,11 +21,7 @@ function App({ toggleTheme }) {
         <HasMapGLProvider>
           <Layout toggleTheme={toggleTheme}>
             <Routes>
-              <Route
-                exact
-                path="/"
-                element={<Landing toggleTheme={toggleTheme} />}
-              />
+              <Route exact path="/" element={<Landing />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />

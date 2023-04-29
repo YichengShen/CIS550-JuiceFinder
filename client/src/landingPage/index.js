@@ -1,16 +1,13 @@
 import React, { useEffect, useState, useRef } from "react";
-import PropTypes from "prop-types";
 import { logEvent, isSupported } from "firebase/analytics";
 import { useTheme } from "@mui/material/styles";
 import { Typography, Button, Box } from "@mui/material";
 import { Link } from "react-router-dom";
-import Brightness4Icon from "@mui/icons-material/Brightness4";
-import Brightness7Icon from "@mui/icons-material/Brightness7";
 import RINGS from "vanta/dist/vanta.rings.min";
 
 import { analytics } from "../auth/Firebase";
 
-function Landing({ toggleTheme }) {
+function Landing() {
   const theme = useTheme();
 
   useEffect(() => {
@@ -149,27 +146,10 @@ function Landing({ toggleTheme }) {
               </Button>
             </Link>
           </Box>
-
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={toggleTheme}
-            sx={{ height: 30 }}
-          >
-            {theme.palette.mode === "dark" ? (
-              <Brightness7Icon />
-            ) : (
-              <Brightness4Icon />
-            )}
-          </Button>
         </Box>
       </Box>
     </div>
   );
 }
-
-Landing.propTypes = {
-  toggleTheme: PropTypes.func.isRequired,
-};
 
 export default Landing;
