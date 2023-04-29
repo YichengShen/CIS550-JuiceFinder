@@ -1,3 +1,4 @@
+// import PropTypes from "prop-types";
 import React from "react";
 import PropTypes from "prop-types";
 import {
@@ -5,7 +6,11 @@ import {
   TextField,
   Autocomplete,
   FormControl,
+  FormControlLabel,
+  FormLabel,
   FormHelperText,
+  Radio,
+  RadioGroup,
   Button,
 } from "@mui/material";
 
@@ -17,8 +22,8 @@ export default function PathInput({
   setStartAddress,
   endAddress,
   setEndAddress,
-  // maxDistance,
-  // setMaxDistance,
+  maxDistance,
+  setMaxDistance,
   chargingLevels,
   setChargingLevels,
   preferredStationPorts,
@@ -74,6 +79,35 @@ export default function PathInput({
               onChange={(e) => setEndAddress(e.target.value)}
             />
             {formError && <FormHelperText>{formErrorText}</FormHelperText>}
+            <FormControl>
+              <FormLabel id="distance-radio-buttons-group-label">
+                Max Distance
+              </FormLabel>
+              <RadioGroup
+                row
+                defaultValue={1}
+                value={maxDistance}
+                onChange={(e) => setMaxDistance(parseInt(e.target.value, 10))}
+                aria-labelledby="distance-radio-buttons-group-label"
+                name="distance-row-radio-buttons-group"
+              >
+                <FormControlLabel
+                  value={1}
+                  control={<Radio />}
+                  label="1 mile"
+                />
+                <FormControlLabel
+                  value={5}
+                  control={<Radio />}
+                  label="5 miles"
+                />
+                <FormControlLabel
+                  value={10}
+                  control={<Radio />}
+                  label="10 miles"
+                />
+              </RadioGroup>
+            </FormControl>
           </FormControl>
         </Box>
         <Box
