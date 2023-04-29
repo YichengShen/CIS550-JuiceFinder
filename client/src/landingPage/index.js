@@ -87,6 +87,9 @@ function Landing({ toggleTheme }) {
               ml: theme.spacing(15),
               mt: theme.spacing(10),
               position: "relative",
+              backgroundColor: `${theme.palette.background.landing}CC`,
+              padding: theme.spacing(1),
+              borderRadius: theme.shape.borderRadius,
             }}
           >
             <Typography
