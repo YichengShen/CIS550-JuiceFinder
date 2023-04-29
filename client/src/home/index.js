@@ -75,7 +75,7 @@ export default function HomePage() {
         } else {
           setStationFormError(true);
           setStationFormErrorText(
-            "Invalid address. Please try again with a valid address."
+            "Input location not recognized. Please try again with another address, preferably with city and state, or zip code. Alternatively, check server status."
           );
         }
         setLoading(false);
@@ -106,7 +106,7 @@ export default function HomePage() {
       } else {
         setPathFormError(true);
         setPathFormErrorText(
-          "Invalid address. Please try again with a more specific address, preferably with city and state."
+          "Invalid address(es). Please try again with more specific address(es), preferably with city and state or zip code. Alternatively, check server status."
         );
       }
     });
