@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Box, Tabs, Tab, AppBar } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import PropTypes from "prop-types";
 import StationInput from "./StationInput";
 import PathInput from "./PathInput";
@@ -65,6 +66,7 @@ export default function InputTabs({
   setPathFormErrorText,
   handlePathInputSubmit,
 }) {
+  const myTheme = useTheme();
   const [value, setValue] = useState(0);
   const [matchVehicle, setMatchVehicle] = useState(false);
   useEffect(() => {
@@ -80,7 +82,12 @@ export default function InputTabs({
   };
 
   return (
-    <Box>
+    <Box
+      sx={{
+        color: myTheme.palette.primary.main,
+        backgroundColor: myTheme.palette.background.header,
+      }}
+    >
       <AppBar position="static" color="inherit">
         <Tabs
           value={value}
