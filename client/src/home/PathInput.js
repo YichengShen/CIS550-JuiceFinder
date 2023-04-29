@@ -87,7 +87,7 @@ export default function PathInput({
                 row
                 defaultValue={0.1}
                 value={pathDistance}
-                onChange={(e) => setPathDistance(parseInt(e.target.value, 10))}
+                onChange={(e) => setPathDistance(parseFloat(e.target.value))}
                 aria-labelledby="distance-radio-buttons-group-label"
                 name="distance-row-radio-buttons-group"
               >
