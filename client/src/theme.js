@@ -118,7 +118,7 @@ const darkThemeOptions = {
     },
     background: {
       default: "#121212",
-      paper: "#1f1f1f",
+      paper: "#3c3e40",
       landing: "#121212",
     },
   },
