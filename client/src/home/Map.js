@@ -28,7 +28,7 @@ export default function Map({
   destLocation,
   path,
   stations,
-  distance,
+  radius,
 }) {
   const [viewport, setViewport] = useState({
     zoom: 11,
@@ -39,10 +39,7 @@ export default function Map({
 
   useEffect(() => {
     if (curLocation && curLocation.latitude && curLocation.longitude) {
-      const bounds = getBoundsOfDistance(
-        curLocation,
-        distance * METER_PER_MILE
-      );
+      const bounds = getBoundsOfDistance(curLocation, radius * METER_PER_MILE);
       const latSpan =
         Math.abs(bounds[0].latitude - bounds[1].latitude) / BBOX_RATIO;
       const lngSpan =
@@ -258,7 +255,7 @@ Map.propTypes = {
     })
   ).isRequired,
   setStations: PropTypes.func.isRequired,
-  distance: PropTypes.number.isRequired,
+  radius: PropTypes.number.isRequired,
   path: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
 };
 

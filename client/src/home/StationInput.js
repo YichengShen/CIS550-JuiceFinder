@@ -27,8 +27,8 @@ export default function StationInput({
   setZip,
   streetAddress,
   setStreetAddress,
-  maxDistance,
-  setMaxDistance,
+  stationDistance,
+  setStationDistance,
   chargingLevels,
   setChargingLevels,
   preferredStationPorts,
@@ -112,8 +112,10 @@ export default function StationInput({
               <RadioGroup
                 row
                 defaultValue={1}
-                value={maxDistance}
-                onChange={(e) => setMaxDistance(parseInt(e.target.value, 10))}
+                value={stationDistance}
+                onChange={(e) =>
+                  setStationDistance(parseInt(e.target.value, 10))
+                }
                 aria-labelledby="distance-radio-buttons-group-label"
                 name="distance-row-radio-buttons-group"
               >
@@ -210,8 +212,8 @@ StationInput.propTypes = {
   setZip: PropTypes.func.isRequired,
   streetAddress: PropTypes.string.isRequired,
   setStreetAddress: PropTypes.func.isRequired,
-  maxDistance: PropTypes.number.isRequired,
-  setMaxDistance: PropTypes.func.isRequired,
+  stationDistance: PropTypes.number.isRequired,
+  setStationDistance: PropTypes.func.isRequired,
   chargingLevels: PropTypes.arrayOf(PropTypes.string).isRequired,
   setChargingLevels: PropTypes.func.isRequired,
   preferredStationPorts: PropTypes.arrayOf(PropTypes.string).isRequired,

@@ -39,8 +39,8 @@ export default function InputTabs({
   setZip,
   streetAddress,
   setStreetAddress,
-  maxDistance,
-  setMaxDistance,
+  stationDistance,
+  setStationDistance,
   chargingLevels,
   setChargingLevels,
   preferredStationPorts,
@@ -56,6 +56,8 @@ export default function InputTabs({
   setStartAddress,
   endAddress,
   setEndAddress,
+  pathDistance,
+  setPathDistance,
   pathFormError,
   setPathFormError,
   pathFormErrorText,
@@ -93,8 +95,8 @@ export default function InputTabs({
           setZip={setZip}
           streetAddress={streetAddress}
           setStreetAddress={setStreetAddress}
-          maxDistance={maxDistance}
-          setMaxDistance={setMaxDistance}
+          stationDistance={stationDistance}
+          setStationDistance={setStationDistance}
           chargingLevels={chargingLevels}
           setChargingLevels={setChargingLevels}
           preferredStationPorts={preferredStationPorts}
@@ -114,8 +116,8 @@ export default function InputTabs({
           setStartAddress={setStartAddress}
           endAddress={endAddress}
           setEndAddress={setEndAddress}
-          maxDistance={maxDistance}
-          setMaxDistance={setMaxDistance}
+          pathDistance={pathDistance}
+          setPathDistance={setPathDistance}
           chargingLevels={chargingLevels}
           setChargingLevels={setChargingLevels}
           preferredStationPorts={preferredStationPorts}
@@ -142,8 +144,8 @@ InputTabs.propTypes = {
   setZip: PropTypes.func.isRequired,
   streetAddress: PropTypes.string.isRequired,
   setStreetAddress: PropTypes.func.isRequired,
-  maxDistance: PropTypes.number.isRequired,
-  setMaxDistance: PropTypes.func.isRequired,
+  stationDistance: PropTypes.number.isRequired,
+  setStationDistance: PropTypes.func.isRequired,
   chargingLevels: PropTypes.arrayOf(PropTypes.string).isRequired,
   setChargingLevels: PropTypes.func.isRequired,
   preferredStationPorts: PropTypes.arrayOf(PropTypes.string).isRequired,
@@ -164,6 +166,8 @@ InputTabs.propTypes = {
   setStartAddress: PropTypes.func.isRequired,
   endAddress: PropTypes.string.isRequired,
   setEndAddress: PropTypes.func.isRequired,
+  pathDistance: PropTypes.number.isRequired,
+  setPathDistance: PropTypes.func.isRequired,
   pathFormError: PropTypes.bool.isRequired,
   setPathFormError: PropTypes.func.isRequired,
   pathFormErrorText: PropTypes.string.isRequired,

@@ -22,7 +22,7 @@ export default function HomePage() {
   const [city, setCity] = useState("");
   const [zip, setZip] = useState("");
   const [streetAddress, setStreetAddress] = useState("");
-  const [maxDistance, setMaxDistance] = useState(1);
+  const [stationDistance, setStationDistance] = useState(1);
   const [chargingLevels, setChargingLevels] = useState([]);
   const [preferredStationPorts, setPreferredStationPorts] = useState([]);
   const [adapters, setAdapters] = useState([]);
@@ -32,6 +32,7 @@ export default function HomePage() {
   // Props for PathInput
   const [startAddress, setStartAddress] = useState("");
   const [endAddress, setEndAddress] = useState("");
+  const [pathDistance, setPathDistance] = useState(0.1);
   const [pathFormError, setPathFormError] = useState(false);
   const [pathFormErrorText, setPathFormErrorText] = useState("");
 
@@ -45,7 +46,7 @@ export default function HomePage() {
     if (curLocation && curLocation.latitude && curLocation.longitude) {
       getNearbyStations(
         curLocation,
-        maxDistance,
+        stationDistance,
         chargingLevels,
         preferredStationPorts,
         { isElectric: true }
@@ -114,7 +115,7 @@ export default function HomePage() {
     getStationsNearPath(
       startAddress,
       endAddress,
-      maxDistance,
+      pathDistance,
       chargingLevels,
       preferredStationPorts
     ).then((response) => {
@@ -167,8 +168,8 @@ export default function HomePage() {
             setZip={setZip}
             streetAddress={streetAddress}
             setStreetAddress={setStreetAddress}
-            maxDistance={maxDistance}
-            setMaxDistance={setMaxDistance}
+            stationDistance={stationDistance}
+            setStationDistance={setStationDistance}
             chargingLevels={chargingLevels}
             setChargingLevels={setChargingLevels}
             preferredStationPorts={preferredStationPorts}
@@ -184,6 +185,8 @@ export default function HomePage() {
             setStartAddress={setStartAddress}
             endAddress={endAddress}
             setEndAddress={setEndAddress}
+            pathDistance={pathDistance}
+            setPathDistance={setPathDistance}
             pathFormError={pathFormError}
             setPathFormError={setPathFormError}
             pathFormErrorText={pathFormErrorText}
@@ -201,7 +204,7 @@ export default function HomePage() {
             setDestLocation={setDestLocation}
             stations={stations}
             setStations={setStations}
-            distance={maxDistance}
+            radius={stationDistance}
             path={path}
             setPath={setPath}
           />
