@@ -31,10 +31,7 @@ function App({ toggleTheme }) {
               <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/home" element={<HomePage hasMapGL />} />
               <Route path="/popup-test" element={<PopupTest />} />
-              <Route
-                path="/statistics"
-                element={<Statistics toggleTheme={toggleTheme} />}
-              />
+              <Route path="/statistics" element={<Statistics />} />
               <Route
                 path="/settings"
                 element={
