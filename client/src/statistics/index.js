@@ -70,47 +70,25 @@ function Statistics({ toggleTheme }) {
 
   return (
     <Box
+      maxWidth="1740px"
+      disableGutters="true"
+      paddingRight="170px"
       sx={{
+        borderBottom: 1,
+        color: "inherit",
+        borderColor: theme.palette.background.default,
         backgroundColor: theme.palette.background.default,
-        display: "flex",
-        flexDirection: "column",
+        minwidth: "1740",
       }}
     >
       <Box
-        sx={{
-          backgroundColor: theme.palette.background.default,
-          color: theme.palette.primary.main,
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "right",
-          justifyContent: "space-between",
-        }}
-      >
-        <Typography
-          variant="h3"
-          sx={{
-            backgroundColor: theme.palette.background.default,
-            color: theme.palette.primary.main,
-          }}
-        >
-          Statistics
-        </Typography>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={toggleTheme}
-          sx={{
-            backgroundColor: theme.palette.background.default,
-            color: theme.palette.primary.main,
-          }}
-        >
-          <DarkModeSharpIcon />
-        </Button>
-      </Box>
-      <Box
+        maxWidth="1740px"
+        disableGutters="true"
         sx={{
           borderBottom: 1,
-          borderColor: theme.palette.secondary.main,
+          borderColor: theme.palette.background.default,
+          color: "inherit",
+          minwidth: "1740",
         }}
       >
         <Tabs
@@ -118,6 +96,7 @@ function Statistics({ toggleTheme }) {
           onChange={handleChange}
           textColor="primary"
           indicatorColor="primary"
+          color="inherit"
         >
           <Tab
             label="AFS Resources Overview"
@@ -159,6 +138,30 @@ function Statistics({ toggleTheme }) {
             icon={<MoodIcon fontSize="large" />}
           />
         </Tabs>
+      </Box>
+      <Box
+        maxWidth="1740px"
+        disableGutters="true"
+        sx={{
+          backgroundColor: theme.palette.background.default,
+          color: theme.palette.primary.main,
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "right",
+          justifyContent: "right",
+        }}
+      >
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={toggleTheme}
+          sx={{
+            backgroundColor: theme.palette.background.default,
+            color: theme.palette.primary.main,
+          }}
+        >
+          <DarkModeSharpIcon />
+        </Button>
       </Box>
       <TabPanel
         value={value}
