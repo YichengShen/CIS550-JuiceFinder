@@ -1,5 +1,6 @@
 import { React } from "react";
 import PropTypes from "prop-types";
+import { useTheme } from "@mui/material/styles";
 import {
   Box,
   TextField,
@@ -45,6 +46,7 @@ export default function StationInput({
   setFormErrorText,
   handleStationInputSubmit,
 }) {
+  const myTheme = useTheme();
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!state && !city && !streetAddress && !zip) {
@@ -75,6 +77,8 @@ export default function StationInput({
                 "& .MuiTextField-root": {
                   my: 1,
                   width: "30ch",
+                  border: `1px solid ${myTheme.palette.primary.main}`,
+                  borderRadius: `${myTheme.shape.borderRadius}px`,
                 },
               }}
             >
@@ -153,7 +157,12 @@ export default function StationInput({
             </Box>
             <Box
               sx={{
-                "& .MuiTextField-root": { my: 1, width: "30ch" },
+                "& .MuiTextField-root": {
+                  my: 1,
+                  width: "30ch",
+                  border: `1px solid ${myTheme.palette.primary.main}`,
+                  borderRadius: `${myTheme.shape.borderRadius}px`,
+                },
               }}
             >
               <h3>Advanced</h3>
@@ -167,7 +176,7 @@ export default function StationInput({
                       <span
                         style={{
                           borderRadius: 2,
-                          border: "1px solid #000",
+                          border: `1px solid ${myTheme.palette.primary.main}`,
                           width: 16,
                           height: 16,
                         }}
@@ -177,10 +186,10 @@ export default function StationInput({
                       <span
                         style={{
                           borderRadius: 2,
-                          border: "1px solid #000",
+                          border: `1px solid ${myTheme.palette.primary.main}`,
                           width: 16,
                           height: 16,
-                          backgroundColor: "#000",
+                          backgroundColor: myTheme.palette.primary.main,
                         }}
                       />
                     }

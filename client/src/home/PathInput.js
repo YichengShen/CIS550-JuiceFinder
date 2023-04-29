@@ -1,5 +1,6 @@
 // import PropTypes from "prop-types";
 import React from "react";
+import { useTheme } from "@mui/material/styles";
 import PropTypes from "prop-types";
 import {
   Box,
@@ -40,6 +41,7 @@ export default function PathInput({
   setFormErrorText,
   handlePathInputSubmit,
 }) {
+  const myTheme = useTheme();
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -71,6 +73,8 @@ export default function PathInput({
                   "& .MuiTextField-root": {
                     my: 1,
                     width: "30ch",
+                    border: `1px solid ${myTheme.palette.primary.main}`,
+                    borderRadius: `${myTheme.shape.borderRadius}px`,
                   },
                 }}
               >
@@ -128,7 +132,12 @@ export default function PathInput({
               </Box>
               <Box
                 sx={{
-                  "& .MuiTextField-root": { my: 1, width: "30ch" },
+                  "& .MuiTextField-root": {
+                    my: 1,
+                    width: "30ch",
+                    border: `1px solid ${myTheme.palette.primary.main}`,
+                    borderRadius: `${myTheme.shape.borderRadius}px`,
+                  },
                 }}
               >
                 <h3>Advanced</h3>
@@ -142,7 +151,7 @@ export default function PathInput({
                         <span
                           style={{
                             borderRadius: 2,
-                            border: "1px solid #000",
+                            border: `1px solid ${myTheme.palette.primary.main}`,
                             width: 16,
                             height: 16,
                           }}
@@ -152,10 +161,10 @@ export default function PathInput({
                         <span
                           style={{
                             borderRadius: 2,
-                            border: "1px solid #000",
+                            border: `1px solid ${myTheme.palette.primary.main}`,
                             width: 16,
                             height: 16,
-                            backgroundColor: "#000",
+                            backgroundColor: myTheme.palette.primary.main,
                           }}
                         />
                       }
