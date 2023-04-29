@@ -114,7 +114,7 @@ export default function HomePage() {
     getStationsNearPath(
       startAddress,
       endAddress,
-      1,
+      maxDistance,
       chargingLevels,
       preferredStationPorts
     ).then((response) => {
