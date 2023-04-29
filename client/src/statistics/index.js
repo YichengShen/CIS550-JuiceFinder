@@ -4,7 +4,8 @@ import PropTypes from "prop-types";
 import { Box, Button, Tab, Tabs, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 // import MUI icons
-import DarkModeSharpIcon from "@mui/icons-material/DarkModeSharp";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
 import EqualizerIcon from "@mui/icons-material/Equalizer";
 import EvStationIcon from "@mui/icons-material/EvStation";
 import MoodIcon from "@mui/icons-material/Mood";
@@ -69,32 +70,20 @@ function Statistics({ toggleTheme }) {
   };
 
   return (
-    <Box
-      sx={{
-        backgroundColor: theme.palette.background.default,
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
+    <div>
       <Box
+        maxWidth="1740px"
+        disableGutters="true"
+        paddingRight="170px"
         sx={{
           backgroundColor: theme.palette.background.default,
           color: theme.palette.primary.main,
           display: "flex",
           flexDirection: "row",
           alignItems: "right",
-          justifyContent: "space-between",
+          justifyContent: "right",
         }}
       >
-        <Typography
-          variant="h3"
-          sx={{
-            backgroundColor: theme.palette.background.default,
-            color: theme.palette.primary.main,
-          }}
-        >
-          Statistics
-        </Typography>
         <Button
           variant="contained"
           color="primary"
@@ -104,84 +93,108 @@ function Statistics({ toggleTheme }) {
             color: theme.palette.primary.main,
           }}
         >
-          <DarkModeSharpIcon />
+          {/* <DarkModeSharpIcon /> */}
+          {theme.palette.mode === "dark" ? (
+            <Brightness7Icon />
+          ) : (
+            <Brightness4Icon />
+          )}
         </Button>
       </Box>
       <Box
+        maxWidth="1740px"
+        disableGutters="true"
+        paddingRight="170px"
         sx={{
           borderBottom: 1,
-          borderColor: theme.palette.secondary.main,
+          color: "inherit",
+          borderColor: theme.palette.background.default,
+          backgroundColor: theme.palette.background.default,
+          minwidth: "1740",
         }}
       >
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          textColor="primary"
-          indicatorColor="primary"
+        <Box
+          maxWidth="1740px"
+          disableGutters="true"
+          sx={{
+            borderBottom: 1,
+            borderColor: theme.palette.background.default,
+            color: "inherit",
+            minwidth: "1740",
+          }}
         >
-          <Tab
-            label="AFS Resources Overview"
-            {...a11yProps(0)}
-            sx={{
-              backgroundColor: theme.palette.background.default,
-              color: theme.palette.primary.main,
-              display: "flex",
-              alignItems: "center",
-              flexDirection: "row",
-              justifyContent: "center",
-            }}
-            icon={<EqualizerIcon fontSize="large" />}
-          />
-          <Tab
-            label="Electric Charging Stations"
-            {...a11yProps(1)}
-            sx={{
-              backgroundColor: theme.palette.background.default,
-              color: theme.palette.primary.main,
-              display: "flex",
-              alignItems: "center",
-              flexDirection: "row",
-              justifyContent: "center",
-            }}
-            icon={<EvStationIcon fontSize="large" />}
-          />
-          <Tab
-            label="EV Friendliness"
-            {...a11yProps(2)}
-            sx={{
-              backgroundColor: theme.palette.background.default,
-              color: theme.palette.primary.main,
-              display: "flex",
-              alignItems: "center",
-              flexDirection: "row",
-              justifyContent: "center",
-            }}
-            icon={<MoodIcon fontSize="large" />}
-          />
-        </Tabs>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            textColor="primary"
+            indicatorColor="primary"
+            color="inherit"
+          >
+            <Tab
+              label="AFS Resources Overview"
+              {...a11yProps(0)}
+              sx={{
+                backgroundColor: theme.palette.background.default,
+                color: theme.palette.primary.main,
+                display: "flex",
+                alignItems: "center",
+                flexDirection: "row",
+                justifyContent: "center",
+              }}
+              icon={<EqualizerIcon fontSize="large" />}
+            />
+            <Tab
+              label="Electric Charging Stations"
+              {...a11yProps(1)}
+              sx={{
+                backgroundColor: theme.palette.background.default,
+                color: theme.palette.primary.main,
+                display: "flex",
+                alignItems: "center",
+                flexDirection: "row",
+                justifyContent: "center",
+              }}
+              icon={<EvStationIcon fontSize="large" />}
+            />
+            <Tab
+              label="EV Friendliness"
+              {...a11yProps(2)}
+              sx={{
+                backgroundColor: theme.palette.background.default,
+                color: theme.palette.primary.main,
+                display: "flex",
+                alignItems: "center",
+                flexDirection: "row",
+                justifyContent: "center",
+              }}
+              icon={<MoodIcon fontSize="large" />}
+            />
+          </Tabs>
+        </Box>
+
+        <TabPanel
+          value={value}
+          index={0}
+          sx={{ color: theme.palette.primary.main }}
+        >
+          <OverviewTab />
+        </TabPanel>
+        <TabPanel
+          value={value}
+          index={1}
+          sx={{ color: theme.palette.primary.main }}
+        >
+          <ElectricStationTab />
+        </TabPanel>
+        <TabPanel
+          value={value}
+          index={2}
+          sx={{ color: theme.palette.primary.main }}
+        >
+          <EVFriendlinessTab />
+        </TabPanel>
       </Box>
-      <TabPanel
-        value={value}
-        index={0}
-        sx={{ color: theme.palette.primary.main }}
-      >
-        <OverviewTab />
-      </TabPanel>
-      <TabPanel
-        value={value}
-        index={1}
-        sx={{ color: theme.palette.primary.main }}
-      >
-        <ElectricStationTab />
-      </TabPanel>
-      <TabPanel
-        value={value}
-        index={2}
-        sx={{ color: theme.palette.primary.main }}
-      >
-        <EVFriendlinessTab />
-      </TabPanel>
-    </Box>
+    </div>
   );
 }
 
