@@ -16,9 +16,11 @@ const lightThemeOptions = {
       main: "#028090",
     },
     background: {
-      default: "#ffffff",
-      paper: "#f5f5f5",
+      // default: "#ffffff",
+      default: "#f5f5fa",
+      paper: "#FFFFF0",
       landing: "#f3f3ff",
+      header: "#ffffff",
     },
   },
   typography: {
@@ -120,6 +122,7 @@ const darkThemeOptions = {
       default: "#121212",
       paper: "#3c3e40",
       landing: "#121212",
+      header: "#121212",
     },
   },
   typography: {

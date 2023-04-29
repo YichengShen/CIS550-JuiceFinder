@@ -67,7 +67,14 @@ function ResponsiveAppBar() {
 
   return (
     <>
-      <AppBar position="static">
+      <AppBar
+        position="static"
+        sx={{
+          backgroundColor: myTheme.palette.background.header,
+          color: myTheme.palette.primary.main,
+          borderBottom: `2px solid ${myTheme.palette.primary.main}`,
+        }}
+      >
         <Container maxWidth="false">
           <Toolbar disableGutters>
             <OfflineBoltIcon
@@ -154,8 +161,9 @@ function ResponsiveAppBar() {
                   key={page}
                   onClick={handleCloseNavMenu}
                   sx={{
-                    my: 2,
-                    color: myTheme.palette.primary.contrastText,
+                    my: myTheme.spacing(2),
+                    mx: myTheme.spacing(3),
+                    color: "inherit",
                     display: "block",
                   }}
                 >
@@ -163,7 +171,15 @@ function ResponsiveAppBar() {
                     to={`/${page.toLowerCase()}`}
                     style={{ textDecoration: "none", color: "inherit" }}
                   >
-                    {page}
+                    <Typography
+                      sx={{
+                        fontSize: 16,
+                        fontWeight: 700,
+                        borderBottom: `1px solid`,
+                      }}
+                    >
+                      {page}
+                    </Typography>
                   </Link>
                 </Button>
               ))}
@@ -174,7 +190,9 @@ function ResponsiveAppBar() {
                 <>
                   <Tooltip title="Open settings">
                     <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                      <AccountCircle color="secondary" />
+                      <AccountCircle
+                        sx={{ color: myTheme.palette.primary.main }}
+                      />
                     </IconButton>
                   </Tooltip>
                   <Menu
