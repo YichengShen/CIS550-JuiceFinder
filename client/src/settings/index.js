@@ -13,6 +13,7 @@ import {
   DialogTitle,
   DialogContent,
   MenuItem,
+  Grid,
 } from "@mui/material";
 import OfflineBoltIcon from "@mui/icons-material/OfflineBolt";
 import { styled } from "@mui/system";
@@ -232,10 +233,11 @@ function Settings() {
           color: theme.palette.text.primary,
           backgroundColor: theme.palette.background.paper,
           borderRadius: theme.shape.borderRadius,
-          paddingTop: theme.spacing(6),
-          paddingBottom: theme.spacing(10),
+          paddingTop: theme.spacing(3),
+          paddingBottom: theme.spacing(3),
           paddingLeft: theme.spacing(20),
           paddingRight: theme.spacing(20),
+          marginBottom: theme.spacing(2),
           boxShadow: theme.shadows[3],
         }}
       >
@@ -267,66 +269,128 @@ function Settings() {
               Account Information
             </Typography>
           </Box>
-          <Typography>
-            <b>Email:</b> {currentUser.email}
-          </Typography>
-          {/* <Typography>
-          <b>User ID:</b> {currentUser.uid}
-        </Typography> */}
+          <Grid container spacing={2}>
+            <Grid item xs={3}>
+              <Typography>
+                <b>Email:</b>
+              </Typography>
+            </Grid>
+            <Grid item xs={9}>
+              <Typography>{currentUser.email}</Typography>
+            </Grid>
+          </Grid>
 
-          {vehicleInfo && (
-            <div style={{ marginTop: theme.spacing(3) }}>
-              <Box sx={{ fontWeight: "Bold" }}>
-                <Typography
-                  variant="h4"
-                  sx={{ color: theme.palette.primary.main }}
-                >
-                  Saved Vehicle Information
-                </Typography>
-              </Box>
-              {/* <Typography>
-              <b>Vehicle ID:</b> {vehicleInfo.id}
-            </Typography> */}
-              <Typography>
-                <b>Brand:</b> {vehicleInfo.brand}
-              </Typography>
-              <Typography>
-                <b>Type:</b> {vehicleInfo.vehicle_type}
-              </Typography>
-              <Typography>
-                <b>Model:</b> {vehicleInfo.model}
-              </Typography>
-              <Typography>
-                <b>Release Year:</b> {vehicleInfo.release_year}
-              </Typography>
-              {vehicleInfo.variant && (
-                <Typography>
-                  <b>Variant:</b> {vehicleInfo.variant}
-                </Typography>
-              )}
-              <Typography>
-                <b>Vehicle Type:</b> {vehicleInfo.type}
-              </Typography>
-              {vehicleInfo.usable_battery_size && (
-                <Typography>
-                  <b>Usable Battery Size:</b> {vehicleInfo.usable_battery_size}
-                </Typography>
-              )}
-              {vehicleInfo.energy_consumption && (
-                <Typography>
-                  <b>Energy Consumption:</b> {vehicleInfo.energy_consumption}
-                </Typography>
-              )}
-              {vehicleInfo.port && (
-                <Typography>
-                  <b>Port(s):</b> {vehicleInfo.port}
-                </Typography>
-              )}
-            </div>
-          )}
+          <div>
+            {vehicleInfo && (
+              <div style={{ marginTop: theme.spacing(3) }}>
+                <Box sx={{ fontWeight: "Bold" }}>
+                  <Typography
+                    variant="h4"
+                    sx={{ color: theme.palette.primary.main }}
+                  >
+                    Saved Vehicle Information
+                  </Typography>
+                </Box>
+                <Grid container spacing={2}>
+                  <Grid item xs={6}>
+                    <Typography>
+                      <b>Brand:</b>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography>{vehicleInfo.brand}</Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography>
+                      <b>Type:</b>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography>{vehicleInfo.vehicle_type}</Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography>
+                      <b>Model:</b>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography>{vehicleInfo.model}</Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography>
+                      <b>Release Year:</b>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography>{vehicleInfo.release_year}</Typography>
+                  </Grid>
+                  {vehicleInfo.variant && (
+                    <>
+                      <Grid item xs={6}>
+                        <Typography>
+                          <b>Variant:</b>
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={6}>
+                        <Typography>{vehicleInfo.variant}</Typography>
+                      </Grid>
+                    </>
+                  )}
+                  <Grid item xs={6}>
+                    <Typography>
+                      <b>Vehicle Type:</b>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography>{vehicleInfo.type}</Typography>
+                  </Grid>
+                  {vehicleInfo.usable_battery_size && (
+                    <>
+                      <Grid item xs={6}>
+                        <Typography>
+                          <b>Usable Battery Size:</b>
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={6}>
+                        <Typography>
+                          {vehicleInfo.usable_battery_size}
+                        </Typography>
+                      </Grid>
+                    </>
+                  )}
+                  {vehicleInfo.energy_consumption && (
+                    <>
+                      <Grid item xs={6}>
+                        <Typography>
+                          <b>Energy Consumption:</b>
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={6}>
+                        <Typography>
+                          {vehicleInfo.energy_consumption}
+                        </Typography>
+                      </Grid>
+                    </>
+                  )}
+                  {vehicleInfo.port && (
+                    <>
+                      <Grid item xs={6}>
+                        <Typography>
+                          <b>Port(s):</b>
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={6}>
+                        <Typography>{vehicleInfo.port}</Typography>
+                      </Grid>
+                    </>
+                  )}
+                </Grid>
+              </div>
+            )}
+          </div>
         </div>
 
-        <div style={{ marginTop: theme.spacing(1) }}>
+        <div style={{ marginTop: theme.spacing(3) }}>
           <Button onClick={handleOpenPopup} variant="contained" color="primary">
             Update Saved Vehicle
           </Button>
