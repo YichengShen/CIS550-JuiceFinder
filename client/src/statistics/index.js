@@ -1,11 +1,9 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from "react";
 import PropTypes from "prop-types";
-import { Box, Button, Tab, Tabs, Typography } from "@mui/material";
+import { Box, Tab, Tabs, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 // import MUI icons
-import Brightness4Icon from "@mui/icons-material/Brightness4";
-import Brightness7Icon from "@mui/icons-material/Brightness7";
 import EqualizerIcon from "@mui/icons-material/Equalizer";
 import EvStationIcon from "@mui/icons-material/EvStation";
 import MoodIcon from "@mui/icons-material/Mood";
@@ -58,7 +56,7 @@ function a11yProps(index) {
 }
 
 // statistics page
-function Statistics({ toggleTheme }) {
+function Statistics() {
   // use theme for this page
   const theme = useTheme();
 
@@ -70,37 +68,16 @@ function Statistics({ toggleTheme }) {
   };
 
   return (
-    <div>
-      <Box
-        maxWidth="1740px"
-        disableGutters="true"
-        paddingRight="170px"
-        sx={{
-          backgroundColor: theme.palette.background.default,
-          color: theme.palette.primary.main,
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "right",
-          justifyContent: "right",
-        }}
-      >
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={toggleTheme}
-          sx={{
-            backgroundColor: theme.palette.background.default,
-            color: theme.palette.primary.main,
-          }}
-        >
-          {/* <DarkModeSharpIcon /> */}
-          {theme.palette.mode === "dark" ? (
-            <Brightness7Icon />
-          ) : (
-            <Brightness4Icon />
-          )}
-        </Button>
-      </Box>
+    <Box
+      sx={{
+        backgroundColor: theme.palette.background.default,
+        color: theme.palette.primary.main,
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+      }}
+    >
       <Box
         maxWidth="1740px"
         disableGutters="true"
@@ -194,7 +171,7 @@ function Statistics({ toggleTheme }) {
           <EVFriendlinessTab />
         </TabPanel>
       </Box>
-    </div>
+    </Box>
   );
 }
 
