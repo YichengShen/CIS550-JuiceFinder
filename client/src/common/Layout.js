@@ -1,14 +1,13 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import PropTypes from "prop-types";
-import MapGL from "react-map-gl";
 import Footer from "./Footer";
 import ResponsiveAppBar from "./AppBar";
 
+import { useHasMapGL } from "./HasMapGLContext";
+
 function Layout({ children }) {
-  const hasMapGL = React.Children.toArray(children).some(
-    (child) => child.type === MapGL
-  );
+  const { hasMapGL } = useHasMapGL();
 
   const getSx1 = () => {
     if (hasMapGL) {

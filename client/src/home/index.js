@@ -7,8 +7,18 @@ import {
   getCoordinatesFromAddress,
   getStationsNearPath,
 } from "../common/APIUtils";
+import { useHasMapGL } from "../common/HasMapGLContext";
 
 export default function HomePage() {
+  const { setHasMapGL } = useHasMapGL();
+
+  useEffect(() => {
+    setHasMapGL(true);
+    return () => {
+      setHasMapGL(false);
+    };
+  }, [setHasMapGL]);
+
   const DEFAULT_LOCATION = {
     latitude: 39.9524657202615,
     longitude: -75.19028570489878,
