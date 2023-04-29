@@ -142,7 +142,7 @@ export default function HomePage() {
   };
 
   return (
-    <div style={{ width: "100vw" }}>
+    <div style={{ width: "100vw", height: "100%" }}>
       <Backdrop sx={{ color: "#fff", zIndex: 1000 }} open={loading}>
         <CircularProgress color="inherit" />
       </Backdrop>
@@ -150,6 +150,7 @@ export default function HomePage() {
         sx={{
           display: "grid",
           gridTemplateColumns: "1fr 4fr",
+          height: "100%",
         }}
       >
         <Box
