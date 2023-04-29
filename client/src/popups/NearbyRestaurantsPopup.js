@@ -306,7 +306,7 @@ function NearbyRestaurantsPopup({ open, handleClose, longitude, latitude }) {
 
               <div>
                 <Typography gutterBottom component="p">
-                  Open Time
+                  Expected Visit Time
                 </Typography>
                 <Typography
                   gutterBottom
@@ -339,10 +339,13 @@ function NearbyRestaurantsPopup({ open, handleClose, longitude, latitude }) {
                   <MenuItem value="Saturday">Saturday</MenuItem>
                   <MenuItem value="Sunday">Sunday</MenuItem>
                 </Select>
-                <Typography component="p">Hours</Typography>
+                <Typography component="p">
+                  Arrival Time - Leaving Time
+                </Typography>
                 <Slider
                   value={timeRange}
                   onChange={handleTimeRangeChange}
+                  size="small"
                   valueLabelDisplay="auto"
                   aria-labelledby="time-range-slider"
                   getAriaValueText={valuetext}
@@ -353,7 +356,10 @@ function NearbyRestaurantsPopup({ open, handleClose, longitude, latitude }) {
                     { value: 0, label: "0:00" },
                     { value: 24, label: "24:00" },
                   ]}
-                  sx={{ width: "80%", ml: myTheme.spacing(1) }}
+                  sx={{
+                    width: "80%",
+                    ml: myTheme.spacing(1),
+                  }}
                 />
               </div>
             </Grid>
