@@ -70,7 +70,7 @@ function ResponsiveAppBar() {
       <AppBar
         position="static"
         sx={{
-          backgroundColor: myTheme.palette.background.default,
+          backgroundColor: myTheme.palette.background.header,
           color: myTheme.palette.primary.main,
           borderBottom: `2px solid ${myTheme.palette.primary.main}`,
         }}
