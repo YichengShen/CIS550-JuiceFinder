@@ -1,4 +1,10 @@
-import MapGL, { Marker, NavigationControl, Layer, Source } from "react-map-gl";
+import MapGL, {
+  Marker,
+  NavigationControl,
+  Layer,
+  Source,
+  FlyToInterpolator,
+} from "react-map-gl";
 import { getBoundsOfDistance } from "geolib";
 import Geocoder from "react-map-gl-geocoder";
 import "mapbox-gl/dist/mapbox-gl.css";
@@ -26,6 +32,7 @@ export default function Map({
 }) {
   const [viewport, setViewport] = useState({
     zoom: 11,
+    duration: 1000,
     ...curLocation,
   });
   const mapRef = useRef(null);
@@ -118,6 +125,8 @@ export default function Map({
       // latitude={viewport.latitude}
       // longitude={viewport.longitude}
       onViewportChange={handleViewportChange}
+      transitionDuration={1000}
+      transitionInterpolator={new FlyToInterpolator()}
       mapStyle="mapbox://styles/mapbox/streets-v9"
       mapboxApiAccessToken={MAPBOX_TOKEN}
     >
