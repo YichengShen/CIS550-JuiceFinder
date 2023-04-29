@@ -61,7 +61,13 @@ export default function StationInput({
       <FormControl error={formError} fullWidth>
         <div id="station-form" style={{ height: "75vh", display: "grid" }}>
           <Box
-            sx={{ width: "min-content", height: "70vh", overflow: "scroll" }}
+            sx={{
+              width: "min-content",
+              height: "70vh",
+              overflowY: "scroll",
+              paddingLeft: "1rem",
+              paddingRight: "1rem",
+            }}
             id="station-input-fields"
           >
             <Box

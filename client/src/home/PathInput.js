@@ -56,7 +56,13 @@ export default function PathInput({
       <FormControl error={formError} fullWidth>
         <div id="path-form" style={{ height: "75vh", display: "grid" }}>
           <Box
-            sx={{ width: "min-content", height: "70vh", overflow: "scroll" }}
+            sx={{
+              width: "min-content",
+              height: "70vh",
+              overflowY: "scroll",
+              paddingLeft: "1rem",
+              paddingRight: "1rem",
+            }}
             id="path-input-fields"
           >
             <Box>
