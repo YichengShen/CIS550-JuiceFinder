@@ -79,3 +79,30 @@ export const getStationsNearPath = async (
     return [];
   }
 };
+
+export const fetchVehicleInfo = async (currentUser) => {
+  try {
+    const token = await currentUser.getIdToken(/* forceRefresh */ true);
+
+    const response = await fetch(
+      `http://${config.server_host}:${config.server_port}/users/info`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    if (response.ok) {
+      const data = await response.json();
+      return data;
+    }
+    console.error("Vehicle info is empty");
+    return {};
+  } catch (error) {
+    console.error("Error fetching vehicle info:", error);
+    return {};
+  }
+};
