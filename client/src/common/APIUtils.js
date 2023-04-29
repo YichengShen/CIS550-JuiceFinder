@@ -6,6 +6,8 @@ const config = require("../config.json");
 export const getNearbyStations = async (
   location,
   maxDistance,
+  chargeLevels,
+  stationPorts,
   isElectric = false
 ) => {
   if (!location || !location.latitude || !location.longitude) {
@@ -17,7 +19,9 @@ export const getNearbyStations = async (
       `http://${config.server_host}:${config.server_port}/stations/` +
         `${isElectric ? "electric/" : ""}` +
         `?latitude=${location.latitude}&longitude=${location.longitude}` +
-        `&mileDistance=${maxDistance}&pageSize=${150}`
+        `&mileDistance=${maxDistance}&pageSize=${150}` +
+        `${chargeLevels ? `&chargeLevels=${chargeLevels}` : ""}` +
+        `${stationPorts ? `&stationPorts=${stationPorts}` : ""}`
     );
     return response.data;
   } catch (err) {
@@ -51,13 +55,22 @@ export const getPath = async (start, end) => {
   }
 };
 
-export const getStationsNearPath = async (start, end, maxDistance = 10) => {
+// This retrieves the path as well as the stations near the path
+export const getStationsNearPath = async (
+  start,
+  end,
+  maxDistance,
+  chargeLevels,
+  stationPorts
+) => {
   try {
     const response = await axios.get(
       encodeURI(
         `http://${config.server_host}:${config.server_port}/paths/stationsNearPath` +
           `/${start}/${end}` +
-          `?maxDistMile=${maxDistance}`
+          `?maxDistMile=${maxDistance}` +
+          `${chargeLevels ? `&chargeLevels=${chargeLevels}` : ""}` +
+          `${stationPorts ? `&stationPorts=${stationPorts}` : ""}`
       )
     );
     return response.data;

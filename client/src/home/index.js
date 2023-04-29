@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box } from "@mui/material";
+import { Box, Backdrop, CircularProgress } from "@mui/material";
 import Map from "./Map";
 import InputTabs from "./InputTabs";
 import {
@@ -14,13 +14,15 @@ export default function HomePage() {
     longitude: -75.19028570489878,
   };
   const [curLocation, setCurLocation] = useState(DEFAULT_LOCATION);
+  const [srcLocation, setSrcLocation] = useState({});
+  const [destLocation, setDestLocation] = useState({});
 
   // Props for StationInput
   const [state, setState] = useState("");
   const [city, setCity] = useState("");
   const [zip, setZip] = useState("");
   const [streetAddress, setStreetAddress] = useState("");
-  const [maxDistance, setMaxDistance] = useState(1);
+  const [stationDistance, setStationDistance] = useState(1);
   const [chargingLevels, setChargingLevels] = useState([]);
   const [preferredStationPorts, setPreferredStationPorts] = useState([]);
   const [adapters, setAdapters] = useState([]);
@@ -30,6 +32,7 @@ export default function HomePage() {
   // Props for PathInput
   const [startAddress, setStartAddress] = useState("");
   const [endAddress, setEndAddress] = useState("");
+  const [pathDistance, setPathDistance] = useState(0.1);
   const [pathFormError, setPathFormError] = useState(false);
   const [pathFormErrorText, setPathFormErrorText] = useState("");
 
@@ -37,9 +40,17 @@ export default function HomePage() {
   const [stations, setStations] = useState([]);
   const [path, setPath] = useState([]);
 
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
-    getNearbyStations(curLocation, maxDistance, { isElectric: true }).then(
-      (response) => {
+    if (curLocation && curLocation.latitude && curLocation.longitude) {
+      getNearbyStations(
+        curLocation,
+        stationDistance,
+        chargingLevels,
+        preferredStationPorts,
+        { isElectric: true }
+      ).then((response) => {
         setStations(response);
         if (!response || response.length === 0) {
           setStationFormError(true);
@@ -47,11 +58,16 @@ export default function HomePage() {
             "No stations found within the specified distance and location. Please try again with a different distance or location."
           );
         }
-      }
-    );
+      });
+    }
   }, [curLocation]);
 
   const handleStationInputSubmit = async () => {
+    setLoading(true);
+    setPath([]);
+    setSrcLocation({});
+    setDestLocation({});
+
     getCoordinatesFromAddress(`${streetAddress} ${state} ${city} ${zip}`).then(
       (response) => {
         if (response && response.latitude && response.longitude) {
@@ -60,41 +76,76 @@ export default function HomePage() {
         } else {
           setStationFormError(true);
           setStationFormErrorText(
-            "Invalid address. Please try again with a valid address."
+            "Input location not recognized. Please try again with another address, preferably with city and state, or zip code. Alternatively, check server status."
           );
         }
+        setLoading(false);
       }
     );
   };
 
   const handlePathInputSubmit = async () => {
-    getStationsNearPath(startAddress, endAddress, maxDistance).then(
-      (response) => {
-        const stationData = response.stations.map((station) => {
-          return {
-            sid: station.sid,
-            location: {
-              y: station.latitude,
-              x: station.longitude,
-            },
-          };
-        });
-        // console.log(response);
-        // console.log(stationData);
-        setStations(stationData);
+    setLoading(true);
+    setCurLocation({});
+    setPath([]);
+    setStations([]);
 
-        if (!response || response.length === 0) {
-          setStationFormError(true);
-          setStationFormErrorText(
-            "No stations found given the specified distance and locations. Please try again with different distance or locations."
-          );
-        }
+    Promise.all([
+      getCoordinatesFromAddress(startAddress),
+      getCoordinatesFromAddress(endAddress),
+    ]).then(([srcCoor, destCoor]) => {
+      if (
+        srcCoor &&
+        srcCoor.latitude &&
+        srcCoor.longitude &&
+        destCoor &&
+        destCoor.latitude &&
+        destCoor.longitude
+      ) {
+        setSrcLocation(srcCoor);
+        setDestLocation(destCoor);
+      } else {
+        setPathFormError(true);
+        setPathFormErrorText(
+          "Invalid address(es). Please try again with more specific address(es), preferably with city and state or zip code. Alternatively, check server status."
+        );
       }
-    );
+    });
+
+    getStationsNearPath(
+      startAddress,
+      endAddress,
+      pathDistance,
+      chargingLevels,
+      preferredStationPorts
+    ).then((response) => {
+      setPath(response.waypoints);
+      const stationData = response.stations.map((station) => {
+        return {
+          sid: station.sid,
+          location: {
+            y: station.latitude,
+            x: station.longitude,
+          },
+        };
+      });
+      setStations(stationData);
+
+      if (!response || response.length === 0) {
+        setStationFormError(true);
+        setStationFormErrorText(
+          "No stations found given the specified distance and locations. Please try again with different distance or locations."
+        );
+      }
+      setLoading(false);
+    });
   };
 
   return (
     <div style={{ width: "100vw" }}>
+      <Backdrop sx={{ color: "#fff", zIndex: 1000 }} open={loading}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <Box
         sx={{
           display: "grid",
@@ -117,8 +168,8 @@ export default function HomePage() {
             setZip={setZip}
             streetAddress={streetAddress}
             setStreetAddress={setStreetAddress}
-            maxDistance={maxDistance}
-            setMaxDistance={setMaxDistance}
+            stationDistance={stationDistance}
+            setStationDistance={setStationDistance}
             chargingLevels={chargingLevels}
             setChargingLevels={setChargingLevels}
             preferredStationPorts={preferredStationPorts}
@@ -134,6 +185,8 @@ export default function HomePage() {
             setStartAddress={setStartAddress}
             endAddress={endAddress}
             setEndAddress={setEndAddress}
+            pathDistance={pathDistance}
+            setPathDistance={setPathDistance}
             pathFormError={pathFormError}
             setPathFormError={setPathFormError}
             pathFormErrorText={pathFormErrorText}
@@ -145,8 +198,13 @@ export default function HomePage() {
           <Map
             curLocation={curLocation}
             setCurLocation={setCurLocation}
+            srcLocation={srcLocation}
+            setSrcLocation={setSrcLocation}
+            destLocation={destLocation}
+            setDestLocation={setDestLocation}
             stations={stations}
             setStations={setStations}
+            radius={stationDistance}
             path={path}
             setPath={setPath}
           />
