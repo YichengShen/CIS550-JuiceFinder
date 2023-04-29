@@ -153,48 +153,52 @@ export default function HomePage() {
           height: "100%",
         }}
       >
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "flex-start",
-            justifyContent: "center",
-          }}
-        >
-          <InputTabs
-            state={state}
-            setState={setState}
-            city={city}
-            setCity={setCity}
-            zip={zip}
-            setZip={setZip}
-            streetAddress={streetAddress}
-            setStreetAddress={setStreetAddress}
-            stationDistance={stationDistance}
-            setStationDistance={setStationDistance}
-            chargingLevels={chargingLevels}
-            setChargingLevels={setChargingLevels}
-            preferredStationPorts={preferredStationPorts}
-            setPreferredStationPorts={setPreferredStationPorts}
-            adapters={adapters}
-            setAdapters={setAdapters}
-            stationFormError={stationFormError}
-            setStationFormError={setStationFormError}
-            stationFormErrorText={stationFormErrorText}
-            setStationFormErrorText={setStationFormErrorText}
-            handleStationInputSubmit={handleStationInputSubmit}
-            startAddress={startAddress}
-            setStartAddress={setStartAddress}
-            endAddress={endAddress}
-            setEndAddress={setEndAddress}
-            pathDistance={pathDistance}
-            setPathDistance={setPathDistance}
-            pathFormError={pathFormError}
-            setPathFormError={setPathFormError}
-            pathFormErrorText={pathFormErrorText}
-            setPathFormErrorText={setPathFormErrorText}
-            handlePathInputSubmit={handlePathInputSubmit}
-          />
-        </Box>
+        <div>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "flex-start",
+              justifyContent: "center",
+              height: "100%",
+              overflowY: "visible",
+            }}
+          >
+            <InputTabs
+              state={state}
+              setState={setState}
+              city={city}
+              setCity={setCity}
+              zip={zip}
+              setZip={setZip}
+              streetAddress={streetAddress}
+              setStreetAddress={setStreetAddress}
+              stationDistance={stationDistance}
+              setStationDistance={setStationDistance}
+              chargingLevels={chargingLevels}
+              setChargingLevels={setChargingLevels}
+              preferredStationPorts={preferredStationPorts}
+              setPreferredStationPorts={setPreferredStationPorts}
+              adapters={adapters}
+              setAdapters={setAdapters}
+              stationFormError={stationFormError}
+              setStationFormError={setStationFormError}
+              stationFormErrorText={stationFormErrorText}
+              setStationFormErrorText={setStationFormErrorText}
+              handleStationInputSubmit={handleStationInputSubmit}
+              startAddress={startAddress}
+              setStartAddress={setStartAddress}
+              endAddress={endAddress}
+              setEndAddress={setEndAddress}
+              pathDistance={pathDistance}
+              setPathDistance={setPathDistance}
+              pathFormError={pathFormError}
+              setPathFormError={setPathFormError}
+              pathFormErrorText={pathFormErrorText}
+              setPathFormErrorText={setPathFormErrorText}
+              handlePathInputSubmit={handlePathInputSubmit}
+            />
+          </Box>
+        </div>
         <Box>
           <Map
             curLocation={curLocation}
