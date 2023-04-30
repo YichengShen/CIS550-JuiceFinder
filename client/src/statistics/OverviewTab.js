@@ -129,13 +129,13 @@ function OverviewTab() {
               </Typography>
             </Box>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={3}>
             <Container>{plt.afsByTypePie()}</Container>
           </Grid>
-          <Grid item xs={7.5}>
+          <Grid item xs={8}>
             {plt.afsByStateMap()}
           </Grid>
-          <Grid item xs={0.5}>
+          <Grid item xs={1}>
             {plt.mapLegend()}
           </Grid>
         </Grid>
@@ -168,7 +168,7 @@ function OverviewTab() {
             <Container>
               {SelectComponent(
                 "stationType",
-                "Select AFS station type:",
+                "Select AFS station type",
                 "All station types",
                 handleStationTypeChange,
                 stationType
@@ -206,7 +206,7 @@ function OverviewTab() {
             <Container paddingtop={3}>
               {SelectComponent(
                 "vehicleType",
-                "Select light-duty vehicle type:",
+                "Select light-duty vehicle type",
                 "All vehicle types",
                 handleVehicleTypeChange,
                 vehicleType
