@@ -256,7 +256,8 @@ function ResponsiveAppBar({ toggleTheme }) {
                   onClick={handleLoginClick}
                   sx={{
                     my: 2,
-                    color: myTheme.palette.primary.contrastText,
+                    color: myTheme.palette.primary.main,
+                    fontSize: 16,
                     display: "block",
                   }}
                 >
