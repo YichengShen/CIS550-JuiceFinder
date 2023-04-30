@@ -61,7 +61,7 @@ function Landing() {
       ref={myRef}
       style={{
         backgroundColor: theme.palette.background.default,
-        height: "calc(100vh - 95px)",
+        height: "calc(100vh - 115px)",
         position: "relative",
       }}
     >
