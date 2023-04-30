@@ -14,6 +14,7 @@ import {
   RadioGroup,
   Button,
   Checkbox,
+  Typography,
 } from "@mui/material";
 
 import stateDict from "../assets/states_hash.json";
@@ -196,7 +197,15 @@ export default function StationInput({
                     }
                   />
                 }
-                label="Match My Vehicle's Ports"
+                label={
+                  <Typography
+                    style={{
+                      color: !vehiclePorts ? "RGB(158, 158, 158)" : "inherit",
+                    }}
+                  >
+                    Match My Vehicle&apos;s Ports
+                  </Typography>
+                }
               />
               <Autocomplete
                 multiple

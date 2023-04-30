@@ -14,6 +14,7 @@ import {
   RadioGroup,
   Button,
   Checkbox,
+  Typography,
 } from "@mui/material";
 
 import chargingLevelArr from "../assets/charging_levels.json";
@@ -171,7 +172,15 @@ export default function PathInput({
                       }
                     />
                   }
-                  label="Match My Vehicle's Ports"
+                  label={
+                    <Typography
+                      style={{
+                        color: !vehiclePorts ? "RGB(158, 158, 158)" : "inherit",
+                      }}
+                    >
+                      Match My Vehicle&apos;s Ports
+                    </Typography>
+                  }
                 />
                 <Autocomplete
                   multiple

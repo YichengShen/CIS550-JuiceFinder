@@ -88,7 +88,7 @@ export default function InputTabs({
         backgroundColor: myTheme.palette.background.header,
       }}
     >
-      <AppBar position="static" color="inherit">
+      <AppBar position="static" color="primary">
         <Tabs
           value={value}
           onChange={handleChange}

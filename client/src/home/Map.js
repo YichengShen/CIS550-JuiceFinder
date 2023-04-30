@@ -9,6 +9,7 @@ import { getBoundsOfDistance } from "geolib";
 import Geocoder from "react-map-gl-geocoder";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
+import { useTheme } from "@mui/material/styles";
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import PropTypes from "prop-types";
 
@@ -30,6 +31,7 @@ export default function Map({
   stations,
   radius,
 }) {
+  const myTheme = useTheme();
   const [viewport, setViewport] = useState({
     zoom: 13,
     duration: 1000,
@@ -124,7 +126,8 @@ export default function Map({
       onViewportChange={handleViewportChange}
       transitionDuration={1000}
       transitionInterpolator={new FlyToInterpolator()}
-      mapStyle="mapbox://styles/mapbox/streets-v9"
+      mapStyle={myTheme.mapbox.style.main}
+      // https://studio.mapbox.com/styles/add-style/mapbox/navigation-guidance-day-v4/
       mapboxApiAccessToken={MAPBOX_TOKEN}
     >
       <div style={{ position: "absolute", top: 20, right: 70 }}>

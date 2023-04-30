@@ -18,7 +18,7 @@ const lightThemeOptions = {
     background: {
       // default: "#ffffff",
       default: "#f5f5fa",
-      paper: "#FFFFF0",
+      paper: "#f3f3f3",
       landing: "#f3f3ff",
       header: "#ffffff",
     },
@@ -95,6 +95,12 @@ const lightThemeOptions = {
         margin: "dense",
         size: "small",
       },
+    },
+  },
+  mapbox: {
+    style: {
+      default: "mapbox://styles/mapbox/streets-v9",
+      main: "mapbox://styles/mapbox/navigation-guidance-day-v4/",
     },
   },
 };
@@ -197,6 +203,12 @@ const darkThemeOptions = {
         margin: "dense",
         size: "small",
       },
+    },
+  },
+  mapbox: {
+    style: {
+      default: "mapbox://styles/mapbox/streets-v9",
+      main: "mapbox://styles/mapbox/navigation-guidance-night-v4/",
     },
   },
 };
