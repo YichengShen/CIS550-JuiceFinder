@@ -19,6 +19,7 @@ import {
 import stateDict from "../assets/states_hash.json";
 import chargingLevelArr from "../assets/charging_levels.json";
 import stationPortArr from "../assets/port_types.json";
+import adaptorArr from "../assets/adapters.json";
 
 export default function StationInput({
   state,
@@ -228,7 +229,7 @@ export default function StationInput({
                 multiple
                 disableCloseOnSelect
                 id="adapter-types"
-                options={[]}
+                options={adaptorArr}
                 // https://stackoverflow.com/a/74913444
                 getOptionLabel={(option) => {
                   return `${option?.vehiclePort} to ${option?.stationPort}`;
