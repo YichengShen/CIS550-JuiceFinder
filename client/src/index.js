@@ -13,11 +13,11 @@ function Main() {
   };
 
   return (
-    <React.StrictMode>
-      <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
-        <App toggleTheme={toggleTheme} />
-      </ThemeProvider>
-    </React.StrictMode>
+    // <React.StrictMode>
+    <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+      <App toggleTheme={toggleTheme} />
+    </ThemeProvider>
+    // </React.StrictMode>
   );
 }
 
