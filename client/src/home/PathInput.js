@@ -18,6 +18,7 @@ import {
 
 import chargingLevelArr from "../assets/charging_levels.json";
 import stationPortArr from "../assets/port_types.json";
+import adapterArr from "../assets/adapters.json";
 
 export default function PathInput({
   startAddress,
@@ -203,7 +204,7 @@ export default function PathInput({
                   multiple
                   disableCloseOnSelect
                   id="adapter-types"
-                  options={[]}
+                  options={adapterArr}
                   // https://stackoverflow.com/a/74913444
                   getOptionLabel={(option) => {
                     return `${option?.vehiclePort} to ${option?.stationPort}`;

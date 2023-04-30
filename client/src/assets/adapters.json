@@ -1,0 +1,62 @@
+[
+  {
+    "vehiclePort": "tesla",
+    "stationPort": "ccs"
+  },
+  {
+    "vehiclePort": "tesla",
+    "stationPort": "chademo"
+  },
+  {
+    "vehiclePort": "tesla",
+    "stationPort": "nema1450"
+  },
+  {
+    "vehiclePort": "type1",
+    "stationPort": "nema1450"
+  },
+  {
+    "vehiclePort": "type2",
+    "stationPort": "nema1450"
+  },
+  {
+    "vehiclePort": "tesla",
+    "stationPort": "nema515"
+  },
+  {
+    "vehiclePort": "type1",
+    "stationPort": "nema515"
+  },
+  {
+    "vehiclePort": "type2",
+    "stationPort": "nema515"
+  },
+  {
+    "vehiclePort": "tesla",
+    "stationPort": "nema520"
+  },
+  {
+    "vehiclePort": "type1",
+    "stationPort": "nema520"
+  },
+  {
+    "vehiclePort": "type2",
+    "stationPort": "nema520"
+  },
+  {
+    "vehiclePort": "tesla",
+    "stationPort": "type1"
+  },
+  {
+    "vehiclePort": "type2",
+    "stationPort": "type1"
+  },
+  {
+    "vehiclePort": "tesla",
+    "stationPort": "type2"
+  },
+  {
+    "vehiclePort": "type1",
+    "stationPort": "type2"
+  }
+]
