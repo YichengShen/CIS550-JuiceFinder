@@ -187,7 +187,7 @@ function ElectricStationTab() {
             <Container>
               {SelectComponent(
                 "state",
-                "Select state 1:",
+                "Select state 1",
                 "All states",
                 handleState1Change,
                 state1
@@ -198,7 +198,7 @@ function ElectricStationTab() {
             <Container>
               {SelectComponent(
                 "state",
-                "Select state 2:",
+                "Select state 2",
                 "All states",
                 handleState2Change,
                 state2
@@ -232,14 +232,14 @@ function ElectricStationTab() {
             <Container>
               {SelectComponent(
                 "port",
-                "Select port 1:",
+                "Select port 1",
                 "All ports",
                 handlePort1Change,
                 port1
               )}
               {SelectComponent(
                 "port",
-                "Select port 2:",
+                "Select port 2",
                 "All ports",
                 handlePort2Change,
                 port2
@@ -278,14 +278,14 @@ function ElectricStationTab() {
             <Container>
               {SelectComponent(
                 "speed",
-                "Select charging speed 1:",
+                "Select charging speed 1",
                 "All speeds",
                 handleSpeed1Change,
                 speed1
               )}
               {SelectComponent(
                 "speed",
-                "Select charging speed 2:",
+                "Select charging speed 2",
                 "All speeds",
                 handleSpeed2Change,
                 speed2
@@ -324,14 +324,14 @@ function ElectricStationTab() {
             <Container>
               {SelectComponent(
                 "network",
-                "Select network 1:",
+                "Select network 1",
                 "All networks",
                 handleNetwork1Change,
                 network1
               )}
               {SelectComponent(
                 "network",
-                "Select network 2:",
+                "Select network 2",
                 "All networks",
                 handleNetwork2Change,
                 network2
