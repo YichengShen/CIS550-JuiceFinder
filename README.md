@@ -8,7 +8,7 @@
 
 ## Code for Data Cleaning, Wrangling, and Ingesting
 
-See `/datasets/DDL/` and `/datasets/preprocessing/`.
+See `/datasets/JuiceFiner_DDL.sql` and `/datasets/preprocessing/`.
 
 ## Dependencies Installation
 - Install server-side dependencies
