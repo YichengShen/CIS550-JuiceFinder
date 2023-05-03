@@ -11,6 +11,10 @@
 See `/datasets/JuiceFiner_DDL.sql` and `/datasets/preprocessing/`.
 
 ## Dependencies Installation
+- Install dependencies on the root folder
+    ```
+    npm install
+    ```
 - Install server-side dependencies
     ```
     cd server
@@ -33,7 +37,7 @@ See `/datasets/JuiceFiner_DDL.sql` and `/datasets/preprocessing/`.
   cd client
   npm start
   ```
-Now you should see a webpage pops up in your browser with URL `localhost:3000`
+After a few seconds, you will see a webpage pops up in your browser with URL `localhost:3000`
 
 ## Safety Note
 Both `/server/.env` and `/client/.env` contain sensitive credentials such as database password and API key. **Please keep them confidential.**
